@@ -1,5 +1,5 @@
 <template>
     <main class="grow flex flex-col">
-        <TheRegistrationForm />
+        
     </main>
 </template>
