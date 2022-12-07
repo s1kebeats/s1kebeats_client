@@ -1,14 +1,13 @@
 <template>
     <form @submit.prevent="register" class="flex flex-col w-[500px]">
         <input type="text" v-model="registrationState.username">
-        <div v-if="v$.username.$error">Name field has an error.</div>
         <input type="text" v-model="registrationState.email">
-        <div v-if="v$.email.$error" class="bg-red">Name field has an error.</div>
         <input type="text" v-model="registrationState.password">
-        <div v-if="v$.password.$error">Name field has an error.</div>
         <input type="text" v-model="registrationState.passwordConfirm">
-        <div v-if="v$.passwordConfirm.$error">Name field has an error.</div>
         <button type="submit" class="">Зарегистрироваться</button>
+        <span v-for="error in v$.$errors" :key="error.$uid">
+            {{ error.$property }} - {{  error.$message }}
+        </span>
     </form>
 </template>
 <script setup lang="ts">
@@ -34,8 +33,10 @@ const registrationRules = computed(() => {
         passwordConfirm: { required, sameAs: sameAs(registrationState.passwordConfirm) },
     }
 })
-const v$ = useVuelidate(registrationRules, registrationState)
+const v$ = useVuelidate(registrationRules, registrationState, { $autoDirty: true, $lazy: true })
 const register = async () => {
+    const result = await v$.value.$validate()
+    console.log(result)
     // const res = await axios.post('http://localhost:5000/api/register', {
     //     username: registrationState.username,
     //     email: registrationState.email,
