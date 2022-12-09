@@ -4,14 +4,22 @@
             <h1 class="text-2xl font-semibold">Регистрация</h1>
             <h2 class="text-sm">Уже есть аккаунт? <nuxt-link to="/login" class="text-[#7945fc] hover:font-semibold transition-all">Войдите</nuxt-link></h2>
         </div>
-        <BaseTitledInput :debounce="true" :class="v$.username.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('username', $event)" title="Имя пользователя" placeholder="Введите имя пользователя" :value="registrationState.username" />
-        <span v-if="v$.username.$error">{{ v$.username.$errors[0].$message }}</span>
-        <BaseTitledInput :class="v$.email.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('email', $event)" type="email" title="Электронная почта" placeholder="Введите электронную почту" :value="registrationState.email" />
-        <span v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</span>
-        <BasePasswordInput :class="v$.password.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('password', $event)" title="Пароль" placeholder="Введите имя пароль" :value="registrationState.password" />
-        <span v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</span>
-        <BasePasswordInput :class="v$.passwordConfirm.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('passwordConfirm', $event)" title="Подтверждение пароля" placeholder="Введите пароль ещё раз" :value="registrationState.passwordConfirm" />
-        <span v-if="v$.passwordConfirm.$error">{{ v$.passwordConfirm.$errors[0].$message }}</span>
+        <div class="h-[86px]">
+            <BaseTitledInput :debounce="true" :class="v$.username.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('username', $event)" title="Имя пользователя" placeholder="Введите имя пользователя" :value="registrationState.username" />
+            <span v-if="v$.username.$error" class="text-sm text-red-500 ml-5" >{{ v$.username.$errors[0].$message }}</span>
+        </div>
+        <div class="h-[86px]">
+            <BaseTitledInput :class="v$.email.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('email', $event)" type="email" title="Электронная почта" placeholder="Введите электронную почту" :value="registrationState.email" />
+            <span v-if="v$.email.$error" class="text-sm text-red-500 ml-5" >{{ v$.email.$errors[0].$message }}</span>
+        </div>
+        <div class="h-[86px]">
+            <BasePasswordInput :class="v$.password.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('password', $event)" title="Пароль" placeholder="Введите имя пароль" :value="registrationState.password" />
+            <span v-if="v$.password.$error" class="text-sm text-red-500 ml-5" >{{ v$.password.$errors[0].$message }}</span>
+        </div>
+        <div class="h-[86px]">
+            <BasePasswordInput :class="v$.passwordConfirm.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('passwordConfirm', $event)" title="Подтверждение пароля" placeholder="Введите пароль ещё раз" :value="registrationState.passwordConfirm" />
+            <span v-if="v$.passwordConfirm.$error" class="text-sm text-red-500 ml-5" >{{ v$.passwordConfirm.$errors[0].$message }}</span>
+        </div>
         <button type="submit" class="bg-[#7945fc] text-white rounded-lg py-2 text-sm">Зарегистрироваться</button>
     </form>
 </template>
