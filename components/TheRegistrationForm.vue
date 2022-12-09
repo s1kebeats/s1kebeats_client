@@ -4,14 +4,10 @@
             <h1 class="text-2xl font-semibold">Регистрация</h1>
             <h2 class="text-sm">Уже есть аккаунт? <nuxt-link to="/login" class="text-[#7945fc] hover:font-semibold transition-all">Войдите</nuxt-link></h2>
         </div>
-        <BaseTitledInput title="Имя пользователя" placeholder="Введите имя пользователя" :value="registrationState.username" />
-        <BaseTitledInput type="email" title="Электронная почта" placeholder="Введите электронную почту" :value="registrationState.email" />
-        <BaseTitledInput type="password" title="Пароль" placeholder="Введите имя пароль" :value="registrationState.password">
-            <!-- <SeePasswordButton /> -->
-        </BaseTitledInput>
-        <BaseTitledInput type="password" title="Подтверждение пароля" placeholder="Введите пароль ещё раз" :value="registrationState.passwordConfirm">
-            <!-- <SeePasswordButton /> -->
-        </BaseTitledInput>
+        <BaseTitledInput :class="v$.username.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('username', $event)" title="Имя пользователя" placeholder="Введите имя пользователя" :value="registrationState.username" />
+        <BaseTitledInput :class="v$.email.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('email', $event)" type="email" title="Электронная почта" placeholder="Введите электронную почту" :value="registrationState.email" />
+        <BasePasswordInput :class="v$.password.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('password', $event)" title="Пароль" placeholder="Введите имя пароль" :value="registrationState.password" />
+        <BasePasswordInput :class="v$.passwordConfirm.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('passwordConfirm', $event)" title="Подтверждение пароля" placeholder="Введите пароль ещё раз" :value="registrationState.passwordConfirm" />
         <button type="submit" class="bg-[#7945fc] text-white rounded-lg py-2 text-sm">Зарегистрироваться</button>
         <span v-for="error in v$.$errors" :key="error.$uid">
             {{ error.$property }} - {{  error.$message }}
@@ -38,10 +34,13 @@ const registrationRules = computed(() => {
         username: { required },
         email: { required, email },
         password: { required, minLength: minLength(8) },
-        passwordConfirm: { required, sameAs: sameAs(registrationState.passwordConfirm) },
+        passwordConfirm: { required, sameAs: sameAs(registrationState.password) },
     }
 })
 const v$ = useVuelidate(registrationRules, registrationState, { $autoDirty: true, $lazy: true })
+const updateRegistrationState = (key: keyof typeof registrationState, value: string) => {
+    registrationState[key] = value;
+}
 const register = async () => {
     const result = await v$.value.$validate()
     console.log(result)
