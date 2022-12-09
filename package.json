@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/vuelidate": "^0.7.15",
     "autoprefixer": "^10.4.13",
     "nuxt": "3.0.0",
     "nuxt-icon": "^0.1.8",

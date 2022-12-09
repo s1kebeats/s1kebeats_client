@@ -6,19 +6,21 @@
         </div>
         <div class="h-[86px]">
             <BaseTitledInput :debounce="true" :class="v$.username.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('username', $event)" title="Имя пользователя" placeholder="Введите имя пользователя" :value="registrationState.username" />
-            <span v-if="v$.username.$error" class="text-sm text-red-500 ml-5" >{{ v$.username.$errors[0].$message }}</span>
+            <span v-if="v$.username.$error" class="text-xs text-red-500" >{{ 
+                v$.username.$errors[0].$message as string
+            }}</span>
         </div>
         <div class="h-[86px]">
-            <BaseTitledInput :class="v$.email.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('email', $event)" type="email" title="Электронная почта" placeholder="Введите электронную почту" :value="registrationState.email" />
-            <span v-if="v$.email.$error" class="text-sm text-red-500 ml-5" >{{ v$.email.$errors[0].$message }}</span>
+            <BaseTitledInput :debounce="true" :class="v$.email.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('email', $event)" type="email" title="Электронная почта" placeholder="Введите электронную почту" :value="registrationState.email" />
+            <span v-if="v$.email.$error" class="text-xs text-red-500" >{{ v$.email.$errors[0].$message as string }}</span>
         </div>
         <div class="h-[86px]">
             <BasePasswordInput :class="v$.password.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('password', $event)" title="Пароль" placeholder="Введите имя пароль" :value="registrationState.password" />
-            <span v-if="v$.password.$error" class="text-sm text-red-500 ml-5" >{{ v$.password.$errors[0].$message }}</span>
+            <span v-if="v$.password.$error" class="text-xs text-red-500" >{{ v$.password.$errors[0].$message as string }}</span>
         </div>
         <div class="h-[86px]">
             <BasePasswordInput :class="v$.passwordConfirm.$error ? 'border-red-500' : ''" @update-value="updateRegistrationState('passwordConfirm', $event)" title="Подтверждение пароля" placeholder="Введите пароль ещё раз" :value="registrationState.passwordConfirm" />
-            <span v-if="v$.passwordConfirm.$error" class="text-sm text-red-500 ml-5" >{{ v$.passwordConfirm.$errors[0].$message }}</span>
+            <span v-if="v$.passwordConfirm.$error" class="text-xs text-red-500" >{{ v$.passwordConfirm.$errors[0].$message as string }}</span>
         </div>
         <button type="submit" class="bg-[#7945fc] text-white rounded-lg py-2 text-sm">Зарегистрироваться</button>
     </form>
@@ -26,7 +28,7 @@
 <script setup lang="ts">
 import axios from 'axios'
 import { useVuelidate } from '@vuelidate/core'
-import { email, minLength, required, sameAs } from '@vuelidate/validators'
+import { email, minLength, required, sameAs, helpers } from '@vuelidate/validators'
 const registrationState = reactive<{
     username: string;
     email: string;
@@ -38,11 +40,14 @@ const registrationState = reactive<{
     password: "",
     passwordConfirm: "",
 })
+const passwordRegexValidator = (param: string): boolean => {
+    return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]$/.test(param);
+}
 const registrationRules = computed(() => {
     return {
         username: { required },
         email: { required, email },
-        password: { required, minLength: minLength(8) },
+        password: { required, minLength: helpers.withMessage('Минимальная длина пароля: 8 символов', minLength(8)), password: helpers.withMessage('Пароль должен содержать хотя бы одну цифру и заглавную букву', passwordRegexValidator) },
         passwordConfirm: { required, sameAs: sameAs(registrationState.password) },
     }
 })
@@ -52,11 +57,22 @@ const updateRegistrationState = (key: keyof typeof registrationState, value: str
 }
 const register = async () => {
     const result = await v$.value.$validate()
-    console.log(result)
     // const res = await axios.post('http://localhost:5000/api/register', {
     //     username: registrationState.username,
     //     email: registrationState.email,
     //     password: registrationState.password,
     // });
+}
+const translateError = (message: string) => {
+    switch (message) {
+        case 'Value is required':
+            return 'Обязательное поле'
+        case 'Value is not a valid email address':
+            return 'Введите настояющую электронную почту'
+        case 'This field should be at least 8 characters long':
+            return 'Минимальная длина: 8 символов'
+        case 'The value must be equal to the other value':
+            return 'Пароли не совпадают'
+    }
 }
 </script>

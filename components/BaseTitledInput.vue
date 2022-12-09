@@ -34,6 +34,5 @@ const updateValue = (e: Event) => {
         const input = e.target as HTMLInputElement;
         emit("updateValue", input.value);
     }
-
 }
 </script>
