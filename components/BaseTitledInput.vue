@@ -1,8 +1,8 @@
 <template>
     <div class="rounded-lg border-[1px] px-5 py-2">
-        <p class="text-sm">{{ title }}</p>
+        <label :for="title" class="text-sm">{{ title }}</label>
         <div class="flex items-center">
-            <input class="focus:outline-none grow" :type="type ? type : 'text'" :placeholder="placeholder" :value="value" @input="updateValue">
+            <input :name="title" class="focus:outline-none grow" :type="type ? type : 'text'" :placeholder="placeholder" :value="value" @input="updateValue">
             <slot />
         </div>
     </div>
