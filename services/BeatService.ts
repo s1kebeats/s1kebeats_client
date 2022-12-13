@@ -6,4 +6,4 @@ import AuthorIndividual from "../models/AuthorIndividual";
 class BeatService {
 
 }
-export default new BeatService();
+export default BeatService;

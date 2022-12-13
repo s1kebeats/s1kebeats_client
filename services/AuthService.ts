@@ -19,4 +19,4 @@ class AuthService {
         return $api.post('/logout')
     }
 }
-export default new AuthService();
+export default AuthService;

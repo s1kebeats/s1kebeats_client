@@ -11,4 +11,4 @@ class AuthorService {
         return $api.get<AuthorIndividual>(`/author/${username}`);
     }
 }
-export default new AuthorService();
+export default AuthorService;
