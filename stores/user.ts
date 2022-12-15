@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', {
         setAuthorized(state: boolean) {
             this.authorized = state;
         },
-        async login(username: string, password: string) {
+        async login(username: string, password: string): Promise<void | AxiosError> {
             try {
                 const response = await AuthService.login(username, password);
                 this.setAccessToken(response.data.accessToken);
@@ -31,6 +31,7 @@ export const useUserStore = defineStore('user', {
             } catch (e) {
                 const error = e as AxiosError;
                 console.log(error.message)
+                return error;
             }
         },
         async logout() {
@@ -42,6 +43,7 @@ export const useUserStore = defineStore('user', {
             } catch (e) {
                 const error = e as AxiosError;
                 console.log(error.message)
+                return error;
             }
         },
         async checkAuth() {
@@ -53,6 +55,7 @@ export const useUserStore = defineStore('user', {
             } catch (e) {
                 const error = e as AxiosError;
                 console.log(error.message)
+                return error;
             }
         }
     }

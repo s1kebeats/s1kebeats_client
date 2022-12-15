@@ -1,10 +1,10 @@
 <template>
-  <h1>{{ userStore.authorized }}</h1>
+  <!-- <h1>{{ userStore.authorized }}</h1> -->
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useUserStore } from './stores/user'
 const userStore = useUserStore()
 onMounted(() => {
@@ -12,4 +12,4 @@ onMounted(() => {
     userStore.checkAuth()
   }
 }),
-</script>
+</script> -->
