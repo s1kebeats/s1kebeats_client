@@ -1,14 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    css: ['~/assets/css/main.css', '~/assets/css/fonts.css'],
-    postcss: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {},
-        },
+  css: ['~/assets/css/main.css', '~/assets/css/fonts.css'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
     },
-    modules: [
-      '@pinia/nuxt',
-      'nuxt-icon',
-    ],
+  },
+  modules: ['@pinia/nuxt', 'nuxt-icon'],
+  // imports: {
+  //   dirs: ['./stores']
+  // }
 })

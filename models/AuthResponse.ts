@@ -1,7 +1,7 @@
-import User from "./User";
+import User from './User'
 
 export default interface AuthResponse {
-    accessToken: string;
-    refreshToken: string;
-    user: User;
+  accessToken: string
+  refreshToken: string
+  user: User
 }

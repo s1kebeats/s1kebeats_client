@@ -1,0 +1,9 @@
+dist
+coverage
+.vscode/settings.json
+.output
+.nuxt
+pnpm-lock.yaml
+README.md
+tailwind.config.js
+tsconfig.json

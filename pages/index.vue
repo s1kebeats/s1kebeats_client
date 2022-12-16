@@ -1,5 +1,5 @@
 <template>
-    <main class="grow flex flex-col">
-        <TheLandingPoster />
-    </main>
+  <main class="grow flex flex-col">
+    <TheLandingPoster />
+  </main>
 </template>

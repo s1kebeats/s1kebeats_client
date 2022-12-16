@@ -1,10 +1,12 @@
 <template>
-    <header class="relative h-[50px] border-b-[1px] flex items-center justify-between px-3">
-        <HeaderLogo />
-        <HeaderSearch class="absolute left-0 right-0 mx-auto" />
-        <div class="flex items-center gap-5">
-            <HeaderNav />
-            <HeaderProfile />
-        </div>
-    </header>
+  <header
+    class="relative h-[50px] border-b-[1px] flex items-center justify-between px-3"
+  >
+    <HeaderLogo />
+    <HeaderSearch class="absolute left-0 right-0 mx-auto" />
+    <div class="flex items-center gap-5">
+      <HeaderNav />
+      <HeaderProfile />
+    </div>
+  </header>
 </template>
