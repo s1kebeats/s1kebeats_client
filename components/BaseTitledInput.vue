@@ -1,14 +1,21 @@
 <template>
-  <div class="rounded-lg border-[1px] px-5 py-2 w-[320px]">
-    <label :for="title" class="text-sm">{{ title }}</label>
+  <div
+    class="rounded-lg border-[1px] px-5 py-2 transition-all"
+    :class="inputFocused ? 'border-[#7945fc]' : ''"
+  >
+    <label :for="title" class="text-sm font-semibold transition-all">{{
+      title
+    }}</label>
     <div class="flex items-center">
       <input
         :name="title"
-        class="focus:outline-none grow"
+        class="focus:outline-none grow font-semibold!"
         :type="type ? type : 'text'"
         :placeholder="placeholder"
         :value="value"
         @input="updateValue"
+        @focus="toggleFocusedState(true)"
+        @blur="toggleFocusedState(false)"
       />
       <slot />
     </div>
@@ -41,5 +48,9 @@ const updateValue = (e: Event) => {
     const input = e.target as HTMLInputElement
     emit('updateValue', input.value)
   }
+}
+const inputFocused = ref(false)
+const toggleFocusedState = (value: boolean) => {
+  inputFocused.value = value
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <span v-if="v$.$errors.length" class="text-xs text-red-500">{{
+  <span v-if="v$.$errors.length" class="text-sm text-red-500 font-semibold">{{
     v$.$errors[0].$message
   }}</span>
 </template>

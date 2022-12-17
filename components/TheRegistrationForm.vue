@@ -1,53 +1,40 @@
 <template>
-  <form
-    @submit.prevent="register"
-    class="flex flex-col bg-white rounded-md shadow-md p-6"
-  >
-    <BaseFormLogo title="Регистрация">
-      Уже есть аккаунт?
-      <nuxt-link to="/login" class="text-[#7945fc] !hover:font-semibold"
-        >Войдите</nuxt-link
-      >
-    </BaseFormLogo>
+  <form @submit.prevent="register" class="flex flex-col w-full">
     <div
-      class="flex flex-col gap-2 mb-2"
-      :class="!v$.$errors.length ? 'pb-6' : ''"
+      class="flex flex-col gap-3 mb-3"
+      :class="!v$.$errors.length ? 'pb-8' : ''"
     >
-      <fieldset class="flex gap-2 grow">
-        <BaseTitledInput
-          :debounce="true"
-          :class="v$.email.$error ? 'border-red-500' : ''"
-          @update-value="updateRegistrationState('email', $event)"
-          type="email"
-          title="Электронная почта"
-          placeholder="Введите электронную почту"
-          :value="registrationState.email"
-        />
-        <BasePasswordInput
-          :class="v$.passwordConfirm.$error ? 'border-red-500' : ''"
-          @update-value="updateRegistrationState('passwordConfirm', $event)"
-          title="Подтверждение пароля"
-          placeholder="Введите пароль ещё раз"
-          :value="registrationState.passwordConfirm"
-        />
-      </fieldset>
-      <fieldset class="flex gap-2 grow">
-        <BaseTitledInput
-          :debounce="true"
-          :class="v$.username.$error ? 'border-red-500' : ''"
-          @update-value="updateRegistrationState('username', $event)"
-          title="Имя пользователя"
-          placeholder="Введите имя пользователя"
-          :value="registrationState.username"
-        />
-        <BasePasswordInput
-          :class="v$.password.$error ? 'border-red-500' : ''"
-          @update-value="updateRegistrationState('password', $event)"
-          title="Пароль"
-          placeholder="Введите имя пароль"
-          :value="registrationState.password"
-        />
-      </fieldset>
+      <BaseTitledInput
+        :debounce="true"
+        :class="v$.email.$error ? 'border-red-500' : ''"
+        @update-value="updateRegistrationState('email', $event)"
+        type="email"
+        title="Электронная почта"
+        placeholder="Введите электронную почту"
+        :value="registrationState.email"
+      />
+      <BasePasswordInput
+        :class="v$.passwordConfirm.$error ? 'border-red-500' : ''"
+        @update-value="updateRegistrationState('passwordConfirm', $event)"
+        title="Подтверждение пароля"
+        placeholder="Введите пароль ещё раз"
+        :value="registrationState.passwordConfirm"
+      />
+      <BaseTitledInput
+        :debounce="true"
+        :class="v$.username.$error ? 'border-red-500' : ''"
+        @update-value="updateRegistrationState('username', $event)"
+        title="Имя пользователя"
+        placeholder="Введите имя пользователя"
+        :value="registrationState.username"
+      />
+      <BasePasswordInput
+        :class="v$.password.$error ? 'border-red-500' : ''"
+        @update-value="updateRegistrationState('password', $event)"
+        title="Пароль"
+        placeholder="Введите имя пароль"
+        :value="registrationState.password"
+      />
       <BaseFormErrorOutput :v$="v$" />
     </div>
     <BaseButton v-if="!registrationError" type="submit"

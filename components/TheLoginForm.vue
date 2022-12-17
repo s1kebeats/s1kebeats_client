@@ -1,14 +1,8 @@
 <template>
   <form
     @submit.prevent="login"
-    class="flex flex-col bg-white rounded-md shadow-md p-6"
+    class="flex flex-col w-full gap-3"
   >
-    <BaseFormLogo title="Вход">
-      <nuxt-link to="/login" class="text-[#7945fc] !hover:font-semibold"
-        >Забыли пароль?</nuxt-link
-      >
-    </BaseFormLogo>
-    <div class="flex flex-col gap-2 mb-2">
       <BaseTitledInput
         :class="v$.username.$error ? 'border-red-500' : ''"
         @update-value="updateLoginState('username', $event)"
@@ -23,7 +17,7 @@
         placeholder="Введите пароль"
         :value="loginState.password"
       />
-      <div class="flex items-center">
+      <div class="flex items-center h-5">
         <BaseFormErrorOutput :v$="v$" />
         <div class="grow flex items-center justify-end gap-2">
           <label for="save" class="text-xs">Сохранить вход?</label>
@@ -33,7 +27,6 @@
           />
         </div>
       </div>
-    </div>
     <BaseButton v-if="!loginError" type="submit">Войти</BaseButton>
     <BaseButton v-if="loginError" class="bg-red-500 cursor-default">{{
       loginErrorMessages[loginError]
