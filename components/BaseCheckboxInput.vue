@@ -12,15 +12,15 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  value: boolean
-  color?: string
-}>()
+  value: boolean;
+  color?: string;
+}>();
 const emit = defineEmits<{
-  (e: 'updateValue', value: boolean): void
-}>()
-const value = ref(props.value)
+  (e: 'updateValue', value: boolean): void;
+}>();
+const value = ref(props.value);
 const checkbox = () => {
-  value.value = !value.value
-  emit('updateValue', value.value)
-}
+  value.value = !value.value;
+  emit('updateValue', value.value);
+};
 </script>

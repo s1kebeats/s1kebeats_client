@@ -15,6 +15,6 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  color?: string
-}>()
+  color?: string;
+}>();
 </script>

@@ -4,8 +4,8 @@
   }}</span>
 </template>
 <script setup lang="ts">
-import { Validation } from '@vuelidate/core'
+import { Validation } from '@vuelidate/core';
 const props = defineProps<{
-  v$: Validation
-}>()
+  v$: Validation;
+}>();
 </script>

@@ -46,40 +46,40 @@
   </form>
 </template>
 <script setup lang="ts">
-import axios, { AxiosError } from 'axios'
-import { useVuelidate } from '@vuelidate/core'
-import { useUserStore } from '~~/stores/user'
+import axios, { AxiosError } from 'axios';
+import { useVuelidate } from '@vuelidate/core';
+import { useUserStore } from '~~/stores/user';
 import {
   email,
   minLength,
   required,
   sameAs,
   helpers,
-} from '@vuelidate/validators'
-const userStore = useUserStore()
-const registrationError = ref()
+} from '@vuelidate/validators';
+const userStore = useUserStore();
+const registrationError = ref();
 const registrationState = reactive<{
-  username: string
-  email: string
-  password: string
-  passwordConfirm: string
+  username: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
 }>({
   username: '',
   email: '',
   password: '',
   passwordConfirm: '',
-})
+});
 const passwordComplexity = (param: string): boolean => {
-  return /\d/.test(param) && /[A-Z]/.test(param)
-}
+  return /\d/.test(param) && /[A-Z]/.test(param);
+};
 const usernameNotAvailable = async (param: string): Promise<boolean> => {
   try {
-    const res = await axios.get(`http://localhost:5000/api/author/${param}`)
-    return false
+    const res = await axios.get(`http://localhost:5000/api/author/${param}`);
+    return false;
   } catch (error) {
-    return true
+    return true;
   }
-}
+};
 const registrationRules = computed(() => {
   return {
     username: {
@@ -111,31 +111,31 @@ const registrationRules = computed(() => {
         sameAs(registrationState.password)
       ),
     },
-  }
-})
+  };
+});
 const v$ = useVuelidate(registrationRules, registrationState, {
   $autoDirty: true,
   $lazy: true,
-})
+});
 const updateRegistrationState = (
   key: keyof typeof registrationState,
   value: string
 ) => {
-  registrationState[key] = value
-}
+  registrationState[key] = value;
+};
 const register = async () => {
-  const result = await v$.value.$validate()
+  const result = await v$.value.$validate();
   if (result) {
     try {
       const res = await userStore.register(
         registrationState.username,
         registrationState.email,
         registrationState.password
-      )
-      await navigateTo('/login')
+      );
+      await navigateTo('/login');
     } catch (error) {
-      registrationError.value = (error as AxiosError).response?.status
+      registrationError.value = (error as AxiosError).response?.status;
     }
   }
-}
+};
 </script>

@@ -18,6 +18,6 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  title: string
-}>()
+  title: string;
+}>();
 </script>

@@ -2,7 +2,9 @@
   <section
     class="bg-image grow flex flex-col items-center justify-center gap-10"
   >
-    <BaseLogo width="40%" color="white" />
+    <nuxt-link class="w-[40%]" to="/">
+      <BaseLogo width="100%" color="white" />
+    </nuxt-link>
   </section>
 </template>
 <style scoped>

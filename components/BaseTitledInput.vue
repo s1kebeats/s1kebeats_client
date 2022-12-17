@@ -13,6 +13,7 @@
         :type="type ? type : 'text'"
         :placeholder="placeholder"
         :value="value"
+        autocomplete="off"
         @input="updateValue"
         @focus="toggleFocusedState(true)"
         @blur="toggleFocusedState(false)"
@@ -23,34 +24,34 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  title: string
-  placeholder?: string
-  value: string
-  type?: string
-  debounce?: boolean
-}>()
+  title: string;
+  placeholder?: string;
+  value: string;
+  type?: string;
+  debounce?: boolean;
+}>();
 const emit = defineEmits<{
-  (e: 'updateValue', value: string): void
-}>()
+  (e: 'updateValue', value: string): void;
+}>();
 // debounced emitting
-let timeout: NodeJS.Timeout
+let timeout: NodeJS.Timeout;
 const updateValueDebounced = (e: Event) => {
-  clearTimeout(timeout)
+  clearTimeout(timeout);
   timeout = setTimeout(() => {
-    const input = e.target as HTMLInputElement
-    emit('updateValue', input.value)
-  }, 500)
-}
+    const input = e.target as HTMLInputElement;
+    emit('updateValue', input.value);
+  }, 500);
+};
 const updateValue = (e: Event) => {
   if (props.debounce) {
-    updateValueDebounced(e)
+    updateValueDebounced(e);
   } else {
-    const input = e.target as HTMLInputElement
-    emit('updateValue', input.value)
+    const input = e.target as HTMLInputElement;
+    emit('updateValue', input.value);
   }
-}
-const inputFocused = ref(false)
+};
+const inputFocused = ref(false);
 const toggleFocusedState = (value: boolean) => {
-  inputFocused.value = value
-}
+  inputFocused.value = value;
+};
 </script>
