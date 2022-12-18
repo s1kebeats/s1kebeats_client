@@ -18,5 +18,5 @@
 const inputFocused = ref(false);
 const toggleFocusedState = (value: boolean) => {
   inputFocused.value = value;
-}
+};
 </script>

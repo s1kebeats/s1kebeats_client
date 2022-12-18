@@ -2,9 +2,11 @@
   <section
     class="bg-image select-none border-b flex items-center justify-center w-full h-[480px]"
   >
-    <div class="flex items-start gap-5 justify-center text-black">
-      <h1 class="text-7xl font-semibold font-[Poppins]">s1kebeats</h1>
-      <h2 class="text-3xl font-semibold font-[Poppins]">2023</h2>
+    <div
+      class="flex items-start gap-5 justify-center text-black font-semibold font-[Poppins]"
+    >
+      <h1 class="text-7xl">s1kebeats</h1>
+      <h2 class="text-3xl">2023</h2>
       <!-- <BaseLogo width="360px" color="white" /> -->
     </div>
   </section>
