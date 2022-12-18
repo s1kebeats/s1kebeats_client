@@ -3,4 +3,5 @@ export default interface User {
   username: string;
   id: number;
   isActivated: boolean;
+  image: string;
 }

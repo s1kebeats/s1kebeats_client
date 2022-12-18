@@ -10,6 +10,6 @@
       );
     "
   >
-    <TheLoginForm />
+
   </main>
 </template>

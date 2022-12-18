@@ -1,6 +1,6 @@
 <template>
   <header
-    class="relative h-[50px] border-b-[1px] flex items-center justify-between px-3"
+    class="relative h-[75px] flex items-center justify-between px-[10%]"
   >
     <HeaderLogo />
     <HeaderSearch class="absolute left-0 right-0 mx-auto" />
