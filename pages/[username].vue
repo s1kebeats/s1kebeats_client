@@ -13,6 +13,6 @@ const { data: author } = await useFetch<AuthorIndividual>(
   `http://localhost:5000/api/author/${route.params.username}`
 );
 if (!author.value) {
-  showError({ statusCode: 404, statusMessage: 'f' });
+  showError({ statusCode: 404, statusMessage: 'Страница не найдена' });
 }
 </script>
