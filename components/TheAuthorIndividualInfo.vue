@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full h-[270px] px-[10%]">
+  <section class="w-full h-[250px] w-[1480px]">
     <div
       class="bg-image pt-[130px] relative w-full h-full rounded-t-lg border-[1px] bg-black"
     >
@@ -57,9 +57,17 @@
               </div>
             </div>
           </div>
-          <div v-if="author.about" class="text-sm leading-[28px]">
+          <!-- <div v-if="author.about" class="multiline text-left max-h-[100%] text-sm pt-[8px] font-semibold">
             {{ author.about }}
-          </div>
+          </div> -->
+          <nuxt-link
+            v-if="userStore.user.username === route.params.username"
+            to="/settings"
+            class="bg-black text-white rounded-md py-2 px-2 text-xs transition-all flex items-center gap-2"
+          >
+            <Icon name="material-symbols:edit" size="16px" />
+            Редактировать профиль
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -67,12 +75,15 @@
 </template>
 <script setup lang="ts">
 import AuthorIndividual from '~~/models/AuthorIndividual';
+import { useUserStore } from '~~/stores/user';
 
+const route = useRoute();
+const userStore = useUserStore();
 const props = defineProps<{
   author: AuthorIndividual;
 }>();
 </script>
-<style scoped>
+<style scoped lang="scss">
 .bg-image {
   background-image: linear-gradient(
       to bottom,
@@ -82,5 +93,10 @@ const props = defineProps<{
     url('~/assets/images/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+.multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 </style>

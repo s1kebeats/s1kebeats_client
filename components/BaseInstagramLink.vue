@@ -1,7 +1,7 @@
 <template>
-  <nuxt-link :to="'https://www.instagram.com/' + username">
+  <a target="_blank" :href="'https://www.instagram.com/' + username">
     <Icon name="mdi:instagram" :width="width" :height="height" />
-  </nuxt-link>
+  </a>
 </template>
 <script setup lang="ts">
 const props = defineProps<{

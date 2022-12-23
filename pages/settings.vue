@@ -1,6 +1,6 @@
 <template>
   <main
-    class="grow flex flex-col items-center justify-center"
+    class="grow flex flex-col items-center justify-center w-full"
     style="
       background: linear-gradient(
         70deg,

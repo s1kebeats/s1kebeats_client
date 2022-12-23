@@ -1,5 +1,5 @@
 <template>
-  <main class="grow flex flex-col gap-2 pt-5">
+  <main class="grow flex flex-col items-center gap-5 pt-5 w-full">
     <template v-if="author">
       <TheAuthorIndividualInfo :author="author" />
       <TheAuthorBeats :data="author.beats" />

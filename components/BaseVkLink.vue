@@ -1,7 +1,7 @@
 <template>
-  <nuxt-link :to="'https://vk.com/' + username">
+  <a target="_blank" :href="'https://vk.com/' + username">
     <Icon name="mdi:vk" :width="width" :height="height" />
-  </nuxt-link>
+  </a>
 </template>
 <script setup lang="ts">
 const props = defineProps<{

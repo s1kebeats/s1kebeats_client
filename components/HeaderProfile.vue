@@ -1,19 +1,19 @@
 <template>
   <nuxt-link
-    :to="userStore.authorized ? `/${userStore.user.username}` : '/login'"
+    :to="userStore.authorized ? `/${userStore.user.username}` : '/register'"
   >
     <Icon
       v-if="!userStore.user.image"
       name="ic:round-account-circle"
       color="#e5e7eb"
-      size="30px"
+      size="32px"
     />
     <BaseApiImage
       v-else
       :src="userStore.user.image"
-      class="rounded-full border-[1px] w-[30px] h-[30px]"
-      width="30px"
-      height="30px"
+      class="rounded-full border-[1px] w-[32px] h-[32px]"
+      width="32px"
+      height="32px"
       alt="Profile Image"
     />
   </nuxt-link>
