@@ -4,50 +4,117 @@
       <BaseTitledInput
         class="w-[400px] bg-white"
         title="Название"
-        :value="''"
+        :value="beat.name"
         placeholder="Введите название"
+        @update-value="updateBeatInfo('name', $event)"
       />
       <BaseTitledInput
         class="w-[170px] bg-white"
         title="Темп"
         type="number"
-        :value="''"
+        :value="beat.bpm"
         placeholder="Введите BPM"
+        @update-value="updateBeatInfo('bpm', $event)"
       />
+      <BeatUploadImageInput
+        :value="beat.image ? beat.image.name : ''"
+        @update-value="updateBeatMedia('image', $event)"
+      />
+      <BaseButton
+        v-show="beat.image"
+        @click="clearBeatMediaInput('image')"
+        class="text-xs py-1 px-3 rounded-md gap-3"
+      >
+        <Icon name="lucide:trash-2" size="16px" />
+      </BaseButton>
     </div>
     <div class="flex gap-2">
-      <BaseTitledInput
-        class="w-[170px] bg-white"
-        title="Цена .rar, руб."
-        type="number"
-        :value="''"
-        placeholder="Введите цену"
-      />
       <div class="flex flex-col gap-2">
-        <BaseFileInput icon="ic:outline-music-note" name="mp3" title="WAV Аудио" />
-        <!-- <BaseFileInput name="wave" title="MP3 Аудио" /> -->
-      </div>
-      <BaseTitledInput
-        class="w-[400px] h-[132px] bg-white"
-        title="Описание"
-        type="area"
-        :value="''"
-        placeholder="Введите описание"
-      />
-    </div>
-    <div class="flex items-center justify-start gap-2">
-      <div class="flex flex-col gap-2">
-        <BaseTitledInput
-          class="w-[170px] bg-white"
-          title="Цена .wav, руб."
-          type="number"
-          :value="''"
-          placeholder="Введите цену"
+        <BeatUploadWavInput
+          :value="beat.wav ? beat.wav.name : ''"
+          @update-value="updateBeatMedia('wav', $event)"
+        />
+        <BeatUploadMp3Input
+          :value="beat.mp3 ? beat.mp3.name : ''"
+          @update-value="updateBeatMedia('mp3', $event)"
         />
       </div>
+      <BaseTitledInput
+        class="w-[500px] -[132px] bg-white"
+        title="Описание"
+        type="area"
+        :value="beat.description"
+        placeholder="Введите описание"
+        @update-value="updateBeatInfo('description', $event)"
+      />
+    </div>
+
+    <div class="flex items-start justify-start gap-2">
+      <div class="flex flex-col gap-1">
+        <BeatUploadStemsInput
+          :value="beat.stems ? beat.stems.name : ''"
+          @update-value="updateBeatMedia('stems', $event)"
+        />
+        <BaseButton
+          v-show="beat.stems"
+          @click="clearBeatMediaInput('stems')"
+          class="text-xs py-1 px-1 rounded-md"
+          >Удалить архив</BaseButton
+        >
+      </div>
+      <BaseTitledInput
+        class="w-[200px] bg-white"
+        title="Цена за Trackout"
+        type="number"
+        :value="beat.stemsPrice"
+        placeholder="Введите сумму"
+        @update-value="updateBeatInfo('stemsPrice', $event)"
+      >
+        <Icon name="material-symbols:currency-ruble" />
+      </BaseTitledInput>
+      <BaseTitledInput
+        class="w-[200px] bg-white"
+        title="Цена за аудио"
+        type="number"
+        :value="beat.wavePrice"
+        placeholder="Введите сумму"
+        @update-value="updateBeatInfo('wavePrice', $event)"
+      >
+        <Icon name="material-symbols:currency-ruble" />
+      </BaseTitledInput>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import BeatUpload from '~~/models/BeatUpload';
+
+const beat = reactive<BeatUpload>({
+  name: '',
+  bpm: null,
+  description: '',
+  wavePrice: null,
+  stemsPrice: null,
+  wav: null,
+  mp3: null,
+  stems: null,
+  image: null,
+});
+const updateBeatMedia = (
+  field: 'stems' | 'image' | 'wav' | 'mp3',
+  value: File | null
+) => {
+  beat[field] = value;
+};
+const updateBeatInfo = (
+  field: 'name' | 'bpm' | 'description' | 'wavePrice' | 'stemsPrice',
+  value: number | string
+) => {
+  beat[field] = value;
+};
+const clearBeatMediaInput = (field: 'stems' | 'image' | 'wav' | 'mp3') => {
+  beat[field] = null;
+};
+</script>
 <style scoped>
 .bg-image {
   background-image: linear-gradient(

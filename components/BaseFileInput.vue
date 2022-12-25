@@ -1,34 +1,74 @@
 <template>
   <div class="flex flex-col">
-    <label for="file-upload" class="flex items-center w-[220px] cursor-pointer text-white p-3 rounded-md bg-[#7945fc]">
-        <Icon v-if="icon" :name="icon" color="white" size="28px" />
-        <div class="grow flex flex-col items-center">
-            <span class="text-sm">        {{ title }}</span>
-            <span v-if="description">        {{ description }}</span>
-        </div>
-
+    <label
+      :for="name"
+      class="flex items-center gap-3 cursor-pointer text-white py-3 pr-5 pl-3 rounded-md"
+      :class="value ? 'bg-filled' : 'bg-empty'"
+    >
+      <Icon v-if="icon" :name="icon" color="white" height="36px" width="36px" />
+      <div class="grow flex flex-col items-center">
+        <span class="text-sm font-semibold"> {{ title }}</span>
+        <span class="text-xs" v-if="description"> {{ description }}</span>
+      </div>
     </label>
-    <BaseButton @click="clearFileInput" class="text-xs py-1 px-1 rounded-md">Удалить</BaseButton>
-    <input :name="name" id="file-upload" type="file" class="hidden" :value="value" @input="updateValue" />
+    <input
+      ref="inputElement"
+      :name="name"
+      :id="name"
+      type="file"
+      class="hidden"
+      :accept="accept"
+      @input="updateValue"
+    />
   </div>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-    title: string;
-    description?: string;
-    name: string;
-    value: File | null;
-    icon?: string;
+  title: string;
+  description?: string;
+  name: string;
+  icon?: string;
+  accept?: string;
+  value: string;
 }>();
 const emit = defineEmits<{
-    (e: 'updateValue', value: File | null): void;
-}>()
+  (e: 'updateValue', value: File): void;
+}>();
+const inputElement = ref<HTMLInputElement>();
 const updateValue = (e: Event) => {
-    // const input = e.target as HTMLInputElement;
-    // const value = input.files;
-    // emit('updateValue', value)
-}
-const clearFileInput = (e: Event): void => {
-    emit('updateValue', null)
-}
+  const input = e.target as HTMLInputElement;
+  if (input.files) {
+    emit('updateValue', input.files[0]);
+  }
+};
+watch(
+  () => props.value,
+  (newValue) => {
+    if (!newValue) {
+      inputElement.value!.value = '';
+    }
+  }
+);
 </script>
+<style scoped>
+.bg-filled {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(121, 69, 252, 0.55)
+    ),
+    url('~/assets/images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg-empty {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(95, 95, 95, 0.55)
+    ),
+    url('~/assets/images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>

@@ -14,7 +14,7 @@
         min="0"
         :type="type ? type : 'text'"
         :placeholder="placeholder"
-        :value="value"
+        :value="String(value)"
         autocomplete="off"
         @input="updateValue"
         @focus="toggleFocusedState(true)"
@@ -41,12 +41,12 @@
 const props = defineProps<{
   title: string;
   placeholder?: string;
-  value: string;
+  value: string | number | null;
   type?: string;
   debounce?: boolean;
 }>();
 const emit = defineEmits<{
-  (e: 'updateValue', value: string): void;
+  (e: 'updateValue', value: string | number): void;
 }>();
 // debounced emitting
 let timeout: NodeJS.Timeout;
