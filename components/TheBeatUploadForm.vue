@@ -1,16 +1,52 @@
 <template>
-    <div class="bg-image rounded-lg w-[1480px] h-[500px] flex flex-col gap-5 p-5">
-        <h2 class="text-white font-semibold text-md">Информация</h2>
-        <div class="flex items-center justify-between">
-            <BaseTitledInput class="w-[400px] bg-white" title="Название" :value="''" placeholder="Введите название бита" />
-            <BaseTitledInput class="w-[200px] bg-white" title="Темп" type="number" :value="''" placeholder="Введите BPM" />
-        </div>
-        <h2 class="text-white font-semibold text-md">Медиа</h2>
-        <div class="flex items-center justify-between">
-            <BaseTitledInput class="w-[400px] bg-white" title="Название" :value="''" placeholder="Введите название бита" />
-            <BaseTitledInput class="w-[200px] bg-white" title="Темп" type="number" :value="''" placeholder="Введите BPM" />
-        </div>
+  <div class="w-[1480px] flex flex-col gap-2">
+    <div class="flex gap-2">
+      <BaseTitledInput
+        class="w-[400px] bg-white"
+        title="Название"
+        :value="''"
+        placeholder="Введите название"
+      />
+      <BaseTitledInput
+        class="w-[170px] bg-white"
+        title="Темп"
+        type="number"
+        :value="''"
+        placeholder="Введите BPM"
+      />
     </div>
+    <div class="flex gap-2">
+      <BaseTitledInput
+        class="w-[170px] bg-white"
+        title="Цена .rar, руб."
+        type="number"
+        :value="''"
+        placeholder="Введите цену"
+      />
+      <div class="flex flex-col gap-2">
+        <BaseFileInput icon="ic:outline-music-note" name="mp3" title="WAV Аудио" />
+        <!-- <BaseFileInput name="wave" title="MP3 Аудио" /> -->
+      </div>
+      <BaseTitledInput
+        class="w-[400px] h-[132px] bg-white"
+        title="Описание"
+        type="area"
+        :value="''"
+        placeholder="Введите описание"
+      />
+    </div>
+    <div class="flex items-center justify-start gap-2">
+      <div class="flex flex-col gap-2">
+        <BaseTitledInput
+          class="w-[170px] bg-white"
+          title="Цена .wav, руб."
+          type="number"
+          :value="''"
+          placeholder="Введите цену"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 <style scoped>
 .bg-image {

@@ -1,15 +1,30 @@
 <template>
   <div
-    class="rounded-lg border-[1px] px-5 py-2 transition-all"
+    class="rounded-lg border-[1px] px-5 py-2 transition-all flex flex-col"
     :class="inputFocused ? 'border-[#7945fc]' : ''"
   >
     <label :for="title" class="text-sm font-semibold transition-all">{{
       title
     }}</label>
-    <div class="flex items-center">
-      <input
+    <div class="flex items-center grow">
+      <textarea
+        v-if="type === 'area'"
         :name="title"
-        class="focus:outline-none grow font-semibold!"
+        class="focus:outline-none grow w-full h-full resize-none"
+        min="0"
+        :type="type ? type : 'text'"
+        :placeholder="placeholder"
+        :value="value"
+        autocomplete="off"
+        @input="updateValue"
+        @focus="toggleFocusedState(true)"
+        @blur="toggleFocusedState(false)"
+      ></textarea>
+      <input
+        v-else
+        :name="title"
+        class="focus:outline-none grow w-full"
+        min="0"
         :type="type ? type : 'text'"
         :placeholder="placeholder"
         :value="value"

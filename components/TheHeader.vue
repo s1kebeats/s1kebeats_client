@@ -7,18 +7,18 @@
     <div class="flex items-center gap-5">
       <HeaderNav />
       <nuxt-link
-            v-if="userStore.authorized"
-            to="/upload"
-            class="bg-black text-white rounded-md p-2 text-xs transition-all flex items-center gap-2"
-          >
-            <Icon name="material-symbols:upload-rounded" size="16px" />
-            Опубликовать
-          </nuxt-link>
+        v-if="userStore.authorized"
+        to="/upload"
+        class="bg-black text-white rounded-md p-2 text-xs transition-all flex items-center gap-2"
+      >
+        <Icon name="material-symbols:upload-rounded" size="16px" />
+        Опубликовать
+      </nuxt-link>
       <HeaderProfile />
     </div>
   </header>
 </template>
 <script setup lang="ts">
 import { useUserStore } from '~~/stores/user';
-const userStore = useUserStore()
+const userStore = useUserStore();
 </script>
