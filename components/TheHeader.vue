@@ -7,7 +7,7 @@
     <div class="flex items-center gap-5">
       <HeaderNav />
       <nuxt-link
-        v-if="userStore.authorized"
+        v-if="user"
         to="/upload"
         class="bg-black text-white rounded-md p-2 text-xs transition-all flex items-center gap-2"
       >
@@ -19,6 +19,5 @@
   </header>
 </template>
 <script setup lang="ts">
-import { useUserStore } from '~~/stores/user';
-const userStore = useUserStore();
+const user = useAuthUser();
 </script>

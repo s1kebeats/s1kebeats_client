@@ -1,6 +1,10 @@
 <template>
   <div class="w-[1480px] flex flex-col gap-2">
-    <div class="flex gap-2">
+    <BeatUploadImageInput
+      :value="beat.image ? beat.image.name : ''"
+      @update-value="updateBeatMedia('image', $event)"
+    />
+    <!-- <div class="flex gap-2">
       <BaseTitledInput
         class="w-[400px] bg-white"
         title="Название"
@@ -82,7 +86,7 @@
       >
         <Icon name="material-symbols:currency-ruble" />
       </BaseTitledInput>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup lang="ts">
@@ -99,7 +103,7 @@ const beat = reactive<BeatUpload>({
   stems: null,
   image: null,
 });
-const updateBeatMedia = (
+const updateBeatMedia = async (
   field: 'stems' | 'image' | 'wav' | 'mp3',
   value: File | null
 ) => {

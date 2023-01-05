@@ -8,7 +8,9 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@pinia/nuxt', 'nuxt-icon'],
-  // imports: {
-  //   dirs: ['./stores']
-  // }
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.API_URL ?? 'http://localhost:5000/api/',
+    },
+  },
 });

@@ -1,15 +1,18 @@
 <template>
-  <TheLoginSection />
+  <section
+    class="w-[40%] bg-white flex flex-col items-center justify-center gap-7 px-[7.5%]"
+  >
+    <BaseFormHeader title="Вход" />
+    <TheLoginForm @success="onLoginSuccess" />
+    <TheLoginFooter />
+  </section>
 </template>
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user';
-const userStore = useUserStore();
 definePageMeta({
   layout: 'form',
 });
-onBeforeMount(async () => {
-  if (userStore.authorized) {
-    await navigateTo('/profile');
-  }
-});
+
+async function onLoginSuccess() {
+  await navigateTo('/');
+}
 </script>

@@ -46,7 +46,7 @@ const props = defineProps<{
   debounce?: boolean;
 }>();
 const emit = defineEmits<{
-  (e: 'updateValue', value: string | number): void;
+  (e: 'updateValue', value: string): void;
 }>();
 // debounced emitting
 let timeout: NodeJS.Timeout;

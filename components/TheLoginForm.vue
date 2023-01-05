@@ -1,39 +1,43 @@
 <template>
-  <form @submit.prevent="login" class="flex flex-col w-full gap-3">
+  <form @submit.prevent="submitLoginForm" class="flex flex-col w-full gap-3">
     <BaseTitledInput
       :class="v$.username.$error ? 'border-red-500' : ''"
-      @update-value="updateLoginState('username', $event)"
+      @update-value="($event: string) => { loginFormState.data.username = $event }"
       title="Имя пользователя"
       placeholder="Введите имя пользователя"
-      :value="loginState.username"
+      :value="loginFormState.data.username"
     />
     <BasePasswordInput
       :class="v$.password.$error ? 'border-red-500' : ''"
-      @update-value="updateLoginState('password', $event)"
+      @update-value="($event: string) => { loginFormState.data.password = $event }"
       title="Пароль"
       placeholder="Введите пароль"
-      :value="loginState.password"
+      :value="loginFormState.data.password"
     />
     <div class="flex items-center h-5">
       <BaseFormErrorOutput :v$="v$" />
       <div class="grow flex items-center justify-end gap-2">
         <label for="save" class="text-xs">Сохранить вход?</label>
         <BaseCheckboxInput
-          :value="loginState.save"
-          @update-value="updateLoginSave"
+          :value="loginFormState.data.rememberMe"
+          @update-value="($event: boolean) => { loginFormState.data.rememberMe = $event }"
         />
       </div>
     </div>
     <BaseButton
       type="submit"
-      :class="loginError ? 'bg-red-500 cursor-default' : ''"
+      :class="loginFormState.errorStatus ? 'bg-red-500 cursor-default' : ''"
     >
-      <span v-show="!loginError && !loading">Войти</span>
-      <BaseLoadinSpinner v-show="!loginError && loading" />
-      <span v-show="loginError">
+      <span v-show="!loginFormState.errorStatus && !loginFormState.pending"
+        >Войти</span
+      >
+      <BaseLoadinSpinner
+        v-show="!loginFormState.errorStatus && loginFormState.pending"
+      />
+      <span v-show="loginFormState.errorStatus">
         {{
-          loginErrorMessages[loginError]
-            ? loginErrorMessages[loginError]
+          loginErrorMessages[loginFormState.errorStatus]
+            ? loginErrorMessages[loginFormState.errorStatus]
             : 'Произошла непредвиденная ошибка'
         }}
       </span>
@@ -43,64 +47,66 @@
 <script setup lang="ts">
 import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { useUserStore } from '../stores/user';
-import { AxiosError } from 'axios';
-const userStore = useUserStore();
-const loginError = ref('');
 const loginErrorMessages: {
   [key: string]: string;
 } = {
   '401': 'Неверные данные для входа',
   '403': 'Электронная почта не подтверждена',
 };
-const loading = ref(false);
-const loginState = reactive<{
-  [key: string]: string | boolean;
-  username: string;
-  password: string;
-  save: boolean;
+
+const emit = defineEmits<{
+  (e: 'success'): void;
+}>();
+
+const loginFormState = reactive<{
+  data: {
+    username: string;
+    password: string;
+    rememberMe: boolean;
+  };
+  errorStatus: string;
+  pending: boolean;
 }>({
-  username: '',
-  password: '',
-  save: true,
+  data: {
+    username: '',
+    password: '',
+    rememberMe: true,
+  },
+  errorStatus: '',
+  pending: false,
 });
+
 const loginRules = computed(() => {
   return {
     username: { required: helpers.withMessage('Заполните поля', required) },
     password: { required: helpers.withMessage('Заполните поля', required) },
   };
 });
-const v$ = useVuelidate(loginRules, loginState, {
+
+const v$ = useVuelidate(loginRules, loginFormState.data, {
   $autoDirty: true,
   $lazy: true,
 });
-const updateLoginState = (key: keyof typeof loginState, value: string) => {
-  if (loginError.value) {
-    loginError.value = '';
-  }
-  loginState[key] = value;
-};
-const updateLoginSave = (value: boolean) => {
-  loginState.save = value;
-};
-const login = async () => {
+
+async function submitLoginForm() {
   const result = await v$.value.$validate();
   if (result) {
-    if (!loading.value && !loginError.value) {
-      try {
-        loading.value = true;
-        const res = await userStore.login(
-          loginState.username,
-          loginState.password,
-          loginState.save
-        );
-        await navigateTo('/');
-      } catch (error) {
-        loginError.value = String((error as AxiosError).response?.status);
-      } finally {
-        loading.value = false;
-      }
+    try {
+      loginFormState.errorStatus = '';
+      loginFormState.pending = true;
+
+      const user = await useLogin(
+        loginFormState.data.username,
+        loginFormState.data.password,
+        loginFormState.data.rememberMe
+      );
+
+      emit('success');
+    } catch (error: any) {
+      loginFormState.errorStatus = error.value.status;
+    } finally {
+      loginFormState.pending = false;
     }
   }
-};
+}
 </script>
