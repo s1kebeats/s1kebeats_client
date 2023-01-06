@@ -1,5 +1,13 @@
 <template>
-  <form @submit.prevent="submitLoginForm" class="flex flex-col w-full gap-3">
+  <form
+    @submit.prevent="submitLoginForm"
+    class="relative flex flex-col w-full gap-3"
+  >
+    <BaseFormErrorPopUp
+      :open="loginFormState.error.state"
+      :code="loginFormState.error.code"
+      @close="closeErrorPopUp"
+    />
     <BaseTitledInput
       :class="v$.username.$error ? 'border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.username = $event }"
@@ -26,33 +34,23 @@
     </div>
     <BaseButton
       type="submit"
-      :class="loginFormState.errorStatus ? 'bg-red-500 cursor-default' : ''"
+      class="relative flex items-center justify-center h-[36px]"
     >
-      <span v-show="!loginFormState.errorStatus && !loginFormState.pending"
-        >Войти</span
-      >
-      <BaseLoadinSpinner
-        v-show="!loginFormState.errorStatus && loginFormState.pending"
-      />
-      <span v-show="loginFormState.errorStatus">
-        {{
-          loginErrorMessages[loginFormState.errorStatus]
-            ? loginErrorMessages[loginFormState.errorStatus]
-            : 'Произошла непредвиденная ошибка'
-        }}
-      </span>
+      <transition name="spinner">
+        <div v-show="loginFormState.pending" class="absolute w-full bg-black">
+          <BaseLoadinSpinner key="spinner" />
+        </div>
+      </transition>
+      <span key="span">Войти</span>
     </BaseButton>
   </form>
 </template>
 <script setup lang="ts">
 import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-const loginErrorMessages: {
-  [key: string]: string;
-} = {
-  '401': 'Неверные данные для входа',
-  '403': 'Электронная почта не подтверждена',
-};
+import { useUserStore } from '~~/stores/user';
+
+const userStore = useUserStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;
@@ -64,7 +62,10 @@ const loginFormState = reactive<{
     password: string;
     rememberMe: boolean;
   };
-  errorStatus: string;
+  error: {
+    state: boolean;
+    code: number | null;
+  };
   pending: boolean;
 }>({
   data: {
@@ -72,7 +73,10 @@ const loginFormState = reactive<{
     password: '',
     rememberMe: true,
   },
-  errorStatus: '',
+  error: {
+    state: false,
+    code: null,
+  },
   pending: false,
 });
 
@@ -88,14 +92,20 @@ const v$ = useVuelidate(loginRules, loginFormState.data, {
   $lazy: true,
 });
 
+function closeErrorPopUp() {
+  loginFormState.error.state = false;
+  setTimeout(() => {
+    loginFormState.error.code = null;
+  }, 200);
+}
+
 async function submitLoginForm() {
   const result = await v$.value.$validate();
   if (result) {
     try {
-      loginFormState.errorStatus = '';
       loginFormState.pending = true;
 
-      const user = await useLogin(
+      await userStore.login(
         loginFormState.data.username,
         loginFormState.data.password,
         loginFormState.data.rememberMe
@@ -103,10 +113,23 @@ async function submitLoginForm() {
 
       emit('success');
     } catch (error: any) {
-      loginFormState.errorStatus = error.value.status;
+      loginFormState.error.state = true;
+      if (error.value.status) {
+        loginFormState.error.code = error.value.status;
+      }
     } finally {
       loginFormState.pending = false;
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.spinner-enter-active,
+.spinner-leave-active {
+  transition: opacity 0.2s ease;
+}
+.spinner-enter-from,
+.spinner-leave-to {
+  opacity: 0;
+}
+</style>

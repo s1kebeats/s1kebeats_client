@@ -5,9 +5,10 @@ import AuthResponse from '../models/AuthResponse';
 class AuthService {
   static async login(
     username: string,
-    password: string
+    password: string,
+    refresh: boolean
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/login', { username, password });
+    return $api.post<AuthResponse>('/login', { username, password, refresh });
   }
   static async register(
     username: string,

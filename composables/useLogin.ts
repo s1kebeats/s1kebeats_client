@@ -10,9 +10,9 @@ export default async function (
     body: {
       username,
       password,
-      rememberMe,
+      refresh: rememberMe,
     },
   });
-  if (error) throw error;
+  if (error.value) throw error;
   return data;
 }

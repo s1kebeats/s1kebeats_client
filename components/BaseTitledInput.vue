@@ -14,7 +14,7 @@
         min="0"
         :type="type ? type : 'text'"
         :placeholder="placeholder"
-        :value="String(value)"
+        :value="localValue"
         autocomplete="off"
         @input="updateValue"
         @focus="toggleFocusedState(true)"
@@ -27,7 +27,7 @@
         min="0"
         :type="type ? type : 'text'"
         :placeholder="placeholder"
-        :value="value"
+        :value="localValue"
         autocomplete="off"
         @input="updateValue"
         @focus="toggleFocusedState(true)"
@@ -45,24 +45,28 @@ const props = defineProps<{
   type?: string;
   debounce?: boolean;
 }>();
+
 const emit = defineEmits<{
   (e: 'updateValue', value: string): void;
 }>();
+
+const localValue = ref();
+
 // debounced emitting
 let timeout: NodeJS.Timeout;
 const updateValueDebounced = (e: Event) => {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    const input = e.target as HTMLInputElement;
-    emit('updateValue', input.value);
+    emit('updateValue', localValue.value);
   }, 500);
 };
 const updateValue = (e: Event) => {
+  const input = e.target as HTMLInputElement;
+  localValue.value = input.value;
   if (props.debounce) {
     updateValueDebounced(e);
   } else {
-    const input = e.target as HTMLInputElement;
-    emit('updateValue', input.value);
+    emit('updateValue', localValue.value);
   }
 };
 const inputFocused = ref(false);

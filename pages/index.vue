@@ -4,8 +4,3 @@
     <!-- <BaseBeatList /> -->
   </main>
 </template>
-<!-- <script setup lang="ts">
-onMounted(() => {
-
-})
-</script> -->

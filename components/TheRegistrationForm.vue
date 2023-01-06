@@ -1,5 +1,16 @@
 <template>
-  <form @submit.prevent="submitRegistrationForm" class="flex flex-col w-full">
+  <form
+    @submit.prevent="submitRegistrationForm"
+    class="relative flex flex-col w-full"
+  >
+    <BaseFormErrorPopUp
+      :open="registrationFormState.error"
+      @close="
+        () => {
+          registrationFormState.error = false;
+        }
+      "
+    />
     <div
       class="flex flex-col gap-3 mb-3"
       :class="!v$.$errors.length ? 'pb-8' : ''"
@@ -37,20 +48,11 @@
       />
       <BaseFormErrorOutput :v$="v$" />
     </div>
-    <BaseButton
-      type="submit"
-      :class="registrationFormState.errorStatus ? 'bg-red-500 cursor-default' : ''"
-    >
-      <span
-        v-show="!registrationFormState.errorStatus && !registrationFormState.pending"
-        >Зарегистрироваться</span
-      >
-      <BaseLoadinSpinner
-        v-show="!registrationFormState.errorStatus && registrationFormState.pending"
-      />
-      <span v-show="registrationFormState.errorStatus">
-        Произошла непредвиденная ошибка
-      </span>
+    <BaseButton type="submit">
+      <transition name="spinner">
+        <BaseLoadinSpinner v-if="registrationFormState.pending" />
+        <span v-else>Зарегистрироваться</span>
+      </transition>
     </BaseButton>
   </form>
 </template>
@@ -75,7 +77,7 @@ const registrationFormState = reactive<{
     password: string;
     passwordConfirm: string;
   };
-  errorStatus: string;
+  error: boolean;
   pending: boolean;
 }>({
   data: {
@@ -84,7 +86,7 @@ const registrationFormState = reactive<{
     password: '',
     passwordConfirm: '',
   },
-  errorStatus: '',
+  error: false,
   pending: false,
 });
 
@@ -93,7 +95,9 @@ const passwordComplexity = (param: string): boolean => {
 };
 
 const usernameAvailable = async (param: string): Promise<boolean> => {
-  const { data: user } = await useFetch(`http://localhost:5000/api/author/${param}`);
+  const { data: user } = await useFetch(
+    `http://localhost:5000/api/author/${param}`
+  );
   if (user.value) {
     return false;
   }
@@ -143,7 +147,7 @@ async function submitRegistrationForm() {
   const result = await v$.value.$validate();
   if (result) {
     try {
-      registrationFormState.errorStatus = '';
+      registrationFormState.error = false;
       registrationFormState.pending = true;
 
       await useRegister(
@@ -154,10 +158,20 @@ async function submitRegistrationForm() {
 
       emit('success');
     } catch (error: any) {
-        registrationFormState.errorStatus = error.data.status;
+      registrationFormState.error = true;
     } finally {
       registrationFormState.pending = false;
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.spinner-enter-active,
+.spinner-leave-active {
+  transition: opacity 0.2s ease;
+}
+.spinner-enter-from,
+.spinner-leave-to {
+  opacity: 0;
+}
+</style>

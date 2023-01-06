@@ -11,15 +11,13 @@ export const useUserStore = defineStore('user', {
       accessToken: '',
       authorized: false,
       user: {} as User,
-      loading: false,
+      loading: true,
     };
   },
   actions: {
-    setAccessToken(accessToken: string, save: boolean) {
+    setAccessToken(accessToken: string) {
       this.accessToken = accessToken;
-      if (save) {
-        localStorage.setItem('accessToken', accessToken);
-      }
+      localStorage.setItem('accessToken', accessToken);
     },
     setUser(user: User) {
       this.user = user;
@@ -33,16 +31,19 @@ export const useUserStore = defineStore('user', {
     async login(
       username: string,
       password: string,
-      save: boolean
+      rememberMe: boolean
     ): Promise<AxiosResponse> {
       try {
-        const response = await AuthService.login(username, password);
-        this.setAccessToken(response.data.accessToken, save);
+        const response = await AuthService.login(
+          username,
+          password,
+          rememberMe
+        );
+        this.setAccessToken(response.data.accessToken);
         this.setAuthorized(true);
         this.setUser(response.data.user);
         return response;
-      } catch (e) {
-        const error = e as AxiosError;
+      } catch (error: any) {
         throw error;
       }
     },
@@ -54,15 +55,14 @@ export const useUserStore = defineStore('user', {
       try {
         const response = await AuthService.register(username, email, password);
         return response;
-      } catch (e) {
-        const error = e as AxiosError;
+      } catch (error) {
         throw error;
       }
     },
     async logout(): Promise<AxiosResponse> {
       try {
         const response = await AuthService.logout();
-        this.setAccessToken('', true);
+        this.setAccessToken('');
         this.setAuthorized(false);
         this.setUser({} as User);
         return response;
@@ -73,9 +73,8 @@ export const useUserStore = defineStore('user', {
     },
     async checkAuth(): Promise<AxiosResponse> {
       try {
-        this.setLoading(true);
         const response = await $api.get(`/refresh`);
-        this.setAccessToken(response.data.accessToken, true);
+        this.setAccessToken(response.data.accessToken);
         this.setAuthorized(true);
         this.setUser(response.data.user);
         return response;
