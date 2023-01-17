@@ -1,16 +1,16 @@
 import BeatForAuthor from './BeatForAuthor';
 
 export default interface AuthorIndividual {
+  id: number;
   username: string;
+  createdAt: string;
   displayedName: string | null;
   about: string | null;
-  vk: string | null;
+  image: string | null;
+  beats: BeatForAuthor[];
   youtube: string | null;
   instagram: string | null;
-  image: string;
-  beats: BeatForAuthor[];
-  createdAt: Date;
-  id: number;
+  vk: string | null;
   _count: {
     beats: number;
   };

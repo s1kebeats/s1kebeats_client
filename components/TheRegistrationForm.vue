@@ -50,8 +50,8 @@
     </div>
     <BaseButton type="submit">
       <!-- <transition name="spinner"> -->
-        <BaseLoadinSpinner v-if="registrationFormState.pending" />
-        <span v-else>Зарегистрироваться</span>
+      <BaseLoadinSpinner v-if="registrationFormState.pending" />
+      <span v-else>Зарегистрироваться</span>
       <!-- </transition> -->
     </BaseButton>
   </form>
@@ -65,6 +65,9 @@ import {
   sameAs,
   helpers,
 } from '@vuelidate/validators';
+import { useUserStore } from '~~/stores/user';
+
+const userStore = useUserStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;
@@ -150,7 +153,7 @@ async function submitRegistrationForm() {
       registrationFormState.error = false;
       registrationFormState.pending = true;
 
-      await useRegister(
+      await userStore.register(
         registrationFormState.data.email,
         registrationFormState.data.username,
         registrationFormState.data.password

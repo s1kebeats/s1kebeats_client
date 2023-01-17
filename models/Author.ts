@@ -2,5 +2,5 @@ export default interface Author {
   id: number;
   username: string;
   displayedName: string | null;
-  image: string;
+  image: string | null;
 }

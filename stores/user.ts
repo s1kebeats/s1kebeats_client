@@ -32,16 +32,18 @@ export const useUserStore = defineStore('user', {
       username: string,
       password: string,
       rememberMe: boolean
-    ): Promise<AxiosResponse> {
+    ): Promise<AxiosResponse<AuthResponse>> {
       try {
         const response = await AuthService.login(
           username,
           password,
           rememberMe
         );
-        this.setAccessToken(response.accessToken);
+
+        this.setAccessToken(response.data.accessToken);
+        this.setUser(response.data.user);
         this.setAuthorized(true);
-        this.setUser(response.user);
+
         return response;
       } catch (error: any) {
         throw error;
@@ -54,36 +56,35 @@ export const useUserStore = defineStore('user', {
     ): Promise<AxiosResponse> {
       try {
         const response = await AuthService.register(username, email, password);
+
         return response;
       } catch (error) {
         throw error;
       }
     },
-    async logout(): Promise<AxiosResponse> {
+    // async logout(): Promise<AxiosResponse> {
+    //   try {
+    //     const response = await AuthService.logout();
+    //     this.setAccessToken('');
+    //     this.setAuthorized(false);
+    //     this.setUser({} as User);
+    //     return response;
+    //   } catch (e) {
+    //     const error = e as AxiosError;
+    //     throw error;
+    //   }
+    // },
+    async checkAuth(): Promise<AxiosResponse<AuthResponse>> {
       try {
-        const response = await AuthService.logout();
-        this.setAccessToken('');
-        this.setAuthorized(false);
-        this.setUser({} as User);
-        return response;
-      } catch (e) {
-        const error = e as AxiosError;
-        throw error;
-      }
-    },
-    async checkAuth() {
-      try {
-        const response = await $fetch<AuthResponse>(
-          `http://localhost:5000/api/refresh`, {
-            method: 'POST',
-          }
-        );
-        this.setAccessToken(response.accessToken);
+        const response = await $api.post<AuthResponse>(`/refresh`);
+
+        this.setAccessToken(response.data.accessToken);
+        this.setUser(response.data.user);
         this.setAuthorized(true);
-        this.setUser(response.user);
+
         return response;
-      } catch (e) {
-        const error = e as AxiosError;
+      } catch (e: any) {
+        const error = e;
         throw error;
       } finally {
         this.setLoading(false);

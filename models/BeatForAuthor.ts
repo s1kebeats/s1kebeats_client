@@ -4,8 +4,8 @@ export default interface BeatForAuthor {
   id: number;
   name: string;
   bpm: number | null;
-  tags: Tag[];
-  image: string;
+  image: string | null;
   mp3: string;
   wavePrice: number;
+  tags: Tag[];
 }
