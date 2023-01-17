@@ -13,6 +13,6 @@ export default async function (
       password,
     },
   });
-  if (error) throw error;
+  if (error.value) throw error.value;
   return data;
 }

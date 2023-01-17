@@ -3,7 +3,7 @@
     :to="userStore.authorized ? `/${userStore.user.username}` : '/register'"
   > -->
   <div class="relative">
-    <button @click="toggleProfileOverlay">
+    <button @click="toggleProfileOverlay" class="flex items-center gap-1">
       <Icon
         v-if="!userStore.user.image"
         name="ic:round-account-circle"

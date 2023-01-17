@@ -49,10 +49,10 @@
       <BaseFormErrorOutput :v$="v$" />
     </div>
     <BaseButton type="submit">
-      <transition name="spinner">
+      <!-- <transition name="spinner"> -->
         <BaseLoadinSpinner v-if="registrationFormState.pending" />
         <span v-else>Зарегистрироваться</span>
-      </transition>
+      <!-- </transition> -->
     </BaseButton>
   </form>
 </template>

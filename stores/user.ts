@@ -1,9 +1,9 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
-import { API_URL } from '~~/http';
 import AuthService from '~~/services/AuthService';
 import User from '../models/User';
 import $api from '~~/http';
+import AuthResponse from '../models/AuthResponse';
 
 export const useUserStore = defineStore('user', {
   state: () => {
@@ -39,9 +39,9 @@ export const useUserStore = defineStore('user', {
           password,
           rememberMe
         );
-        this.setAccessToken(response.data.accessToken);
+        this.setAccessToken(response.accessToken);
         this.setAuthorized(true);
-        this.setUser(response.data.user);
+        this.setUser(response.user);
         return response;
       } catch (error: any) {
         throw error;
@@ -71,12 +71,16 @@ export const useUserStore = defineStore('user', {
         throw error;
       }
     },
-    async checkAuth(): Promise<AxiosResponse> {
+    async checkAuth() {
       try {
-        const response = await $api.get(`/refresh`);
-        this.setAccessToken(response.data.accessToken);
+        const response = await $fetch<AuthResponse>(
+          `http://localhost:5000/api/refresh`, {
+            method: 'POST',
+          }
+        );
+        this.setAccessToken(response.accessToken);
         this.setAuthorized(true);
-        this.setUser(response.data.user);
+        this.setUser(response.user);
         return response;
       } catch (e) {
         const error = e as AxiosError;

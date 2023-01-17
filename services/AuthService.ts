@@ -6,9 +6,17 @@ class AuthService {
   static async login(
     username: string,
     password: string,
-    refresh: boolean
-  ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/login', { username, password, refresh });
+    refresh: boolean // : Promise<AxiosResponse<AuthResponse>>
+  ) {
+    return $fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+      body: {
+        username,
+        password,
+        refresh,
+      },
+    });
+    // return $api.post<AuthResponse>('/login', { username, password, refresh });
   }
   static async register(
     username: string,
