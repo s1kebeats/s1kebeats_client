@@ -114,8 +114,8 @@ async function submitLoginForm() {
       emit('success');
     } catch (error: any) {
       loginFormState.error.state = true;
-      if (error.statusCode) {
-        loginFormState.error.code = error.statusCode;
+      if (error.response.status) {
+        loginFormState.error.code = error.response.status;
       }
     } finally {
       loginFormState.pending = false;

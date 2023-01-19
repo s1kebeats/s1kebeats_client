@@ -1,4 +1,5 @@
 <template>
+  {{ userStore.authorized }}
   <div id="default" class="flex flex-col items-center min-h-[100vh]">
     <transition name="loading">
       <div
@@ -16,10 +17,8 @@ import { useUserStore } from '~~/stores/user';
 const userStore = useUserStore();
 
 onMounted(async () => {
-  if (!userStore.authorized) {
+  if (!userStore.authorized && localStorage.getItem('accessToken')) {
     await userStore.checkAuth();
-  } else {
-    userStore.setLoading(false);
   }
 });
 </script>

@@ -1,5 +1,5 @@
-import $api from '../http';
-import { AxiosResponse } from 'axios';
+import $api, { API_URL } from '../http';
+import axios, { AxiosResponse } from 'axios';
 import AuthResponse from '../models/AuthResponse';
 
 class AuthService {
@@ -16,6 +16,11 @@ class AuthService {
     password: string
   ): Promise<AxiosResponse> {
     return $api.post('/register', { username, email, password });
+  }
+  static async refresh(): Promise<AxiosResponse<AuthResponse>> {
+    return axios.post(`${API_URL}/refresh`, null, {
+      withCredentials: true
+    });
   }
   // static async edit({
   //   displayedName,
@@ -44,8 +49,8 @@ class AuthService {
   // static async activate(activationLink: string): Promise<AxiosResponse> {
   //   return $api.get(`/activate/${activationLink}`);
   // }
-  // static async logout(): Promise<AxiosResponse> {
-  //   return $api.post('/logout');
-  // }
+  static async logout(): Promise<AxiosResponse> {
+    return $api.post('/logout');
+  }
 }
 export default AuthService;

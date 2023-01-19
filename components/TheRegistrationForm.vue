@@ -154,8 +154,8 @@ async function submitRegistrationForm() {
       registrationFormState.pending = true;
 
       await userStore.register(
-        registrationFormState.data.email,
         registrationFormState.data.username,
+        registrationFormState.data.email,
         registrationFormState.data.password
       );
 
