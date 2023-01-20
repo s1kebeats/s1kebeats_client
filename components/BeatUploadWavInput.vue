@@ -1,5 +1,6 @@
 <template>
-  <BaseFileInput
+  <BeatUploadFileInput
+    class="w-[100%] h-[50%]"
     icon="ic:outline-music-note"
     name="wav"
     title="WAV Аудио"

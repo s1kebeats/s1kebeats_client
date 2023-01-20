@@ -1,5 +1,5 @@
 <template>
-  <BaseFileInput
+  <BeatUploadFileInput
     icon="material-symbols:unarchive-outline-rounded"
     name="stems"
     title="Trackout архив"

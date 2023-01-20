@@ -1,9 +1,28 @@
 <template>
-  <div class="w-[1480px] flex flex-col gap-2">
-    <BeatUploadImageInput
-      :value="beat.image ? beat.image.name : ''"
-      @update-value="updateBeatMedia('image', $event)"
-    />
+  <div class="w-[1480px] grow flex flex-col gap-5 pb-[75px]">
+    <div class="grow flex items-stretch gap-5">
+      <div class="w-[35%] flex flex-col gap-5">
+          <BeatUploadMp3Input
+          :value="beat.image ? beat.image.name : ''"
+          @update-value="updateBeatMedia('image', $event)"
+        />
+        <BeatUploadWavInput
+          :value="beat.image ? beat.image.name : ''"
+          @update-value="updateBeatMedia('image', $event)"
+        />
+      </div>
+      <BeatUploadImageInput
+        :value="beat.image ? beat.image.name : ''"
+        @update-value="updateBeatMedia('image', $event)"
+      />
+      <BeatUploadStemsInput
+        :value="beat.image ? beat.image.name : ''"
+        @update-value="updateBeatMedia('image', $event)"
+      />
+    </div>
+    <div class="flex justify-end">
+      <BaseButton class="px-5 text-xs">Далее</BaseButton>
+    </div>
     <!-- <div class="flex gap-2">
       <BaseTitledInput
         class="w-[400px] bg-white"
@@ -123,10 +142,10 @@ const clearBeatMediaInput = (field: 'stems' | 'image' | 'wav' | 'mp3') => {
 .bg-image {
   background-image: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.8),
-      rgba(121, 69, 252, 0.65)
+      rgba(0, 0, 0, 0.5),
+      rgba(121, 69, 252, 0.45)
     ),
-    url('~/assets/images/bg.jpg');
+    url('~/assets/images/profile-bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }

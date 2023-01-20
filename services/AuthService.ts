@@ -19,7 +19,7 @@ class AuthService {
   }
   static async refresh(): Promise<AxiosResponse<AuthResponse>> {
     return axios.post(`${API_URL}/refresh`, null, {
-      withCredentials: true
+      withCredentials: true,
     });
   }
   // static async edit({
@@ -50,7 +50,9 @@ class AuthService {
   //   return $api.get(`/activate/${activationLink}`);
   // }
   static async logout(): Promise<AxiosResponse> {
-    return $api.post('/logout');
+    return axios.post(`${API_URL}/logout`, null, {
+      withCredentials: true,
+    });
   }
 }
 export default AuthService;

@@ -1,5 +1,5 @@
 <template>
-  <BaseFileInput
+  <BeatUploadFileInput
     icon="material-symbols:image-outline-rounded"
     name="image"
     title="Обложка"

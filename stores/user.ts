@@ -15,7 +15,7 @@ export const useUserStore = defineStore('user', {
       accessToken: null,
       authorized: false,
       user: {} as User,
-      loading: false,
+      loading: true,
     };
   },
   actions: {
@@ -73,6 +73,8 @@ export const useUserStore = defineStore('user', {
     },
     async logout(): Promise<AxiosResponse> {
       try {
+        this.setLoading(true);
+
         const response = await AuthService.logout();
 
         this.setAccessToken(null);
@@ -82,12 +84,12 @@ export const useUserStore = defineStore('user', {
         return response;
       } catch (e: any) {
         throw e;
+      } finally {
+        this.setLoading(false);
       }
     },
     async checkAuth(): Promise<AxiosResponse<AuthResponse>> {
       try {
-        this.setLoading(true);
-
         const response = await AuthService.refresh();
 
         this.setAccessToken(response.data.accessToken);
