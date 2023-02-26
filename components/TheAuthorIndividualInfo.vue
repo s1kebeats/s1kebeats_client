@@ -74,7 +74,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import AuthorIndividual from '~~/models/AuthorIndividual';
+import AuthorIndividual from '@/api/models/AuthorIndividual';
 import { useUserStore } from '~~/stores/user';
 
 const route = useRoute();

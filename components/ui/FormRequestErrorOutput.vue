@@ -3,6 +3,7 @@
     <div
       v-show="open"
       class="absolute z-[9999] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold select-none"
+      data-testid="errorPopup"
     >
       <Icon
         name="material-symbols:warning-rounded"
@@ -10,20 +11,21 @@
         size="50px"
       />
       <div class="text-center">
-        <template v-if="code === 403">
-          <p class="text-md">Подтвердите электронную почту</p>
+        <template v-if="status === 403">
+          <p class="text-md" data-testid="errorTitle">Подтвердите электронную почту</p>
         </template>
-        <template v-else-if="code === 401">
-          <p class="text-md">Неверные данные для входа</p>
+        <template v-else-if="status === 401">
+          <p class="text-md" data-testid="errorTitle">Неверные данные для входа</p>
         </template>
         <template v-else>
-          <p class="text-md">Произошла непредвиденная ошибка</p>
-          <p class="text-xs">Проверьте ваше интернет соединение</p>
+          <p class="text-md" data-testid="errorTitle">Произошла непредвиденная ошибка</p>
+          <p class="text-xs" data-testid="errorDescription" >Проверьте ваше интернет соединение</p>
         </template>
       </div>
       <button
-        @click.prevent="closePopUp"
-        class="absolute top-[12px] right-[12px] flex items-center justify-center"
+        @click.prevent="close"
+        data-testid="closeButton"
+        class="absolute top-3 right-3 flex items-center justify-center"
       >
         <Icon name="material-symbols:close-rounded" size="21px" />
       </button>
@@ -33,12 +35,14 @@
 <script setup lang="ts">
 const props = defineProps<{
   open: boolean;
-  code?: number | null;
+  status?: number | null;
 }>();
+
 const emit = defineEmits<{
   (e: 'close'): void;
 }>();
-const closePopUp = () => {
+
+const close = () => {
   emit('close');
 };
 </script>

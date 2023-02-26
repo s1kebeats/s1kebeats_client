@@ -1,5 +1,5 @@
 <template>
-  <span v-if="v$.$errors.length" class="text-sm text-red-500 font-semibold">{{
+  <span v-if="v$.$errors.length" class="text-sm text-red-500 font-medium" data-testid="errorList">{{
     v$.$errors[0].$message
   }}</span>
 </template>
