@@ -41,7 +41,6 @@
 const props = defineProps<{
   title: string;
   placeholder?: string;
-  value: string | number | null;
   type?: string;
   debounce?: boolean;
 }>();

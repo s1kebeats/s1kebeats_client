@@ -2,7 +2,7 @@
   <div class="w-[1480px] grow flex flex-col gap-5 pb-[75px]">
     <div class="grow flex items-stretch gap-5">
       <div class="w-[35%] flex flex-col gap-5">
-          <BeatUploadMp3Input
+        <BeatUploadMp3Input
           :value="beat.image ? beat.image.name : ''"
           @update-value="updateBeatMedia('image', $event)"
         />

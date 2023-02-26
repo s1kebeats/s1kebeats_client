@@ -50,7 +50,7 @@
     </div>
     <BaseButton type="submit">
       <!-- <transition name="spinner"> -->
-      <BaseLoadinSpinner v-if="registrationFormState.pending" />
+      <BaseLoadingSpinner v-if="registrationFormState.pending" />
       <span v-else>Зарегистрироваться</span>
       <!-- </transition> -->
     </BaseButton>

@@ -7,15 +7,19 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "format": "prettier --write .",
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+    "test": "vitest"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "jsdom": "^21.1.0",
     "nuxt": "3.0.0",
     "nuxt-icon": "^0.1.8",
     "postcss": "^8.4.19",
     "prettier": "^2.8.1",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "unplugin-auto-import": "^0.15.0",
+    "vitest": "^0.29.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",

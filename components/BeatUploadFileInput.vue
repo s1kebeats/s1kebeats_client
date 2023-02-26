@@ -4,12 +4,7 @@
       :for="name"
       class="bg-gray-200 h-full flex flex-col items-center justify-center gap-3 p-5 cursor-pointer text-black rounded-md"
     >
-      <Icon
-        v-if="icon"
-        :name="icon"
-        height="90px"
-        width="90px"
-      />
+      <Icon v-if="icon" :name="icon" height="90px" width="90px" />
       <div class="flex flex-col items-center gap-1">
         <span class="text-2xl font-semibold"> {{ title }}</span>
         <span class="text-xs" v-if="description"> {{ description }}</span>
