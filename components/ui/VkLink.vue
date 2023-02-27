@@ -1,6 +1,6 @@
 <template>
-  <a target="_blank" :href="'https://vk.com/' + username">
-    <Icon name="mdi:vk" :width="width" :height="height" />
+  <a target="_blank" data-testid="link" :href="'https://vk.com/' + username">
+    <Icon name="mdi:vk" data-testid="icon" :width="width" :height="height" />
   </a>
 </template>
 <script setup lang="ts">

@@ -65,7 +65,7 @@ import {
   sameAs,
   helpers,
 } from '@vuelidate/validators';
-import { useUserStore } from '~~/stores/user';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 

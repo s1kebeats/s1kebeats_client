@@ -20,6 +20,7 @@ describe('InstagramLink', () => {
         })
 
         expect(wrapper.get(instagramLinkSelector).attributes('href')).toBe(`https://www.instagram.com/${testUsername}`)
-        expect(wrapper.get(instagramIconSelector).attributes(''))
+        expect(wrapper.get(instagramIconSelector).attributes('width')).toBe(testWidth)
+        expect(wrapper.get(instagramIconSelector).attributes('height')).toBe(testHeight)
     })
 })
