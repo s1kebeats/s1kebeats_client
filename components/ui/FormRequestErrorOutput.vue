@@ -12,14 +12,22 @@
       />
       <div class="text-center">
         <template v-if="status === 403">
-          <p class="text-md" data-testid="errorTitle">Подтвердите электронную почту</p>
+          <p class="text-md" data-testid="errorTitle">
+            Подтвердите электронную почту
+          </p>
         </template>
         <template v-else-if="status === 401">
-          <p class="text-md" data-testid="errorTitle">Неверные данные для входа</p>
+          <p class="text-md" data-testid="errorTitle">
+            Неверные данные для входа
+          </p>
         </template>
         <template v-else>
-          <p class="text-md" data-testid="errorTitle">Произошла непредвиденная ошибка</p>
-          <p class="text-xs" data-testid="errorDescription" >Проверьте ваше интернет соединение</p>
+          <p class="text-md" data-testid="errorTitle">
+            Произошла непредвиденная ошибка
+          </p>
+          <p class="text-xs" data-testid="errorDescription">
+            Проверьте ваше интернет соединение
+          </p>
         </template>
       </div>
       <button

@@ -5,7 +5,7 @@
       class="grow h-full focus:outline-none"
       autocomplete="off"
       :type="type"
-      :name="title"
+      :name="name"
       :placeholder="placeholder"
       @input="updateValue"
       @focus="focus"
@@ -17,6 +17,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   title: string;
+  name: string;
   placeholder: string;
   type: 'text' | 'email' | 'password';
 }>();

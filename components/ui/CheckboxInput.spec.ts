@@ -5,32 +5,26 @@ import { mount } from '@vue/test-utils';
 const checkboxSelector = '[data-testid=checkbox]';
 const checkboxIndicatorSelector = '[data-testid=chekboxIndicator]';
 
+const defaultMountOptions = {
+  props: {
+    name: 'test',
+  },
+};
+
 describe('CheckboxInput', async () => {
   it('renders without indicator visible on default', () => {
-    const wrapper = mount(CheckboxInput, {
-      props: {
-        name: 'test',
-      },
-    });
+    const wrapper = mount(CheckboxInput, defaultMountOptions);
 
     expect(wrapper.get(checkboxIndicatorSelector).isVisible()).toBe(false);
   });
   it('renders with passed name attribute', () => {
-    const wrapper = mount(CheckboxInput, {
-      props: {
-        name: 'test',
-      },
-    });
+    const wrapper = mount(CheckboxInput, defaultMountOptions);
     const attributes = wrapper.attributes();
 
     expect(attributes.name).toBe('test');
   });
   it('renders with aria-checked attribute = "false" on default', () => {
-    const wrapper = mount(CheckboxInput, {
-      props: {
-        name: 'test',
-      },
-    });
+    const wrapper = mount(CheckboxInput, defaultMountOptions);
     const attributes = wrapper.attributes();
 
     expect(attributes['aria-checked']).toBe('false');
@@ -57,11 +51,7 @@ describe('CheckboxInput', async () => {
     expect(attributes['aria-checked']).toBe('true');
   });
   it('emits value on click', async () => {
-    const wrapper = mount(CheckboxInput, {
-      props: {
-        name: 'test',
-      },
-    });
+    const wrapper = mount(CheckboxInput, defaultMountOptions);
 
     await wrapper.get(checkboxSelector).trigger('click');
     expect(wrapper.emitted()).toHaveProperty('updateValue');
@@ -76,11 +66,7 @@ describe('CheckboxInput', async () => {
     expect(updateValueEvent![1]).toEqual([false]);
   });
   it('changes checkbox indicator visibility on click', async () => {
-    const wrapper = mount(CheckboxInput, {
-      props: {
-        name: 'test',
-      },
-    });
+    const wrapper = mount(CheckboxInput, defaultMountOptions);
 
     expect(wrapper.get(checkboxIndicatorSelector).isVisible()).toBe(false);
 
@@ -91,11 +77,7 @@ describe('CheckboxInput', async () => {
     expect(wrapper.get(checkboxIndicatorSelector).isVisible()).toBe(false);
   });
   it('changes aria-checked attribute on click', async () => {
-    const wrapper = mount(CheckboxInput, {
-      props: {
-        name: 'test',
-      },
-    });
+    const wrapper = mount(CheckboxInput, defaultMountOptions);
     const attributes = wrapper.attributes();
 
     expect(attributes['aria-checked']).toBe('false');

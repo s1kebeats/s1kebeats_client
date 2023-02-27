@@ -1,0 +1,62 @@
+import SocialLink from './SocialLink.vue'
+import { describe, expect, it } from 'vitest';
+import { mount } from '@vue/test-utils';
+
+const iconSelector = '[data-testid=icon]';
+const linkSelector = '[data-testid=link]';
+
+const defaultMountOptions = {
+    username: 'test',
+    icon: 'test',
+    url: 'test',
+    getUrl(): string {
+        return this.url + this.username
+    }
+}
+
+describe('SocialLink', () => {
+    it('renders with default width', () => {
+        const wrapper = mount(SocialLink, defaultMountOptions)
+
+        expect(wrapper.get(iconSelector).attributes('width')).toBe('25px')
+    })
+    it('renders with default height', () => {
+        const wrapper = mount(SocialLink, defaultMountOptions)
+
+        expect(wrapper.get(iconSelector).attributes('height')).toBe('25px')
+    })
+    it('renders with set username', () => {
+        const wrapper = mount(SocialLink, defaultMountOptions)
+
+        expect(wrapper.get(linkSelector).attributes('href')).toContain(defaultMountOptions.username)
+    })
+    it('renders with set url', () => {
+        const wrapper = mount(SocialLink, defaultMountOptions)
+
+        expect(wrapper.get(linkSelector).attributes('href')).toContain(defaultMountOptions.url)
+    })
+    it('renders with both url and username', () => {
+        const wrapper = mount(SocialLink, defaultMountOptions)
+
+        expect(wrapper.get(linkSelector).attributes('href')).toBe(defaultMountOptions.getUrl())
+    })
+    it('renders with set icon', () => {
+        const wrapper = mount(SocialLink, defaultMountOptions)
+
+        expect(wrapper.get(iconSelector).attributes('name')).toBe(defaultMountOptions.icon)
+    })
+    it('renders with set width', () => {
+        const testWidth = '199px'
+
+        const wrapper = mount(SocialLink, { ...defaultMountOptions, width: testWidth })
+
+        expect(wrapper.get(iconSelector).attributes('width')).toBe(testWidth)
+    })
+    it('renders with set height', () => {
+        const testHeight = '199px'
+
+        const wrapper = mount(SocialLink, { ...defaultMountOptions, height: testHeight })
+
+        expect(wrapper.get(iconSelector).attributes('height')).toBe(testHeight)
+    })
+})

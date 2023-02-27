@@ -3,11 +3,9 @@ import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 describe('PasswordInput', () => {
-    it('', () => {
-        const wrapper = mount(PasswordInput, {
-            props: {
-                
-            }
-        })
-    })
-})
+  it('', () => {
+    const wrapper = mount(PasswordInput, {
+      props: {},
+    });
+  });
+});

@@ -5,22 +5,34 @@ import { mount } from '@vue/test-utils';
 const vkIconSelector = '[data-testid=icon]';
 const vkLinkSelector = '[data-testid=link]';
 
+const testUsername = 'test';
+const testWidth = '100px';
+const testHeight = '100px';
+
+const mountOptions = {
+  props: {
+    username: testUsername,
+    width: testWidth,
+    height: testHeight,
+  },
+};
+
 describe('VkLink', () => {
-    it('renders with set size and username', () => {
-        const testUsername = 'test'
-        const testWidth = '100px'
-        const testHeight = '100px'
+  it('renders with set username', () => {
+    const wrapper = mount(VkLink, mountOptions);
 
-        const wrapper = mount(VkLink, {
-            props: {
-                username: testUsername,
-                width: testWidth,
-                height: testHeight
-            }
-        })
+    expect(wrapper.get(vkLinkSelector).attributes('href')).toBe(
+      `https://vk.com/${testUsername}`
+    );
+  });
+  it('renders with set width', () => {
+    const wrapper = mount(VkLink, mountOptions);
 
-        expect(wrapper.get(vkLinkSelector).attributes('href')).toBe(`https://vk.com/${testUsername}`)
-        expect(wrapper.get(vkIconSelector).attributes('width')).toBe(testWidth)
-        expect(wrapper.get(vkIconSelector).attributes('height')).toBe(testHeight)
-    })
-})
+    expect(wrapper.get(vkIconSelector).attributes('width')).toBe(testWidth);
+  });
+  it('renders with set heigth', () => {
+    const wrapper = mount(VkLink, mountOptions);
+
+    expect(wrapper.get(vkIconSelector).attributes('height')).toBe(testHeight);
+  });
+});
