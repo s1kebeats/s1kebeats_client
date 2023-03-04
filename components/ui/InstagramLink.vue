@@ -1,16 +1,5 @@
 <template>
-  <a
-    target="_blank"
-    data-testid="link"
-    :href="'https://www.instagram.com/' + username"
-  >
-    <Icon
-      name="mdi:instagram"
-      :width="width"
-      :height="height"
-      data-testid="icon"
-    />
-  </a>
+  <UiSocialLink icon="mdi:instagram" :username="username" url="https://www.instagram.com/" :width="width" :height="height" />
 </template>
 <script setup lang="ts">
 const props = defineProps<{

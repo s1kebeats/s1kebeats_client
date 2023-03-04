@@ -1,17 +1,5 @@
 <template>
-  <a
-    target="_blank"
-    data-testid="link"
-    :href="'https://www.youtube.com/@' + username"
-  >
-    <Icon
-      name="mdi:youtube"
-      data-testid="icon"
-      :width="width"
-      :height="height"
-      color="black"
-    />
-  </a>
+  <UiSocialLink icon="mdi:youtube" :username="username" url="https://www.youtube.com/@" :width="width" :height="height" />
 </template>
 <script setup lang="ts">
 const props = defineProps<{

@@ -10,6 +10,7 @@
       @input="updateValue"
       @focus="focus"
       @blur="blur"
+      data-testid="textInput"
     />
     <slot />
   </UiTitledInput>

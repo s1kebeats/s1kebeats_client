@@ -1,7 +1,5 @@
 <template>
-  <a target="_blank" data-testid="link" :href="'https://vk.com/' + username">
-    <Icon name="mdi:vk" data-testid="icon" :width="width" :height="height" />
-  </a>
+  <UiSocialLink icon="mdi:vk" :username="username" url="https://vk.com/" :width="width" :height="height" />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
