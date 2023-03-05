@@ -4,18 +4,21 @@
       ref="input"
       class="grow focus:outline-none min-h-[20px]"
       autocomplete="off"
-      :name="title"
+      :name="name"
       :placeholder="placeholder"
       @input="updateValue"
       @focus="focus"
       @blur="blur"
+      data-testid="textArea"
     />
     <slot />
   </UiTitledInput>
 </template>
 <script setup lang="ts">
+import UiTitledInput from './TitledInput.vue';
 const props = defineProps<{
   title: string;
+  name: string;
   placeholder: string;
 }>();
 const emit = defineEmits<{

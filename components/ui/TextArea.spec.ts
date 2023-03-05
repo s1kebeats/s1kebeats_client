@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import TextInput from './TextInput.vue';
+import TextArea from './TextArea.vue';
 
-const textInputSelector = '[data-testid=textInput]';
+const textInputSelector = '[data-testid=textArea]';
 const titledInputSelector = '[data-testid=input]';
 
 const defaultMountOptions: {
@@ -10,41 +10,32 @@ const defaultMountOptions: {
     title: string;
     name: string;
     placeholder: string;
-    type: 'text' | 'email' | 'password';
   };
 } = {
   props: {
     title: 'test',
     name: 'test',
     placeholder: 'test',
-    type: 'text',
   },
 };
 
-describe('TextInput', () => {
-  it('renders with set type', () => {
-    const wrapper = mount(TextInput, defaultMountOptions);
-
-    expect(wrapper.get(textInputSelector).attributes('type')).toBe(
-      defaultMountOptions.props.type
-    );
-  });
+describe('TextArea', () => {
   it('renders with set name', () => {
-    const wrapper = mount(TextInput, defaultMountOptions);
+    const wrapper = mount(TextArea, defaultMountOptions);
 
     expect(wrapper.get(textInputSelector).attributes('name')).toBe(
       defaultMountOptions.props.name
     );
   });
   it('renders with set placeholder', () => {
-    const wrapper = mount(TextInput, defaultMountOptions);
+    const wrapper = mount(TextArea, defaultMountOptions);
 
     expect(wrapper.get(textInputSelector).attributes('placeholder')).toBe(
       defaultMountOptions.props.placeholder
     );
   });
   it('changes color when focused', async () => {
-    const wrapper = mount(TextInput, defaultMountOptions);
+    const wrapper = mount(TextArea, defaultMountOptions);
 
     expect(wrapper.get(titledInputSelector).classes()).not.toContain(
       'border-violet-500'
@@ -62,7 +53,7 @@ describe('TextInput', () => {
   });
   it('emits value on input', async () => {
     const testValue = 'test';
-    const wrapper = mount(TextInput, defaultMountOptions);
+    const wrapper = mount(TextArea, defaultMountOptions);
     const input = wrapper.get(textInputSelector);
 
     await input.setValue(testValue);
