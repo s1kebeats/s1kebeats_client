@@ -1,6 +1,6 @@
-import $api, { API_URL } from '../http';
+import $api, { API_URL } from '../api';
 import axios, { AxiosResponse } from 'axios';
-import AuthResponse from '../models/AuthResponse';
+import AuthResponse from '../api/models/AuthResponse';
 
 class AuthService {
   static async login(

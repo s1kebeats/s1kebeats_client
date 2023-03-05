@@ -8,4 +8,9 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@pinia/nuxt', 'nuxt-icon'],
+  runtimeConfig: {
+    public: {
+      API_URL: 'http://localhost:5000/api',
+    },
+  },
 });

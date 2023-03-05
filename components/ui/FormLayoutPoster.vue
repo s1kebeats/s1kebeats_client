@@ -3,7 +3,7 @@
     class="bg-image grow flex flex-col items-center justify-center gap-10"
   >
     <nuxt-link class="w-[40%]" to="/">
-      <BaseLogo width="100%" color="white" />
+      <UiLogo width="100%" color="white" />
     </nuxt-link>
   </section>
 </template>

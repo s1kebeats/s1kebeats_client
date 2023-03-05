@@ -10,7 +10,7 @@
   >
     <div
       v-show="value"
-      class="w-[11px] h-[11px] rounded-full brand-gradient"
+      class="w-[11px] h-[11px] rounded-full bg-[#7945fc]"
       data-testid="chekboxIndicator"
     ></div>
   </div>

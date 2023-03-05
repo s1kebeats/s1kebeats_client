@@ -2,12 +2,14 @@
   <section
     class="w-[40%] bg-white flex flex-col items-center justify-center gap-7 px-[7.5%]"
   >
-    <BaseFormHeader title="Вход" />
-    <TheLoginForm @success="onLoginSuccess" />
-    <TheLoginFooter />
+    <UiFormHeader title="Вход" />
+    <LoginForm @success="onLoginSuccess" />
+    <UiLoginFooter />
   </section>
 </template>
 <script setup lang="ts">
+import LoginForm from '@/components/modules/LoginForm/LoginForm.vue';
+
 definePageMeta({
   layout: 'form',
 });

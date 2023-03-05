@@ -1,6 +1,7 @@
 <template>
   <UiTextInput
     :title="title"
+    :name="name"
     :placeholder="placeholder"
     :type="type"
     @update-value="updateValue"
@@ -9,6 +10,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   title: string;
+  name: string;
   placeholder: string;
   type: 'text' | 'email' | 'password';
 }>();

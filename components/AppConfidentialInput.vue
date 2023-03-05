@@ -1,10 +1,10 @@
 <template>
-  <BaseTitledInput
+  <UiTextInput
     :type="passwordVisible ? 'text' : 'password'"
     @update-value="updateValue"
-    :title="title"
+    :title="name"
+    :name="name"
     :placeholder="placeholder"
-    :value="value"
   >
     <button @click.prevent="togglePasswordVisibility">
       <Icon
@@ -16,13 +16,13 @@
         "
       />
     </button>
-  </BaseTitledInput>
+  </UiTextInput>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
   title: string;
-  placeholder?: string;
-  value: string;
+  name: string;
+  placeholder: string;
 }>();
 const emit = defineEmits<{
   (e: 'updateValue', value: string): void;
