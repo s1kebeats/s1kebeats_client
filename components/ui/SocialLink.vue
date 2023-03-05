@@ -12,7 +12,7 @@ interface Props {
   url: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-    width: '25px',
-    height: '25px',
+  width: '25px',
+  height: '25px',
 });
 </script>

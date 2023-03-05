@@ -1,5 +1,11 @@
 <template>
-  <UiSocialLink icon="mdi:vk" :username="username" url="https://vk.com/" :width="width" :height="height" />
+  <UiSocialLink
+    icon="mdi:vk"
+    :username="username"
+    url="https://vk.com/"
+    :width="width"
+    :height="height"
+  />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
