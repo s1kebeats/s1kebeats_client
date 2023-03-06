@@ -1,12 +1,23 @@
 import useAuthStore from './auth';
 import { setActivePinia, createPinia } from 'pinia';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
+import User from '~~/api/models/User';
 
-const testUser = {
+const testUser: User = {
   id: 1,
   email: 'test@example.com',
   username: 'test',
+  image: null,
+  displayedName: null,
 };
+
+vi.mock('./api/logout', () => {
+  return {
+    default: () => {
+      return "success"
+    },
+  };
+});
 
 describe('Auth Store', () => {
   beforeEach(() => {
@@ -36,4 +47,16 @@ describe('Auth Store', () => {
     store.setAuthorized(false);
     expect(store.authorized).toBe(false);
   });
+
+  test('logout', async () => {
+    const store = useAuthStore()
+
+    store.setUser(testUser)
+    store.setAuthorized(true);
+
+    await store.logout();
+
+    expect(store.authorized).toBe(false);
+    expect(store.user).toBe(null);
+  })
 });

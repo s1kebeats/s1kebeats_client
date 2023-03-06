@@ -5,16 +5,10 @@
       class="absolute z-[9999] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold select-none"
       data-testid="confirmEmailPopup"
     >
-      <Icon
-        name="ic:sharp-alternate-email"
-        color="#7945fc"
-        size="50px"
-      />
+      <Icon name="ic:sharp-alternate-email" color="#7945fc" size="50px" />
       <div class="flex flex-col gap-5">
-          <p class="text-md">
-            Подтвердите электронную почту
-          </p>
-          <!-- <UiButton class="w-full h-[36px]" @click.prevent="loginRedirect">Вход</UiButton> -->
+        <p class="text-md">Подтвердите электронную почту</p>
+        <!-- <UiButton class="w-full h-[36px]" @click.prevent="loginRedirect">Вход</UiButton> -->
       </div>
     </div>
   </transition>
@@ -25,7 +19,7 @@ const props = defineProps<{
 }>();
 
 async function loginRedirect() {
-    await navigateTo('/login')
+  await navigateTo('/login');
 }
 </script>
 <style lang="scss" scoped>

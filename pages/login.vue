@@ -8,7 +8,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import LoginForm from '@/components/modules/LoginForm/LoginForm.vue';
+import LoginForm from '~~/components/modules/LoginForm/LoginForm.vue';
 
 definePageMeta({
   layout: 'form',

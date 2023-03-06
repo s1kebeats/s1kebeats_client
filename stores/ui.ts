@@ -3,16 +3,19 @@ import { defineStore } from 'pinia';
 const useUiStore = defineStore('ui', {
   state: (): {
     loading: boolean;
-    menuActive: boolean;
+    profileOverlay: boolean;
   } => {
     return {
       loading: true,
-      menuActive: false,
+      profileOverlay: false,
     };
   },
   actions: {
-    setMenuActive(value: boolean): void {
-      this.menuActive = value;
+    toggleProfileOverlay(): void {
+      this.profileOverlay = !this.profileOverlay;
+    },
+    setProfileOverlay(value: boolean): void {
+      this.profileOverlay = value;
     },
     setLoading(value: boolean): void {
       this.loading = value;

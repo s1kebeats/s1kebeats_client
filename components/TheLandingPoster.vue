@@ -7,7 +7,6 @@
     >
       <h1 class="text-7xl">s1kebeats</h1>
       <h2 class="text-3xl">2023</h2>
-      <!-- <BaseLogo width="360px" color="white" /> -->
     </div>
   </section>
 </template>

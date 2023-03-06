@@ -4,7 +4,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import BeatForAuthor from '@/api/models/BeatForAuthor';
+import BeatForAuthor from '~~/api/models/BeatForAuthor';
 
 const props = defineProps<{
   data: BeatForAuthor[];

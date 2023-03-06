@@ -46,7 +46,7 @@
   </form>
 </template>
 <script setup lang="ts">
-import ConfirmEmailPopUp from './components/ConfirmEmailPopUp.vue'
+import ConfirmEmailPopUp from './components/ConfirmEmailPopUp.vue';
 import EmailInput from './components/EmailInput.vue';
 import { useVuelidate } from '@vuelidate/core';
 import {

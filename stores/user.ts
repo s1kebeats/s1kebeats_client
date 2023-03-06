@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
-import AuthService from '@/services/AuthService';
+import AuthService from '~~/services/AuthService';
 import User from '../models/User';
 import AuthResponse from '../models/AuthResponse';
 

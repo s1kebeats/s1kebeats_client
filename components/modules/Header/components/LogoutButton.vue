@@ -1,19 +1,18 @@
 <template>
   <button
     @click="logout"
-    class="w-full text-right text-sm text-red-500 font-bold flex items-center justify-start gap-3"
+    class="w-full text-right text-sm text-red-500 font-medium flex items-center justify-start gap-3"
   >
     <Icon name="uiw:circle-close" size="18px" />
     <span> Выйти </span>
   </button>
 </template>
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user';
-
-const userStore = useUserStore();
+import useAuthStore from '@/stores/auth'
+const authStore = useAuthStore();
 
 async function logout() {
-  await userStore.logout();
+  await authStore.logout();
   await navigateTo('/');
 }
 </script>

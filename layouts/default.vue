@@ -1,27 +1,11 @@
 <template>
   <div id="default" class="flex flex-col items-center min-h-[100vh]">
-    <transition name="loading">
-      <div
-        class="absolute z-[9999] top-0 left-0 w-full h-full bg-white"
-        v-if="userStore.loading"
-      ></div>
-    </transition>
-
-    <TheHeader />
+    <Header />
     <slot />
   </div>
 </template>
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user';
-const userStore = useUserStore();
-
-onMounted(async () => {
-  if (!userStore.authorized && localStorage.getItem('accessToken')) {
-    await userStore.checkAuth();
-  } else {
-    userStore.setLoading(false);
-  }
-});
+import Header from '~~/components/modules/Header/Header.vue';
 </script>
 <style lang="scss" scoped>
 .loading-leave-active {

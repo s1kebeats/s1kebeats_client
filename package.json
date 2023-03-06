@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@pinia/testing": "^0.0.15",
     "@vue/test-utils": "^2.3.0",
     "autoprefixer": "^10.4.13",
     "jsdom": "^21.1.0",

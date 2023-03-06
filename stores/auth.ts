@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import refresh from './api/refresh';
-import User from '@/api/models/User';
+import User from '~~/api/models/User';
+import logout from './api/logout';
 
 const useAuthStore = defineStore('auth', {
   state: (): {
@@ -32,6 +33,15 @@ const useAuthStore = defineStore('auth', {
         this.setAuthorized(false);
       }
     },
+    async logout(): Promise<void> {
+      try {
+        await logout()
+        this.setUser(null);
+        this.setAuthorized(false);
+      } catch (error) {
+        // maybe create global error state
+      }
+    }
   },
 });
 

@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '~~/stores/user';
 
 const userStore = useUserStore();
 

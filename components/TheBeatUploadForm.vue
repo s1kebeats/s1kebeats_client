@@ -109,7 +109,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import BeatUpload from '@/api/models/BeatUpload';
+import BeatUpload from '~~/api/models/BeatUpload';
 
 const beat = reactive<BeatUpload>({
   name: '',
