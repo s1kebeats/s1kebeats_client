@@ -13,9 +13,9 @@ const defaultMountOptions: {
   };
 } = {
   props: {
-    title: 'test',
-    name: 'test',
-    placeholder: 'test',
+    title: 'title',
+    name: 'title',
+    placeholder: 'placeholder',
   },
 };
 

@@ -7,9 +7,9 @@ const linkSelector = '[data-testid=link]';
 
 const defaultMountOptions = {
   props: {
-    username: 'test',
-    icon: 'test',
-    url: 'test',
+    username: 'username',
+    icon: 'username',
+    url: 'url',
   },
   getUrl(): string {
     return this.props.url + this.props.username;

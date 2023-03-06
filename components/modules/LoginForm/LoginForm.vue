@@ -8,15 +8,15 @@
       :status="loginFormState.error.code"
       @close="closeErrorPopUp"
     />
-    <UsernameInput
-      :class="v$.username.$error ? 'border-red-500' : ''"
+    <AppUsernameInput
+      :class="v$.username.$error ? '!border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.username = $event }"
     />
     <AppConfidentionalInput
       title="Пароль"
       name="password"
       placeholder="Введите пароль"
-      :class="v$.password.$error ? 'border-red-500' : ''"
+      :class="v$.password.$error ? '!border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.password = $event }"
     />
     <div class="flex items-center h-5">
@@ -33,7 +33,6 @@ import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import UsernameInput from './components/UsernameInput.vue';
 import RememberMeInput from './components/RememberMeInput.vue';
-import LoginButton from './components/LoginButton.vue';
 import login from './api/login';
 
 const emit = defineEmits<{

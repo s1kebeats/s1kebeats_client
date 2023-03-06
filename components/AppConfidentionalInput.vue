@@ -2,7 +2,7 @@
   <UiTextInput
     :type="passwordVisible ? 'text' : 'password'"
     @update-value="updateValue"
-    :title="name"
+    :title="title"
     :name="name"
     :placeholder="placeholder"
   >

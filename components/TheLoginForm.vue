@@ -9,14 +9,14 @@
       @close="closeErrorPopUp"
     />
     <BaseTitledInput
-      :class="v$.username.$error ? 'border-red-500' : ''"
+      :class="v$.username.$error ? '!border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.username = $event }"
       title="Имя пользователя"
       placeholder="Введите имя пользователя"
       :value="loginFormState.data.username"
     />
     <BasePasswordInput
-      :class="v$.password.$error ? 'border-red-500' : ''"
+      :class="v$.password.$error ? '!border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.password = $event }"
       title="Пароль"
       placeholder="Введите пароль"

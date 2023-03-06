@@ -11,37 +11,34 @@
         }
       "
     />
+    <ConfirmEmailPopUp :open="registrationFormState.success" />
     <div
       class="flex flex-col gap-3 mb-3"
       :class="!v$.$errors.length ? 'pb-8' : ''"
     >
-      <BaseTitledInput
-        :debounce="true"
-        :class="v$.username.$error ? 'border-red-500' : ''"
+      <AppUsernameInput
+        :class="v$.username.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.username = $event }"
-        title="Имя пользователя"
-        placeholder="Введите имя пользователя"
-        :value="registrationFormState.data.username"
       />
       <EmailInput
-        :class="v$.email.$error ? 'border-red-500' : ''"
+        :class="v$.email.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
       />
-      <BasePasswordInput
-        :class="v$.password.$error ? 'border-red-500' : ''"
-        @update-value="($event: string) => { registrationFormState.data.password = $event }"
+      <AppConfidentionalInput
         title="Пароль"
-        placeholder="Введите имя пароль"
-        :value="registrationFormState.data.password"
+        name="password"
+        placeholder="Введите пароль"
+        :class="v$.password.$error ? '!border-red-500' : ''"
+        @update-value="($event: string) => { registrationFormState.data.password = $event }"
       />
-      <BasePasswordInput
-        :class="v$.passwordConfirm.$error ? 'border-red-500' : ''"
-        @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
+      <AppConfidentionalInput
         title="Подтверждение пароля"
+        name="passwordConfirm"
         placeholder="Введите пароль ещё раз"
-        :value="registrationFormState.data.passwordConfirm"
+        :class="v$.passwordConfirm.$error ? '!border-red-500' : ''"
+        @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
       />
-      <UiFormValidationErrorOutputFormErrorOutput :v="v$" />
+      <UiFormValidationErrorOutput :v="v$" />
     </div>
     <UiLoadingButton :pending="registrationFormState.pending">
       Зарегистрироваться
@@ -49,6 +46,7 @@
   </form>
 </template>
 <script setup lang="ts">
+import ConfirmEmailPopUp from './components/ConfirmEmailPopUp.vue'
 import EmailInput from './components/EmailInput.vue';
 import { useVuelidate } from '@vuelidate/core';
 import {
@@ -58,13 +56,10 @@ import {
   sameAs,
   helpers,
 } from '@vuelidate/validators';
-import { useUserStore } from '@/stores/user';
-
-const userStore = useUserStore();
-
-const emit = defineEmits<{
-  (e: 'success'): void;
-}>();
+import usernameAvailable from './helpers/validators/usernameAvailable';
+import withDigit from './helpers/validators/withDigit';
+import withCapitalLetter from './helpers/validators/withCapitalLetter';
+import register from './api/register';
 
 const registrationFormState = reactive<{
   data: {
@@ -75,6 +70,7 @@ const registrationFormState = reactive<{
   };
   error: boolean;
   pending: boolean;
+  success: boolean;
 }>({
   data: {
     username: '',
@@ -84,21 +80,8 @@ const registrationFormState = reactive<{
   },
   error: false,
   pending: false,
+  success: false,
 });
-
-const passwordComplexity = (param: string): boolean => {
-  return /\d/.test(param) && /[A-Z]/.test(param);
-};
-
-const usernameAvailable = async (param: string): Promise<boolean> => {
-  const { data: user } = await useFetch(
-    `http://localhost:5000/api/author/${param}`
-  );
-  if (user.value) {
-    return false;
-  }
-  return true;
-};
 
 const registrationRules = computed(() => {
   return {
@@ -119,9 +102,10 @@ const registrationRules = computed(() => {
         'Минимальная длина пароля: 8 символов',
         minLength(8)
       ),
-      complexity: helpers.withMessage(
-        'Пароль должен содержать хотя бы одну цифру и заглавную букву',
-        passwordComplexity
+      withDigit: helpers.withMessage('Номер должен содержать цифру', withDigit),
+      withCapitalLetter: helpers.withMessage(
+        'Номер должен содержать заглавную букву',
+        withCapitalLetter
       ),
     },
     passwordConfirm: {
@@ -146,13 +130,13 @@ async function submitRegistrationForm() {
       registrationFormState.error = false;
       registrationFormState.pending = true;
 
-      await userStore.register(
+      await register(
         registrationFormState.data.username,
         registrationFormState.data.email,
         registrationFormState.data.password
       );
 
-      emit('success');
+      registrationFormState.success = true;
     } catch (error: any) {
       registrationFormState.error = true;
     } finally {
@@ -161,13 +145,3 @@ async function submitRegistrationForm() {
   }
 }
 </script>
-<style lang="scss" scoped>
-.spinner-enter-active,
-.spinner-leave-active {
-  transition: opacity 0.2s ease;
-}
-.spinner-enter-from,
-.spinner-leave-to {
-  opacity: 0;
-}
-</style>

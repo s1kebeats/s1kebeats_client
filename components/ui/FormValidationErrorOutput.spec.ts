@@ -9,7 +9,7 @@ describe('FormValidationErrorOutput', async () => {
   it('renders invisible without error list', () => {
     const wrapper = mount(FormValidationErrorOutput, {
       props: {
-        v$: {
+        v: {
           $errors: [],
         } as Validation,
       },
@@ -20,7 +20,7 @@ describe('FormValidationErrorOutput', async () => {
   it('renders visible with error list', () => {
     const wrapper = mount(FormValidationErrorOutput, {
       props: {
-        v$: {
+        v: {
           $errors: [
             {
               $message: 'error',
@@ -35,7 +35,7 @@ describe('FormValidationErrorOutput', async () => {
   it('renders first error message', () => {
     const wrapper = mount(FormValidationErrorOutput, {
       props: {
-        v$: {
+        v: {
           $errors: [
             {
               $message: 'first',

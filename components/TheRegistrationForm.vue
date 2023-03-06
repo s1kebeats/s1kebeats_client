@@ -17,7 +17,7 @@
     >
       <BaseTitledInput
         :debounce="true"
-        :class="v$.username.$error ? 'border-red-500' : ''"
+        :class="v$.username.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.username = $event }"
         title="Имя пользователя"
         placeholder="Введите имя пользователя"
@@ -25,7 +25,7 @@
       />
       <BaseTitledInput
         :debounce="true"
-        :class="v$.email.$error ? 'border-red-500' : ''"
+        :class="v$.email.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
         type="email"
         title="Электронная почта"
@@ -33,14 +33,14 @@
         :value="registrationFormState.data.email"
       />
       <BasePasswordInput
-        :class="v$.password.$error ? 'border-red-500' : ''"
+        :class="v$.password.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.password = $event }"
         title="Пароль"
         placeholder="Введите имя пароль"
         :value="registrationFormState.data.password"
       />
       <BasePasswordInput
-        :class="v$.passwordConfirm.$error ? 'border-red-500' : ''"
+        :class="v$.passwordConfirm.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
         title="Подтверждение пароля"
         placeholder="Введите пароль ещё раз"
