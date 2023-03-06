@@ -18,12 +18,12 @@
         <Icon name="icon-park-outline:like" size="18px" />
         <span> Понравившееся </span>
       </nuxt-link>
-      <UiLogoutButton />
+      <LogoutButton />
     </template>
     <nuxt-link
       v-else
       to="/login"
-      class="w-full text-right text-xs text-black font-bold flex items-center justify-start gap-3"
+      class="w-full text-right text-sm font-medium flex items-center justify-start gap-3"
     >
       <Icon name="material-symbols:login-rounded" size="16px" />
       <span> Войти </span>
@@ -31,6 +31,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import LogoutButton from './LogoutButton.vue';
 import useUiStore from '~~/stores/ui';
 import useAuthStore from '~~/stores/auth';
 const authStore = useAuthStore();

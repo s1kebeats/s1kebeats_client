@@ -5,7 +5,7 @@
     <UiLogo />
     <Search class="absolute left-0 right-0 mx-auto" />
     <div class="flex items-center gap-5">
-      <Nav />
+      <UiNav />
       <nuxt-link
         v-if="authStore.authorized"
         to="/upload"
@@ -19,6 +19,7 @@
   </header>
 </template>
 <script setup lang="ts">
+import UiNav from './components/ui/Nav.vue';
 import UiLogo from './components/ui/Logo.vue';
 import Search from './components/Search.vue';
 import Profile from './components/Profile.vue';

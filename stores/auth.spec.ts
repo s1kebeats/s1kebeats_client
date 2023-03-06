@@ -14,7 +14,7 @@ const testUser: User = {
 vi.mock('./api/logout', () => {
   return {
     default: () => {
-      return "success"
+      return 'success';
     },
   };
 });
@@ -49,14 +49,14 @@ describe('Auth Store', () => {
   });
 
   test('logout', async () => {
-    const store = useAuthStore()
+    const store = useAuthStore();
 
-    store.setUser(testUser)
+    store.setUser(testUser);
     store.setAuthorized(true);
 
     await store.logout();
 
     expect(store.authorized).toBe(false);
     expect(store.user).toBe(null);
-  })
+  });
 });

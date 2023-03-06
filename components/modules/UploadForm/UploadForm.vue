@@ -21,7 +21,7 @@
       />
     </div>
     <div class="flex justify-end">
-      <BaseButton class="px-5 text-xs">Далее</BaseButton>
+      <UiButton class="px-5 text-xs bg-[#7945fc]">Далее</UiButton>
     </div>
     <!-- <div class="flex gap-2">
       <BaseTitledInput

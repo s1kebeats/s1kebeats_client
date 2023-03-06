@@ -31,9 +31,10 @@
 <script setup lang="ts">
 import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import UsernameInput from './components/UsernameInput.vue';
 import RememberMeInput from './components/RememberMeInput.vue';
-import login from './api/login';
+import useAuthStore from '@/stores/auth';
+
+const authStore = useAuthStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;
@@ -88,7 +89,7 @@ async function submitLoginForm() {
     try {
       loginFormState.pending = true;
 
-      await login(
+      await authStore.login(
         loginFormState.data.username,
         loginFormState.data.password,
         loginFormState.data.rememberMe
