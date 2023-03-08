@@ -23,7 +23,7 @@ import UiNav from './components/ui/Nav.vue';
 import UiLogo from './components/ui/Logo.vue';
 import Search from './components/Search.vue';
 import Profile from './components/Profile.vue';
-import useAuthStore from '~~/stores/auth';
+import useAuthStore from '@/stores/auth';
 
 const authStore = useAuthStore();
 </script>

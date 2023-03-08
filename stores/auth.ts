@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import refresh from './api/refresh';
-import User from '~~/api/models/User';
+import User from '@/api/models/User';
 import logout from './api/logout';
 import login from './api/login';
 
@@ -54,6 +54,7 @@ const useAuthStore = defineStore('auth', {
         this.setAuthorized(true);
       } catch (error) {
         this.setAuthorized(false);
+        throw error;
       }
     },
   },

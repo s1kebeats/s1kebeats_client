@@ -32,8 +32,8 @@
 </template>
 <script setup lang="ts">
 import LogoutButton from './LogoutButton.vue';
-import useUiStore from '~~/stores/ui';
-import useAuthStore from '~~/stores/auth';
+import useUiStore from '@/stores/ui';
+import useAuthStore from '@/stores/auth';
 const authStore = useAuthStore();
 const uiStore = useUiStore();
 

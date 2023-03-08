@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AuthResponse from '~~/api/models/AuthResponse';
+import AuthResponse from '@/api/models/AuthResponse';
 
 export default async function refresh() {
   const runtimeConfig = useRuntimeConfig();

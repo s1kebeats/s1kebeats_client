@@ -2,8 +2,8 @@ import ProfileIcon from './ProfileIcon.vue';
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import useAuthStore from '~~/stores/auth';
-import User from '~~/api/models/User';
+import useAuthStore from '@/stores/auth';
+import User from '@api/models/User';
 
 const testUser: User = {
   email: 'test@example.com',

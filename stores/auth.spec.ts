@@ -1,7 +1,7 @@
 import useAuthStore from './auth';
 import { setActivePinia, createPinia } from 'pinia';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import User from '~~/api/models/User';
+import User from '@/api/models/User';
 
 const testUser: User = {
   id: 1,

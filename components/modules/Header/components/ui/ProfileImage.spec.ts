@@ -1,9 +1,8 @@
 import ProfileImage from './ProfileImage.vue';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import useAuthStore from '~~/stores/auth';
-import User from '~~/api/models/User';
+import User from '@/api/models/User';
 
 const profileImageSelector = '[data-testid=image]';
 const profileIconSelector = '[data-testid=icon]';
@@ -16,27 +15,29 @@ const testUser: User = {
   displayedName: null,
 };
 
-vi.mock('~~/stores/auth', () => {
+vi.mock('@/stores/auth', () => {
   return {
-    default: { myDefaultKey: vi.fn() },
+    default: () => {
+      return 'success';
+    },
   };
 });
 
 describe('ProfileImage', () => {
   it('renders profile image when it is provided', async () => {
     const wrapper = mount(ProfileImage, {
-      global: {
-        plugins: [
-          createTestingPinia({
-            initialState: {
-              auth: {
-                authorized: true,
-                user: testUser,
-              },
-            },
-          }),
-        ],
-      },
+      // global: {
+      //   plugins: [
+      //     createTestingPinia({
+      //       initialState: {
+      //         auth: {
+      //           authorized: true,
+      //           user: testUser,
+      //         },
+      //       },
+      //     }),
+      //   ],
+      // },
     });
     expect(wrapper.find(profileIconSelector).exists()).toBe(false);
     expect(wrapper.find(profileImageSelector).exists()).toBe(true);

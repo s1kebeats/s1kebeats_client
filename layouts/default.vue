@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import Header from '~~/components/modules/Header/Header.vue';
+import Header from '@/components/modules/Header/Header.vue';
 </script>
 <style lang="scss" scoped>
 .loading-leave-active {

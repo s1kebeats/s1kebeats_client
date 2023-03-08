@@ -6,7 +6,7 @@
 </template>
 <script setup lang="ts">
 import ProfileOverlay from './ProfileOverlay.vue';
-import useAuthStore from '~~/stores/auth';
+import useAuthStore from '@/stores/auth';
 import ProfileButton from './ProfileButton.vue';
 const authStore = useAuthStore();
 const showProfileOverlay = ref(false);

@@ -7,16 +7,16 @@ describe('UI Store', () => {
     setActivePinia(createPinia());
   });
 
-  test('set menuActive', () => {
+  test('set profileOverlay', () => {
     const store = usestore();
 
-    expect(store.menuActive).toBe(false);
+    expect(store.profileOverlay).toBe(false);
 
-    store.setMenuActive(true);
-    expect(store.menuActive).toBe(true);
+    store.setProfileOverlay(true);
+    expect(store.profileOverlay).toBe(true);
 
-    store.setMenuActive(false);
-    expect(store.menuActive).toBe(false);
+    store.setProfileOverlay(false);
+    expect(store.profileOverlay).toBe(false);
   });
 
   test('set loading', () => {

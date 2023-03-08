@@ -1,8 +1,9 @@
 <template>
-  <div class="w-[35%] flex flex-col">
+  <div class="grow flex flex-col">
     <label
       :for="name"
-      class="bg-gray-200 h-full flex flex-col items-center justify-center gap-3 p-5 cursor-pointer text-black rounded-md"
+      class="w-full border-[1px] h-full flex flex-col items-center justify-center gap-3 p-5 cursor-pointer rounded-md"
+      :class="value ? 'bg-[#f1f1f1] text-black' : 'text-black'"
     >
       <Icon v-if="icon" :name="icon" height="90px" width="90px" />
       <div class="flex flex-col items-center gap-1">
@@ -49,25 +50,3 @@ watch(
   }
 );
 </script>
-<style scoped>
-.bg-filled {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.8),
-      rgba(121, 69, 252, 0.55)
-    ),
-    url('~/assets/images/bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.bg-empty {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.8),
-      rgba(95, 95, 95, 0.55)
-    ),
-    url('~/assets/images/bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-</style>

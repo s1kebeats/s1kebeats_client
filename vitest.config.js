@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
+import path from 'path';
 
 export default {
   plugins: [
@@ -11,5 +12,10 @@ export default {
   test: {
     globals: true,
     environment: 'jsdom',
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname),
+    },
   },
 };

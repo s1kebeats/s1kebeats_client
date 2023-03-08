@@ -8,7 +8,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import RegistrationForm from '~~/components/modules/RegistrationForm/RegistrationForm.vue';
+import RegistrationForm from '@/components/modules/RegistrationForm/RegistrationForm.vue';
 
 definePageMeta({
   layout: 'form',

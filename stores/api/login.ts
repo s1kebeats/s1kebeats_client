@@ -1,4 +1,4 @@
-import AuthResponse from '~~/api/models/AuthResponse';
+import AuthResponse from '@/api/models/AuthResponse';
 import axios from 'axios';
 
 export default async function login(

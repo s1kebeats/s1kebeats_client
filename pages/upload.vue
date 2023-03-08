@@ -5,5 +5,5 @@
   </main>
 </template>
 <script setup lang="ts">
-import BeatUploadForm from '@/components/modules/UploadForm/UploadForm.vue'
+import BeatUploadForm from '@/components/modules/UploadForm/UploadForm.vue';
 </script>

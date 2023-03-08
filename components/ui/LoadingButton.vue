@@ -3,15 +3,8 @@
     type="submit"
     class="relative flex items-center justify-center h-[36px]"
   >
-    <transition name="spinner">
-      <div
-        v-show="pending"
-        class="absolute w-full bg-black flex items-center justify-center"
-      >
-        <UiLoadingSpinner />
-      </div>
-    </transition>
-    <span>
+    <UiLoadingSpinner v-if="pending" />
+    <span v-else>
       <slot />
     </span>
   </UiButton>
