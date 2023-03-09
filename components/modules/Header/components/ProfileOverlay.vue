@@ -36,10 +36,6 @@ import useUiStore from '@/stores/ui';
 import useAuthStore from '@/stores/auth';
 const authStore = useAuthStore();
 const uiStore = useUiStore();
-
-const props = defineProps<{
-  show: boolean;
-}>();
 </script>
 <style lang="scss" scoped>
 .shadow {

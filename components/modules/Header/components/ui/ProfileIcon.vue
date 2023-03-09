@@ -3,7 +3,7 @@
   <div
     v-else
     class="bg-black rounded-full w-[32px] h-[32px] flex items-center justify-center text-lg text-white"
-    data-testid="icon"
+    data-testid="unauthorized-icon"
   >
     ?
   </div>

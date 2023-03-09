@@ -2,8 +2,10 @@ import ProfileIcon from './ProfileIcon.vue';
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import useAuthStore from '@/stores/auth';
-import User from '@api/models/User';
+import User from '@/api/models/User';
+
+const unauthorizedIconSelector = '[data-testid=unauthorized-icon]';
+const profileImageSelector = '[data-testid=profile-image]';
 
 const testUser: User = {
   email: 'test@example.com',
@@ -14,7 +16,26 @@ const testUser: User = {
 };
 
 describe('ProfileIcon', () => {
-  it('', async () => {
+  it('renders unauthorized icon when not authorized', async () => {
+    const wrapper = mount(ProfileIcon, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            initialState: {
+              auth: {
+                authorized: false,
+                user: null,
+              },
+            },
+          }),
+        ],
+      },
+    });
+
+    expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
+    expect(wrapper.find(profileImageSelector).exists()).toBe(false);
+  });
+  it('renders profile image when authorized', async () => {
     const wrapper = mount(ProfileIcon, {
       global: {
         plugins: [
@@ -29,6 +50,8 @@ describe('ProfileIcon', () => {
         ],
       },
     });
-    const authStore = useAuthStore();
+
+    expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(false);
+    expect(wrapper.find(profileImageSelector).exists()).toBe(true);
   });
 });
