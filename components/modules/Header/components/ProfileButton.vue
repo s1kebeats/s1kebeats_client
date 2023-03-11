@@ -3,6 +3,7 @@
     @click="uiStore.toggleProfileOverlay"
     class="flex items-center gap-1"
     @focusout="closeProfileOverlay"
+    data-testid="profileButton"
   >
     <ProfileIcon />
     <Icon
@@ -10,6 +11,7 @@
       size="18px"
       class="transition-all"
       :class="uiStore.profileOverlay ? 'rotate-180' : ''"
+      data-testid="profileButtonIcon"
     />
   </button>
 </template>

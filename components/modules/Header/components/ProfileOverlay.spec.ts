@@ -1,21 +1,21 @@
-import ProfileOverlay from './ProfileOverlay.vue'
+import ProfileOverlay from './ProfileOverlay.vue';
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import User from '@/api/models/User';
 
-const profileOverlaySelector = '[data-testid=profileOverlay]'
-const loginButtonSelector = '[data-testid=loginButton]'
-const logoutButtonSelector = '[data-testid=logoutButton]'
-const profileLinkSelector = '[data-testid=profileLink]'
-const likedLinkSelector = '[data-testid=likedLink]'
+const profileOverlaySelector = '[data-testid=profileOverlay]';
+const loginButtonSelector = '[data-testid=loginButton]';
+const logoutButtonSelector = '[data-testid=logoutButton]';
+const profileLinkSelector = '[data-testid=profileLink]';
+const likedLinkSelector = '[data-testid=likedLink]';
 
 const testUser: User = {
-    email: 'test@example.com',
-    username: 's1kebeats',
-    id: 777,
-    image: 'path/to/Image.png',
-    displayedName: null,
+  email: 'test@example.com',
+  username: 's1kebeats',
+  id: 777,
+  image: 'path/to/Image.png',
+  displayedName: null,
 };
 
 describe('ProfileOverlay', () => {
@@ -26,8 +26,8 @@ describe('ProfileOverlay', () => {
           createTestingPinia({
             initialState: {
               ui: {
-                profileOverlay: false
-              }
+                profileOverlay: false,
+              },
             },
           }),
         ],
@@ -43,8 +43,8 @@ describe('ProfileOverlay', () => {
           createTestingPinia({
             initialState: {
               ui: {
-                profileOverlay: true
-              }
+                profileOverlay: true,
+              },
             },
           }),
         ],
@@ -59,13 +59,13 @@ describe('ProfileOverlay', () => {
         plugins: [
           createTestingPinia({
             initialState: {
-                auth: {
-                    authorized: false,
-                    user: null,
-                },
+              auth: {
+                authorized: false,
+                user: null,
+              },
               ui: {
-                profileOverlay: true
-              }
+                profileOverlay: true,
+              },
             },
           }),
         ],
@@ -83,13 +83,13 @@ describe('ProfileOverlay', () => {
         plugins: [
           createTestingPinia({
             initialState: {
-                auth: {
-                    authorized: true,
-                    user: testUser,
-                },
+              auth: {
+                authorized: true,
+                user: testUser,
+              },
               ui: {
-                profileOverlay: true
-              }
+                profileOverlay: true,
+              },
             },
           }),
         ],

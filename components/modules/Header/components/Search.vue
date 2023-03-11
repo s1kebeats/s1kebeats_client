@@ -2,9 +2,14 @@
   <div
     class="gap-3 px-3 h-[40px] bg-white rounded-lg flex-1 border-[1px] max-w-[600px] flex items-center transition-all"
     :class="inputFocused ? 'border-[#7945fc]' : ''"
+    data-testid="headerSearch"
   >
-    <Icon name="material-symbols:search" class="cursor-pointer" size="20px" />
+    <button @click="search">
+      <Icon name="material-symbols:search" class="cursor-pointer" size="20px" />
+    </button>
+
     <input
+      data-testid="headerSearchInput"
       type="text"
       class="flex-1 h-[20px] focus:outline-none text-sm"
       placeholder="Найди свой звук"
@@ -19,4 +24,8 @@ const inputFocused = ref(false);
 const toggleFocusedState = (value: boolean) => {
   inputFocused.value = value;
 };
+
+async function search() {
+  await navigateTo('/s1kebeats');
+}
 </script>
