@@ -14,6 +14,7 @@
       class="flex-1 h-[20px] focus:outline-none text-sm"
       placeholder="Найди свой звук"
       autocomplete="off"
+      v-model="searchQuery"
       @focus="toggleFocusedState(true)"
       @blur="toggleFocusedState(false)"
     />
@@ -25,7 +26,23 @@ const toggleFocusedState = (value: boolean) => {
   inputFocused.value = value;
 };
 
+const searchQuery = ref('');
+
 async function search() {
-  await navigateTo('/s1kebeats');
+  await navigateTo(`/search?q=${searchQuery}`);
 }
+
+async function submitOnEnter(e: KeyboardEvent) {
+  if (e.key == 'Enter') {
+    await search();
+  }
+}
+
+watch(inputFocused, () => {
+  if (inputFocused.value) {
+    document.addEventListener('keypress', submitOnEnter);
+  } else {
+    document.removeEventListener('keypress', submitOnEnter);
+  }
+});
 </script>
