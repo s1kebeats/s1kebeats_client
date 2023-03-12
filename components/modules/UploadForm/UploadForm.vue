@@ -3,24 +3,12 @@
     <div class="grow flex flex-col gap-5">
       <div class="grow flex gap-5">
         <div class="box-top w-[10%] rounded-lg"></div>
-        <Mp3Input
-          :value="beat.image ? beat.image.name : ''"
-          @update-value="updateBeatMedia('mp3', $event)"
-        />
-        <WavInput
-          :value="beat.image ? beat.image.name : ''"
-          @update-value="updateBeatMedia('wav', $event)"
-        />
+        <Mp3Input @update-value="updateBeatMedia('mp3', $event)" />
+        <WavInput @update-value="updateBeatMedia('wav', $event)" />
       </div>
       <div class="grow flex gap-5">
-        <ImageInput
-          :value="beat.image ? beat.image.name : ''"
-          @update-value="updateBeatMedia('image', $event)"
-        />
-        <StemsInput
-          :value="beat.image ? beat.image.name : ''"
-          @update-value="updateBeatMedia('stems', $event)"
-        />
+        <ImageInput @update-value="updateBeatMedia('image', $event)" />
+        <StemsInput @update-value="updateBeatMedia('stems', $event)" />
         <div class="box-bottom w-[10%] rounded-lg"></div>
       </div>
     </div>
@@ -50,7 +38,7 @@ const beat = reactive<BeatUpload>({
 });
 const updateBeatMedia = async (
   field: 'stems' | 'image' | 'wav' | 'mp3',
-  value: File | null
+  value: File
 ) => {
   beat[field] = value;
 };
@@ -59,9 +47,6 @@ const updateBeatInfo = (
   value: number | string
 ) => {
   beat[field] = value;
-};
-const clearBeatMediaInput = (field: 'stems' | 'image' | 'wav' | 'mp3') => {
-  beat[field] = null;
 };
 </script>
 <style lang="scss">

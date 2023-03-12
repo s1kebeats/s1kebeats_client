@@ -2,13 +2,18 @@
   <div class="grow flex flex-col">
     <label
       :for="name"
-      class="w-full border-[1px] h-full flex flex-col items-center justify-center gap-3 p-5 cursor-pointer rounded-md"
-      :class="value ? 'bg-[#f1f1f1] text-black' : 'text-black'"
+      class="w-full border-[1px] h-full flex flex-col items-center justify-center p-5 cursor-pointer rounded-md"
     >
-      <Icon v-if="icon" :name="icon" height="90px" width="90px" />
-      <div class="flex flex-col items-center gap-1">
+      <Icon v-if="icon" :name="icon" height="90px" width="90px" class="mb-3" />
+      <div class="flex flex-col items-center gap-1 mb-7">
         <span class="text-2xl font-semibold"> {{ title }}</span>
         <span class="text-xs" v-if="description"> {{ description }}</span>
+      </div>
+      <div
+        v-show="selected"
+        class="bg-black text-white rounded-lg py-1 px-3 text-sm max-w-[200px] truncate"
+      >
+        {{ selected }}
       </div>
     </label>
     <input
@@ -23,30 +28,27 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Ref } from 'vue';
 const props = defineProps<{
   title: string;
   description?: string;
   name: string;
   icon?: string;
   accept?: string;
-  value: string;
 }>();
 const emit = defineEmits<{
   (e: 'updateValue', value: File): void;
 }>();
+
 const inputElement = ref<HTMLInputElement>();
+
+const selected: Ref<string | null> = ref(null);
+
 const updateValue = (e: Event) => {
   const input = e.target as HTMLInputElement;
   if (input.files) {
     emit('updateValue', input.files[0]);
+    selected.value = input.files[0].name;
   }
 };
-watch(
-  () => props.value,
-  (newValue) => {
-    if (!newValue) {
-      inputElement.value!.value = '';
-    }
-  }
-);
 </script>
