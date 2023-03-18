@@ -1,27 +1,12 @@
 <template>
-  <div class="w-[1480px] grow flex flex-col gap-5 pb-[75px]">
-    <div class="grow flex flex-col gap-5">
-      <div class="grow flex gap-5">
-        <div class="box-top w-[10%] rounded-lg"></div>
-        <Mp3Input @update-value="updateBeatMedia('mp3', $event)" />
-        <WavInput @update-value="updateBeatMedia('wav', $event)" />
-      </div>
-      <div class="grow flex gap-5">
-        <ImageInput @update-value="updateBeatMedia('image', $event)" />
-        <StemsInput @update-value="updateBeatMedia('stems', $event)" />
-        <div class="box-bottom w-[10%] rounded-lg"></div>
-      </div>
-    </div>
-    <div class="flex justify-end">
-      <UiButton class="px-5 bg-black">Далее</UiButton>
-    </div>
+  <div class="w-[1480px] grow flex items-center justify-center gap-5 pb-[75px]">
+    <UploadVersionCard icon="material-symbols:unarchive-outline-rounded">
+      Mp3, Wav, Stems 
+    </UploadVersionCard>
   </div>
 </template>
 <script setup lang="ts">
-import Mp3Input from './components/Mp3Input.vue';
-import WavInput from './components/WavInput.vue';
-import ImageInput from './components/ImageInput.vue';
-import StemsInput from './components/StemsInput.vue';
+import UploadVersionCard from './components/ui/UploadVersionCard.vue';
 
 import BeatUpload from '@/api/models/';
 

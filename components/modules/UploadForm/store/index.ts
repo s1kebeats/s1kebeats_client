@@ -3,11 +3,10 @@ import BeatUpload from '@/api/models/BeatUpload';
 
 const useUploadStore = defineStore('upload', {
   state: (): {
-    beat: BeatUpload
+    beat: BeatUpload;
   } => {
     return {
       beat: {} as BeatUpload,
-      
     };
   },
   actions: {},
