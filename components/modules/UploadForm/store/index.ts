@@ -4,12 +4,24 @@ import BeatUpload from '@/api/models/BeatUpload';
 const useUploadStore = defineStore('upload', {
   state: (): {
     beat: BeatUpload;
+    uploadVersion: 'default' | 'extended' | null;
+    page: number;
   } => {
     return {
       beat: {} as BeatUpload,
+      uploadVersion: null,
+      page: 1,
     };
   },
-  actions: {},
+  actions: {
+    setPage(value: number) {
+      this.page = value;
+    },
+    setUploadVersion(value: typeof this.uploadVersion) {
+      this.uploadVersion = value;
+      this.setPage(2);
+    },
+  },
 });
 
 export default useUploadStore;

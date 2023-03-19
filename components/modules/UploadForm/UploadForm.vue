@@ -1,14 +1,12 @@
 <template>
   <div class="w-[1480px] grow flex items-center justify-center gap-5 pb-[75px]">
-    <UploadVersionCard icon="material-symbols:unarchive-outline-rounded">
-      Mp3, Wav, Stems 
-    </UploadVersionCard>
+    <FirstPage />
+    <!-- <SecondPage /> -->
   </div>
 </template>
 <script setup lang="ts">
-import UploadVersionCard from './components/ui/UploadVersionCard.vue';
-
-import BeatUpload from '@/api/models/';
+import FirstPage from './components/modules/FirstPage/FirstPage.vue';
+// import SecondPage from './components/modules/SecondPage/SecondPage.vue';
 
 const beat = reactive<BeatUpload>({
   name: '',
@@ -34,21 +32,3 @@ const updateBeatInfo = (
   beat[field] = value;
 };
 </script>
-<style lang="scss">
-.box-top {
-  background: rgb(121, 69, 252);
-  background: linear-gradient(
-    120deg,
-    rgba(121, 69, 252, 1) 0%,
-    rgba(0, 0, 0, 1) 80%
-  );
-}
-.box-bottom {
-  background: rgb(121, 69, 252);
-  background: linear-gradient(
-    120deg,
-    rgba(0, 0, 0, 1) 30%,
-    rgba(121, 69, 252, 1) 90%
-  );
-}
-</style>
