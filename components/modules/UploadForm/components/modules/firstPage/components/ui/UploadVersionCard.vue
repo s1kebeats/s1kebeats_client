@@ -1,6 +1,6 @@
 <template>
   <button
-    class="rounded-lg border-[1px] flex flex-col gap-5 justify-start items-center font-medium p-[90px]"
+    class="grow h-full rounded-lg border-[1px] flex flex-col gap-5 justify-center items-center font-medium p-10"
   >
     <Icon :name="icon" size="110px" />
     <div class="flex flex-col gap-1">

@@ -19,7 +19,12 @@ const useUploadStore = defineStore('upload', {
     },
     setUploadVersion(value: typeof this.uploadVersion) {
       this.uploadVersion = value;
-      this.setPage(2);
+    },
+    incrementPage() {
+      this.page++;
+    },
+    decrementPage() {
+      this.page--;
     },
   },
 });

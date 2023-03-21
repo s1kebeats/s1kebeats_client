@@ -1,12 +1,12 @@
 <template>
-  <div class="w-[1480px] grow flex items-center justify-center gap-5 pb-[75px]">
+  <div class="w-[1480px] grow flex items-center justify-center gap-5 mb-[75px]">
     <FirstPage />
-    <!-- <SecondPage /> -->
+    <SecondPage />
   </div>
 </template>
 <script setup lang="ts">
 import FirstPage from './components/modules/FirstPage/FirstPage.vue';
-// import SecondPage from './components/modules/SecondPage/SecondPage.vue';
+import SecondPage from './components/modules/SecondPage/SecondPage.vue';
 
 const beat = reactive<BeatUpload>({
   name: '',

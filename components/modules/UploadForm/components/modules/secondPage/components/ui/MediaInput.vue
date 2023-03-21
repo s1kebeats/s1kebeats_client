@@ -2,7 +2,7 @@
   <div class="grow flex flex-col">
     <label
       :for="name"
-      class="w-full border-[1px] h-full flex flex-col items-center justify-center p-5 cursor-pointer rounded-md"
+      class="w-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md"
     >
       <Icon v-if="icon" :name="icon" height="90px" width="90px" class="mb-3" />
       <div class="flex flex-col items-center gap-1 mb-7">
