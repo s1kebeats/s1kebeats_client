@@ -1,6 +1,7 @@
 <template>
   <button
-    class="grow h-full rounded-lg border-[1px] flex flex-col gap-5 justify-center items-center font-medium p-10"
+    class="grow h-full rounded-lg border-[1px] flex flex-col gap-5 justify-center items-center font-medium p-10 transition-all"
+    :class="selected ? 'bg-black text-white' : ''"
   >
     <Icon :name="icon" size="110px" />
     <div class="flex flex-col gap-1">
@@ -18,5 +19,6 @@ const props = defineProps<{
   icon: string;
   title: string;
   description: string;
+  selected: boolean;
 }>();
 </script>
