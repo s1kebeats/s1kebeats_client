@@ -1,13 +1,17 @@
 <template>
   <UiTextInput
     title="Имя пользователя"
-    name="username"
+    :name="name"
     type="text"
     placeholder="Введите имя пользователя"
     @update-value="updateValue"
   />
 </template>
 <script setup lang="ts">
+const props = defineProps<{
+  name: string;
+}>();
+
 const emit = defineEmits<{
   (e: 'updateValue', value: string): void;
 }>();

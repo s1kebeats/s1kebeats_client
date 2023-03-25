@@ -1,12 +1,23 @@
 <template>
-  <div class="w-[1480px] grow flex items-center justify-center gap-5 mb-[75px]">
-    <FirstPage />
-    <SecondPage />
+  <div
+    class="w-[1480px] grow flex flex-col items-end justify-center gap-5 mb-[75px]"
+  >
+    <div class="w-full grow flex items-center justify-center">
+      <!-- <transition-group name="loading"> -->
+      <UploadVersionSelect v-show="uploadStore.page === 1" key="1" />
+      <MediaForm v-show="uploadStore.page === 2" key="2" />
+      <!-- </transition-group> -->
+    </div>
+    <NavigationPanel />
   </div>
 </template>
 <script setup lang="ts">
-import FirstPage from './components/modules/FirstPage/FirstPage.vue';
-import SecondPage from './components/modules/SecondPage/SecondPage.vue';
+import UploadVersionSelect from './components/UploadVersionSelect.vue';
+import useUploadStore from '@/components/modules/UploadForm/store';
+import NavigationPanel from '@/components/modules/UploadForm/components/ui/NavigationPanel.vue';
+import MediaForm from './components/MediaForm.vue';
+
+const uploadStore = useUploadStore();
 
 const beat = reactive<BeatUpload>({
   name: '',

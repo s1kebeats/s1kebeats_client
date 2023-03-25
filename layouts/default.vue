@@ -1,7 +1,9 @@
 <template>
   <div id="default" class="flex flex-col items-center min-h-[100vh]">
     <Header />
-    <slot />
+    <main class="grow w-full flex flex-col items-center gap-5">
+      <slot />
+    </main>
   </div>
 </template>
 <script setup lang="ts">

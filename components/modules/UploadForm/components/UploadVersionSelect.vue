@@ -1,5 +1,6 @@
 <template>
-  <div class="w-full flex items-center justify-center gap-5 h-[548px]">
+  <div class="grow h-[400px] flex items-center justify-center gap-5">
+    <UiGradientFiller direction="top" class="w-[25%]" />
     <UploadVersionCard
       data-testid="default"
       @click="uploadStore.setUploadVersion('default')"
@@ -16,6 +17,7 @@
       description="Mp3 + Wav + Stems"
       :selected="uploadStore.uploadVersion === 'extended'"
     />
+    <UiGradientFiller direction="bottom" class="grow" />
   </div>
 </template>
 <script setup lang="ts">

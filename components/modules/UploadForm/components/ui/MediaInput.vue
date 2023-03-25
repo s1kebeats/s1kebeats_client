@@ -2,16 +2,16 @@
   <div class="grow flex flex-col">
     <label
       :for="name"
-      class="w-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md"
+      class="relative w-full h-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md"
     >
       <Icon v-if="icon" :name="icon" height="90px" width="90px" class="mb-3" />
-      <div class="flex flex-col items-center gap-1 mb-7">
+      <div class="flex flex-col items-center gap-1 mb-3">
         <span class="text-2xl font-semibold"> {{ title }}</span>
         <span class="text-xs" v-if="description"> {{ description }}</span>
       </div>
       <div
         v-show="selected"
-        class="bg-black text-white rounded-lg py-1 px-3 text-sm max-w-[200px] truncate"
+        class="absolute bottom-5 bg-black text-white rounded-lg py-1 px-3 text-sm max-w-[200px] truncate"
       >
         {{ selected }}
       </div>

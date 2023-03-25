@@ -1,5 +1,5 @@
 <template>
-  <div :class="`box-${direction}`" class="h-full w-[10%] rounded-lg"></div>
+  <div :class="`box-${direction}`" class="h-full rounded-lg"></div>
 </template>
 <script setup lang="ts">
 const props = defineProps<{

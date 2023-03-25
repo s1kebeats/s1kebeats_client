@@ -10,11 +10,12 @@
     />
     <AppUsernameInput
       :class="v$.username.$error ? '!border-red-500' : ''"
+      name="loginUsername"
       @update-value="($event: string) => { loginFormState.data.username = $event }"
     />
     <AppConfidentionalInput
       title="Пароль"
-      name="password"
+      name="loginPassword"
       placeholder="Введите пароль"
       :class="v$.password.$error ? '!border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.password = $event }"

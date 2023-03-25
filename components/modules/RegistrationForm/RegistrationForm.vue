@@ -17,23 +17,28 @@
       :class="!v$.$errors.length ? 'pb-8' : ''"
     >
       <AppUsernameInput
+        autocomplete="off"
+        name="registrationUsername"
         :class="v$.username.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.username = $event }"
       />
       <EmailInput
+        autocomplete="off"
         :class="v$.email.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
       />
       <AppConfidentionalInput
+        autocomplete="off"
         title="Пароль"
-        name="password"
+        name="registrationPassword"
         placeholder="Введите пароль"
         :class="v$.password.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.password = $event }"
       />
       <AppConfidentionalInput
+        autocomplete="off"
         title="Подтверждение пароля"
-        name="passwordConfirm"
+        name="registrationPasswordConfirm"
         placeholder="Введите пароль ещё раз"
         :class="v$.passwordConfirm.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"

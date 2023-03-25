@@ -1,8 +1,6 @@
 <template>
-  <main class="grow flex flex-col items-center w-full pt-5 gap-5">
-    <UiPageTitle> Публикация </UiPageTitle>
-    <BeatUploadForm />
-  </main>
+  <UiPageTitle> Публикация </UiPageTitle>
+  <BeatUploadForm />
 </template>
 <script setup lang="ts">
 import BeatUploadForm from '@/components/modules/UploadForm/UploadForm.vue';

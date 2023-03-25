@@ -1,6 +1,6 @@
 <template>
   <header
-    class="relative h-[75px] flex items-center justify-between w-[1480px]"
+    class="relative h-[75px] flex items-center justify-between w-[1480px] mb-5"
   >
     <UiLogo />
     <Search class="absolute left-0 right-0 mx-auto" />
@@ -11,7 +11,7 @@
         to="/upload"
         class="bg-black text-white rounded-md p-2 text-xs transition-all flex items-center gap-2"
       >
-        <Icon name="material-symbols:upload-rounded" size="16px" />
+        <Icon name="material-symbols:upload-rounded" size="1rem" />
         Опубликовать
       </nuxt-link>
       <Profile />

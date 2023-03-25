@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between">
+  <div class="w-full flex">
     <UiButton
       class="px-5 bg-black"
       @click="uploadStore.decrementPage()"
@@ -7,7 +7,7 @@
       >Назад</UiButton
     >
     <UiButton
-      class="px-5 bg-black"
+      class="ml-auto px-5 bg-black"
       @click="uploadStore.incrementPage()"
       v-if="uploadStore.page < 3"
       >Далее</UiButton

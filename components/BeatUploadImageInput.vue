@@ -1,7 +1,7 @@
 <template>
   <BeatUploadFileInput
     icon="material-symbols:image-outline-rounded"
-    name="image"
+    :name="name"
     title="Обложка"
     accept=".jpg, .png, .jpeg"
     description="Изображение в формате .jpg, .png, .jpeg"
@@ -15,6 +15,7 @@ const emit = defineEmits<{
 }>();
 const props = defineProps<{
   value: string;
+  name: string;
 }>();
 const updateValue = (value: File) => {
   emit('updateValue', value);
