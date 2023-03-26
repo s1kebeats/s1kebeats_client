@@ -10,7 +10,7 @@
   />
   <div
     v-else
-    class="profile-bg rounded-full w-[32px] h-[32px] flex items-center justify-center text-lg text-white"
+    class="green-bg rounded-full w-[32px] h-[32px] flex items-center justify-center text-lg text-white"
     data-testid="authorized-icon"
   >
     {{ authStore.user!.username.charAt(0).toUpperCase() }}
@@ -21,8 +21,8 @@ import useAuthStore from '@/stores/auth';
 
 const authStore = useAuthStore();
 </script>
-<style scoped>
-.profile-bg {
+<style>
+.green-bg {
   background-image: linear-gradient(to bottom, rgba(0, 255, 21, 0.8), #00ff4c8c),
     url('~/assets/images/profile-bg.jpg');
   background-repeat: no-repeat;

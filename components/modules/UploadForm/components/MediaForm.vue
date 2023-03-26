@@ -51,10 +51,4 @@ import MediaInput from './ui/MediaInput.vue';
 import useUploadStore from '../store';
 
 const uploadStore = useUploadStore();
-const updateBeatInfo = (
-  field: 'name' | 'bpm' | 'description' | 'wavePrice' | 'stemsPrice',
-  value: number | string
-) => {
-  beat[field] = value;
-};
 </script>

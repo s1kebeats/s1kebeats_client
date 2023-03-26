@@ -1,6 +1,6 @@
 <template>
   <header
-    class="relative h-[75px] flex items-center justify-between w-[1480px] mb-5"
+    class="relative h-[75px] flex items-center justify-between w-[1480px]"
   >
     <UiLogo />
     <Search class="absolute left-0 right-0 mx-auto" />
