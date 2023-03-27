@@ -2,9 +2,8 @@ import EmailActivation from './EmailActivation.vue';
 import { describe, expect, it, vi } from 'vitest';
 import { mount, shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import UiLoadingSpinner from '@/components/ui/LoadingSpinner.vue'
+import UiLoadingSpinner from '@/components/ui/LoadingSpinner.vue';
 import EmailActivationError from './components/EmailActivationError.vue';
-
 
 vi.mock('./api/refresh', () => {
   return {
@@ -29,11 +28,11 @@ describe('EmailActivation', () => {
           },
         },
         stubs: {
-            UiLoadingSpinner,
-            EmailActivationError,
-            NuxtLink: true,
-            Icon: true,
-        }
+          UiLoadingSpinner,
+          EmailActivationError,
+          NuxtLink: true,
+          Icon: true,
+        },
       },
     });
     const refresh = vi.fn();

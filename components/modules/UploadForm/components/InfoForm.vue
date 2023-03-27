@@ -15,6 +15,7 @@ description?: string;
 
 <template>
   <form class="grow flex flex-col gap-5 h-[600px]">
+    <ImagePreview />
     <UiTextInput
       type="text"
       placeholder="Введите название бита"
@@ -52,3 +53,6 @@ description?: string;
     />
   </form>
 </template>
+<script setup lang="ts">
+import ImagePreview from './ui/ImagePreview.vue';
+</script>

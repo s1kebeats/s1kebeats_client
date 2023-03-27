@@ -1,10 +1,10 @@
 export default interface BeatUpload {
   name: string;
   wavePrice: number;
-  wave: File;
-  mp3: File;
-  image: File;
-  stems: File;
+  wave: string;
+  mp3: string;
+  image: string;
+  stems: string;
   stemsPrice: number;
   description?: string;
   bpm?: number;
