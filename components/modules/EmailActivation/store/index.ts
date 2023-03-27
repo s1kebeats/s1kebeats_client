@@ -5,30 +5,30 @@ const useEmailActivationStore = defineStore('emailActivation', {
   state: (): {
     loading: boolean;
     error: {
-        state: boolean;
-        status: null | number;
-    }
+      state: boolean;
+      status: null | number;
+    };
   } => {
     return {
       loading: false,
       error: {
         state: false,
-        status: null
-      }
+        status: null,
+      },
     };
   },
   actions: {
-    async activate(link: string) {
-        this.loading = true;
-        try {
-            await activate(link)
-        } catch (error: any) {
-            this.error.state = true;
-            this.error.status = error.response.status;
-        } finally {
-            this.loading = false;
-        }
-    }
+    async activate(activation: string) {
+      this.loading = true;
+      try {
+        await activate(activation);
+      } catch (error: any) {
+        this.error.state = true;
+        this.error.status = error.response.status;
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 });
 

@@ -1,9 +1,9 @@
-import $api from "@/api";
+import $api from '@/api';
 
-export default async function activate(link: string) {
-    try {
-        await $api.post(`/activate/${link}`)
-    } catch (error) {
-        throw error;
-    }
+export default async function activate(activation: string) {
+  try {
+    await $api.post(`/activate/${activation}`);
+  } catch (error) {
+    throw error;
+  }
 }
