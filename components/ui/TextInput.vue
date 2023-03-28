@@ -2,7 +2,7 @@
   <UiTitledInput :title="title" :focused="focused" @click="focus">
     <input
       ref="input"
-      class="grow h-full focus:outline-none"
+      class="focus:outline-none"
       autocomplete="off"
       :type="type"
       :name="name"

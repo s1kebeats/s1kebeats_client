@@ -14,36 +14,54 @@ description?: string;
 } -->
 
 <template>
-  <form class="grow flex flex-col gap-5 h-[600px]">
-    <ImagePreview />
+  <form class="flex flex-col gap-5">
+    <fieldset class="flex gap-5 items-center">
+      <ImagePreview />
+      <fieldset class="h-full grow flex flex-col gap-5">
+        <div class="flex gap-5">
+          <UiTextInput
+            type="text"
+            placeholder="Введите название"
+            class="h-full"
+            name="beatName"
+            title="Название"
+            :focused="false"
+          />
+          <UiTextInput
+            type="text"
+            placeholder="Введите Bpm"
+            name="beatBpm"
+            title="Bpm"
+            :focused="false"
+          />
+        </div>
+
+        <UiTextInput
+          type="text"
+          placeholder="Введите описание"
+          class="w-full h-full max-h-[152px]"
+          name="beatDescription"
+          title="Description"
+          :focused="false"
+        />
+      </fieldset>
+    </fieldset>
     <UiTextInput
       type="text"
-      placeholder="Введите название бита"
-      name="beatName"
-      title="Name"
-      :focused="false"
-    />
-    <UiTextInput
-      type="text"
-      placeholder="Введите цену за Wave бита"
+      placeholder="Введите цену за Wave"
+      class="h-full"
       name="beatWavePrice"
-      title="Wave Price"
+      title="Цена за Wave"
       :focused="false"
     />
     <UiTextInput
       type="text"
-      placeholder="Введите цену за Trackout бита"
+      placeholder="Введите цену за Trackout"
       name="beatTrackoutPrice"
       title="Trackout Price"
       :focused="false"
     />
-    <UiTextInput
-      type="text"
-      placeholder="Введите Bpm"
-      name="beatBpm"
-      title="Bpm"
-      :focused="false"
-    />
+
     <UiTextInput
       type="text"
       placeholder="Введите описание"
