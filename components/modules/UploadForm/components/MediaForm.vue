@@ -44,6 +44,14 @@
         direction="bottom"
       />
     </div>
+    <div class="flex justify-between">
+      <UiButton class="px-5" @click.prevent="uploadStore.decrementPage()">
+        Назад
+      </UiButton>
+      <UiButton class="px-5" @click.prevent="uploadStore.incrementPage()">
+        Далее
+      </UiButton>
+    </div>
   </form>
 </template>
 <script setup lang="ts">

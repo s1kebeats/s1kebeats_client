@@ -2,7 +2,8 @@
   <UiTitledInput :title="title" :focused="focused" @click="focus">
     <textarea
       ref="input"
-      class="grow focus:outline-none min-h-[20px]"
+      class="grow h-full focus:outline-none min-h-[20px]"
+      :class="blocked ? 'resize-none' : ''"
       autocomplete="off"
       :name="name"
       :placeholder="placeholder"
@@ -20,6 +21,7 @@ const props = defineProps<{
   title: string;
   name: string;
   placeholder: string;
+  blocked?: boolean;
 }>();
 const emit = defineEmits<{
   (event: 'updateValue', value: string): void;

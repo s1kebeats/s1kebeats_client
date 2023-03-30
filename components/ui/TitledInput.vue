@@ -7,7 +7,7 @@
     <label :for="title" data-testid="title" class="text-sm font-semibold">
       {{ title }}
     </label>
-    <div class="grow flex justify-start items-center gap-1">
+    <div class="grow flex justify-between items-start gap-1">
       <slot />
     </div>
   </div>

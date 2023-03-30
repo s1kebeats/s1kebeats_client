@@ -8,10 +8,18 @@
     >
     <UiButton
       class="ml-auto px-5 bg-black"
-      @click="uploadStore.incrementPage()"
+      @click.prevent="uploadStore.incrementPage()"
       v-if="uploadStore.page < 3"
       >Далее</UiButton
     >
+    <UiButton
+      class="gap-3 ml-auto px-5 bg-black"
+      @click.prevent="uploadStore.upload()"
+      v-if="uploadStore.page === 3"
+    >
+      <Icon name="material-symbols:upload-rounded" size="1rem" />
+      Опубликовать
+    </UiButton>
   </div>
 </template>
 <script setup lang="ts">

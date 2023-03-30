@@ -9,7 +9,7 @@
       <!-- </transition-group> -->
       <InfoForm v-show="uploadStore.page === 3" key="3" />
     </div>
-    <NavigationPanel />
+    <!-- <NavigationPanel /> -->
   </div>
 </template>
 <script setup lang="ts">
@@ -20,28 +20,4 @@ import MediaForm from './components/MediaForm.vue';
 import InfoForm from './components/InfoForm.vue';
 
 const uploadStore = useUploadStore();
-
-const beat = reactive<BeatUpload>({
-  name: '',
-  bpm: null,
-  description: '',
-  wavePrice: null,
-  stemsPrice: null,
-  wav: null,
-  mp3: null,
-  stems: null,
-  image: null,
-});
-const updateBeatMedia = async (
-  field: 'stems' | 'image' | 'wav' | 'mp3',
-  value: File
-) => {
-  beat[field] = value;
-};
-const updateBeatInfo = (
-  field: 'name' | 'bpm' | 'description' | 'wavePrice' | 'stemsPrice',
-  value: number | string
-) => {
-  beat[field] = value;
-};
 </script>
