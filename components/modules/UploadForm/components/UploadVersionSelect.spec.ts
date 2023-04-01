@@ -28,7 +28,7 @@ describe('UploadVersionSelect', () => {
     await wrapper.get(extendedVersionSelector).trigger('click');
     expect(uploadStore.uploadVersion).toBe('extended');
   });
-  it('does not swith page when uploadVersion is not filled', async () => {
+  it('does not switch page when uploadVersion is not filled', async () => {
     const wrapper = mount(UploadVersionSelect, {
       global: {
         plugins: [

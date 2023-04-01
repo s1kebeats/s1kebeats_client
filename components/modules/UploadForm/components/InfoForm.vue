@@ -1,18 +1,3 @@
-<!-- 
-/upload
-
-auth: true;
-
-body: {
-
-name: string;
-wavePrice: decimal string;
-stemsPrice?: string containing "stems/", required if stems provided;
-bpm?: decimal string;
-description?: string;
-
-} -->
-
 <template>
   <form class="flex flex-col gap-5">
     <fieldset class="flex gap-5 items-center">
