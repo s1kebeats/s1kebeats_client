@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import BeatUpload from '@/api/models/BeatUpload';
 import uploadMedia from '../api/uploadMedia';
+import upload from '../api/upload';
 
 const useUploadStore = defineStore('upload', {
   state: (): {
@@ -43,6 +44,19 @@ const useUploadStore = defineStore('upload', {
       } catch (error) {
         this.error = true;
       }
+    },
+    async upload(data: {
+      name: string;
+      wavePrice: number;
+      stemsPrice: number;
+      bpm: number;
+      description: string;
+    }) {
+      for (const field in data) {
+        this.setBeatInfo(field as keyof BeatUpload, data[field]);
+      }
+
+      await upload(this.beat)
     },
   },
 });
