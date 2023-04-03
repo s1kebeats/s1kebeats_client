@@ -17,17 +17,20 @@
       :class="!v$.$errors.length ? 'pb-8' : ''"
     >
       <AppUsernameInput
+        :required="true"
         autocomplete="off"
         name="registrationUsername"
         :class="v$.username.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.username = $event }"
       />
       <EmailInput
+        :required="true"
         autocomplete="off"
         :class="v$.email.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
       />
       <AppConfidentionalInput
+        :required="true"
         autocomplete="off"
         title="Пароль"
         name="registrationPassword"
@@ -42,6 +45,7 @@
         placeholder="Введите пароль ещё раз"
         :class="v$.passwordConfirm.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
+        :required="true"
       />
       <UiFormValidationErrorOutput :v="v$" />
     </div>

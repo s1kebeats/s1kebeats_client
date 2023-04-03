@@ -6,15 +6,18 @@
         <div class="flex gap-5">
           <UiTextInput
             :class="v$.name.$error ? '!border-red-500' : ''"
+            @input="uploadStore.setBeatInfo('name', $event)"
             type="text"
             placeholder="Введите название"
             class="h-full"
             name="beatName"
             title="Название"
             :focused="false"
+            :required="true"
           />
           <UiTextInput
             :class="v$.bpm.$error ? '!border-red-500' : ''"
+            @input="uploadStore.setBeatInfo('bpm', $event)"
             type="text"
             placeholder="Введите Bpm"
             name="beatBpm"
@@ -25,6 +28,7 @@
 
         <UiTextArea
           :class="v$.description.$error ? '!border-red-500' : ''"
+          @input="uploadStore.setBeatInfo('description', $event)"
           type="text"
           placeholder="Введите описание"
           class="w-full h-full max-h-[152px]"
@@ -38,21 +42,26 @@
     <fieldset class="flex gap-5">
       <UiTextInput
         :class="v$.wavePrice.$error ? '!border-red-500' : ''"
+        @input="uploadStore.setBeatInfo('wavePrice', $event)"
         type="text"
         placeholder="Введите цену за Wave"
         class="grow h-full"
         name="beatWavePrice"
         title="Цена за Wave"
         :focused="false"
+        :required="true"
       />
       <UiTextInput
+        v-if="uploadStore.uploadVersion === 'extended'"
         :class="v$.stemsPrice.$error ? '!border-red-500' : ''"
+        @input="uploadStore.setBeatInfo('stemsPrice', $event)"
         class="grow"
         type="text"
         placeholder="Введите цену за Trackout"
         name="beatStemsPrice"
         title="Цена за Trackout"
         :focused="false"
+        :required="true"
       />
     </fieldset>
     <div class="flex justify-between">
@@ -64,7 +73,13 @@
   </form>
 </template>
 <script setup lang="ts">
-import { decimal, helpers, maxLength, required } from '@vuelidate/validators';
+import {
+  decimal,
+  helpers,
+  maxLength,
+  required,
+  requiredIf,
+} from '@vuelidate/validators';
 import ImagePreview from './ui/ImagePreview.vue';
 import useUploadStore from '@/components/modules/UploadForm/store';
 import useVuelidate from '@vuelidate/core';
@@ -108,13 +123,13 @@ const infoFormRules = computed(() => {
       required: helpers.withMessage('Заполните поля', required),
       decimal: helpers.withMessage('Введите число', decimal),
     },
-    stemsPrice:
-      uploadStore.uploadVersion === 'extended'
-        ? {
-            required: helpers.withMessage('Заполните поля', required),
-            decimal: helpers.withMessage('Введите число', decimal),
-          }
-        : null,
+    stemsPrice: {
+      requiredIf: helpers.withMessage(
+        'Заполните поля',
+        requiredIf(() => uploadStore.uploadVersion === 'extended')
+      ),
+      decimal: helpers.withMessage('Введите число', decimal),
+    },
     bpm: {
       decimal: helpers.withMessage('Введите число', decimal),
     },

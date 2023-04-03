@@ -56,7 +56,7 @@ const useUploadStore = defineStore('upload', {
         this.setBeatInfo(field as keyof BeatUpload, data[field]);
       }
 
-      await upload(this.beat)
+      await upload(this.beat);
     },
   },
 });

@@ -1,5 +1,10 @@
 <template>
-  <UiTitledInput :title="title" :focused="focused" @click="focus">
+  <UiTitledInput
+    :title="title"
+    :focused="focused"
+    @click="focus"
+    :required="required"
+  >
     <textarea
       ref="input"
       class="grow h-full focus:outline-none min-h-[20px]"
@@ -22,6 +27,7 @@ const props = defineProps<{
   name: string;
   placeholder: string;
   blocked?: boolean;
+  required?: boolean;
 }>();
 const emit = defineEmits<{
   (event: 'updateValue', value: string): void;

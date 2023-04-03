@@ -5,9 +5,14 @@
     name="email"
     title="Электронная почта"
     placeholder="Введите электронную почту"
+    :required="required"
   />
 </template>
 <script setup lang="ts">
+const props = defineProps<{
+  required: boolean;
+}>();
+
 const emit = defineEmits<{
   (e: 'updateValue', value: string): void;
 }>();

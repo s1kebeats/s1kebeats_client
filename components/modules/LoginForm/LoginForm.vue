@@ -12,6 +12,7 @@
       :class="v$.username.$error ? '!border-red-500' : ''"
       name="loginUsername"
       @update-value="($event: string) => { loginFormState.data.username = $event }"
+      :required="true"
     />
     <AppConfidentionalInput
       title="Пароль"
@@ -19,6 +20,7 @@
       placeholder="Введите пароль"
       :class="v$.password.$error ? '!border-red-500' : ''"
       @update-value="($event: string) => { loginFormState.data.password = $event }"
+      :required="true"
     />
     <div class="flex items-center h-5">
       <UiFormValidationErrorOutput :v="v$" />

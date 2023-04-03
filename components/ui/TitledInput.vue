@@ -6,6 +6,7 @@
   >
     <label :for="title" data-testid="title" class="text-sm font-semibold">
       {{ title }}
+      <span v-if="required">*</span>
     </label>
     <div class="grow flex justify-between items-start gap-1">
       <slot />
@@ -16,5 +17,6 @@
 const props = defineProps<{
   title: string;
   focused: boolean;
+  required?: boolean;
 }>();
 </script>

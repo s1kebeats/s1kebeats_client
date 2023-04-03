@@ -5,6 +5,7 @@
     :placeholder="placeholder"
     :type="type"
     @update-value="updateValue"
+    :required="required"
   />
 </template>
 <script setup lang="ts">
@@ -13,6 +14,7 @@ const props = defineProps<{
   name: string;
   placeholder: string;
   type: 'text' | 'email' | 'password';
+  required: boolean;
 }>();
 const emit = defineEmits<{
   (event: 'updateValue', value: string): void;

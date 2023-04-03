@@ -5,6 +5,9 @@
       v-bind="$attrs"
       class="relative w-full h-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md transition-all"
     >
+      <span v-if="required" class="absolute right-7 top-5 text-xl font-medium"
+        >*</span
+      >
       <Icon v-if="icon" :name="icon" height="90px" width="90px" class="mb-3" />
       <div class="flex flex-col items-center gap-1 mb-3">
         <span class="text-2xl font-semibold"> {{ title }}</span>
@@ -36,6 +39,7 @@ const props = defineProps<{
   name: string;
   icon?: string;
   accept?: string;
+  required?: boolean;
 }>();
 const emit = defineEmits<{
   (e: 'updateValue', value: File): void;

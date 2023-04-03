@@ -5,11 +5,13 @@
     type="text"
     placeholder="Введите имя пользователя"
     @update-value="updateValue"
+    :required="required"
   />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
   name: string;
+  required: boolean;
 }>();
 
 const emit = defineEmits<{

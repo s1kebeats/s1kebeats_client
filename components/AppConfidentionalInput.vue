@@ -5,6 +5,7 @@
     :title="title"
     :name="name"
     :placeholder="placeholder"
+    :required="required"
   >
     <button @click.prevent="togglePasswordVisibility">
       <Icon
@@ -24,6 +25,7 @@ const props = defineProps<{
   title: string;
   name: string;
   placeholder: string;
+  required: boolean;
 }>();
 const emit = defineEmits<{
   (e: 'updateValue', value: string): void;

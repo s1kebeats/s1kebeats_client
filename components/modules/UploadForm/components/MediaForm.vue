@@ -9,6 +9,7 @@
         description="Аудио в формате .mp3"
         accept=".mp3"
         data-testid="mp3Input"
+        :required="true"
         :class="!uploadStore.beat.mp3 && fill ? 'border-red-500' : ''"
         @update-value="updateMedia('mp3', $event)"
       />
@@ -19,6 +20,7 @@
         description="Аудио в формате .wav"
         accept=".wav"
         data-testid="waveInput"
+        :required="true"
         :class="!uploadStore.beat.wave && fill ? 'border-red-500' : ''"
         @update-value="updateMedia('wave', $event)"
       />
@@ -41,6 +43,7 @@
         accept=".zip, .rar"
         description="Архив в формате .zip, .rar"
         data-testid="stemsInput"
+        :required="true"
         :class="!uploadStore.beat.stems && fill ? 'border-red-500' : ''"
         @update-value="updateMedia('stems', $event)"
       />
