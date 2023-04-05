@@ -6,7 +6,7 @@
         <div class="flex gap-5">
           <UiTextInput
             :class="v$.name.$error ? '!border-red-500' : ''"
-            @input="uploadStore.setBeatInfo('name', $event)"
+            @input="setBeatInfo('name', $event)"
             type="text"
             placeholder="Введите название"
             class="h-full"
@@ -15,10 +15,9 @@
             :focused="false"
             :required="true"
           />
-          <UiTextInput
+          <UiNumberInput
             :class="v$.bpm.$error ? '!border-red-500' : ''"
-            @input="uploadStore.setBeatInfo('bpm', $event)"
-            type="text"
+            @input="setBeatInfo('bpm', $event)"
             placeholder="Введите Bpm"
             name="beatBpm"
             title="Bpm"
@@ -28,7 +27,7 @@
 
         <UiTextArea
           :class="v$.description.$error ? '!border-red-500' : ''"
-          @input="uploadStore.setBeatInfo('description', $event)"
+          @input="setBeatInfo('description', $event)"
           type="text"
           placeholder="Введите описание"
           class="w-full h-full max-h-[152px]"
@@ -40,10 +39,9 @@
       </fieldset>
     </fieldset>
     <fieldset class="flex gap-5">
-      <UiTextInput
+      <UiNumberInput
         :class="v$.wavePrice.$error ? '!border-red-500' : ''"
-        @input="uploadStore.setBeatInfo('wavePrice', $event)"
-        type="text"
+        @input="setBeatInfo('wavePrice', $event)"
         placeholder="Введите цену за Wave"
         class="grow h-full"
         name="beatWavePrice"
@@ -51,12 +49,11 @@
         :focused="false"
         :required="true"
       />
-      <UiTextInput
+      <UiNumberInput
         v-if="uploadStore.uploadVersion === 'extended'"
         :class="v$.stemsPrice.$error ? '!border-red-500' : ''"
-        @input="uploadStore.setBeatInfo('stemsPrice', $event)"
+        @input="setBeatInfo('stemsPrice', $event)"
         class="grow"
-        type="text"
         placeholder="Введите цену за Trackout"
         name="beatStemsPrice"
         title="Цена за Trackout"
@@ -64,11 +61,14 @@
         :required="true"
       />
     </fieldset>
-    <div class="flex justify-between">
+    <div class="flex items-center gap-5">
       <UiButton class="px-5" @click.prevent="uploadStore.decrementPage()">
         Назад
       </UiButton>
-      <UiButton class="px-5" @click.prevent="upload"> Опубликовать </UiButton>
+      <UiFormValidationErrorOutput :v="v$" />
+      <UiButton class="ml-auto px-5" @click.prevent="upload">
+        Опубликовать
+      </UiButton>
     </div>
   </form>
 </template>
@@ -121,17 +121,12 @@ const infoFormRules = computed(() => {
     },
     wavePrice: {
       required: helpers.withMessage('Заполните поля', required),
-      decimal: helpers.withMessage('Введите число', decimal),
     },
     stemsPrice: {
       requiredIf: helpers.withMessage(
         'Заполните поля',
         requiredIf(() => uploadStore.uploadVersion === 'extended')
       ),
-      decimal: helpers.withMessage('Введите число', decimal),
-    },
-    bpm: {
-      decimal: helpers.withMessage('Введите число', decimal),
     },
     description: {
       maxLength: helpers.withMessage(
@@ -163,5 +158,12 @@ async function upload() {
       infoFormState.pending = false;
     }
   }
+}
+
+function setBeatInfo(
+  field: keyof typeof infoFormState.data,
+  value: string | number
+) {
+  infoFormState.data[field] = value;
 }
 </script>
