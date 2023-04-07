@@ -1,39 +1,43 @@
 <template>
-  <form class="flex flex-col gap-5">
+  <form class="relative flex flex-col gap-5">
+    <UiFormRequestErrorOutput
+      :open="infoFormState.error"
+      @close="
+        () => {
+          infoFormState.error = false;
+        }
+      "
+    />
     <fieldset class="flex gap-5 items-center">
       <ImagePreview />
       <fieldset class="h-full grow flex flex-col gap-5">
         <div class="flex gap-5">
           <UiTextInput
             :class="v$.name.$error ? '!border-red-500' : ''"
-            @input="setBeatInfo('name', $event)"
+            @update-value="(value: string) => setBeatInfo('name', value)"
             type="text"
             placeholder="Введите название"
             class="h-full"
             name="beatName"
             title="Название"
-            :focused="false"
             :required="true"
           />
           <UiNumberInput
-            :class="v$.bpm.$error ? '!border-red-500' : ''"
-            @input="setBeatInfo('bpm', $event)"
+            @update-value="(value: string) => setBeatInfo('bpm', value)"
             placeholder="Введите Bpm"
             name="beatBpm"
             title="Bpm"
-            :focused="false"
           />
         </div>
 
         <UiTextArea
           :class="v$.description.$error ? '!border-red-500' : ''"
-          @input="setBeatInfo('description', $event)"
+          @update-value="(value: string) => setBeatInfo('description', value)"
           type="text"
           placeholder="Введите описание"
           class="w-full h-full max-h-[152px]"
           name="beatDescription"
           title="Описание"
-          :focused="false"
           :blocked="true"
         />
       </fieldset>
@@ -41,23 +45,21 @@
     <fieldset class="flex gap-5">
       <UiNumberInput
         :class="v$.wavePrice.$error ? '!border-red-500' : ''"
-        @input="setBeatInfo('wavePrice', $event)"
+        @update-value="(value: number) => setBeatInfo('wavePrice', value)"
         placeholder="Введите цену за Wave"
         class="grow h-full"
         name="beatWavePrice"
         title="Цена за Wave"
-        :focused="false"
         :required="true"
       />
       <UiNumberInput
         v-if="uploadStore.uploadVersion === 'extended'"
         :class="v$.stemsPrice.$error ? '!border-red-500' : ''"
-        @input="setBeatInfo('stemsPrice', $event)"
+        @update-value="(value: number) => setBeatInfo('stemsPrice', value)"
         class="grow"
         placeholder="Введите цену за Trackout"
         name="beatStemsPrice"
         title="Цена за Trackout"
-        :focused="false"
         :required="true"
       />
     </fieldset>
@@ -74,7 +76,6 @@
 </template>
 <script setup lang="ts">
 import {
-  decimal,
   helpers,
   maxLength,
   required,
@@ -83,6 +84,10 @@ import {
 import ImagePreview from './ui/ImagePreview.vue';
 import useUploadStore from '@/components/modules/UploadForm/store';
 import useVuelidate from '@vuelidate/core';
+
+const emit = defineEmits<{
+  (event: 'success'): void;
+}>();
 
 const uploadStore = useUploadStore();
 
@@ -96,7 +101,6 @@ const infoFormState = reactive<{
   };
   error: boolean;
   pending: boolean;
-  success: boolean;
 }>({
   data: {
     name: null,
@@ -107,7 +111,6 @@ const infoFormState = reactive<{
   },
   error: false,
   pending: false,
-  success: false,
 });
 
 const infoFormRules = computed(() => {
@@ -151,7 +154,7 @@ async function upload() {
 
       await uploadStore.upload(infoFormState.data);
 
-      infoFormState.success = true;
+      emit('success');
     } catch (error) {
       infoFormState.error = true;
     } finally {

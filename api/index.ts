@@ -1,5 +1,8 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import AuthResponse from './models/AuthResponse';
+import axios, {
+  type AxiosResponse,
+  type InternalAxiosRequestConfig,
+} from 'axios';
+import type AuthResponse from './models/AuthResponse';
 
 export const API_URL = 'http://localhost:5000/api';
 
@@ -8,28 +11,24 @@ const $api = axios.create({
   baseURL: API_URL,
 });
 
-$api.interceptors.request.use((config: AxiosRequestConfig) => {
-  config.headers!.Authorization = `Bearer ${localStorage.getItem(
-    'accessToken'
-  )}`;
+$api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  config.headers.Authorization = `Bearer ${
+    localStorage.getItem('accessToken') ?? ''
+  }`;
   return config;
 });
 
 $api.interceptors.response.use(
-  (config: AxiosRequestConfig) => {
-    return config;
+  (response: AxiosResponse) => {
+    return response;
   },
   async (error: any) => {
     const request = error.config;
     if (error.response.status === 401) {
-      try {
-        const response = await $api.post<AuthResponse>(`/refresh`);
-        localStorage.setItem('accessToken', response.data.accessToken);
+      const response = await $api.post<AuthResponse>('/refresh');
+      localStorage.setItem('accessToken', response.data.accessToken);
 
-        return $api.request(request);
-      } catch (error) {
-        throw error;
-      }
+      return await $api.request(request);
     } else {
       throw error;
     }

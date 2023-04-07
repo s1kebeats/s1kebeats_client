@@ -1,4 +1,4 @@
-import BeatForAuthor from './BeatForAuthor';
+import type BeatForAuthor from './BeatForAuthor';
 
 export default interface AuthorIndividual {
   id: number;

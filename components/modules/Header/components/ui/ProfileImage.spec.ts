@@ -2,7 +2,7 @@ import ProfileImage from './ProfileImage.vue';
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import User from '@/api/models/User';
+import type User from '@/api/models/User';
 
 const profileImageSelector = '[data-testid=profile-image]';
 const profileIconSelector = '[data-testid=authorized-icon]';

@@ -1,9 +1,7 @@
 import EmailActivation from './EmailActivation.vue';
 import { describe, expect, it, vi } from 'vitest';
-import { mount, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import UiLoadingSpinner from '@/components/ui/LoadingSpinner.vue';
-import EmailActivationError from './components/EmailActivationError.vue';
 
 vi.mock('./api/refresh', () => {
   return {
@@ -17,7 +15,7 @@ vi.mock('./api/refresh', () => {
 
 describe('EmailActivation', () => {
   it('calls activate api with valid activation string', () => {
-    const wrapper = shallowMount(EmailActivation, {
+    mount(EmailActivation, {
       global: {
         plugins: [createTestingPinia()],
         mocks: {
@@ -26,12 +24,6 @@ describe('EmailActivation', () => {
               link: 'testActivation',
             },
           },
-        },
-        stubs: {
-          UiLoadingSpinner,
-          EmailActivationError,
-          NuxtLink: true,
-          Icon: true,
         },
       },
     });

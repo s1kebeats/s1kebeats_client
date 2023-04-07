@@ -11,6 +11,7 @@ const defaultMountOptions: {
     name: string;
     placeholder: string;
     type: 'text' | 'email' | 'password';
+    required: boolean;
   };
 } = {
   props: {
@@ -18,6 +19,7 @@ const defaultMountOptions: {
     name: 'title',
     placeholder: 'placeholder',
     type: 'text',
+    required: false,
   },
 };
 

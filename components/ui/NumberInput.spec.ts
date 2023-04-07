@@ -20,6 +20,37 @@ const defaultMountOptions: {
 };
 
 describe('NumberInput', () => {
+  it('renders with set name', () => {
+    const wrapper = mount(NumberInput, defaultMountOptions);
+
+    expect(wrapper.get(numberInputSelector).attributes('name')).toBe(
+      defaultMountOptions.props.name
+    );
+  });
+  it('renders with set placeholder', () => {
+    const wrapper = mount(NumberInput, defaultMountOptions);
+
+    expect(wrapper.get(numberInputSelector).attributes('placeholder')).toBe(
+      defaultMountOptions.props.placeholder
+    );
+  });
+  it('changes color when focused', async () => {
+    const wrapper = mount(NumberInput, defaultMountOptions);
+
+    expect(wrapper.get(titledInputSelector).classes()).not.toContain(
+      'border-violet-500'
+    );
+
+    await wrapper.get(numberInputSelector).trigger('focus');
+    expect(wrapper.get(titledInputSelector).classes()).toContain(
+      'border-violet-500'
+    );
+
+    await wrapper.get(numberInputSelector).trigger('blur');
+    expect(wrapper.get(titledInputSelector).classes()).not.toContain(
+      'border-violet-500'
+    );
+  });
   it('replaces non-digit value', async () => {
     const wrapper = mount(NumberInput, defaultMountOptions);
 
@@ -37,6 +68,6 @@ describe('NumberInput', () => {
     const updateValueEvent = wrapper.emitted('updateValue');
 
     expect(updateValueEvent).toHaveLength(2);
-    expect(updateValueEvent![0]).toEqual([53]);
+    expect(updateValueEvent![1]).toEqual([53]);
   });
 });

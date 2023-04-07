@@ -34,7 +34,7 @@ const emit = defineEmits<{
 }>();
 
 const input = ref();
-const value = ref<number>(0);
+const value = ref<number | string>('');
 
 function updateValue(e: Event) {
   const input = e.target as HTMLInputElement;

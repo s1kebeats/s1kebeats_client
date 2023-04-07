@@ -2,7 +2,7 @@ import ProfileOverlay from './ProfileOverlay.vue';
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import User from '@/api/models/User';
+import type User from '@/api/models/User';
 
 const profileOverlaySelector = '[data-testid=profileOverlay]';
 const loginButtonSelector = '[data-testid=loginButton]';

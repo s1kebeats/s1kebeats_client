@@ -1,18 +1,17 @@
+import axios, { type AxiosResponse } from 'axios';
+
 export default async function register(
   username: string,
   email: string,
   password: string
-) {
+): Promise<AxiosResponse> {
   const runtimeConfig = useRuntimeConfig();
-  const response = await $fetch<{ available: boolean }>(
-    `${runtimeConfig.public.API_URL}/register`,
+  const response = await axios.post(
+    `${runtimeConfig.public.API_URL as string}/register`,
     {
-      method: 'POST',
-      body: {
-        username,
-        email,
-        password,
-      },
+      username,
+      email,
+      password,
     }
   );
   return response;

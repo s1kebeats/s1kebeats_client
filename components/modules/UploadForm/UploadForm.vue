@@ -7,17 +7,21 @@
       <UploadVersionSelect v-show="uploadStore.page === 1" key="1" />
       <MediaForm v-show="uploadStore.page === 2" key="2" />
       <!-- </transition-group> -->
-      <InfoForm v-show="uploadStore.page === 3" key="3" />
+      <InfoForm v-show="uploadStore.page === 3" key="3" @success="success" />
     </div>
-    <!-- <NavigationPanel /> -->
   </div>
 </template>
 <script setup lang="ts">
 import UploadVersionSelect from './components/UploadVersionSelect.vue';
 import useUploadStore from '@/components/modules/UploadForm/store';
-import NavigationPanel from '@/components/modules/UploadForm/components/ui/NavigationPanel.vue';
 import MediaForm from './components/MediaForm.vue';
 import InfoForm from './components/InfoForm.vue';
+import useAuthStore from '@/stores/auth';
 
 const uploadStore = useUploadStore();
+const authStore = useAuthStore();
+
+async function success() {
+  await navigateTo(`/${authStore.user?.username}`);
+}
 </script>

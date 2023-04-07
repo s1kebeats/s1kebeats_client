@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import BeatUpload from '@/api/models/BeatUpload';
+import type BeatUpload from '@/api/models/BeatUpload';
 import uploadMedia from '../api/uploadMedia';
 import upload from '../api/upload';
 
@@ -31,8 +31,11 @@ const useUploadStore = defineStore('upload', {
       this.page--;
     },
     // TODO: type inference
-    setBeatInfo(field: keyof BeatUpload, value: any) {
+    setBeatField(field: keyof BeatUpload, value: any) {
       this.beat[field] = value;
+    },
+    setBeatData(data: BeatUpload) {
+      Object.assign(this.beat, data);
     },
     async updateBeatMedia(
       field: 'stems' | 'image' | 'wave' | 'mp3',
@@ -40,22 +43,13 @@ const useUploadStore = defineStore('upload', {
     ) {
       try {
         const url = await uploadMedia(field, media);
-        this.setBeatInfo(field, url);
+        this.setBeatField(field, url);
       } catch (error) {
         this.error = true;
       }
     },
-    async upload(data: {
-      name: string;
-      wavePrice: number;
-      stemsPrice: number;
-      bpm: number;
-      description: string;
-    }) {
-      for (const field in data) {
-        this.setBeatInfo(field as keyof BeatUpload, data[field]);
-      }
-
+    async upload(data: BeatUpload) {
+      this.setBeatData(data);
       await upload(this.beat);
     },
   },

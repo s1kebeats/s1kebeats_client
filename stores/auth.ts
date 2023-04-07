@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import refresh from './api/refresh';
-import User from '@/api/models/User';
+import type User from '@/api/models/User';
 import logout from './api/logout';
 import login from './api/login';
 
@@ -16,7 +16,7 @@ const useAuthStore = defineStore('auth', {
   },
   actions: {
     setUser(user: User | null): void {
-      if (this.user && user) {
+      if (this.user != null && user != null) {
         Object.assign(this.user, user);
       } else {
         this.user = user;

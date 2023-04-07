@@ -6,7 +6,7 @@ import useUploadStore from '../store';
 
 const mp3InputSelector = '[data-testid=mp3Input]';
 const waveInputSelector = '[data-testid=waveInput]';
-const imageInputSelector = '[data-testid=imageInput]';
+// const imageInputSelector = '[data-testid=imageInput]'
 const stemsInputSelector = '[data-testid=stemsInput]';
 const nextButtonSelector = '[data-testid=nextButton]';
 const backButtonSelector = '[data-testid=backButton]';

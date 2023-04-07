@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import FormValidationErrorOutput from './FormValidationErrorOutput.vue';
 import { mount } from '@vue/test-utils';
-import { Validation } from '@vuelidate/core';
+import { type Validation } from '@vuelidate/core';
 
 const errorListSelector = '[data-testid=errorList]';
 
@@ -11,7 +11,7 @@ describe('FormValidationErrorOutput', async () => {
       props: {
         v: {
           $errors: [],
-        } as Validation,
+        } as unknown as Validation,
       },
     });
 

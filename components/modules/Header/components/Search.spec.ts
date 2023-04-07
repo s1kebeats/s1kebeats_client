@@ -26,14 +26,14 @@ describe('Search', () => {
 
     await wrapper.get(headerSearchInputSelector).trigger('focus');
     await wrapper.trigger('keypress.enter');
-    //TODO: navigationTest
+    // TODO: navigationTest
   });
   it('stops submittion after blur', async () => {
     const wrapper = mount(Search);
 
     await wrapper.get(headerSearchInputSelector).trigger('focus');
     await wrapper.trigger('keypress.enter');
-    //TODO: navigationTest
+    // TODO: navigationTest
     // expect navigation
     await wrapper.get(headerSearchInputSelector).trigger('blur');
     await wrapper.trigger('keypress.enter');

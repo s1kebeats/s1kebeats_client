@@ -1,5 +1,5 @@
 import $api from '../http';
-import { AxiosResponse } from 'axios';
+import { type AxiosResponse } from 'axios';
 
 class FileService {
   static async login(

@@ -1,6 +1,6 @@
 import $api, { API_URL } from '../api';
-import axios, { AxiosResponse } from 'axios';
-import AuthResponse from '../api/models/AuthResponse';
+import axios, { type AxiosResponse } from 'axios';
+import type AuthResponse from '../api/models/AuthResponse';
 
 class AuthService {
   static async login(
@@ -8,20 +8,27 @@ class AuthService {
     password: string,
     refresh: boolean
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/login', { username, password, refresh });
+    return await $api.post<AuthResponse>('/login', {
+      username,
+      password,
+      refresh,
+    });
   }
+
   static async register(
     username: string,
     email: string,
     password: string
   ): Promise<AxiosResponse> {
-    return $api.post('/register', { username, email, password });
+    return await $api.post('/register', { username, email, password });
   }
+
   static async refresh(): Promise<AxiosResponse<AuthResponse>> {
-    return axios.post(`${API_URL}/refresh`, null, {
+    return await axios.post(`${API_URL}/refresh`, null, {
       withCredentials: true,
     });
   }
+
   // static async edit({
   //   displayedName,
   //   about,
@@ -50,7 +57,7 @@ class AuthService {
   //   return $api.get(`/activate/${activationLink}`);
   // }
   static async logout(): Promise<AxiosResponse> {
-    return axios.post(`${API_URL}/logout`, null, {
+    return await axios.post(`${API_URL}/logout`, null, {
       withCredentials: true,
     });
   }

@@ -1,9 +1,5 @@
 import $api from '@/api';
 
-export default async function activate(activation: string) {
-  try {
-    await $api.post(`/activate/${activation}`);
-  } catch (error) {
-    throw error;
-  }
+export default async function activate(activation: string): Promise<void> {
+  await $api.post(`/activate/${activation}`);
 }

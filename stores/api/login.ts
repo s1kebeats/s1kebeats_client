@@ -1,4 +1,4 @@
-import AuthResponse from '@/api/models/AuthResponse';
+import type AuthResponse from '@/api/models/AuthResponse';
 import axios from 'axios';
 
 export default async function login(
@@ -8,7 +8,7 @@ export default async function login(
 ) {
   const runtimeConfig = useRuntimeConfig();
   const response = await axios.post<AuthResponse>(
-    `${runtimeConfig.public.API_URL}/login`,
+    `${runtimeConfig.public.API_URL as string}/login`,
     {
       username,
       password,
