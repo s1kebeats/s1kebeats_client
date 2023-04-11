@@ -10,6 +10,10 @@ describe('UploadVersionCard', () => {
     const wrapper = mount(UploadVersionCard, {
       props: {
         src: testSrc,
+        icon: '',
+        description: '',
+        title: '',
+        selected: false,
       },
     });
 

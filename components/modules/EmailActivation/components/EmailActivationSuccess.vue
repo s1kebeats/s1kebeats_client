@@ -1,6 +1,7 @@
 <template>
   <div
     class="text-center font-semibold flex flex-col items-center justify-center gap-1"
+    data-testid="emailActivationSuccess"
     v-if="!emailActivationStore.error.state"
   >
     <Icon name="ep:success-filled" size="90px" />

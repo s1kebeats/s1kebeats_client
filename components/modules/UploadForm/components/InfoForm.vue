@@ -23,7 +23,7 @@
             :required="true"
           />
           <UiNumberInput
-            @update-value="(value: string) => setBeatInfo('bpm', value)"
+            @update-value="(value: number) => setBeatInfo('bpm', value)"
             placeholder="Введите Bpm"
             name="beatBpm"
             title="Bpm"

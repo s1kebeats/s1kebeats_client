@@ -17,7 +17,7 @@ const emailActivationStore = useEmailActivationStore();
 const route = useRoute();
 
 onMounted(async () => {
-  const activation = route.path.split('/')[1];
+  const activation = route.path.split('/')[2];
   emailActivationStore.activate(activation);
 });
 </script>

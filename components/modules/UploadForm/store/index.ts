@@ -50,7 +50,10 @@ const useUploadStore = defineStore('upload', {
     },
     async upload(data: BeatUpload) {
       this.setBeatData(data);
-      await upload(this.beat);
+      const filtered = Object.fromEntries(
+        Object.entries(this.beat).filter(([key, value]) => !!value)
+      );
+      await upload(filtered);
     },
   },
 });
