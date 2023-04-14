@@ -2,7 +2,7 @@
   <form class="grow flex flex-col gap-5 h-[600px]">
     <div class="grow flex gap-5">
       <UiGradientFiller class="w-[20%]" direction="top" />
-      <MediaInput
+      <BeatMediaInput
         icon="ic:outline-music-note"
         name="mp3"
         title="MP3 Аудио"
@@ -11,9 +11,10 @@
         data-testid="mp3Input"
         :required="true"
         :class="!uploadStore.beat.mp3 && fill ? 'border-red-500' : ''"
-        @update-value="updateMedia('mp3', $event)"
+        field="mp3"
+        :max-size="150"
       />
-      <MediaInput
+      <BeatMediaInput
         icon="ic:outline-music-note"
         name="wave"
         title="WAV Аудио"
@@ -22,20 +23,22 @@
         data-testid="waveInput"
         :required="true"
         :class="!uploadStore.beat.wave && fill ? 'border-red-500' : ''"
-        @update-value="updateMedia('wave', $event)"
+        field="wave"
+        :max-size="300"
       />
     </div>
     <div class="grow flex gap-5">
-      <MediaInput
+      <BeatMediaInput
         icon="material-symbols:image-outline-rounded"
         name="image"
         title="Обложка"
         accept=".jpg, .png, .jpeg"
         data-testid="imageInput"
         description="Изображение в формате .jpg, .png, .jpeg"
-        @update-value="updateMedia('image', $event)"
+        field="image"
       />
-      <MediaInput
+      <BeatMediaInput
+        field="stems"
         v-if="uploadStore.uploadVersion === 'extended'"
         icon="material-symbols:unarchive-outline-rounded"
         name="stems"
@@ -45,7 +48,7 @@
         data-testid="stemsInput"
         :required="true"
         :class="!uploadStore.beat.stems && fill ? 'border-red-500' : ''"
-        @update-value="updateMedia('stems', $event)"
+        :max-size="500"
       />
       <UiGradientFiller
         :class="
@@ -87,7 +90,7 @@
   </form>
 </template>
 <script setup lang="ts">
-import MediaInput from './ui/MediaInput.vue';
+import BeatMediaInput from './ui/BeatMediaInput.vue';
 import useUploadStore from '../store';
 
 const uploadStore = useUploadStore();

@@ -8,13 +8,21 @@ const useUploadStore = defineStore('upload', {
     beat: BeatUpload;
     uploadVersion: 'default' | 'extended' | null;
     page: number;
-    error: boolean;
+    error: {
+      state: boolean;
+      status: null | number;
+      message: null | string;
+    };
   } => {
     return {
       beat: {} as BeatUpload,
       uploadVersion: null,
       page: 1,
-      error: false,
+      error: {
+        state: false,
+        status: null,
+        message: null,
+      },
     };
   },
   actions: {
@@ -44,9 +52,14 @@ const useUploadStore = defineStore('upload', {
       try {
         const url = await uploadMedia(field, media);
         this.setBeatField(field, url);
-      } catch (error) {
-        this.error = true;
+      } catch (error: any) {
+        this.setError(error);
       }
+    },
+    setError(error: any) {
+      this.error.state = true;
+      this.error.message = error.response.body ?? null;
+      this.error.status = error.response.status ?? null;
     },
     async upload(data: BeatUpload) {
       this.setBeatData(data);

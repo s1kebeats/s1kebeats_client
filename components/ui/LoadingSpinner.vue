@@ -18,6 +18,7 @@ const sizeVariants = {
   md: 'w-[20px] h-[20px]',
   sm: 'w-[15px] h-[15px]',
   lg: 'w-[25px] h-[25px]',
+  xl: 'w-[40px] h-[40px]',
 };
 const props = withDefaults(defineProps<props>(), {
   color: 'white',

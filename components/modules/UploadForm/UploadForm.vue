@@ -3,10 +3,9 @@
     class="w-[1480px] grow flex flex-col items-end justify-center gap-5 mb-[75px]"
   >
     <div class="w-full grow flex items-center justify-center">
-      <!-- <transition-group name="loading"> -->
+      <!-- TODO: transition? -->
       <UploadVersionSelect v-show="uploadStore.page === 1" key="1" />
       <MediaForm v-show="uploadStore.page === 2" key="2" />
-      <!-- </transition-group> -->
       <InfoForm v-show="uploadStore.page === 3" key="3" @success="success" />
     </div>
   </div>
