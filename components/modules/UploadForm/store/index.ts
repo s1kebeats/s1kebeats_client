@@ -42,7 +42,7 @@ const useUploadStore = defineStore('upload', {
     setBeatField(field: keyof BeatUpload, value: any) {
       this.beat[field] = value;
     },
-    setBeatData(data: BeatUpload) {
+    setBeatData(data: Omit<BeatUpload, 'wave' | 'mp3' | 'image' | 'stems'>) {
       Object.assign(this.beat, data);
     },
     async updateBeatMedia(
@@ -61,7 +61,7 @@ const useUploadStore = defineStore('upload', {
       this.error.message = error.response.body ?? null;
       this.error.status = error.response.status ?? null;
     },
-    async upload(data: BeatUpload) {
+    async upload(data: Omit<BeatUpload, 'wave' | 'mp3' | 'image' | 'stems'>) {
       this.setBeatData(data);
       const filtered = Object.fromEntries(
         Object.entries(this.beat).filter(([key, value]) => !!value)

@@ -1,19 +1,23 @@
 <template>
-  <div class="grow flex flex-col">
+  <div class="relative grow flex flex-col">
     <div
       v-if="uploading"
-      class="w-full h-full border-[1px] flex flex-col items-center justify-center p-10 rounded-md transition-all"
+      data-testid="loading"
+      class="absolute z-[1] w-full h-full backdrop-blur-sm border-[1px] flex flex-col items-center justify-center p-10 rounded-md transition-all"
     >
       <UiLoadingSpinner color="black" size="xl" />
     </div>
     <label
-      v-else
       :for="name"
       v-bind="$attrs"
       class="relative w-full h-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md transition-all"
       :class="error.state ? 'bg-red-100 border-red-500' : ''"
+      data-testid="label"
     >
-      <span v-if="required" class="absolute right-7 top-5 text-xl font-medium"
+      <span
+        v-if="required"
+        class="absolute right-7 top-5 text-xl font-medium"
+        data-testid="required"
         >*</span
       >
       <template v-if="error.state">
@@ -33,10 +37,15 @@
           height="90px"
           width="90px"
           class="mb-3"
+          data-testid="icon"
         />
         <div class="flex flex-col items-center gap-1 mb-3">
-          <span class="text-2xl font-semibold"> {{ title }}</span>
-          <span class="text-xs" v-if="description"> {{ description }}</span>
+          <span class="text-2xl font-semibold" data-testid="title">
+            {{ title }}</span
+          >
+          <span class="text-xs" v-if="description" data-testid="description">
+            {{ description }}</span
+          >
         </div>
         <div
           v-show="selected"
@@ -48,6 +57,7 @@
     </label>
     <input
       ref="inputElement"
+      data-testid="fileInput"
       :name="name"
       :id="name"
       type="file"
@@ -62,6 +72,10 @@ import BeatUpload from '@/api/models/BeatUpload';
 import uploadMedia from '../api/uploadMedia';
 import useUploadStore from '../store';
 const uploadStore = useUploadStore();
+
+const emit = defineEmits<{
+  (e: 'updateValue'): void;
+}>();
 
 const props = defineProps<{
   title: string;
@@ -130,6 +144,7 @@ async function upload(media: File) {
     error.status = e.response.status ?? null;
   } finally {
     uploading.value = false;
+    emit('updateValue');
   }
 }
 </script>

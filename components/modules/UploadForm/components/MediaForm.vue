@@ -13,6 +13,11 @@
         :class="!uploadStore.beat.mp3 && fill ? 'border-red-500' : ''"
         field="mp3"
         :max-size="150"
+        @update-value="
+          () => {
+            fill = false;
+          }
+        "
       />
       <BeatMediaInput
         icon="ic:outline-music-note"
@@ -25,6 +30,11 @@
         :class="!uploadStore.beat.wave && fill ? 'border-red-500' : ''"
         field="wave"
         :max-size="300"
+        @update-value="
+          () => {
+            fill = false;
+          }
+        "
       />
     </div>
     <div class="grow flex gap-5">
@@ -36,6 +46,11 @@
         data-testid="imageInput"
         description="Изображение в формате .jpg, .png, .jpeg"
         field="image"
+        @update-value="
+          () => {
+            fill = false;
+          }
+        "
       />
       <BeatMediaInput
         field="stems"
@@ -49,6 +64,11 @@
         :required="true"
         :class="!uploadStore.beat.stems && fill ? 'border-red-500' : ''"
         :max-size="500"
+        @update-value="
+          () => {
+            fill = false;
+          }
+        "
       />
       <UiGradientFiller
         :class="
@@ -90,7 +110,7 @@
   </form>
 </template>
 <script setup lang="ts">
-import BeatMediaInput from './ui/BeatMediaInput.vue';
+import BeatMediaInput from './BeatMediaInput.vue';
 import useUploadStore from '../store';
 
 const uploadStore = useUploadStore();
@@ -107,10 +127,5 @@ function next() {
       uploadStore.incrementPage();
     }
   }
-}
-
-function updateMedia(field: 'wave' | 'mp3' | 'image' | 'stems', media: File) {
-  fill.value = false;
-  uploadStore.updateBeatMedia(field, media);
 }
 </script>

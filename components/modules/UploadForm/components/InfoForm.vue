@@ -84,6 +84,7 @@ import {
 import ImagePreview from './ui/ImagePreview.vue';
 import useUploadStore from '@/components/modules/UploadForm/store';
 import useVuelidate from '@vuelidate/core';
+import BeatUpload from '@/api/models/BeatUpload';
 
 const emit = defineEmits<{
   (event: 'success'): void;
@@ -116,18 +117,18 @@ const infoFormState = reactive<{
 const infoFormRules = computed(() => {
   return {
     name: {
-      required: helpers.withMessage('Заполните поля', required),
+      required: helpers.withMessage('* Заполните поля', required),
       maxLength: helpers.withMessage(
         'Максимальная длина: 255 символов',
         maxLength(255)
       ),
     },
     wavePrice: {
-      required: helpers.withMessage('Заполните поля', required),
+      required: helpers.withMessage('* Заполните поля', required),
     },
     stemsPrice: {
       requiredIf: helpers.withMessage(
-        'Заполните поля',
+        '* Заполните поля',
         requiredIf(() => uploadStore.uploadVersion === 'extended')
       ),
     },
@@ -152,7 +153,12 @@ async function upload() {
       infoFormState.error = false;
       infoFormState.pending = true;
 
-      await uploadStore.upload(infoFormState.data);
+      await uploadStore.upload(
+        infoFormState.data as Omit<
+          BeatUpload,
+          'wave' | 'mp3' | 'image' | 'stems'
+        >
+      );
 
       emit('success');
     } catch (error) {
