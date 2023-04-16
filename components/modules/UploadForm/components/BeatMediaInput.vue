@@ -3,14 +3,14 @@
     <div
       v-if="uploading"
       data-testid="loading"
-      class="absolute z-[1] w-full h-full backdrop-blur-sm border-[1px] flex flex-col items-center justify-center p-10 rounded-md transition-all"
+      class="absolute z-[1] w-full h-full backdrop-blur-sm flex items-center justify-center p-10 rounded-md transition-all"
     >
       <UiLoadingSpinner color="black" size="xl" />
     </div>
     <label
       :for="name"
       v-bind="$attrs"
-      class="relative w-full h-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md transition-all"
+      class="relative h-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md transition-all"
       :class="error.state ? 'bg-red-100 border-red-500' : ''"
       data-testid="label"
     >

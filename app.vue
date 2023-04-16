@@ -13,7 +13,7 @@ const authStore = useAuthStore();
 const route = useRoute();
 
 const guestOnly = ['/login', '/register'];
-const authOnly = ['/settings'];
+const authOnly = ['/settings', '/upload'];
 
 onMounted(async () => {
   if (localStorage.getItem('accessToken')) {

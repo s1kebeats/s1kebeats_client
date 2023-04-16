@@ -1,6 +1,6 @@
 <template>
-  <div class="grow relative flex flex-col gap-5 justify-end">
-    <form class="w-full flex flex-col gap-5 h-[600px]">
+  <section class="grow relative flex flex-col gap-5 justify-end">
+    <form class="flex flex-col gap-5 h-[600px]">
       <div class="grow flex gap-5">
         <UiGradientFiller class="w-[20%]" direction="top" />
         <BeatMediaInput
@@ -79,7 +79,7 @@
         />
       </div>
     </form>
-    <div class="w-full flex gap-5 items-center">
+    <div class="flex gap-5 items-center">
       <UiButton
         class="px-5"
         data-testid="backButton"
@@ -109,7 +109,7 @@
         Далее
       </UiButton>
     </div>
-  </div>
+  </section>
 </template>
 <script setup lang="ts">
 import BeatMediaInput from './BeatMediaInput.vue';

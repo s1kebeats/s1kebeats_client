@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[1480px] grow flex flex-col justify-center gap-5 mb-[75px]">
+  <div class="w-[1480px] grow flex flex-col mb-[75px]">
     <!-- TODO: transition? -->
     <UploadVersionSelect v-show="uploadStore.page === 1" key="1" />
     <MediaForm v-show="uploadStore.page === 2" key="2" />
@@ -17,7 +17,6 @@ const uploadStore = useUploadStore();
 const authStore = useAuthStore();
 
 async function success() {
-  await navigateTo(`/`);
-  // await navigateTo(`/${authStore.user?.username}`);
+  await navigateTo(`/${authStore.user?.username}`);
 }
 </script>
