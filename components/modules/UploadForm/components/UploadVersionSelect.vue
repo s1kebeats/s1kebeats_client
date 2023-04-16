@@ -1,6 +1,8 @@
 <template>
-  <div class="grow flex flex-col gap-5 items-between">
-    <div class="grow h-[400px] flex items-center justify-center gap-5">
+  <div
+    class="relative w-full grow flex flex-col gap-5 justify-center items-between"
+  >
+    <div class="w-full h-[400px] flex items-center justify-center gap-5">
       <UiGradientFiller direction="top" class="w-[25%]" />
       <UploadVersionCard
         data-testid="default"
@@ -32,7 +34,7 @@
       />
       <UiGradientFiller direction="bottom" class="grow" />
     </div>
-    <div class="flex items-center">
+    <div class="absolute bottom-0 w-full flex items-center">
       <transition>
         <div
           v-if="fill"

@@ -1,83 +1,85 @@
 <template>
-  <form class="grow flex flex-col gap-5 h-[600px]">
-    <div class="grow flex gap-5">
-      <UiGradientFiller class="w-[20%]" direction="top" />
-      <BeatMediaInput
-        icon="ic:outline-music-note"
-        name="mp3"
-        title="MP3 Аудио"
-        description="Аудио в формате .mp3"
-        accept=".mp3"
-        data-testid="mp3Input"
-        :required="true"
-        :class="!uploadStore.beat.mp3 && fill ? 'border-red-500' : ''"
-        field="mp3"
-        :max-size="150"
-        @update-value="
-          () => {
-            fill = false;
-          }
-        "
-      />
-      <BeatMediaInput
-        icon="ic:outline-music-note"
-        name="wave"
-        title="WAV Аудио"
-        description="Аудио в формате .wav"
-        accept=".wav"
-        data-testid="waveInput"
-        :required="true"
-        :class="!uploadStore.beat.wave && fill ? 'border-red-500' : ''"
-        field="wave"
-        :max-size="300"
-        @update-value="
-          () => {
-            fill = false;
-          }
-        "
-      />
-    </div>
-    <div class="grow flex gap-5">
-      <BeatMediaInput
-        icon="material-symbols:image-outline-rounded"
-        name="image"
-        title="Обложка"
-        accept=".jpg, .png, .jpeg"
-        data-testid="imageInput"
-        description="Изображение в формате .jpg, .png, .jpeg"
-        field="image"
-        @update-value="
-          () => {
-            fill = false;
-          }
-        "
-      />
-      <BeatMediaInput
-        field="stems"
-        v-if="uploadStore.uploadVersion === 'extended'"
-        icon="material-symbols:unarchive-outline-rounded"
-        name="stems"
-        title="Trackout архив"
-        accept=".zip, .rar"
-        description="Архив в формате .zip, .rar"
-        data-testid="stemsInput"
-        :required="true"
-        :class="!uploadStore.beat.stems && fill ? 'border-red-500' : ''"
-        :max-size="500"
-        @update-value="
-          () => {
-            fill = false;
-          }
-        "
-      />
-      <UiGradientFiller
-        :class="
-          uploadStore.uploadVersion === 'default' ? 'w-[40%]' : 'w-[10%] '
-        "
-        direction="bottom"
-      />
-    </div>
-    <div class="flex gap-5 items-center">
+  <div class="grow relative flex flex-col gap-5 justify-end">
+    <form class="w-full flex flex-col gap-5 h-[600px]">
+      <div class="grow flex gap-5">
+        <UiGradientFiller class="w-[20%]" direction="top" />
+        <BeatMediaInput
+          icon="ic:outline-music-note"
+          name="mp3"
+          title="MP3 Аудио"
+          description="Аудио в формате .mp3"
+          accept=".mp3"
+          data-testid="mp3Input"
+          :required="true"
+          :class="!uploadStore.beat.mp3 && fill ? 'border-red-500' : ''"
+          field="mp3"
+          :max-size="150"
+          @update-value="
+            () => {
+              fill = false;
+            }
+          "
+        />
+        <BeatMediaInput
+          icon="ic:outline-music-note"
+          name="wave"
+          title="WAV Аудио"
+          description="Аудио в формате .wav"
+          accept=".wav"
+          data-testid="waveInput"
+          :required="true"
+          :class="!uploadStore.beat.wave && fill ? 'border-red-500' : ''"
+          field="wave"
+          :max-size="300"
+          @update-value="
+            () => {
+              fill = false;
+            }
+          "
+        />
+      </div>
+      <div class="grow flex gap-5">
+        <BeatMediaInput
+          icon="material-symbols:image-outline-rounded"
+          name="image"
+          title="Обложка"
+          accept=".jpg, .png, .jpeg"
+          data-testid="imageInput"
+          description="Изображение в формате .jpg, .png, .jpeg"
+          field="image"
+          @update-value="
+            () => {
+              fill = false;
+            }
+          "
+        />
+        <BeatMediaInput
+          field="stems"
+          v-if="uploadStore.uploadVersion === 'extended'"
+          icon="material-symbols:unarchive-outline-rounded"
+          name="stems"
+          title="Trackout архив"
+          accept=".zip, .rar"
+          description="Архив в формате .zip, .rar"
+          data-testid="stemsInput"
+          :required="true"
+          :class="!uploadStore.beat.stems && fill ? 'border-red-500' : ''"
+          :max-size="500"
+          @update-value="
+            () => {
+              fill = false;
+            }
+          "
+        />
+        <UiGradientFiller
+          :class="
+            uploadStore.uploadVersion === 'default' ? 'w-[40%]' : 'w-[10%] '
+          "
+          direction="bottom"
+        />
+      </div>
+    </form>
+    <div class="w-full flex gap-5 items-center">
       <UiButton
         class="px-5"
         data-testid="backButton"
@@ -107,7 +109,7 @@
         Далее
       </UiButton>
     </div>
-  </form>
+  </div>
 </template>
 <script setup lang="ts">
 import BeatMediaInput from './BeatMediaInput.vue';

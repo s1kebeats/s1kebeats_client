@@ -26,9 +26,18 @@
           color="black"
           size="90px"
         />
-        <span class="font-semibold">
-          {{ error.message }}
-        </span>
+        <div class="flex flex-col items-center gap-1 mb-3">
+          <span class="text-2xl font-semibold" data-testid="title">
+            {{ error.message }}</span
+          >
+          <span
+            class="text-xs"
+            v-if="error.description"
+            data-testid="description"
+          >
+            {{ error.description }}</span
+          >
+        </div>
       </template>
       <template v-else>
         <Icon
@@ -94,10 +103,12 @@ const error = reactive<{
   state: boolean;
   message: string | null;
   status: string | null;
+  description: string | null;
 }>({
   state: false,
   message: null,
   status: null,
+  description: null,
 });
 const selected = ref<string | null>(null);
 const uploading = ref(false);
@@ -118,6 +129,7 @@ async function upload(media: File) {
 
     error.state = true;
     error.message = 'Неверный формат файла';
+    error.description = `Выберите ${props.accept.split(',').join(' / ')} файл`;
     return;
   }
   if (props.maxSize && media.size > props.maxSize * 1024 * 1024) {
@@ -129,6 +141,7 @@ async function upload(media: File) {
   }
   try {
     selected.value = media.name;
+    emit('updateValue');
 
     error.state = false;
     error.message = null;
@@ -144,7 +157,6 @@ async function upload(media: File) {
     error.status = e.response.status ?? null;
   } finally {
     uploading.value = false;
-    emit('updateValue');
   }
 }
 </script>
