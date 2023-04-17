@@ -7,7 +7,7 @@ export default async function register(
 ): Promise<AxiosResponse> {
   const runtimeConfig = useRuntimeConfig();
   const response = await axios.post(
-    `${runtimeConfig.public.API_URL as string}/register`,
+    `${runtimeConfig.public.API_URL}/register`,
     {
       username,
       email,

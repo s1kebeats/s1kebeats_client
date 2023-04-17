@@ -4,6 +4,7 @@
       <div class="grow flex gap-5">
         <UiGradientFiller class="w-[20%]" direction="top" />
         <BeatMediaInput
+          class="w-[40%]"
           icon="ic:outline-music-note"
           name="mp3"
           title="MP3 Аудио"
@@ -21,6 +22,7 @@
           "
         />
         <BeatMediaInput
+          class="w-[40%]"
           icon="ic:outline-music-note"
           name="wave"
           title="WAV Аудио"
@@ -40,6 +42,9 @@
       </div>
       <div class="grow flex gap-5">
         <BeatMediaInput
+          :class="
+            uploadStore.uploadVersion === 'default' ? 'w-[60%]' : 'w-[45%] '
+          "
           icon="material-symbols:image-outline-rounded"
           name="image"
           title="Обложка"
@@ -54,6 +59,7 @@
           "
         />
         <BeatMediaInput
+          class="w-[45%]"
           field="stems"
           v-if="uploadStore.uploadVersion === 'extended'"
           icon="material-symbols:unarchive-outline-rounded"

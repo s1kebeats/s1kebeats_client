@@ -8,7 +8,7 @@ export default async function upload(
 ): Promise<AxiosResponse<Beat>> {
   const runtimeConfig = useRuntimeConfig();
   const response = await $api.post<Beat>(
-    `${runtimeConfig.public.API_URL as string}/beat/upload`,
+    `${runtimeConfig.public.API_URL}/beat/upload`,
     {
       ...data,
     }

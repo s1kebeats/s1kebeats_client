@@ -8,7 +8,7 @@ export default async function login(
 ) {
   const runtimeConfig = useRuntimeConfig();
   const response = await axios.post<AuthResponse>(
-    `${runtimeConfig.public.API_URL as string}/login`,
+    `${runtimeConfig.public.API_URL}/login`,
     {
       username,
       password,

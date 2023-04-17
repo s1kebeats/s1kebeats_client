@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="relative grow flex flex-col justify-center"
-  >
+  <section class="relative grow flex flex-col justify-center">
     <div class="h-[400px] flex gap-5">
       <UiGradientFiller direction="top" class="w-[25%]" />
       <UploadVersionCard
@@ -35,13 +33,13 @@
       <UiGradientFiller direction="bottom" class="grow" />
     </div>
     <div class="absolute bottom-0 w-full flex items-center">
-        <div
-          v-if="fill"
-          class="text-red-500 font-medium text-sm"
-          data-testid="fillMessage"
-        >
-          * Выберите вид публикации
-        </div>
+      <div
+        v-if="fill"
+        class="text-red-500 font-medium text-sm"
+        data-testid="fillMessage"
+      >
+        * Выберите вид публикации
+      </div>
       <UiButton
         class="ml-auto px-5"
         data-testid="nextButton"

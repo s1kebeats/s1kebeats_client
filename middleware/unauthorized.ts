@@ -1,7 +1,7 @@
 import { useUserStore } from '@/stores/user';
 const userStore = useUserStore();
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   if (userStore.authorized) {
-    return navigateTo('/');
+    return await navigateTo('/');
   }
 });

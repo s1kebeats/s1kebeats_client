@@ -13,6 +13,6 @@ export default async function (
       refresh: rememberMe,
     },
   });
-  if (error.value) throw error;
+  if (error.value != null) throw error;
   return data;
 }

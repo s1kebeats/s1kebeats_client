@@ -1,17 +1,18 @@
 <template>
-  <div class="relative grow flex flex-col">
+  <div
+    class="relative flex flex-col border-[1px] rounded-md transition-all"
+    :class="error.state ? 'bg-red-100 border-red-500' : ''"
+  >
     <div
       v-if="uploading"
       data-testid="loading"
-      class="absolute z-[1] w-full h-full backdrop-blur-sm flex items-center justify-center p-10 rounded-md transition-all"
+      class="absolute z-[1] w-full h-full backdrop-blur-sm flex items-center justify-center p-10 rounded-md"
     >
       <UiLoadingSpinner color="black" size="xl" />
     </div>
     <label
       :for="name"
-      v-bind="$attrs"
-      class="relative h-full border-[1px] flex flex-col items-center justify-center p-10 cursor-pointer rounded-md transition-all"
-      :class="error.state ? 'bg-red-100 border-red-500' : ''"
+      class="relative w-full h-full flex flex-col items-center justify-center p-10 cursor-pointer"
       data-testid="label"
     >
       <span
@@ -58,7 +59,7 @@
         </div>
         <div
           v-show="selected"
-          class="absolute bottom-5 bg-black text-white rounded-lg py-1 px-3 text-sm max-w-[200px] truncate"
+          class="absolute bottom-5 bg-black text-white rounded-lg py-1 px-3 text-sm max-w-[40%] truncate"
         >
           {{ selected }}
         </div>

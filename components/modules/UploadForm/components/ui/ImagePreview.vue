@@ -1,7 +1,7 @@
 <template>
   <img
     v-if="uploadStore.beat.image"
-    :src="'file://' + uploadStore.beat.image.replace(/\\/g, '/')"
+    :src="`${runtimeConfig.public.API_URL}/media/${uploadStore.beat.image}`"
     class="w-[260px] h-[260px] rounded-lg"
     alt="beatImage"
   />
@@ -16,4 +16,5 @@
 import useUploadStore from '@/components/modules/UploadForm/store';
 
 const uploadStore = useUploadStore();
+const runtimeConfig = useRuntimeConfig();
 </script>

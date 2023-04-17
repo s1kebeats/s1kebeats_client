@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import useUploadStore from '../store';
-import BeatUpload from '@/api/models/BeatUpload';
+import type BeatUpload from '@/api/models/BeatUpload';
 
 const fileInputSelector = '[data-testid=fileInput]';
 const loadingSelector = '[data-testid=loading]';
