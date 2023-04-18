@@ -1,6 +1,6 @@
 <template>
-  <section class="w-full w-[1480px] flex gap-5">
-    <BaseBeat v-for="beat in data" :data="beat" :key="beat.id" />
+  <section class="w-[1480px] flex gap-5">
+    <UiBeat v-for="beat in data" :data="beat" :key="beat.id" />
   </section>
 </template>
 <script setup lang="ts">

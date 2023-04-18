@@ -1,14 +1,13 @@
 <template>
-  <template v-if="author">
-    <TheAuthorIndividualInfo :author="author" />
-    <TheAuthorBeats :data="author.beats" />
-  </template>
+  <AuthorIndividualInfo :author="author!" />
+  <AuthorBeats :data="author!.beats" />
 </template>
 <script setup lang="ts">
 import AuthorIndividual from '@/api/models/AuthorIndividual';
 const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
 const { data: author } = await useFetch<AuthorIndividual>(
-  `http://localhost:5000/api/author/${route.params.username}`
+  `${runtimeConfig.public.API_URL}/author/${route.params.username}`
 );
 if (!author.value) {
   showError({ statusCode: 404, statusMessage: 'Страница не найдена' });

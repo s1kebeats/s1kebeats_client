@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative flex flex-col border-[1px] rounded-md transition-all"
-    :class="error.state ? 'bg-red-100 border-red-500' : ''"
+    :class="error.state ? 'bg-red-100' : ''"
   >
     <div
       v-if="uploading"
@@ -131,6 +131,7 @@ async function upload(media: File) {
     error.state = true;
     error.message = 'Неверный формат файла';
     error.description = `Выберите ${props.accept.split(',').join(' / ')} файл`;
+    uploadStore.setBeatField(props.field, null);
     return;
   }
   if (props.maxSize && media.size > props.maxSize * 1024 * 1024) {
@@ -138,6 +139,7 @@ async function upload(media: File) {
 
     error.state = true;
     error.message = `Максимальный размер файла ${props.maxSize}мб.`;
+    uploadStore.setBeatField(props.field, null);
     return;
   }
   try {
@@ -156,6 +158,7 @@ async function upload(media: File) {
     error.state = true;
     error.message = e.response.data.message ?? null;
     error.status = e.response.status ?? null;
+    uploadStore.setBeatField(props.field, null);
   } finally {
     uploading.value = false;
   }
