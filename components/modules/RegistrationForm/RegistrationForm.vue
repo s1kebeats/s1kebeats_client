@@ -69,6 +69,7 @@ import usernameAvailable from './helpers/validators/usernameAvailable';
 import withDigit from './helpers/validators/withDigit';
 import withCapitalLetter from './helpers/validators/withCapitalLetter';
 import register from './api/register';
+import noSpecialChars from './helpers/validators/noSpecialChars';
 
 const registrationFormState = reactive<{
   data: {
@@ -96,6 +97,10 @@ const registrationRules = computed(() => {
   return {
     username: {
       required: helpers.withMessage('Заполните поля', required),
+      noSpecialChars: helpers.withMessage(
+        'Введите имя пользователя без спец. символов',
+        noSpecialChars
+      ),
       available: helpers.withMessage(
         'Имя пользователя занято',
         helpers.withAsync(usernameAvailable)
@@ -111,9 +116,9 @@ const registrationRules = computed(() => {
         'Минимальная длина пароля: 8 символов',
         minLength(8)
       ),
-      withDigit: helpers.withMessage('Номер должен содержать цифру', withDigit),
+      withDigit: helpers.withMessage('Пароль должен содержать цифру', withDigit),
       withCapitalLetter: helpers.withMessage(
-        'Номер должен содержать заглавную букву',
+        'Пароль должен содержать заглавную букву',
         withCapitalLetter
       ),
     },

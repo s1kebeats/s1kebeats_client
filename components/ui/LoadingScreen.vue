@@ -2,10 +2,10 @@
   <transition name="loading">
     <div
       v-show="loading"
-      class="absolute z-[9999] top-0 left-0 w-full h-full bg-white flex items-center justify-center"
+      class="absolute z-[2] flex w-full h-full bg-white"
       data-testid="loading"
     >
-      <UiLogo class="w-[15%]" />
+      <UiLogo class="w-[15%] max-w-[300px] min-w-[175px] m-auto" />
     </div>
   </transition>
 </template>

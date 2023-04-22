@@ -2,13 +2,13 @@
   <transition name="popup">
     <div
       v-show="open"
-      class="absolute z-[9999] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold select-none"
+      class="absolute z-[1] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold"
       data-testid="errorPopup"
     >
       <Icon
         name="material-symbols:warning-rounded"
         color="#ff0000"
-        size="50px"
+        size="25%"
       />
       <div class="text-center">
         <template v-if="status === 403">
@@ -33,9 +33,9 @@
       <button
         @click.prevent="close"
         data-testid="closeButton"
-        class="absolute top-3 right-3 flex items-center justify-center"
+        class="absolute top-3 right-3 w-[5%]"
       >
-        <Icon name="material-symbols:close-rounded" size="21px" />
+        <Icon name="material-symbols:close-rounded" size="100%" />
       </button>
     </div>
   </transition>

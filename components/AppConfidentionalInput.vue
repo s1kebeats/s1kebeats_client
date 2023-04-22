@@ -7,9 +7,10 @@
     :placeholder="placeholder"
     :required="required"
   >
-    <button @click.prevent="togglePasswordVisibility">
+    <button @click.prevent="togglePasswordVisibility" class="flex w-4">
       <Icon
-        size="16px"
+        size="100%"
+        class="m-auto"
         :name="
           passwordVisible
             ? 'material-symbols:visibility-outline-rounded'
