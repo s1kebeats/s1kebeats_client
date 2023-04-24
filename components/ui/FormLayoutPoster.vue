@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="bg-image grow flex"
-  >
+  <section class="bg-image grow flex">
     <nuxt-link class="w-[40%] max-w-[450px] m-auto" to="/">
       <UiLogo color="white" />
     </nuxt-link>

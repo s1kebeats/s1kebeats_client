@@ -116,7 +116,10 @@ const registrationRules = computed(() => {
         'Минимальная длина пароля: 8 символов',
         minLength(8)
       ),
-      withDigit: helpers.withMessage('Пароль должен содержать цифру', withDigit),
+      withDigit: helpers.withMessage(
+        'Пароль должен содержать цифру',
+        withDigit
+      ),
       withCapitalLetter: helpers.withMessage(
         'Пароль должен содержать заглавную букву',
         withCapitalLetter

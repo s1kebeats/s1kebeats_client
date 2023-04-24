@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col border-[1px] rounded-lg py-2 px-5 transition-all"
+    class="border-[1px] rounded-lg py-2 px-5 transition-all"
     data-testid="input"
     :class="focused ? 'border-violet-500' : ''"
   >
@@ -8,7 +8,7 @@
       {{ title }}
       <span v-if="required">*</span>
     </label>
-    <div class="grow flex gap-1 items-start">
+    <div class="grow flex gap-1 items-center  justify-between">
       <slot />
     </div>
   </div>
