@@ -7,7 +7,7 @@
   >
     <input
       ref="input"
-      class="grow focus:outline-none"
+      class="focus:outline-none"
       autocomplete="off"
       :type="type"
       :name="name"

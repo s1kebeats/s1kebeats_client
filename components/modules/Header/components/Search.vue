@@ -1,6 +1,6 @@
 <template>
   <div
-    class="gap-3 px-3 h-[40px] bg-white rounded-lg flex-1 border-[1px] max-w-[600px] flex items-center transition-all"
+    class="absolute left-0 right-0 mx-auto gap-1 px-2 h-[55%] max-h-[80px] bg-white rounded-lg flex-1 border-[1px] w-[45%] max-w-[600px] flex items-center transition-all"
     :class="inputFocused ? 'border-[#7945fc]' : ''"
     data-testid="headerSearch"
   >
@@ -11,7 +11,7 @@
     <input
       data-testid="headerSearchInput"
       type="text"
-      class="flex-1 h-[20px] focus:outline-none text-sm"
+      class="flex-1 h-[20px] focus:outline-none text-sm overflow-hidden"
       placeholder="Найди свой звук"
       autocomplete="off"
       v-model="searchQuery"

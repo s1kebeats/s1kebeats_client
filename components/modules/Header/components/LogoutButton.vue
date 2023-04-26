@@ -1,14 +1,14 @@
 <template>
-  <button
+  <HeaderUiNavButton
     @click="logout"
-    class="w-full text-right text-sm text-red-500 font-medium flex items-center justify-start gap-3"
-  >
-    <Icon name="uiw:circle-close" size="18px" />
-    <span> Выйти </span>
-  </button>
+    class="bg-red-500 text-white"
+    text="Выход"
+    icon="ri:logout-circle-r-fill"
+  />
 </template>
 <script setup lang="ts">
 import useAuthStore from '@/stores/auth';
+import HeaderUiNavButton from './ui/NavButton.vue';
 const authStore = useAuthStore();
 
 async function logout() {

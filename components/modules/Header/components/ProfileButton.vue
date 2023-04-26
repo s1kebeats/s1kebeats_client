@@ -8,7 +8,7 @@
     <ProfileIcon />
     <Icon
       name="ic:baseline-keyboard-arrow-down"
-      size="18px"
+      size="20px"
       class="transition-all"
       :class="uiStore.profileOverlay ? 'rotate-180' : ''"
       data-testid="profileButtonIcon"

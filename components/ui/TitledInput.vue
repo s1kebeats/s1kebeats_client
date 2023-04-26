@@ -8,7 +8,7 @@
       {{ title }}
       <span v-if="required">*</span>
     </label>
-    <div class="grow flex gap-1 items-center  justify-between">
+    <div class="flex gap-1 items-center justify-between">
       <slot />
     </div>
   </div>

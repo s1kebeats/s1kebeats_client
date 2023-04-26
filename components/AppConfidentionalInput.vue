@@ -9,7 +9,7 @@
   >
     <button @click.prevent="togglePasswordVisibility" class="flex w-4">
       <Icon
-        size="100%"
+        size="16px"
         class="m-auto"
         :name="
           passwordVisible
