@@ -1,7 +1,7 @@
 <template>
   <span
     v-if="v.$errors.length"
-    class="text-sm text-red-500"
+    class="text-xs text-red-500"
     data-testid="errorList"
     >{{ v.$errors[0].$message }}</span
   >

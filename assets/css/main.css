@@ -4,10 +4,10 @@
 
 @layer components {
   .brand-gradient {
-    @apply gradient-animated bg-gradient-to-r from-violet-500 to-pink-500;
+    @apply bg-gradient-to-r from-violet-500 to-pink-500;
   }
   .text-brand-gradient {
-    @apply gradient-animated bg-gradient-to-r from-violet-500 to-pink-500 text-transparent bg-clip-text;
+    @apply bg-gradient-to-r from-violet-500 to-pink-500 text-transparent bg-clip-text;
   }
   .button {
     @apply bg-black text-white py-1 px-3 rounded-lg transition-all flex items-center justify-center gap-1;

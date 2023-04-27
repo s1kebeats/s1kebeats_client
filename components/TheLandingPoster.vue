@@ -1,12 +1,12 @@
 <template>
   <section
-    class="bg-image select-none border-b flex items-center justify-center w-full h-[480px]"
+    class="bg-image select-none border-b flex items-center justify-center w-full h-[30vh]"
   >
     <div
-      class="flex items-start gap-5 justify-center text-black font-semibold font-[Poppins]"
+      class="flex flex-col items-end justify-center text-black font-semibold font-[Poppins]"
     >
-      <h1 class="text-7xl">s1kebeats</h1>
-      <h2 class="text-3xl">2023</h2>
+      <h1 class="text-5xl">s1kebeats</h1>
+      <h2 class="text-xl">2023</h2>
     </div>
   </section>
 </template>

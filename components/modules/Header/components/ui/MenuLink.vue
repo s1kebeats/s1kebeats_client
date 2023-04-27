@@ -1,7 +1,9 @@
 <template>
-  <nuxt-link class="menu-link" :to="to">
-    <Icon :name="icon" size="22px" />
-    <span> {{ text }} </span></nuxt-link
+  <nuxt-link class="menu-link w-full py-1" :to="to">
+
+    <span> {{ text }} </span>
+    <Icon :name="icon" size="25px" />
+    </nuxt-link
   >
 </template>
 <script setup lang="ts">
@@ -16,7 +18,7 @@ const props = defineProps<{
   text-align: right;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 0.75rem;
 }
 </style>

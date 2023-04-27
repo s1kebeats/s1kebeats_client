@@ -1,11 +1,19 @@
 <template>
   <div
     data-testid="profileOverlay"
-    class="absolute z-[1] right-0 top-[64px] w-full h-[calc(100vh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
+    class="absolute z-[1] right-0 border-t-[1px] p-5 top-[64px] w-full h-[calc(100vh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
     v-show="uiStore.profileOverlay"
   >
-    <div class="m-auto flex flex-col items-center gap-3">
-      <div class="flex flex-col items-start gap-2">
+    <div class="w-full flex flex-col justify-between gap-3">
+      <div class="w-full flex flex-col items-start">
+        <!-- <nuxt-link
+        v-if="authStore.authorized"
+        to="/upload"
+        class="bg-black text-white rounded-md p-2 text-xs transition-all flex items-center gap-2"
+      >
+        <Icon name="material-symbols:upload-rounded" size="1rem" />
+        Опубликовать
+      </nuxt-link> -->
         <HeaderUiMenuLink
           to="/"
           icon="material-symbols:home-outline-rounded"
@@ -34,9 +42,11 @@
             text="Понравившееся"
           />
         </template>
-        
       </div>
-      <LoginButton v-if="!authStore.authorized" />
+      <div v-if="!authStore.authorized" class="flex gap-2">
+        <LoginButton />
+        <RegisterButton />
+      </div>
       <LogoutButton v-if="authStore.authorized" data-testid="logoutButton" />
     </div>
   </div>
@@ -44,6 +54,7 @@
 <script setup lang="ts">
 import LogoutButton from './LogoutButton.vue';
 import LoginButton from './LoginButton.vue';
+import RegisterButton from './RegisterButton.vue';
 import HeaderUiNav from './ui/Nav.vue';
 import HeaderUiMenuLink from './ui/MenuLink.vue';
 import useUiStore from '@/stores/ui';

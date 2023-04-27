@@ -7,7 +7,7 @@
   >
     <input
       ref="input"
-      class="focus:outline-none"
+      class="max-w-[calc(100%-16px)] focus:outline-none"
       autocomplete="off"
       :type="type"
       :name="name"

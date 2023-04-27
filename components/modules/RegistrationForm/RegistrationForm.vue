@@ -14,7 +14,7 @@
     <ConfirmEmailPopUp :open="registrationFormState.success" />
     <div
       class="flex flex-col gap-3 mb-3"
-      :class="!v$.$errors.length ? 'pb-8' : ''"
+      :class="!v$.$errors.length ? 'pb-7' : ''"
     >
       <AppUsernameInput
         :required="true"
