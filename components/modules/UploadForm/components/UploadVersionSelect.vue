@@ -1,7 +1,6 @@
 <template>
-  <section class="relative grow flex flex-col justify-center">
-    <div class="h-[400px] flex gap-5">
-      <UiGradientFiller direction="top" class="w-[25%]" />
+  <section class="grow flex flex-col justify-between items-between px-3">
+    <div class="flex gap-3">
       <UploadVersionCard
         data-testid="default"
         @click="
@@ -10,7 +9,7 @@
             uploadStore.setUploadVersion('default');
           }
         "
-        icon="material-symbols:upload-file-rounded"
+        icon="ph:file-fill"
         title="Стандартная"
         description="Mp3 + Wav"
         :selected="uploadStore.uploadVersion === 'default'"
@@ -24,15 +23,14 @@
             uploadStore.setUploadVersion('extended');
           }
         "
-        icon="material-symbols:drive-folder-upload-rounded"
+        icon="material-symbols:folder"
         title="Расширенная"
         description="Mp3 + Wav + Stems"
         :selected="uploadStore.uploadVersion === 'extended'"
         :class="fill ? 'border-red-500' : ''"
       />
-      <UiGradientFiller direction="bottom" class="grow" />
     </div>
-    <div class="absolute bottom-0 w-full flex items-center">
+    <div class="w-full flex items-center">
       <div
         v-if="fill"
         class="text-red-500 font-medium text-sm"
@@ -40,11 +38,7 @@
       >
         * Выберите вид публикации
       </div>
-      <UiButton
-        class="ml-auto px-5"
-        data-testid="nextButton"
-        @click.prevent="next"
-      >
+      <UiButton class="ml-auto" data-testid="nextButton" @click.prevent="next">
         Далее
       </UiButton>
     </div>

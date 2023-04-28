@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[1480px] grow flex flex-col mb-[75px]">
+  <div class="w-full grow flex flex-col pb-3">
     <!-- TODO: transition? -->
     <UploadVersionSelect v-show="uploadStore.page === 1" key="1" />
     <MediaForm v-show="uploadStore.page === 2" key="2" />

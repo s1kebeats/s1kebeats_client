@@ -1,80 +1,62 @@
 <template>
-  <section class="relative w-full grow flex flex-col justify-center gap-5">
-    <div class="w-full flex gap-5 h-[342px]">
-      <UiGradientFiller class="grow" direction="top" />
-      <form class="relative flex flex-col gap-5">
-        <UiFormRequestErrorOutput
-          :open="infoFormState.error"
-          @close="
-            () => {
-              infoFormState.error = false;
-            }
-          "
-        />
-        <fieldset class="flex gap-5 items-center">
-          <ImagePreview />
-          <fieldset class="h-full grow flex flex-col gap-5">
-            <div class="flex gap-5">
-              <UiTextInput
-                :class="v$.name.$error ? '!border-red-500' : ''"
-                @update-value="(value: string) => setBeatInfo('name', value)"
-                type="text"
-                placeholder="Введите название"
-                class="h-full"
-                name="beatName"
-                title="Название"
-                :required="true"
-              />
-              <UiNumberInput
-                @update-value="(value: number) => setBeatInfo('bpm', value)"
-                placeholder="Введите Bpm"
-                name="beatBpm"
-                title="Bpm"
-              />
-            </div>
+  <section class="relative w-full grow flex flex-col justify-center gap-5 px-3">
+    <form class="relative flex flex-col items-center gap-3">
+      <UiFormRequestErrorOutput
+        :open="infoFormState.error"
+        @close="
+          () => {
+            infoFormState.error = false;
+          }
+        "
+      />
+      <ImagePreview />
+      <UiTextInput
+        :class="v$.name.$error ? '!border-red-500' : ''"
+        @update-value="(value: string) => setBeatInfo('name', value)"
+        type="text"
+        placeholder="Введите название"
+        name="beatName"
+        title="Название"
+        :required="true"
+      />
+      <UiNumberInput
+        @update-value="(value: number) => setBeatInfo('bpm', value)"
+        placeholder="Введите Bpm"
+        name="beatBpm"
+        title="Bpm"
+      />
 
-            <UiTextArea
-              :class="v$.description.$error ? '!border-red-500' : ''"
-              @update-value="(value: string) => setBeatInfo('description', value)"
-              type="text"
-              placeholder="Введите описание"
-              class="w-full h-full"
-              name="beatDescription"
-              title="Описание"
-              :blocked="true"
-            />
-          </fieldset>
-        </fieldset>
-        <fieldset class="flex gap-5">
-          <UiNumberInput
-            :class="v$.wavePrice.$error ? '!border-red-500' : ''"
-            @update-value="(value: number) => setBeatInfo('wavePrice', value)"
-            placeholder="Введите цену за Wave"
-            class="grow h-full"
-            name="beatWavePrice"
-            title="Цена за Wave"
-            :required="true"
-          />
-          <UiNumberInput
-            v-if="uploadStore.uploadVersion === 'extended'"
-            :class="v$.stemsPrice.$error ? '!border-red-500' : ''"
-            @update-value="(value: number) => setBeatInfo('stemsPrice', value)"
-            class="grow"
-            placeholder="Введите цену за Trackout"
-            name="beatStemsPrice"
-            title="Цена за Trackout"
-            :required="true"
-          />
-        </fieldset>
-      </form>
-      <UiGradientFiller class="w-[18%]" direction="top" />
-    </div>
-    <div class="w-full absolute bottom-0 flex items-center gap-5">
-      <UiButton class="px-5" @click.prevent="uploadStore.decrementPage()">
-        Назад
-      </UiButton>
+      <UiTextArea
+        :class="v$.description.$error ? '!border-red-500' : ''"
+        @update-value="(value: string) => setBeatInfo('description', value)"
+        type="text"
+        placeholder="Введите описание"
+        name="beatDescription"
+        title="Описание"
+        :blocked="true"
+      />
+      <UiNumberInput
+        :class="v$.wavePrice.$error ? '!border-red-500' : ''"
+        @update-value="(value: number) => setBeatInfo('wavePrice', value)"
+        placeholder="Введите цену за Wave"
+        name="beatWavePrice"
+        title="Цена за Wave"
+        :required="true"
+      />
+      <UiNumberInput
+        v-if="uploadStore.uploadVersion === 'extended'"
+        :class="v$.stemsPrice.$error ? '!border-red-500' : ''"
+        @update-value="(value: number) => setBeatInfo('stemsPrice', value)"
+        placeholder="Введите цену за Trackout"
+        name="beatStemsPrice"
+        title="Цена за Trackout"
+        :required="true"
+      />
+    </form>
+    <div class="w-full flex items-center gap-3">
+      <UiButton @click.prevent="uploadStore.decrementPage()"> Назад </UiButton>
       <UiFormValidationErrorOutput :v="v$" />
-      <UiButton class="ml-auto px-5" @click.prevent="upload">
+      <UiButton class="ml-auto" @click.prevent="upload">
         Опубликовать
       </UiButton>
     </div>

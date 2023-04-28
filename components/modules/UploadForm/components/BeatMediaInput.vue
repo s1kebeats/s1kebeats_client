@@ -1,70 +1,53 @@
 <template>
   <div
-    class="relative flex flex-col border-[1px] rounded-md transition-all"
+    class="relative overflow-hidden border-[1px] rounded-md transition-all"
     :class="error.state ? 'bg-red-100' : ''"
   >
     <div
       v-if="uploading"
       data-testid="loading"
-      class="absolute z-[1] w-full h-full backdrop-blur-sm flex items-center justify-center p-10 rounded-md"
+      class="absolute z-[1] w-full h-full backdrop-blur-sm flex p-10 rounded-md"
     >
-      <UiLoadingSpinner color="black" size="xl" />
+      <UiLoadingSpinner color="black" class="m-auto" size="lg" />
     </div>
-    <label
-      :for="name"
-      class="relative w-full h-full flex flex-col items-center justify-center p-10 cursor-pointer"
-      data-testid="label"
-    >
-      <span
-        v-if="required"
-        class="absolute right-7 top-5 text-xl font-medium"
-        data-testid="required"
-        >*</span
+    <label :for="name" class="cursor-pointer" data-testid="label">
+      <div
+        class="relative w-full h-full py-4 px-5 flex items-center justify-between gap-2"
       >
-      <template v-if="error.state">
-        <Icon
-          name="material-symbols:warning-rounded"
-          color="black"
-          size="90px"
-        />
-        <div class="flex flex-col items-center gap-1 mb-3">
-          <span class="text-2xl font-semibold" data-testid="title">
-            {{ error.message }}</span
-          >
-          <span
-            class="text-xs"
-            v-if="error.description"
-            data-testid="description"
-          >
-            {{ error.description }}</span
-          >
-        </div>
-      </template>
-      <template v-else>
-        <Icon
-          v-if="icon"
-          :name="icon"
-          height="90px"
-          width="90px"
-          class="mb-3"
-          data-testid="icon"
-        />
-        <div class="flex flex-col items-center gap-1 mb-3">
-          <span class="text-2xl font-semibold" data-testid="title">
-            {{ title }}</span
-          >
-          <span class="text-xs" v-if="description" data-testid="description">
-            {{ description }}</span
-          >
-        </div>
-        <div
-          v-show="selected"
-          class="absolute bottom-5 bg-black text-white rounded-lg py-1 px-3 text-sm max-w-[40%] truncate"
+        <span
+          v-if="required"
+          class="absolute right-5 top-3 text-sm font-medium"
+          data-testid="required"
+          >*</span
         >
-          {{ selected }}
+        <Icon
+          v-if="icon || error.state"
+          :name="error.state ? 'material-symbols:warning-rounded' : icon!"
+          color="black"
+          size="20%"
+          class="min-w-[50px]"
+        />
+        <div class="grow flex flex-col text-center gap-1">
+          <span class="font-semibold text-sm" data-testid="title">
+            {{ error.state ? error.message : title }}</span
+          >
+          <span class="text-xs" data-testid="description">
+            <template v-if="error.state && error.description">
+              {{ error.description }}
+            </template>
+            <template v-if="!error.state && description">
+              {{ description }}
+            </template>
+          </span>
         </div>
-      </template>
+      </div>
+      <div
+        class="w-full bg-purple-200 text-white text-center py-1.5 px-3 text-xs truncate"
+      >
+        {{ selected ? selected : 'Файл не выбран' }}
+      </div>
     </label>
+
     <input
       ref="inputElement"
       data-testid="fileInput"

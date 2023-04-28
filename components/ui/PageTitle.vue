@@ -1,5 +1,5 @@
 <template>
-  <h1 class="font-semibold text-left w-[1480px] text-2xl mt-5">
+  <h1 class="font-semibold text-2xl mt-3">
     <slot />
   </h1>
 </template>

@@ -30,6 +30,8 @@ onMounted(async () => {
     } finally {
       uiStore.setLoading(false);
     }
+  } else {
+    uiStore.setLoading(false);
   }
 });
 </script>
