@@ -6,14 +6,6 @@
   >
     <div class="w-full flex flex-col justify-between gap-3">
       <div class="w-full flex flex-col items-start">
-        <!-- <nuxt-link
-        v-if="authStore.authorized"
-        to="/upload"
-        class="bg-black text-white rounded-md p-2 text-xs transition-all flex items-center gap-2"
-      >
-        <Icon name="material-symbols:upload-rounded" size="1rem" />
-        Опубликовать
-      </nuxt-link> -->
         <HeaderUiMenuLink
           to="/"
           icon="material-symbols:home-outline-rounded"
@@ -43,11 +35,19 @@
           />
         </template>
       </div>
-      <div v-if="!authStore.authorized" class="flex gap-2">
-        <LoginButton />
-        <RegisterButton />
+      <div class="flex gap-2">
+        <template v-if="authStore.authorized">
+          <UploadButton class="grow" />
+          <LogoutButton
+            v-if="authStore.authorized"
+            data-testid="logoutButton"
+          />
+        </template>
+        <template v-if="!authStore.authorized">
+          <LoginButton />
+          <RegisterButton />
+        </template>
       </div>
-      <LogoutButton v-if="authStore.authorized" data-testid="logoutButton" />
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@
 import LogoutButton from './LogoutButton.vue';
 import LoginButton from './LoginButton.vue';
 import RegisterButton from './RegisterButton.vue';
-import HeaderUiNav from './ui/Nav.vue';
+import UploadButton from './UploadButton.vue';
 import HeaderUiMenuLink from './ui/MenuLink.vue';
 import useUiStore from '@/stores/ui';
 import useAuthStore from '@/stores/auth';
