@@ -1,13 +1,12 @@
 <template>
   <a target="_blank" data-testid="link" :href="url + username">
-    <Icon :name="icon" data-testid="icon" :width="width" :height="height" />
+    <Icon :name="icon" data-testid="icon" :size="size" />
   </a>
 </template>
 <script setup lang="ts">
 interface Props {
   username: string;
-  width: string;
-  height: string;
+  size: string;
   icon: string;
   url: string;
 }

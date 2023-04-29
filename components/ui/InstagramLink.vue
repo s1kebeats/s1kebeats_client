@@ -3,14 +3,12 @@
     icon="mdi:instagram"
     :username="username"
     url="https://www.instagram.com/"
-    :width="width"
-    :height="height"
+    :size="size"
   />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
   username: string;
-  width: string;
-  height: string;
+  size: string;
 }>();
 </script>

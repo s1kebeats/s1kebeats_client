@@ -42,7 +42,7 @@
         </div>
       </div>
       <div
-        class="w-full bg-purple-200 text-white text-center py-1.5 px-3 text-xs truncate"
+        class="w-full bg-green-200 text-white text-center py-1.5 px-3 text-xs truncate"
       >
         {{ selected ? selected : 'Файл не выбран' }}
       </div>

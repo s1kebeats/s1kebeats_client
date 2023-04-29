@@ -3,7 +3,7 @@
     @click="logout"
     class="bg-red-500 text-white"
     text="Выход"
-    icon="ri:logout-circle-r-fill"
+    icon="streamline:entertainment-control-button-power-1-power-button-on-off"
   />
 </template>
 <script setup lang="ts">

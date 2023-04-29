@@ -38,7 +38,7 @@ const value = ref('');
 
 function updateValue(e: Event) {
   const input = e.target as HTMLInputElement;
-  value.value = input.value;
+  value.value = input.value.trim();
   emit('updateValue', value.value);
 }
 

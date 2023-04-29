@@ -3,7 +3,7 @@
     @click="redirect"
     class="bg-[#7945fc] text-white"
     text="Регистрация"
-    icon="ri:logout-circle-r-fill"
+    icon="streamline:interface-user-add-actions-add-close-geometric-human-person-plus-single-up-user"
   />
 </template>
 <script setup lang="ts">

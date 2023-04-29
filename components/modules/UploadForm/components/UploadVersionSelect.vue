@@ -1,6 +1,6 @@
 <template>
-  <section class="grow flex flex-col justify-between items-between px-3">
-    <div class="flex gap-3">
+  <section class="grow flex flex-col gap-5 px-3">
+    <div class="grow flex flex-col gap-3">
       <UploadVersionCard
         data-testid="default"
         @click="

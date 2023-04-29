@@ -45,7 +45,7 @@
         </template>
         <template v-if="!authStore.authorized">
           <LoginButton />
-          <RegisterButton />
+          <RegisterButton class="grow" />
         </template>
       </div>
     </div>
