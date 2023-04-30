@@ -7,6 +7,7 @@ export default interface Beat {
   image: string | null;
   mp3: string;
   wavePrice: number;
+  stemsPrice: number | null;
   user: {
     id: number;
     username: string;

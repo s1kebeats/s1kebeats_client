@@ -1,7 +1,7 @@
 <template>
   <div id="default" class="flex flex-col min-h-[100vh]">
     <Header />
-    <main class="grow w-full flex flex-col items-center gap-5">
+    <main class="grow w-full flex flex-col items-center gap-3">
       <slot />
     </main>
   </div>

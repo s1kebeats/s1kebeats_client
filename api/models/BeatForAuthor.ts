@@ -7,5 +7,6 @@ export default interface BeatForAuthor {
   image: string | null;
   mp3: string;
   wavePrice: number;
+  stemsPrice: number | null;
   tags: Tag[];
 }
