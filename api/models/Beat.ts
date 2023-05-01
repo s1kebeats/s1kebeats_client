@@ -13,4 +13,5 @@ export default interface Beat {
     username: string;
     displayedName: string | null;
   };
+  tags: Tag[];
 }

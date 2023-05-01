@@ -25,7 +25,7 @@ $api.interceptors.response.use(
   async (error: any) => {
     const request = error.config;
     if (error.response.status === 401) {
-      const response = await $api.post<AuthResponse>('/refresh');
+      const response = await axios.post<AuthResponse>('/refresh');
       localStorage.setItem('accessToken', response.data.accessToken);
 
       return await $api.request(request);
