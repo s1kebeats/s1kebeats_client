@@ -2,7 +2,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import type AuthResponse from './models/AuthResponse';
+import refresh from '@/stores/api/refresh';
 
 export const API_URL = 'http://localhost:5000/api';
 
@@ -25,8 +25,8 @@ $api.interceptors.response.use(
   async (error: any) => {
     const request = error.config;
     if (error.response.status === 401) {
-      const response = await axios.post<AuthResponse>('/refresh');
-      localStorage.setItem('accessToken', response.data.accessToken);
+      const { data } = await refresh();
+      localStorage.setItem('accessToken', data.accessToken);
 
       return await $api.request(request);
     } else {
