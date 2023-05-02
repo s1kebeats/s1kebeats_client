@@ -5,11 +5,11 @@
       class="w-full aspect-square rounded-t-lg"
     />
     <div class="flex flex-col px-3 pb-3">
-      <div class="flex justify-between items-center gap-3">
+      <div class="flex justify-between items-center gap-1">
         <span class="font-semibold text-lg truncate">
           {{ data.name }}
         </span>
-        <span class="bg-[#7945fc] text-white truncate rounded-md px-1"
+        <span class="bg-[#7945fc] text-white truncate text-sm rounded-md px-1"
           >{{ data.wavePrice }} р.</span
         >
       </div>

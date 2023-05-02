@@ -68,6 +68,16 @@ const useUploadStore = defineStore('upload', {
       );
       await upload(filtered);
     },
+    resetState() {
+      this.page = 1;
+      this.uploadVersion = null;
+      this.beat = {} as BeatUpload;
+      this.error = {
+        state: false,
+        status: null,
+        message: null,
+      };
+    },
   },
 });
 

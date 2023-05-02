@@ -2,7 +2,7 @@
   <img
     v-if="uploadStore.beat.image"
     :src="`${runtimeConfig.public.API_URL}/media/${uploadStore.beat.image}`"
-    class="w-[50%] min-w-[160px] aspect-square rounded-lg"
+    class="w-[50%] min-w-[160px] aspect-square rounded-lg object-cover"
     alt="beatImage"
   />
   <div

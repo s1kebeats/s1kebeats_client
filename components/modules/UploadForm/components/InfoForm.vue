@@ -62,8 +62,14 @@
     <div class="w-full flex items-center gap-3">
       <UiButton @click.prevent="uploadStore.decrementPage()"> Назад </UiButton>
       <UiFormValidationErrorOutput :v="v$" />
-      <UiButton class="ml-auto" @click.prevent="upload">
-        Опубликовать
+
+      <UiButton
+        class="ml-auto w-[120px]"
+        @click.prevent="upload"
+        :disabled="infoFormState.pending"
+      >
+        <UiLoadingSpinner v-if="infoFormState.pending" size="sm" />
+        <span v-else>Опубликовать</span>
       </UiButton>
     </div>
   </section>
@@ -168,4 +174,9 @@ function setBeatInfo(
 ) {
   infoFormState.data[field] = value;
 }
+
+onBeforeRouteLeave(() => {
+  console.log('reset');
+  uploadStore.resetState();
+});
 </script>
