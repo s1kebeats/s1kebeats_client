@@ -2,6 +2,7 @@
   <UiTitledInput
     :title="title"
     :focused="focused"
+    :name="name"
     @click="focus"
     :required="required"
   >
@@ -24,17 +25,17 @@
 <script setup lang="ts">
 import UiTitledInput from './TitledInput.vue';
 const props = defineProps<{
-  title: string;
+  title?: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
 }>();
 const emit = defineEmits<{
-  (event: 'updateValue', value: number): void;
+  (event: 'updateValue', value: number | null): void;
 }>();
 
 const input = ref();
-const value = ref<number | string>('');
+const value = ref<number | null>(null);
 
 function updateValue(e: Event) {
   const input = e.target as HTMLInputElement;

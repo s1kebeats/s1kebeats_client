@@ -1,6 +1,7 @@
 <template>
   <UiTitledInput
     :title="title"
+    :name="name"
     :focused="focused"
     @click="focus"
     :required="required"
@@ -23,9 +24,9 @@
 <script setup lang="ts">
 import UiTitledInput from './TitledInput.vue';
 const props = defineProps<{
-  title: string;
+  title?: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   blocked?: boolean;
   required?: boolean;
 }>();

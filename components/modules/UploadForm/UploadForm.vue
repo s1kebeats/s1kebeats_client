@@ -2,8 +2,8 @@
   <div class="w-full grow flex flex-col pb-3">
     <!-- TODO: transition? -->
     <UploadVersionSelect v-show="uploadStore.page === 1" key="1" />
-    <MediaForm v-show="uploadStore.page === 2" key="2" />
-    <InfoForm v-show="uploadStore.page === 3" key="3" @success="success" />
+    <MediaForm v-show="uploadStore.page === 3" key="2" />
+    <InfoForm v-show="uploadStore.page === 2" key="3" @success="success" />
   </div>
 </template>
 <script setup lang="ts">

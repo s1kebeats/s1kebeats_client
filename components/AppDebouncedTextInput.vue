@@ -9,13 +9,18 @@
   />
 </template>
 <script setup lang="ts">
-const props = defineProps<{
-  title: string;
+interface Props {
   name: string;
-  placeholder: string;
+  title?: string;
+  placeholder?: string;
   type: 'text' | 'email' | 'password';
-  required: boolean;
-}>();
+  required?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'text',
+});
+
 const emit = defineEmits<{
   (event: 'updateValue', value: string): void;
 }>();

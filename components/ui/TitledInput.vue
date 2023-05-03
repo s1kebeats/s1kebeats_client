@@ -4,7 +4,12 @@
     data-testid="input"
     :class="focused ? 'border-violet-500' : ''"
   >
-    <label :for="title" data-testid="title" class="text-sm font-semibold">
+    <label
+      v-if="title"
+      :for="name"
+      data-testid="title"
+      class="text-sm font-semibold"
+    >
       {{ title }}
       <span v-if="required">*</span>
     </label>
@@ -15,8 +20,9 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  title: string;
-  focused: boolean;
+  title?: string;
+  name: string;
+  focused?: boolean;
   required?: boolean;
 }>();
 </script>

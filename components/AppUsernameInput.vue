@@ -11,7 +11,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   name: string;
-  required: boolean;
+  required?: boolean;
 }>();
 
 const emit = defineEmits<{

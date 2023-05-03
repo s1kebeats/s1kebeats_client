@@ -23,10 +23,10 @@
 <script setup lang="ts">
 import UiTextInput from './ui/TextInput.vue';
 const props = defineProps<{
-  title: string;
+  title?: string;
   name: string;
-  placeholder: string;
-  required: boolean;
+  placeholder?: string;
+  required?: boolean;
 }>();
 const emit = defineEmits<{
   (e: 'updateValue', value: string): void;

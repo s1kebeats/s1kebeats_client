@@ -23,7 +23,7 @@
           :required="true"
         />
         <UiNumberInput
-          @update-value="(value: number) => setBeatInfo('bpm', value)"
+          @update-value="(value: number | null) => setBeatInfo('bpm', value)"
           placeholder="Введите Bpm"
           name="beatBpm"
           title="Bpm"
@@ -40,7 +40,7 @@
         />
         <UiNumberInput
           :class="v$.wavePrice.$error ? '!border-red-500' : ''"
-          @update-value="(value: number) => setBeatInfo('wavePrice', value)"
+          @update-value="(value: number | null) => setBeatInfo('wavePrice', value)"
           placeholder="Введите цену за Wave"
           name="beatWavePrice"
           title="Цена за Wave"
@@ -50,13 +50,21 @@
         <UiNumberInput
           v-if="uploadStore.uploadVersion === 'extended'"
           :class="v$.stemsPrice.$error ? '!border-red-500' : ''"
-          @update-value="(value: number) => setBeatInfo('stemsPrice', value)"
+          @update-value="(value: number | null) => setBeatInfo('stemsPrice', value)"
           placeholder="Введите цену за Trackout"
           name="beatStemsPrice"
           title="Цена за Trackout"
           :required="true"
           class="col-span-2"
         />
+        <div class="flex flex-col gap-3 col-span-2">
+          <span class="text-lg font-semibold">Теги</span>
+          <AppDebouncedTextInput
+            type="text"
+            name="tags"
+            placeholder="Введите тег"
+          />
+        </div>
       </div>
     </form>
     <div class="w-full flex items-center gap-3">
@@ -170,7 +178,7 @@ async function upload() {
 
 function setBeatInfo(
   field: keyof typeof infoFormState.data,
-  value: string | number
+  value: string | number | null
 ) {
   infoFormState.data[field] = value;
 }
