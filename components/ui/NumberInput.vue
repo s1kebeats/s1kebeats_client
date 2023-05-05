@@ -29,19 +29,16 @@ const props = defineProps<{
   name: string;
   placeholder?: string;
   required?: boolean;
+  value: number;
 }>();
 const emit = defineEmits<{
   (event: 'updateValue', value: number | null): void;
 }>();
 
 const input = ref();
-const value = ref<number | null>(null);
 
 function updateValue(e: Event) {
-  const input = e.target as HTMLInputElement;
-  input.value = input.value.replace(/[^0-9.]/g, '');
-  value.value = +input.value;
-  emit('updateValue', value.value);
+  emit('updateValue', +input.value.value.replace(/[^0-9.]/g, ''));
 }
 
 const focused = ref(false);
@@ -55,6 +52,6 @@ function blur() {
 }
 
 onMounted(() => {
-  emit('updateValue', value.value);
+  emit('updateValue', input.value.value);
 });
 </script>

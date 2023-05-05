@@ -6,12 +6,14 @@
     placeholder="Введите имя пользователя"
     @update-value="updateValue"
     :required="required"
+    :value="value"
   />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
   name: string;
   required?: boolean;
+  value: string;
 }>();
 
 const emit = defineEmits<{

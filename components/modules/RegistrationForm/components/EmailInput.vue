@@ -6,11 +6,13 @@
     title="Электронная почта"
     placeholder="Введите электронную почту"
     :required="required"
+    :value="value"
   />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
   required: boolean;
+  value: string;
 }>();
 
 const emit = defineEmits<{

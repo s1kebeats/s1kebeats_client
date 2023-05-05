@@ -11,8 +11,9 @@
           }
         "
       />
-      <ImagePreview />
+      
       <div class="grid gap-3 grid-cols-2">
+        <ImagePreview class="row-span-2" />
         <UiTextInput
           :class="v$.name.$error ? '!border-red-500' : ''"
           @update-value="(value: string) => setBeatInfo('name', value)"
@@ -21,12 +22,14 @@
           name="beatName"
           title="Название"
           :required="true"
+          :value="infoFormState.data.name ?? ''"
         />
         <UiNumberInput
           @update-value="(value: number | null) => setBeatInfo('bpm', value)"
           placeholder="Введите Bpm"
           name="beatBpm"
           title="Bpm"
+          :value="infoFormState.data.bpm ?? 0"
         />
         <UiTextArea
           :class="v$.description.$error ? '!border-red-500' : ''"
@@ -46,6 +49,7 @@
           title="Цена за Wave"
           :required="true"
           class="col-span-2"
+          :value="infoFormState.data.wavePrice ?? 0"
         />
         <UiNumberInput
           v-if="uploadStore.uploadVersion === 'extended'"
@@ -56,6 +60,7 @@
           title="Цена за Trackout"
           :required="true"
           class="col-span-2"
+          :value="infoFormState.data.stemsPrice ?? 0"
         />
         <div class="flex flex-col gap-3 col-span-2">
           <span class="text-lg font-semibold">Теги</span>
@@ -63,14 +68,22 @@
             type="text"
             name="tags"
             placeholder="Введите тег"
-          />
+            @update-value="updateTagNameInputValue"
+            :value="tagNameInputValue"
+          >
+            <button @click.prevent="addTag">
+              <Icon
+                name="material-symbols:add-circle-outline-rounded"
+                size="20px"
+              />
+            </button>
+          </AppDebouncedTextInput>
         </div>
       </div>
     </form>
     <div class="w-full flex items-center gap-3">
       <UiButton @click.prevent="uploadStore.decrementPage()"> Назад </UiButton>
       <UiFormValidationErrorOutput :v="v$" />
-
       <UiButton
         class="ml-auto w-[120px]"
         @click.prevent="upload"
@@ -107,6 +120,7 @@ const infoFormState = reactive<{
     stemsPrice: number | null;
     bpm: number | null;
     description: string | null;
+    tags: string[];
   };
   error: boolean;
   pending: boolean;
@@ -117,6 +131,7 @@ const infoFormState = reactive<{
     stemsPrice: null,
     bpm: null,
     description: null,
+    tags: [],
   },
   error: false,
   pending: false,
@@ -183,8 +198,18 @@ function setBeatInfo(
   infoFormState.data[field] = value;
 }
 
+const tagNameInputValue = ref('');
+
+function updateTagNameInputValue(value: string) {
+  tagNameInputValue.value = value;
+}
+
+function addTag() {
+  infoFormState.data.tags.push(tagNameInputValue.value);
+  tagNameInputValue.value = '';
+}
+
 onBeforeRouteLeave(() => {
-  console.log('reset');
   uploadStore.resetState();
 });
 </script>

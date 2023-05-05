@@ -16,18 +16,22 @@
       class="flex flex-col gap-3 mb-3"
       :class="!v$.$errors.length ? 'pb-7' : ''"
     >
-      <AppUsernameInput
+      <AppDebouncedTextInput
+        title="Имя пользователя"
+        placeholder="Введите имя пользователя"
         :required="true"
         autocomplete="off"
         name="registrationUsername"
         :class="v$.username.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.username = $event }"
+        :value="registrationFormState.data.username"
       />
       <EmailInput
         :required="true"
         autocomplete="off"
         :class="v$.email.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
+        :value="registrationFormState.data.email"
       />
       <AppConfidentionalInput
         :required="true"
@@ -37,6 +41,7 @@
         placeholder="Введите пароль"
         :class="v$.password.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.password = $event }"
+        :value="registrationFormState.data.password"
       />
       <AppConfidentionalInput
         autocomplete="off"
@@ -45,6 +50,7 @@
         placeholder="Введите пароль ещё раз"
         :class="v$.passwordConfirm.$error ? '!border-red-500' : ''"
         @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
+        :value="registrationFormState.data.passwordConfirm"
         :required="true"
       />
       <UiFormValidationErrorOutput :v="v$" />

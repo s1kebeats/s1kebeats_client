@@ -2,12 +2,12 @@
   <img
     v-if="uploadStore.beat.image"
     :src="`${runtimeConfig.public.API_URL}/media/${uploadStore.beat.image}`"
-    class="w-[50%] min-w-[160px] aspect-square rounded-lg object-cover"
+    class="min-w-[142px] aspect-square rounded-lg object-cover"
     alt="beatImage"
   />
   <div
     v-else
-    class="w-[50%] min-w-[160px] aspect-square text-white font-medium text-4xl rounded-lg green-bg flex items-center justify-center"
+    class="min-w-[142px] aspect-square text-white font-medium text-4xl rounded-lg green-bg flex items-center justify-center"
   >
     ?
   </div>

@@ -12,6 +12,7 @@
       autocomplete="off"
       :type="type"
       :name="name"
+      :value="value"
       :placeholder="placeholder"
       @input="updateValue"
       @focus="focus"
@@ -28,6 +29,7 @@ interface Props {
   placeholder?: string;
   type: 'text' | 'email' | 'password';
   required?: boolean;
+  value: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -39,12 +41,9 @@ const emit = defineEmits<{
 }>();
 
 const input = ref();
-const value = ref('');
 
 function updateValue(e: Event) {
-  const input = e.target as HTMLInputElement;
-  value.value = input.value.trim();
-  emit('updateValue', value.value);
+  emit('updateValue', input.value.value.trim());
 }
 
 const focused = ref(false);
@@ -58,6 +57,6 @@ function blur() {
 }
 
 onMounted(() => {
-  emit('updateValue', value.value);
+  emit('updateValue', input.value.value);
 });
 </script>
