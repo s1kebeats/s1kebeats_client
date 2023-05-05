@@ -11,7 +11,7 @@
           }
         "
       />
-      
+
       <div class="grid gap-3 grid-cols-2">
         <ImagePreview class="row-span-2" />
         <UiTextInput
@@ -29,7 +29,7 @@
           placeholder="Введите Bpm"
           name="beatBpm"
           title="Bpm"
-          :value="infoFormState.data.bpm ?? 0"
+          :value="infoFormState.data.bpm ?? null"
         />
         <UiTextArea
           :class="v$.description.$error ? '!border-red-500' : ''"
@@ -49,7 +49,7 @@
           title="Цена за Wave"
           :required="true"
           class="col-span-2"
-          :value="infoFormState.data.wavePrice ?? 0"
+          :value="infoFormState.data.wavePrice ?? null"
         />
         <UiNumberInput
           v-if="uploadStore.uploadVersion === 'extended'"
@@ -60,11 +60,11 @@
           title="Цена за Trackout"
           :required="true"
           class="col-span-2"
-          :value="infoFormState.data.stemsPrice ?? 0"
+          :value="infoFormState.data.stemsPrice ?? null"
         />
         <div class="flex flex-col gap-3 col-span-2">
           <span class="text-lg font-semibold">Теги</span>
-          <AppDebouncedTextInput
+          <UiTextInput
             type="text"
             name="tags"
             placeholder="Введите тег"
@@ -77,7 +77,19 @@
                 size="20px"
               />
             </button>
-          </AppDebouncedTextInput>
+          </UiTextInput>
+          <div
+            v-if="infoFormState.data.tags.length"
+            class="flex flex-wrap gap-1"
+          >
+            <div
+              v-for="tag in infoFormState.data.tags"
+              :key="tag"
+              class="bg-[#7945fc] px-2 py-1 rounded-md text-white"
+            >
+              #{{ tag }}
+            </div>
+          </div>
         </div>
       </div>
     </form>
@@ -175,12 +187,10 @@ async function upload() {
       infoFormState.error = false;
       infoFormState.pending = true;
 
-      await uploadStore.upload(
-        infoFormState.data as Omit<
-          BeatUpload,
-          'wave' | 'mp3' | 'image' | 'stems'
-        >
-      );
+      await uploadStore.upload({
+        ...infoFormState.data,
+        tags: infoFormState.data.tags.join(','),
+      } as Omit<BeatUpload, 'wave' | 'mp3' | 'image' | 'stems'>);
 
       emit('success');
     } catch (error) {

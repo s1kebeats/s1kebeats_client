@@ -10,7 +10,7 @@
           {{ data.name }}
         </span>
         <span class="bg-[#7945fc] text-white truncate text-sm rounded-md px-1"
-          >{{ data.wavePrice }} р.</span
+          >{{ data.wavePrice }}р.</span
         >
       </div>
       <div v-if="data.user" class="text-sm font-semibold">

@@ -29,7 +29,7 @@ const props = defineProps<{
   name: string;
   placeholder?: string;
   required?: boolean;
-  value: number;
+  value: number | null;
 }>();
 const emit = defineEmits<{
   (event: 'updateValue', value: number | null): void;
