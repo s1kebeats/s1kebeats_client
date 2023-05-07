@@ -1,6 +1,6 @@
-import ApiImage from './ApiImage.vue';
+import ApiImage from './AppApiImage.vue';
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 
 const apiImageSelector = '[data-testid=apiImage]';
 // TODO: MEDIA_URL from Nuxt runtimeConfig
@@ -10,7 +10,7 @@ describe('ApiImage', () => {
   describe('props', () => {
     it('src - should render with api-based src', () => {
       const testSrc = 'test';
-      const wrapper = mount(ApiImage, {
+      const wrapper = shallowMount(ApiImage, {
         props: {
           src: testSrc,
         },

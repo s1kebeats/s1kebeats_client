@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-2 border-[1px] rounded-lg">
-    <UiApiImage
+    <AppApiImage
       :src="data.image ? data.image : ''"
       class="w-full aspect-square rounded-t-lg"
     />

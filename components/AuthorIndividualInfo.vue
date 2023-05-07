@@ -2,7 +2,7 @@
   <section class="w-full mt-3 px-[3%]">
     <div class="border-[1px] rounded-lg overflow-hidden">
       <div class="bg-image px-[5%] flex items-end pb-3 justify-between">
-        <UiApiImage
+        <AppApiImage
           v-if="author.image"
           class="translate-y-1/4 w-[35%] aspect-square rounded-full shadow-sm"
           :src="author.image"

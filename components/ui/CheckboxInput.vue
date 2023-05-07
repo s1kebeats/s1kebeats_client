@@ -16,23 +16,16 @@
   </div>
 </template>
 <script setup lang="ts">
-interface Props {
-  checked?: boolean;
+const props = defineProps<{
+  value: boolean;
   name: string;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  checked: false,
-});
+}>();
 
 const emit = defineEmits<{
   (e: 'updateValue', value: boolean): void;
 }>();
 
-const value = ref(props.checked);
-
 const updateValue = () => {
-  value.value = !value.value;
-  emit('updateValue', value.value);
+  emit('updateValue', !props.value);
 };
 </script>

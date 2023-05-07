@@ -4,7 +4,7 @@
     <UiCheckboxInput
       name="rememberme"
       @update-value="updateValue"
-      :checked="true"
+      :value="true"
     />
   </div>
 </template>

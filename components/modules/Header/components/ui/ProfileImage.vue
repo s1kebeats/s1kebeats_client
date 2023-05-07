@@ -1,5 +1,5 @@
 <template>
-  <UiApiImage
+  <AppApiImage
     v-if="authStore.user!.image"
     :src="authStore.user!.image"
     class="rounded-full border-[1px] w-[32px] h-[32px]"
