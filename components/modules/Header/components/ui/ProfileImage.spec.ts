@@ -16,7 +16,7 @@ const testUser: User = {
 };
 
 describe('ProfileImage', () => {
-  it('renders profile image when it is provided', async () => {
+  it('should render profile image when it is provided', async () => {
     const wrapper = mount(ProfileImage, {
       global: {
         plugins: [
@@ -37,7 +37,7 @@ describe('ProfileImage', () => {
       testUser.image
     );
   });
-  it('renders icon without profile image provided', async () => {
+  it('should render icon without profile image provided', async () => {
     const wrapper = mount(ProfileImage, {
       global: {
         plugins: [

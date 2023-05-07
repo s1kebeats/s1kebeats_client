@@ -3,7 +3,7 @@
     @submit.prevent="submitLoginForm"
     class="relative flex flex-col w-full gap-3"
   >
-    <UiFormRequestErrorOutput
+    <AppFormRequestErrorOutput
       :open="loginFormState.error.state"
       :status="loginFormState.error.code"
       @close="closeErrorPopUp"

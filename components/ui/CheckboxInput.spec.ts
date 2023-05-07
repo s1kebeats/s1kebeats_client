@@ -14,13 +14,13 @@ const defaultMountOptions = {
 
 describe('CheckboxInput', async () => {
   describe('props', () => {
-    it('name - renders with set name attribute', () => {
+    it('name - should render with set name attribute', () => {
       const wrapper = shallowMount(CheckboxInput, defaultMountOptions);
       const attributes = wrapper.attributes();
 
       expect(attributes.name).toBe(defaultMountOptions.props.name);
     });
-    it('value - renders checkbox indicator when set to true; sets aria-checked attribute', () => {
+    it('value - should render checkbox indicator when set to true; sets aria-checked attribute', () => {
       const wrapper = shallowMount(CheckboxInput, defaultMountOptions);
       const attributes = wrapper.attributes();
 
@@ -31,7 +31,7 @@ describe('CheckboxInput', async () => {
         defaultMountOptions.props.value
       );
     });
-    it('value - does not render checkbox indicator when set to false; sets aria-checked attribute', () => {
+    it('value - should not render checkbox indicator when set to false; sets aria-checked attribute', () => {
       const wrapper = shallowMount(CheckboxInput, {
         props: {
           ...defaultMountOptions.props,
@@ -45,7 +45,7 @@ describe('CheckboxInput', async () => {
     });
   });
   describe('User Interactions', () => {
-    it('click - emits opposite value', async () => {
+    it('click - should emit opposite value', async () => {
       const wrapper = shallowMount(CheckboxInput, defaultMountOptions);
 
       await wrapper.get(checkboxSelector).trigger('click');

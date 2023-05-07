@@ -16,7 +16,7 @@ const testUser: User = {
 };
 
 describe('ProfileIcon', () => {
-  it('renders unauthorized icon when not authorized', async () => {
+  it('should render unauthorized icon when not authorized', async () => {
     const wrapper = mount(ProfileIcon, {
       global: {
         plugins: [
@@ -35,7 +35,7 @@ describe('ProfileIcon', () => {
     expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
     expect(wrapper.find(profileImageSelector).exists()).toBe(false);
   });
-  it('renders profile image when authorized', async () => {
+  it('should render profile image when authorized', async () => {
     const wrapper = mount(ProfileIcon, {
       global: {
         plugins: [

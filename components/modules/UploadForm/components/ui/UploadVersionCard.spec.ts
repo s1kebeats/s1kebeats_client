@@ -5,7 +5,7 @@ import { mount } from '@vue/test-utils';
 const apiImageSelector = '[data-testid=apiImage]';
 
 describe('UploadVersionCard', () => {
-  it('renders with api-based src', () => {
+  it('should render with api-based src', () => {
     const testSrc = 'test';
     const wrapper = mount(UploadVersionCard, {
       props: {

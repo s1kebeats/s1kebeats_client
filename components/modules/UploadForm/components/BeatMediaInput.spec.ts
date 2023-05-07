@@ -27,7 +27,7 @@ const defaultMountOptions = {
 };
 
 describe('BeatMediaInput', () => {
-  it('renders with set name, label "for" field and id', () => {
+  it('should render with set name, label "for" field and id', () => {
     const wrapper = mount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
@@ -45,7 +45,7 @@ describe('BeatMediaInput', () => {
       defaultMountOptions.props.name
     );
   });
-  it('renders with set accept field', () => {
+  it('should render with set accept field', () => {
     const wrapper = mount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
@@ -57,7 +57,7 @@ describe('BeatMediaInput', () => {
       defaultMountOptions.props.accept
     );
   });
-  it('renders with set title and description', () => {
+  it('should render with set title and description', () => {
     const wrapper = mount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
@@ -72,7 +72,7 @@ describe('BeatMediaInput', () => {
       defaultMountOptions.props.description
     );
   });
-  it('renders with set icon', () => {
+  it('should render with set icon', () => {
     const wrapper = mount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
@@ -84,7 +84,7 @@ describe('BeatMediaInput', () => {
       defaultMountOptions.props.icon
     );
   });
-  it('renders required when set to true', () => {
+  it('should render required when set to true', () => {
     const wrapper = mount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
@@ -94,7 +94,7 @@ describe('BeatMediaInput', () => {
 
     expect(wrapper.find(requiredSelector).exists()).toBe(true);
   });
-  it('does not render required when set to false', () => {
+  it('should not render required when set to false', () => {
     const wrapper = mount(BeatMediaInput, {
       props: {
         ...defaultMountOptions.props,

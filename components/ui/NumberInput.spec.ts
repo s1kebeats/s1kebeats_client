@@ -20,14 +20,14 @@ const defaultMountOptions: {
 };
 
 describe('NumberInput', () => {
-  it('renders with set name', () => {
+  it('should render with set name', () => {
     const wrapper = mount(NumberInput, defaultMountOptions);
 
     expect(wrapper.get(numberInputSelector).attributes('name')).toBe(
       defaultMountOptions.props.name
     );
   });
-  it('renders with set placeholder', () => {
+  it('should render with set placeholder', () => {
     const wrapper = mount(NumberInput, defaultMountOptions);
 
     expect(wrapper.get(numberInputSelector).attributes('placeholder')).toBe(
@@ -58,7 +58,7 @@ describe('NumberInput', () => {
 
     expect(wrapper.get(numberInputSelector).element.value).toBe('53');
   });
-  it('emits numeric value', async () => {
+  it('should emit numeric value', async () => {
     const wrapper = mount(NumberInput, defaultMountOptions);
 
     await wrapper.get(numberInputSelector).setValue('5df3');

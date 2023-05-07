@@ -3,7 +3,7 @@
     @submit.prevent="submitRegistrationForm"
     class="relative flex flex-col w-full"
   >
-    <UiFormRequestErrorOutput
+    <AppFormRequestErrorOutput
       :open="registrationFormState.error"
       @close="
         () => {

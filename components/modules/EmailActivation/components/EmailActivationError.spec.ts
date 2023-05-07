@@ -48,7 +48,7 @@ describe('EmailActivationError', () => {
 
     expect(wrapper.find(emailActivationErrorSelector).exists()).toBe(true);
   });
-  it('renders check link error when emailActivationStore.error.status is 404', async () => {
+  it('should render check link error when emailActivationStore.error.status is 404', async () => {
     const wrapper = mount(EmailActivationError, {
       global: {
         plugins: [
@@ -71,7 +71,7 @@ describe('EmailActivationError', () => {
       'Проверьте ссылку'
     );
   });
-  it('renders unexpexted error when emailActivationStore.error.status is not 404', async () => {
+  it('should render unexpexted error when emailActivationStore.error.status is not 404', async () => {
     const wrapper = mount(EmailActivationError, {
       global: {
         plugins: [

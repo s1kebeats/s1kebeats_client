@@ -3,7 +3,7 @@
     class="relative w-full grow flex flex-col justify-between gap-5 px-3"
   >
     <form class="relative flex flex-col items-center gap-3">
-      <UiFormRequestErrorOutput
+      <AppFormRequestErrorOutput
         :open="infoFormState.error"
         @close="
           () => {

@@ -20,14 +20,14 @@ const defaultMountOptions: {
 };
 
 describe('TextArea', () => {
-  it('renders with set name', () => {
+  it('should render with set name', () => {
     const wrapper = mount(TextArea, defaultMountOptions);
 
     expect(wrapper.get(textInputSelector).attributes('name')).toBe(
       defaultMountOptions.props.name
     );
   });
-  it('renders with set placeholder', () => {
+  it('should render with set placeholder', () => {
     const wrapper = mount(TextArea, defaultMountOptions);
 
     expect(wrapper.get(textInputSelector).attributes('placeholder')).toBe(
@@ -51,7 +51,7 @@ describe('TextArea', () => {
       'border-violet-500'
     );
   });
-  it('emits value on input', async () => {
+  it('should emit value on input', async () => {
     const testValue = 'test';
     const wrapper = mount(TextArea, defaultMountOptions);
     const input = wrapper.get(textInputSelector);

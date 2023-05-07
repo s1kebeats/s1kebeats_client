@@ -6,7 +6,7 @@ import { type Validation } from '@vuelidate/core';
 const errorListSelector = '[data-testid=errorList]';
 
 describe('FormValidationErrorOutput', async () => {
-  it('renders invisible without error list', () => {
+  it('should render invisible without error list', () => {
     const wrapper = mount(FormValidationErrorOutput, {
       props: {
         v: {
@@ -17,7 +17,7 @@ describe('FormValidationErrorOutput', async () => {
 
     expect(wrapper.find(errorListSelector).exists()).toBe(false);
   });
-  it('renders visible with error list', () => {
+  it('should render visible with error list', () => {
     const wrapper = mount(FormValidationErrorOutput, {
       props: {
         v: {
@@ -32,7 +32,7 @@ describe('FormValidationErrorOutput', async () => {
 
     expect(wrapper.find(errorListSelector).exists()).toBe(true);
   });
-  it('renders first error message', () => {
+  it('should render first error message', () => {
     const wrapper = mount(FormValidationErrorOutput, {
       props: {
         v: {

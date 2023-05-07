@@ -53,7 +53,7 @@ describe('ProfileOverlay', () => {
 
     expect(wrapper.get(profileOverlaySelector).isVisible()).toBe(true);
   });
-  it('renders login button when not authorized', async () => {
+  it('should render login button when not authorized', async () => {
     const wrapper = mount(ProfileOverlay, {
       global: {
         plugins: [
@@ -77,7 +77,7 @@ describe('ProfileOverlay', () => {
     expect(wrapper.find(profileLinkSelector).exists()).toBe(false);
     expect(wrapper.find(likedLinkSelector).exists()).toBe(false);
   });
-  it('renders logout button and links when authorized', async () => {
+  it('should render logout button and links when authorized', async () => {
     const wrapper = mount(ProfileOverlay, {
       global: {
         plugins: [

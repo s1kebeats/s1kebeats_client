@@ -5,12 +5,12 @@ import { mount } from '@vue/test-utils';
 const logoSelector = '[data-testid=logo]';
 
 describe('Logo', () => {
-  it('renders black on default', () => {
+  it('should render black on default', () => {
     const wrapper = mount(Logo);
 
     expect(wrapper.get(logoSelector).attributes('fill')).toBe('black');
   });
-  it('renders with set color', () => {
+  it('should render with set color', () => {
     const testColor = 'red';
 
     const wrapper = mount(Logo, {

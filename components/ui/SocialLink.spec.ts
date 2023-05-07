@@ -17,44 +17,44 @@ const defaultMountOptions = {
 };
 
 describe('SocialLink', () => {
-  it('renders with default width', () => {
+  it('should render with default width', () => {
     const wrapper = mount(SocialLink, defaultMountOptions);
 
     expect(wrapper.get(iconSelector).attributes('width')).toBe('25px');
   });
-  it('renders with default height', () => {
+  it('should render with default height', () => {
     const wrapper = mount(SocialLink, defaultMountOptions);
 
     expect(wrapper.get(iconSelector).attributes('height')).toBe('25px');
   });
-  it('renders with set username', () => {
+  it('should render with set username', () => {
     const wrapper = mount(SocialLink, defaultMountOptions);
     expect(wrapper.get(linkSelector).attributes('href')).toContain(
       defaultMountOptions.props.username
     );
   });
-  it('renders with set url', () => {
+  it('should render with set url', () => {
     const wrapper = mount(SocialLink, defaultMountOptions);
 
     expect(wrapper.get(linkSelector).attributes('href')).toContain(
       defaultMountOptions.props.url
     );
   });
-  it('renders with both url and username', () => {
+  it('should render with both url and username', () => {
     const wrapper = mount(SocialLink, defaultMountOptions);
 
     expect(wrapper.get(linkSelector).attributes('href')).toBe(
       defaultMountOptions.getUrl()
     );
   });
-  it('renders with set icon', () => {
+  it('should render with set icon', () => {
     const wrapper = mount(SocialLink, defaultMountOptions);
 
     expect(wrapper.get(iconSelector).attributes('name')).toBe(
       defaultMountOptions.props.icon
     );
   });
-  it('renders with set width', () => {
+  it('should render with set width', () => {
     const testWidth = '199px';
 
     const wrapper = mount(SocialLink, {
@@ -64,7 +64,7 @@ describe('SocialLink', () => {
 
     expect(wrapper.get(iconSelector).attributes('width')).toBe(testWidth);
   });
-  it('renders with set height', () => {
+  it('should render with set height', () => {
     const testHeight = '199px';
 
     const wrapper = mount(SocialLink, {

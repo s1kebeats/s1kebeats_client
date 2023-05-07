@@ -13,7 +13,7 @@ const backButtonSelector = '[data-testid=backButton]';
 const fillMessageSelector = '[data-testid=fillMessage]';
 
 describe('MediaForm', () => {
-  it('does not render stems input when uploadVersion is set to default', () => {
+  it('should not render stems input when uploadVersion is set to default', () => {
     const wrapper = mount(MediaForm, {
       global: {
         plugins: [
@@ -30,7 +30,7 @@ describe('MediaForm', () => {
 
     expect(wrapper.find(stemsInputSelector).exists()).toBe(false);
   });
-  it('renders stems input when uploadVersion is set to extended', () => {
+  it('should render stems input when uploadVersion is set to extended', () => {
     const wrapper = mount(MediaForm, {
       global: {
         plugins: [

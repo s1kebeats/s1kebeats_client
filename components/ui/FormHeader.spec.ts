@@ -5,15 +5,15 @@ import { mount } from '@vue/test-utils';
 const formTitleSelector = '[data-testid=title]';
 
 describe('FormHeader', async () => {
-  it('renders with title', () => {
-    const testTitle = 'title';
-
-    const wrapper = mount(FormHeader, {
-      props: {
-        title: testTitle,
-      },
+  describe('props', () => {
+    it('title - should render with set title', () => {
+      const testTitle = 'title';
+      const wrapper = mount(FormHeader, {
+        props: {
+          title: testTitle,
+        },
+      });
+      expect(wrapper.get(formTitleSelector).text()).toBe(testTitle);
     });
-
-    expect(wrapper.get(formTitleSelector).text()).toBe(testTitle);
-  });
+  })
 });

@@ -6,7 +6,7 @@ const inputSelector = '[data-testid=input]';
 const titleSelector = '[data-testid=title]';
 
 describe('TitledInput', () => {
-  it('renders with set title', () => {
+  it('should render with set title', () => {
     const testTitle = 'title';
 
     const wrapper = mount(TitledInput, {
@@ -18,7 +18,7 @@ describe('TitledInput', () => {
 
     expect(wrapper.get(titleSelector).text()).toBe(testTitle);
   });
-  it('renders with default border with "focused" = "false"', () => {
+  it('should render with default border with "focused" = "false"', () => {
     const testTitle = 'title';
 
     const wrapper = mount(TitledInput, {
@@ -32,7 +32,7 @@ describe('TitledInput', () => {
       'border-violet-500'
     );
   });
-  it('renders with colored border with "focused" = "true"', () => {
+  it('should render with colored border with "focused" = "true"', () => {
     const testTitle = 'title';
 
     const wrapper = mount(TitledInput, {
