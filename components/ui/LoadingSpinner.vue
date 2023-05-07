@@ -1,7 +1,7 @@
 <template>
   <div
-    class="spinner border-[2px]"
-    data-testid="spinner"
+    class="spinner border-[2px] aspect-square"
+    data-testid="loadingSpinner"
     :class="`${colorVariants[color]} ${sizeVariants[size]}`"
   ></div>
 </template>
@@ -11,14 +11,14 @@ interface props {
   size?: keyof typeof sizeVariants;
 }
 const colorVariants = {
-  white: 'border-[rgba(255,255,255,1)]',
-  black: 'border-[rgba(0,0,0,1)]',
+  white: 'border-white',
+  black: 'border-black',
 };
 const sizeVariants = {
-  md: 'w-[20px] h-[20px]',
-  sm: 'w-[15px] h-[15px]',
-  lg: 'w-[25px] h-[25px]',
-  xl: 'w-[40px] h-[40px]',
+  md: 'w-[20px]',
+  sm: 'w-[15px]',
+  lg: 'w-[25px]',
+  xl: 'w-[40px]',
 };
 const props = withDefaults(defineProps<props>(), {
   color: 'white',

@@ -15,7 +15,7 @@ describe('FormValidationErrorOutput', async () => {
           } as unknown as Validation,
         },
       });
-  
+
       expect(wrapper.find(errorListSelector).exists()).toBe(false);
     });
     it('v - should render with populated error list', () => {
@@ -30,7 +30,7 @@ describe('FormValidationErrorOutput', async () => {
           } as Validation,
         },
       });
-  
+
       expect(wrapper.find(errorListSelector).exists()).toBe(true);
     });
     it('v- should render message from error list', () => {
@@ -48,8 +48,8 @@ describe('FormValidationErrorOutput', async () => {
           } as Validation,
         },
       });
-  
+
       expect(wrapper.find(errorListSelector).text()).toBe('first');
     });
-  })
+  });
 });

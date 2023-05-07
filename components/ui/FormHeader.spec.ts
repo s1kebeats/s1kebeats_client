@@ -15,5 +15,5 @@ describe('FormHeader', async () => {
       });
       expect(wrapper.get(formTitleSelector).text()).toBe(testTitle);
     });
-  })
+  });
 });

@@ -3,8 +3,8 @@
     type="submit"
     class="relative flex items-center justify-center h-[36px]"
   >
-    <UiLoadingSpinner v-if="pending" />
-    <span v-else>
+    <UiLoadingSpinner v-if="pending" data-testid="loadingSpinner" />
+    <span v-else data-testid="loadingButtonSpan">
       <slot />
     </span>
   </UiButton>

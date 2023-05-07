@@ -3,7 +3,7 @@
     <div
       v-show="loading"
       class="absolute z-[2] flex w-full h-full bg-white"
-      data-testid="loading"
+      data-testid="loadingScreen"
     >
       <UiLogo class="w-[15%] max-w-[300px] min-w-[175px] m-auto" />
     </div>
