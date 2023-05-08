@@ -1,17 +1,17 @@
 <template>
   <div
     class="border-[1px] rounded-lg py-2 px-5 transition-all"
-    data-testid="input"
+    data-testid="titledInput"
     :class="focused ? 'border-violet-500' : ''"
   >
     <label
       v-if="title"
       :for="name"
-      data-testid="title"
+      data-testid="titledInputLabel"
       class="text-sm font-semibold"
     >
       {{ title }}
-      <span v-if="required">*</span>
+      <span v-if="required" data-testid="titledInputRequiredIcon">*</span>
     </label>
     <div class="flex gap-1 items-center justify-between">
       <slot />

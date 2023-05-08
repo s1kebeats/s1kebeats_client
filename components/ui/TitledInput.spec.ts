@@ -2,46 +2,79 @@ import TitledInput from './TitledInput.vue';
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
-const inputSelector = '[data-testid=input]';
-const titleSelector = '[data-testid=title]';
+const titledInputSelector = '[data-testid=titledInput]';
+const titledInputLabelSelector = '[data-testid=titledInputLabel]';
+const titledInputRequiredIconSelector = '[data-testid=titledInputRequiredIcon]';
 
 describe('TitledInput', () => {
-  it('should render with set title', () => {
-    const testTitle = 'title';
+  describe('props', () => {
+    it('name - should render with set label "for" attribute', () => {
+      const testName = 'test';
+      const wrapper = mount(TitledInput, {
+        props: {
+          name: testName,
+          title: 'title'
+        },
+      });
 
-    const wrapper = mount(TitledInput, {
-      props: {
-        title: testTitle,
-        focused: false,
-      },
+      expect(wrapper.get(titledInputLabelSelector).attributes()['for']).toBe(
+        testName
+      );
     });
+    it('title - should render with set title', () => {
+      const testTitle = 'title';
+      const wrapper = mount(TitledInput, {
+        props: {
+          title: testTitle,
+          name: 'test',
+        },
+      });
 
-    expect(wrapper.get(titleSelector).text()).toBe(testTitle);
-  });
-  it('should render with default border with "focused" = "false"', () => {
-    const testTitle = 'title';
-
-    const wrapper = mount(TitledInput, {
-      props: {
-        title: testTitle,
-        focused: false,
-      },
+      expect(wrapper.get(titledInputLabelSelector).text()).toBe(testTitle);
     });
+    it('focused - should render with gray border when set to false / not provided', () => {
+      const wrapper = mount(TitledInput, {
+        props: {
+          name: 'test',
+        },
+      });
 
-    expect(wrapper.get(inputSelector).classes()).not.toContain(
-      'border-violet-500'
-    );
-  });
-  it('should render with colored border with "focused" = "true"', () => {
-    const testTitle = 'title';
-
-    const wrapper = mount(TitledInput, {
-      props: {
-        title: testTitle,
-        focused: true,
-      },
+      expect(wrapper.get(titledInputSelector).classes()).not.toContain(
+        'border-violet-500'
+      );
     });
+    it('focused - should render with colored border when set to true', () => {
+      const wrapper = mount(TitledInput, {
+        props: {
+          name: 'test',
+          focused: true,
+        },
+      });
 
-    expect(wrapper.get(inputSelector).classes()).toContain('border-violet-500');
+      expect(wrapper.get(titledInputSelector).classes()).toContain(
+        'border-violet-500'
+      );
+    });
+    it('required - should not render required icon when set to false / not provided', () => {
+      const wrapper = mount(TitledInput, {
+        props: {
+          name: 'test',
+        },
+      });
+
+      expect(wrapper.find(titledInputRequiredIconSelector).exists()).toBe(
+        false
+      );
+    });
+    it('required - should render required icon when set to true', () => {
+      const wrapper = mount(TitledInput, {
+        props: {
+          name: 'test',
+          required: true,
+        },
+      });
+
+      expect(wrapper.find(titledInputRequiredIconSelector).exists()).toBe(true);
+    });
   });
 });
