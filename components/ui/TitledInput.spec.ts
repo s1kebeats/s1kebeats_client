@@ -13,7 +13,7 @@ describe('TitledInput', () => {
       const wrapper = mount(TitledInput, {
         props: {
           name: testName,
-          title: 'title'
+          title: 'title',
         },
       });
 

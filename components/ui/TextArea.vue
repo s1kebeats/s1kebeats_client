@@ -9,7 +9,7 @@
     <textarea
       ref="input"
       class="grow h-full focus:outline-none min-h-[20px]"
-      :class="blocked ? 'resize-none' : ''"
+      :class="resize ? '' : 'resize-none'"
       autocomplete="off"
       :name="name"
       :placeholder="placeholder"
@@ -23,13 +23,16 @@
 </template>
 <script setup lang="ts">
 import UiTitledInput from './TitledInput.vue';
-const props = defineProps<{
+interface Props {
   title?: string;
   name: string;
   placeholder?: string;
-  blocked?: boolean;
+  resize?: boolean;
   required?: boolean;
-}>();
+}
+const props = withDefaults(defineProps<Props>(), {
+  resize: true,
+});
 const emit = defineEmits<{
   (event: 'updateValue', value: string): void;
 }>();

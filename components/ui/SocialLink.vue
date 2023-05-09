@@ -1,6 +1,6 @@
 <template>
-  <a target="_blank" data-testid="link" :href="url + username">
-    <Icon :name="icon" data-testid="icon" :size="size" />
+  <a target="_blank" data-testid="socialLink" :href="url + username">
+    <Icon :name="icon" data-testid="socialLinkIcon" :size="size" />
   </a>
 </template>
 <script setup lang="ts">
@@ -11,7 +11,6 @@ interface Props {
   url: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-  width: '25px',
-  height: '25px',
+  size: '25px',
 });
 </script>

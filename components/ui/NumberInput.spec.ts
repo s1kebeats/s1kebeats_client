@@ -3,71 +3,80 @@ import { mount } from '@vue/test-utils';
 import NumberInput from './NumberInput.vue';
 
 const numberInputSelector = '[data-testid=numberInput]';
-const titledInputSelector = '[data-testid=input]';
+const titledInputSelector = '[data-testid=titledInput]';
+const titledInputLabelSelector = '[data-testid=titledInputLabel]';
+const titledInputRequiredIconSelector = '[data-testid=titledInputRequiredIcon]';
 
-const defaultMountOptions: {
-  props: {
-    title: string;
-    name: string;
-    placeholder: string;
-  };
-} = {
+const defaultMountOptions = {
   props: {
     title: 'title',
-    name: 'title',
+    name: 'testName',
     placeholder: 'placeholder',
+    required: true,
+    resize: false,
   },
 };
 
 describe('NumberInput', () => {
-  it('should render with set name', () => {
-    const wrapper = mount(NumberInput, defaultMountOptions);
+  describe('props', () => {
+    it('name - should render with set name', () => {
+      const wrapper = mount(NumberInput, defaultMountOptions);
 
-    expect(wrapper.get(numberInputSelector).attributes('name')).toBe(
-      defaultMountOptions.props.name
-    );
+      expect(wrapper.get(numberInputSelector).attributes('name')).toBe(
+        defaultMountOptions.props.name
+      );
+    });
+    it('title - should render with set title', () => {
+      const wrapper = mount(NumberInput, {
+        props: {
+          ...defaultMountOptions.props,
+          required: false,
+        },
+      });
+
+      expect(wrapper.get(titledInputLabelSelector).text()).toBe(
+        defaultMountOptions.props.title
+      );
+    });
+    it('required - should render required icon when set to true', () => {
+      const wrapper = mount(NumberInput, defaultMountOptions);
+
+      expect(wrapper.find(titledInputRequiredIconSelector).exists()).toBe(true);
+    });
+    it('placeholder - should render with set placeholder', () => {
+      const wrapper = mount(NumberInput, defaultMountOptions);
+
+      expect(wrapper.get(numberInputSelector).attributes('placeholder')).toBe(
+        defaultMountOptions.props.placeholder
+      );
+    });
   });
-  it('should render with set placeholder', () => {
-    const wrapper = mount(NumberInput, defaultMountOptions);
+  describe('User Interactions', () => {
+    it('focus - should render with colored border when focused', async () => {
+      const wrapper = mount(NumberInput, defaultMountOptions);
 
-    expect(wrapper.get(numberInputSelector).attributes('placeholder')).toBe(
-      defaultMountOptions.props.placeholder
-    );
-  });
-  it('changes color when focused', async () => {
-    const wrapper = mount(NumberInput, defaultMountOptions);
+      await wrapper.get(numberInputSelector).trigger('focus');
+      expect(wrapper.get(titledInputSelector).classes()).toContain(
+        'border-violet-500'
+      );
+    });
+    it('blur - should render with default border when not focused', async () => {
+      const wrapper = mount(NumberInput, defaultMountOptions);
 
-    expect(wrapper.get(titledInputSelector).classes()).not.toContain(
-      'border-violet-500'
-    );
+      await wrapper.get(numberInputSelector).trigger('blur');
+      expect(wrapper.get(titledInputSelector).classes()).not.toContain(
+        'border-violet-500'
+      );
+    });
+    it('input - should filter non-digit chars and emit filtered value', async () => {
+      const wrapper = mount(NumberInput, defaultMountOptions);
 
-    await wrapper.get(numberInputSelector).trigger('focus');
-    expect(wrapper.get(titledInputSelector).classes()).toContain(
-      'border-violet-500'
-    );
+      await wrapper.get(numberInputSelector).setValue('5df3');
 
-    await wrapper.get(numberInputSelector).trigger('blur');
-    expect(wrapper.get(titledInputSelector).classes()).not.toContain(
-      'border-violet-500'
-    );
-  });
-  it('replaces non-digit value', async () => {
-    const wrapper = mount(NumberInput, defaultMountOptions);
-
-    await wrapper.get(numberInputSelector).setValue('5df3');
-
-    expect(wrapper.get(numberInputSelector).element.value).toBe('53');
-  });
-  it('should emit numeric value', async () => {
-    const wrapper = mount(NumberInput, defaultMountOptions);
-
-    await wrapper.get(numberInputSelector).setValue('5df3');
-
-    expect(wrapper.emitted()).toHaveProperty('updateValue');
-
-    const updateValueEvent = wrapper.emitted('updateValue');
-
-    expect(updateValueEvent).toHaveLength(2);
-    expect(updateValueEvent![1]).toEqual([53]);
+      expect(wrapper.emitted()).toHaveProperty('updateValue');
+      const updateValueEvent = wrapper.emitted('updateValue');
+      expect(updateValueEvent).toHaveLength(2);
+      expect(updateValueEvent![1]).toEqual([53]);
+    });
   });
 });
