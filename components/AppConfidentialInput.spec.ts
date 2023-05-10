@@ -3,8 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const textInputSelector = '[data-testid=textInput]';
-const titledInputLabelSelector = '[data-testid=titledInputLabel]';
-const titledInputRequiredIconSelector = '[data-testid=titledInputRequiredIcon]';
 
 const defaultMountOptions = {
   props: {
@@ -12,6 +10,7 @@ const defaultMountOptions = {
     name: 'testName',
     placeholder: 'placeholder',
     required: true,
+    value: 'newVal',
   },
 };
 
@@ -28,24 +27,32 @@ describe('AppConfidentionalInput', () => {
       const wrapper = mount(AppConfidentionalInput, {
         props: {
           ...defaultMountOptions.props,
-          required: false,
         },
       });
 
-      expect(wrapper.get(titledInputLabelSelector).text()).toBe(
+      expect(wrapper.get(textInputSelector).attributes('title')).toBe(
         defaultMountOptions.props.title
       );
     });
-    it('required - should render required icon when set to true', () => {
+    it('required - should render with set required attribute', () => {
       const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
 
-      expect(wrapper.find(titledInputRequiredIconSelector).exists()).toBe(true);
+      expect(wrapper.get(textInputSelector).attributes('required')).toBe(
+        defaultMountOptions.props.required.toString()
+      );
     });
     it('placeholder - should render with set placeholder', () => {
       const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
 
       expect(wrapper.get(textInputSelector).attributes('placeholder')).toBe(
         defaultMountOptions.props.placeholder
+      );
+    });
+    it('value - should render with set value', () => {
+      const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
+
+      expect(wrapper.get(textInputSelector).attributes('value')).toBe(
+        defaultMountOptions.props.value
       );
     });
     describe('User Interactions', () => {

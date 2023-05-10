@@ -7,6 +7,7 @@
     @update-value="updateValue"
     :required="required"
     :value="value"
+    data-testid="textInput"
   />
 </template>
 <script setup lang="ts">

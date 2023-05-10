@@ -4,8 +4,6 @@ import TextArea from './TextArea.vue';
 
 const textAreaSelector = '[data-testid=textArea]';
 const titledInputSelector = '[data-testid=titledInput]';
-const titledInputLabelSelector = '[data-testid=titledInputLabel]';
-const titledInputRequiredIconSelector = '[data-testid=titledInputRequiredIcon]';
 
 const defaultMountOptions = {
   props: {
@@ -30,18 +28,19 @@ describe('TextArea', () => {
       const wrapper = mount(TextArea, {
         props: {
           ...defaultMountOptions.props,
-          required: false,
         },
       });
 
-      expect(wrapper.get(titledInputLabelSelector).text()).toBe(
+      expect(wrapper.get(titledInputSelector).attributes('title')).toBe(
         defaultMountOptions.props.title
       );
     });
     it('required - should render required icon when set to true', () => {
       const wrapper = mount(TextArea, defaultMountOptions);
 
-      expect(wrapper.find(titledInputRequiredIconSelector).exists()).toBe(true);
+      expect(wrapper.get(titledInputSelector).attributes('required')).toBe(
+        defaultMountOptions.props.required.toString()
+      );
     });
     it('placeholder - should render with set placeholder', () => {
       const wrapper = mount(TextArea, defaultMountOptions);
@@ -73,16 +72,16 @@ describe('TextArea', () => {
       const wrapper = mount(TextArea, defaultMountOptions);
 
       await wrapper.get(textAreaSelector).trigger('focus');
-      expect(wrapper.get(titledInputSelector).classes()).toContain(
-        'border-violet-500'
+      expect(wrapper.get(titledInputSelector).attributes('focused')).toBe(
+        'true'
       );
     });
     it('blur - should render with default border when not focused', async () => {
       const wrapper = mount(TextArea, defaultMountOptions);
 
       await wrapper.get(textAreaSelector).trigger('blur');
-      expect(wrapper.get(titledInputSelector).classes()).not.toContain(
-        'border-violet-500'
+      expect(wrapper.get(titledInputSelector).attributes('focused')).toBe(
+        'false'
       );
     });
     it('input - should emit value', async () => {

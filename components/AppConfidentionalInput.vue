@@ -7,6 +7,7 @@
     :placeholder="placeholder"
     :required="required"
     :value="value"
+    data-testid="textInput"
   >
     <button @click.prevent="togglePasswordVisibility" class="flex w-4">
       <Icon
@@ -22,7 +23,6 @@
   </UiTextInput>
 </template>
 <script setup lang="ts">
-import UiTextInput from './ui/TextInput.vue';
 const props = defineProps<{
   title?: string;
   name: string;

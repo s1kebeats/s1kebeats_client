@@ -5,6 +5,7 @@
     :focused="focused"
     @click="focus"
     :required="required"
+    data-testid="titledInput"
   >
     <textarea
       ref="input"
@@ -22,7 +23,6 @@
   </UiTitledInput>
 </template>
 <script setup lang="ts">
-import UiTitledInput from './TitledInput.vue';
 interface Props {
   title?: string;
   name: string;

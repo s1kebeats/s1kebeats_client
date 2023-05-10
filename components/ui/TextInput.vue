@@ -5,6 +5,7 @@
     :name="name"
     @click="focus"
     :required="required"
+    data-testid="titledInput"
   >
     <input
       ref="input"

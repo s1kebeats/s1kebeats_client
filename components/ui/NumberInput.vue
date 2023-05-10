@@ -5,6 +5,7 @@
     :name="name"
     @click="focus"
     :required="required"
+    data-testid="titledInput"
   >
     <input
       ref="input"
@@ -23,7 +24,6 @@
   </UiTitledInput>
 </template>
 <script setup lang="ts">
-import UiTitledInput from './TitledInput.vue';
 const props = defineProps<{
   title?: string;
   name: string;
