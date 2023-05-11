@@ -12,6 +12,8 @@ export default {
   test: {
     globals: true,
     environment: 'jsdom',
+    // error: https://github.com/danielroe/nuxt-vitest/issues/93
+    // environment: 'nuxt',
   },
   resolve: {
     alias: {
