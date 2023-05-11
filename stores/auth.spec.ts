@@ -2,6 +2,8 @@ import useAuthStore from './auth';
 import { setActivePinia, createPinia } from 'pinia';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import type User from '@/api/models/User';
+import { authResponseMock } from './api/mocks';
+import login from './api/login';
 
 const testUser: User = {
   id: 1,
@@ -12,6 +14,22 @@ const testUser: User = {
 };
 
 vi.mock('./api/logout', () => {
+  return {
+    default: () => {
+      return 'success';
+    },
+  };
+});
+vi.mock('./api/login', () => {
+  return {
+    default: () => {
+      return {
+        data: authResponseMock
+      };
+    },
+  };
+});
+vi.mock('./api/refresh', () => {
   return {
     default: () => {
       return 'success';
@@ -48,15 +66,22 @@ describe('Auth Store', () => {
     expect(store.authorized).toBe(false);
   });
 
-  test('logout', async () => {
+  test('login - success', async () => {
     const store = useAuthStore();
 
-    store.setUser(testUser);
-    store.setAuthorized(true);
+    await store.login('username', 'password', true);
 
-    await store.logout();
+    expect(store.user).toStrictEqual(authResponseMock.user);
+    expect(store.authorized).toBe(true);
+  });
+  test('login - error', async () => {
+    const store = useAuthStore();
+    login.mockResolvedValueOnce(() => {
+      throw new Error();
+    });
+    await store.login('username', 'password', true);
 
-    expect(store.authorized).toBe(false);
     expect(store.user).toBe(null);
+    expect(store.authorized).toBe(false);
   });
 });
