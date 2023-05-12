@@ -1,5 +1,5 @@
 import login from './login';
-import { describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { runtimeConfigMock } from './mocks';
 
@@ -8,6 +8,10 @@ vi.stubGlobal('useRuntimeConfig', () => runtimeConfigMock);
 vi.mock('axios');
 
 describe('login', () => {
+  beforeEach(() => {
+    axios.post.mockReset()
+  })
+
   test('should make post request to api with valid params', async () => {
     await login('username', 'password', false);
     expect(axios.post).toHaveBeenCalled();

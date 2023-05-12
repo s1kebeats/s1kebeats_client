@@ -31,6 +31,7 @@ const useAuthStore = defineStore('auth', {
         this.setUser(data.user);
         this.setAuthorized(true);
       } catch (error) {
+        this.setUser(null);
         this.setAuthorized(false);
         throw error;
       }
