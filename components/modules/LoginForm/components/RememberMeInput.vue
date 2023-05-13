@@ -4,16 +4,21 @@
     <UiCheckboxInput
       name="rememberMe"
       @update-value="updateValue"
-      :value="true"
+      :value="value"
+      data-testid="checkboxInput"
     />
   </div>
 </template>
 <script setup lang="ts">
-const emit = defineEmits<{
-  (e: 'updateValue', value: boolean): void;
+const props = defineProps<{
+  value: boolean;
 }>();
 
-function updateValue(value: boolean) {
-  emit('updateValue', value);
+const emit = defineEmits<{
+  (e: 'updateValue', newVal: boolean): void;
+}>();
+
+function updateValue(newVal: boolean) {
+  emit('updateValue', newVal);
 }
 </script>

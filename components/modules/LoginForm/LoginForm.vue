@@ -28,6 +28,7 @@
       <UiFormValidationErrorOutput :v="v$" />
       <RememberMeInput
         @update-value="($event: boolean) => { loginFormState.data.rememberMe = $event }"
+        :value="loginFormState.data.rememberMe"
       />
     </div>
     <UiLoadingButton :pending="loginFormState.pending"> Войти </UiLoadingButton>
