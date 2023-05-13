@@ -3,7 +3,7 @@
     <div
       v-show="open"
       class="absolute z-[1] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold"
-      data-testid="errorPopup"
+      data-testid="formRequestErrorOutput"
     >
       <Icon
         name="material-symbols:warning-rounded"

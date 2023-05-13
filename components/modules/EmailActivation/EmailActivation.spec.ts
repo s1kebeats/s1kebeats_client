@@ -1,6 +1,6 @@
 import EmailActivation from './EmailActivation.vue';
 import { describe, expect, it, vi } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 
 vi.mock('./api/refresh', () => {

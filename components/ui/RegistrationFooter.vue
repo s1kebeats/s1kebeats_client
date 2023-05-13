@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-sm">
+  <footer class="text-sm" data-testid="registrationFooter">
     Уже есть аккаунт?
     <nuxt-link
       to="/login"

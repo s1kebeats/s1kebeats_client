@@ -1,6 +1,6 @@
 import BeatMediaInput from './BeatMediaInput.vue';
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import useUploadStore from '../store';
 import type BeatUpload from '@/api/models/BeatUpload';
@@ -28,7 +28,7 @@ const defaultMountOptions = {
 
 describe('BeatMediaInput', () => {
   it('should render with set name, label "for" field and id', () => {
-    const wrapper = mount(BeatMediaInput, {
+    const wrapper = shallowMount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
         plugins: [createTestingPinia()],
@@ -46,7 +46,7 @@ describe('BeatMediaInput', () => {
     );
   });
   it('should render with set accept field', () => {
-    const wrapper = mount(BeatMediaInput, {
+    const wrapper = shallowMount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
         plugins: [createTestingPinia()],
@@ -58,7 +58,7 @@ describe('BeatMediaInput', () => {
     );
   });
   it('should render with set title and description', () => {
-    const wrapper = mount(BeatMediaInput, {
+    const wrapper = shallowMount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
         plugins: [createTestingPinia()],
@@ -73,7 +73,7 @@ describe('BeatMediaInput', () => {
     );
   });
   it('should render with set icon', () => {
-    const wrapper = mount(BeatMediaInput, {
+    const wrapper = shallowMount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
         plugins: [createTestingPinia()],
@@ -85,7 +85,7 @@ describe('BeatMediaInput', () => {
     );
   });
   it('should render required when set to true', () => {
-    const wrapper = mount(BeatMediaInput, {
+    const wrapper = shallowMount(BeatMediaInput, {
       ...defaultMountOptions,
       global: {
         plugins: [createTestingPinia()],
@@ -95,7 +95,7 @@ describe('BeatMediaInput', () => {
     expect(wrapper.find(requiredSelector).exists()).toBe(true);
   });
   it('should not render required when set to false', () => {
-    const wrapper = mount(BeatMediaInput, {
+    const wrapper = shallowMount(BeatMediaInput, {
       props: {
         ...defaultMountOptions.props,
         required: false,

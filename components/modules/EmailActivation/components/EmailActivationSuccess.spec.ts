@@ -1,13 +1,13 @@
 import EmailActivationSuccess from './EmailActivationSuccess.vue';
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 
 const emailActivationSuccessSelector = '[data-testid=emailActivationSuccess]';
 
 describe('EmailActivationSuccess', () => {
   it('is visible when emailActivationStore.error.state is false', async () => {
-    const wrapper = mount(EmailActivationSuccess, {
+    const wrapper = shallowMount(EmailActivationSuccess, {
       global: {
         plugins: [
           createTestingPinia({
@@ -27,7 +27,7 @@ describe('EmailActivationSuccess', () => {
     expect(wrapper.find(emailActivationSuccessSelector).exists()).toBe(true);
   });
   it('is not visible when emailActivationStore.error.state is true', async () => {
-    const wrapper = mount(EmailActivationSuccess, {
+    const wrapper = shallowMount(EmailActivationSuccess, {
       global: {
         plugins: [
           createTestingPinia({

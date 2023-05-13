@@ -1,6 +1,6 @@
 import ProfileOverlay from './ProfileOverlay.vue';
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import type User from '@/api/models/User';
 
@@ -20,7 +20,7 @@ const testUser: User = {
 
 describe('ProfileOverlay', () => {
   it('is not visible with uiStore.profileOverlay set to false', async () => {
-    const wrapper = mount(ProfileOverlay, {
+    const wrapper = shallowMount(ProfileOverlay, {
       global: {
         plugins: [
           createTestingPinia({
@@ -37,7 +37,7 @@ describe('ProfileOverlay', () => {
     expect(wrapper.get(profileOverlaySelector).isVisible()).toBe(false);
   });
   it('is visible with uiStore.profileOverlay set to true', async () => {
-    const wrapper = mount(ProfileOverlay, {
+    const wrapper = shallowMount(ProfileOverlay, {
       global: {
         plugins: [
           createTestingPinia({
@@ -54,7 +54,7 @@ describe('ProfileOverlay', () => {
     expect(wrapper.get(profileOverlaySelector).isVisible()).toBe(true);
   });
   it('should render login button when not authorized', async () => {
-    const wrapper = mount(ProfileOverlay, {
+    const wrapper = shallowMount(ProfileOverlay, {
       global: {
         plugins: [
           createTestingPinia({
@@ -78,7 +78,7 @@ describe('ProfileOverlay', () => {
     expect(wrapper.find(likedLinkSelector).exists()).toBe(false);
   });
   it('should render logout button and links when authorized', async () => {
-    const wrapper = mount(ProfileOverlay, {
+    const wrapper = shallowMount(ProfileOverlay, {
       global: {
         plugins: [
           createTestingPinia({

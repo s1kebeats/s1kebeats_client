@@ -1,6 +1,6 @@
 import UploadVersionSelect from './UploadVersionSelect.vue';
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import useUploadStore from '@/components/modules/UploadForm/store';
 import { createTestingPinia } from '@pinia/testing';
 
@@ -11,7 +11,7 @@ const nextButtonSelector = '[data-testid=nextButton]';
 
 describe('UploadVersionSelect', () => {
   it('changes uploadVersion on click', async () => {
-    const wrapper = mount(UploadVersionSelect, {
+    const wrapper = shallowMount(UploadVersionSelect, {
       global: {
         plugins: [
           createTestingPinia({
@@ -29,7 +29,7 @@ describe('UploadVersionSelect', () => {
     expect(uploadStore.uploadVersion).toBe('extended');
   });
   it('does not switch page when uploadVersion is not filled', async () => {
-    const wrapper = mount(UploadVersionSelect, {
+    const wrapper = shallowMount(UploadVersionSelect, {
       global: {
         plugins: [
           createTestingPinia({
@@ -44,7 +44,7 @@ describe('UploadVersionSelect', () => {
     expect(uploadStore.page).toBe(1);
   });
   it('shows fill message and changes style when uploadVersion is not filled', async () => {
-    const wrapper = mount(UploadVersionSelect, {
+    const wrapper = shallowMount(UploadVersionSelect, {
       global: {
         plugins: [
           createTestingPinia({
@@ -61,7 +61,7 @@ describe('UploadVersionSelect', () => {
     );
   });
   it('removes styles and fill message when uploadVersion is filled', async () => {
-    const wrapper = mount(UploadVersionSelect, {
+    const wrapper = shallowMount(UploadVersionSelect, {
       global: {
         plugins: [
           createTestingPinia({
@@ -78,7 +78,7 @@ describe('UploadVersionSelect', () => {
     );
   });
   it('changes "selected" property on click', async () => {
-    const wrapper = mount(UploadVersionSelect, {
+    const wrapper = shallowMount(UploadVersionSelect, {
       global: {
         plugins: [
           createTestingPinia({
@@ -102,7 +102,7 @@ describe('UploadVersionSelect', () => {
     );
   });
   it('switches page when uploadVersion is filled', async () => {
-    const wrapper = mount(UploadVersionSelect, {
+    const wrapper = shallowMount(UploadVersionSelect, {
       global: {
         plugins: [
           createTestingPinia({

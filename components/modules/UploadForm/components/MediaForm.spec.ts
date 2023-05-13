@@ -1,6 +1,6 @@
 import MediaForm from './MediaForm.vue';
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import useUploadStore from '../store';
 
@@ -14,7 +14,7 @@ const fillMessageSelector = '[data-testid=fillMessage]';
 
 describe('MediaForm', () => {
   it('should not render stems input when uploadVersion is set to default', () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({
@@ -31,7 +31,7 @@ describe('MediaForm', () => {
     expect(wrapper.find(stemsInputSelector).exists()).toBe(false);
   });
   it('should render stems input when uploadVersion is set to extended', () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({
@@ -48,7 +48,7 @@ describe('MediaForm', () => {
     expect(wrapper.find(stemsInputSelector).exists()).toBe(true);
   });
   it('does not switch page when mp3 is not filled', async () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({
@@ -75,7 +75,7 @@ describe('MediaForm', () => {
     expect(uploadStore.page).toBe(2);
   });
   it('does not switch page when wave is not filled', async () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({
@@ -102,7 +102,7 @@ describe('MediaForm', () => {
     expect(uploadStore.page).toBe(2);
   });
   it('does not switch page when stems are not filled and extended upload version is set', async () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({
@@ -129,7 +129,7 @@ describe('MediaForm', () => {
     expect(uploadStore.page).toBe(2);
   });
   // it('switches page when mp3, wave and image are filled in default uploadVersion', async () => {
-  //   const wrapper = mount(MediaForm, {
+  //   const wrapper = shallowMount(MediaForm, {
   //     global: {
   //       plugins: [
   //         createTestingPinia({
@@ -155,7 +155,7 @@ describe('MediaForm', () => {
   //   expect(uploadStore.page).toBe(3);
   // });
   // it('switches page when mp3, wave, stems are filled in extended uploadVersion', async () => {
-  //   const wrapper = mount(MediaForm, {
+  //   const wrapper = shallowMount(MediaForm, {
   //     global: {
   //       plugins: [
   //         createTestingPinia({
@@ -186,7 +186,7 @@ describe('MediaForm', () => {
   //   expect(uploadStore.page).toBe(3);
   // });
   it('shows fill message and changes inputs style when media is not filled', async () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({
@@ -212,7 +212,7 @@ describe('MediaForm', () => {
     );
   });
   it('back button decrements the page', async () => {
-    const wrapper = mount(MediaForm, {
+    const wrapper = shallowMount(MediaForm, {
       global: {
         plugins: [
           createTestingPinia({

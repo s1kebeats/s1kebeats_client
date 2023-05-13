@@ -1,6 +1,6 @@
 import EmailActivationError from './EmailActivationError.vue';
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 
 const emailActivationErrorSelector = '[data-testid=emailActivationError]';
@@ -9,7 +9,7 @@ const errorDescriptionSelector = '[data-testid=errorDescription]';
 
 describe('EmailActivationError', () => {
   it('is not visible when emailActivationStore.error.state is false', async () => {
-    const wrapper = mount(EmailActivationError, {
+    const wrapper = shallowMount(EmailActivationError, {
       global: {
         plugins: [
           createTestingPinia({
@@ -29,7 +29,7 @@ describe('EmailActivationError', () => {
     expect(wrapper.find(emailActivationErrorSelector).exists()).toBe(false);
   });
   it('is visible when emailActivationStore.error.state is true', async () => {
-    const wrapper = mount(EmailActivationError, {
+    const wrapper = shallowMount(EmailActivationError, {
       global: {
         plugins: [
           createTestingPinia({
@@ -49,7 +49,7 @@ describe('EmailActivationError', () => {
     expect(wrapper.find(emailActivationErrorSelector).exists()).toBe(true);
   });
   it('should render check link error when emailActivationStore.error.status is 404', async () => {
-    const wrapper = mount(EmailActivationError, {
+    const wrapper = shallowMount(EmailActivationError, {
       global: {
         plugins: [
           createTestingPinia({
@@ -72,7 +72,7 @@ describe('EmailActivationError', () => {
     );
   });
   it('should render unexpexted error when emailActivationStore.error.status is not 404', async () => {
-    const wrapper = mount(EmailActivationError, {
+    const wrapper = shallowMount(EmailActivationError, {
       global: {
         plugins: [
           createTestingPinia({

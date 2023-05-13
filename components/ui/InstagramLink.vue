@@ -4,6 +4,7 @@
     :username="username"
     url="https://www.instagram.com/"
     :size="size"
+    data-testid="instagramLink"
   />
 </template>
 <script setup lang="ts">

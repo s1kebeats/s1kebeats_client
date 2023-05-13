@@ -1,8 +1,8 @@
 <template>
   <div class="grow flex items-center justify-end gap-2">
-    <label for="rememberme" class="text-xs">Сохранить вход?</label>
+    <label for="rememberMe" class="text-xs">Сохранить вход?</label>
     <UiCheckboxInput
-      name="rememberme"
+      name="rememberMe"
       @update-value="updateValue"
       :value="true"
     />

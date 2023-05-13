@@ -5,6 +5,7 @@
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 433.67 338.15"
     alt="s1kebeats"
+    data-testid="logo"
   >
     <path
       data-testid="logoSvgPath"

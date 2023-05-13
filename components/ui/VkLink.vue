@@ -4,6 +4,7 @@
     :username="username"
     url="https://vk.com/"
     :size="size"
+    data-testid="vkLink"
   />
 </template>
 <script setup lang="ts">

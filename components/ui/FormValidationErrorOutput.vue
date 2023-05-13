@@ -2,7 +2,7 @@
   <span
     v-if="v.$errors.length"
     class="text-xs text-red-500"
-    data-testid="errorList"
+    data-testid="formValidationErrorOutput"
     >{{ v.$errors[0].$message }}</span
   >
 </template>

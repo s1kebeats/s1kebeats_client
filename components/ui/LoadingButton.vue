@@ -2,6 +2,7 @@
   <UiButton
     type="submit"
     class="relative flex items-center justify-center h-[36px]"
+    data-testid="loadingButton"
   >
     <UiLoadingSpinner v-if="pending" data-testid="loadingSpinner" />
     <span v-else data-testid="loadingButtonSpan">

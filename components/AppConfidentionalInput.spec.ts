@@ -1,6 +1,6 @@
 import AppConfidentionalInput from './AppConfidentionalInput.vue';
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 
 const textInputSelector = '[data-testid=textInput]';
 
@@ -17,14 +17,14 @@ const defaultMountOptions = {
 describe('AppConfidentionalInput', () => {
   describe('props', () => {
     it('name - should render with set name', () => {
-      const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
+      const wrapper = shallowMount(AppConfidentionalInput, defaultMountOptions);
 
       expect(wrapper.get(textInputSelector).attributes('name')).toBe(
         defaultMountOptions.props.name
       );
     });
     it('title - should render with set title', () => {
-      const wrapper = mount(AppConfidentionalInput, {
+      const wrapper = shallowMount(AppConfidentionalInput, {
         props: {
           ...defaultMountOptions.props,
         },
@@ -35,21 +35,21 @@ describe('AppConfidentionalInput', () => {
       );
     });
     it('required - should render with set required attribute', () => {
-      const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
+      const wrapper = shallowMount(AppConfidentionalInput, defaultMountOptions);
 
       expect(wrapper.get(textInputSelector).attributes('required')).toBe(
         defaultMountOptions.props.required.toString()
       );
     });
     it('placeholder - should render with set placeholder', () => {
-      const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
+      const wrapper = shallowMount(AppConfidentionalInput, defaultMountOptions);
 
       expect(wrapper.get(textInputSelector).attributes('placeholder')).toBe(
         defaultMountOptions.props.placeholder
       );
     });
     it('value - should render with set value', () => {
-      const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
+      const wrapper = shallowMount(AppConfidentionalInput, defaultMountOptions);
 
       expect(wrapper.get(textInputSelector).attributes('value')).toBe(
         defaultMountOptions.props.value
@@ -57,7 +57,7 @@ describe('AppConfidentionalInput', () => {
     });
     describe('User Interactions', () => {
       it('click - should toggle password visibility (switch input type between password and text)', async () => {
-        const wrapper = mount(AppConfidentionalInput);
+        const wrapper = shallowMount(AppConfidentionalInput);
 
         expect(wrapper.get(textInputSelector).attributes('type')).toBe(
           'password'
@@ -72,5 +72,32 @@ describe('AppConfidentionalInput', () => {
         );
       });
     });
+  });
+  it('snapshot - should match the snapshot', () => {
+    const wrapper = shallowMount(AppConfidentionalInput, defaultMountOptions);
+    expect(wrapper.get(textInputSelector)).toMatchInlineSnapshot(`
+      DOMWrapper {
+        "isDisabled": [Function],
+        "wrapperElement": <uitextinput
+          data-testid="textInput"
+          name="testName"
+          placeholder="placeholder"
+          required="true"
+          title="title"
+          type="password"
+          value="newVal"
+        >
+          <button
+            class="flex w-4"
+          >
+            <icon
+              class="m-auto"
+              name="material-symbols:visibility-off-outline-rounded"
+              size="16px"
+            />
+          </button>
+        </uitextinput>,
+      }
+    `);
   });
 });

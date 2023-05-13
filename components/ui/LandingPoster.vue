@@ -1,5 +1,6 @@
 <template>
   <section
+    data-testid="landingPoster"
     class="bg-image select-none border-b flex items-center justify-center w-full h-[30vh]"
   >
     <div

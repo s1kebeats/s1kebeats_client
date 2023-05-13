@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import Search from './Search.vue';
 
 const searchSelector = '[data-testid=headerSearch]';
@@ -7,7 +7,7 @@ const headerSearchInputSelector = '[data-testid=headerSearchInput]';
 
 describe('Search', () => {
   it('changes color on focus', async () => {
-    const wrapper = mount(Search);
+    const wrapper = shallowMount(Search);
 
     expect(wrapper.get(searchSelector).classes()).not.toContain(
       'border-[#7945fc]'
@@ -22,14 +22,14 @@ describe('Search', () => {
     );
   });
   it('submits on enter', async () => {
-    const wrapper = mount(Search);
+    const wrapper = shallowMount(Search);
 
     await wrapper.get(headerSearchInputSelector).trigger('focus');
     await wrapper.trigger('keypress.enter');
     // TODO: navigationTest
   });
   it('stops submittion after blur', async () => {
-    const wrapper = mount(Search);
+    const wrapper = shallowMount(Search);
 
     await wrapper.get(headerSearchInputSelector).trigger('focus');
     await wrapper.trigger('keypress.enter');

@@ -1,6 +1,6 @@
 import ProfileImage from './ProfileImage.vue';
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import type User from '@/api/models/User';
 
@@ -17,7 +17,7 @@ const testUser: User = {
 
 describe('ProfileImage', () => {
   it('should render profile image when it is provided', async () => {
-    const wrapper = mount(ProfileImage, {
+    const wrapper = shallowMount(ProfileImage, {
       global: {
         plugins: [
           createTestingPinia({
@@ -38,7 +38,7 @@ describe('ProfileImage', () => {
     );
   });
   it('should render icon without profile image provided', async () => {
-    const wrapper = mount(ProfileImage, {
+    const wrapper = shallowMount(ProfileImage, {
       global: {
         plugins: [
           createTestingPinia({

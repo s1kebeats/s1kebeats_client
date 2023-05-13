@@ -1,6 +1,6 @@
 import ProfileIcon from './ProfileIcon.vue';
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import type User from '@/api/models/User';
 
@@ -17,7 +17,7 @@ const testUser: User = {
 
 describe('ProfileIcon', () => {
   it('should render unauthorized icon when not authorized', async () => {
-    const wrapper = mount(ProfileIcon, {
+    const wrapper = shallowMount(ProfileIcon, {
       global: {
         plugins: [
           createTestingPinia({
@@ -36,7 +36,7 @@ describe('ProfileIcon', () => {
     expect(wrapper.find(profileImageSelector).exists()).toBe(false);
   });
   it('should render profile image when authorized', async () => {
-    const wrapper = mount(ProfileIcon, {
+    const wrapper = shallowMount(ProfileIcon, {
       global: {
         plugins: [
           createTestingPinia({

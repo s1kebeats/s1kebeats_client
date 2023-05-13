@@ -1,13 +1,13 @@
 import UploadVersionCard from './UploadVersionCard.vue';
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 
 const apiImageSelector = '[data-testid=apiImage]';
 
 describe('UploadVersionCard', () => {
   it('should render with api-based src', () => {
     const testSrc = 'test';
-    const wrapper = mount(UploadVersionCard, {
+    const wrapper = shallowMount(UploadVersionCard, {
       props: {
         src: testSrc,
         icon: '',

@@ -1,6 +1,6 @@
 import ProfileButton from './ProfileButton.vue';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import useUiStore from '@/stores/ui';
 
@@ -15,7 +15,7 @@ describe('ProfileButton', () => {
     vi.restoreAllMocks();
   });
   it('toggles profile overlay and rotates icon on click', async () => {
-    const wrapper = mount(ProfileButton, {
+    const wrapper = shallowMount(ProfileButton, {
       global: {
         plugins: [
           createTestingPinia({
@@ -42,7 +42,7 @@ describe('ProfileButton', () => {
     );
   });
   it('turns overlay off and rotates icon on unfocus', async () => {
-    const wrapper = mount(ProfileButton, {
+    const wrapper = shallowMount(ProfileButton, {
       global: {
         plugins: [
           createTestingPinia({

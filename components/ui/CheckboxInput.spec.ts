@@ -20,7 +20,7 @@ describe('CheckboxInput', async () => {
 
       expect(attributes.name).toBe(defaultMountOptions.props.name);
     });
-    it('value - should render checkbox indicator when set to true; sets aria-checked attribute', () => {
+    it('value - should render checkbox indicator when set to true; set aria-checked attribute', () => {
       const wrapper = shallowMount(CheckboxInput, defaultMountOptions);
       const attributes = wrapper.attributes();
 
@@ -31,7 +31,7 @@ describe('CheckboxInput', async () => {
         defaultMountOptions.props.value
       );
     });
-    it('value - should not render checkbox indicator when set to false; sets aria-checked attribute', () => {
+    it('value - should not render checkbox indicator when set to false; set aria-checked attribute', () => {
       const wrapper = shallowMount(CheckboxInput, {
         props: {
           ...defaultMountOptions.props,
@@ -56,5 +56,26 @@ describe('CheckboxInput', async () => {
       expect(updateValueEvent).toHaveLength(1);
       expect(updateValueEvent![0]).toEqual([!defaultMountOptions.props.value]);
     });
+  });
+  it('snapshot - should match the snapshot', () => {
+    const wrapper = shallowMount(CheckboxInput, defaultMountOptions);
+    expect(wrapper.get(checkboxSelector)).toMatchInlineSnapshot(`
+      DOMWrapper {
+        "isDisabled": [Function],
+        "wrapperElement": <div
+          aria-checked="true"
+          class="cursor-pointer flex items-center justify-center w-[15px] h-[15px] rounded-full border-[1px] focus:border-black focus:outline-none"
+          data-testid="checkbox"
+          name="test"
+          role="checkbox"
+          tabindex="0"
+        >
+          <div
+            class="w-[11px] h-[11px] rounded-full bg-[#7945fc]"
+            data-testid="chekboxIndicator"
+          />
+        </div>,
+      }
+    `);
   });
 });
