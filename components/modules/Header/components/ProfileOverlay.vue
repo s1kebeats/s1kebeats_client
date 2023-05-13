@@ -1,7 +1,7 @@
 <template>
   <div
     data-testid="profileOverlay"
-    class="absolute z-[1] right-0 border-t-[1px] p-5 top-[64px] w-full h-[calc(100vh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
+    class="absolute z-[1] right-0 border-t-[1px] p-5 top-[64px] w-full h-[calc(100dvh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
     v-show="uiStore.profileOverlay"
   >
     <div class="w-full flex flex-col justify-between gap-3">

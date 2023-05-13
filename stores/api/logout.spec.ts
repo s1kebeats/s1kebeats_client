@@ -9,8 +9,8 @@ vi.mock('axios');
 
 describe('logout', () => {
   beforeEach(() => {
-    axios.post.mockReset()
-  })
+    axios.post.mockReset();
+  });
 
   test('should make post request to api with valid params', async () => {
     await logout();
