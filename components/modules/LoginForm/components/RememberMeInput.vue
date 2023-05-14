@@ -1,5 +1,8 @@
 <template>
-  <div class="grow flex items-center justify-end gap-2">
+  <div
+    class="grow flex items-center justify-end gap-2"
+    data-testid="rememberMeInput"
+  >
     <label for="rememberMe" class="text-xs">Сохранить вход?</label>
     <UiCheckboxInput
       name="rememberMe"

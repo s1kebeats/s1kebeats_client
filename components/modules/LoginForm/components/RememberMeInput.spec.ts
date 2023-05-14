@@ -1,11 +1,10 @@
+// @vitest-environment nuxt
 import { mount, shallowMount } from '@vue/test-utils';
 import RememberMeInput from './RememberMeInput.vue';
-import { describe, it, expect, vi } from 'vitest';
-import UiCheckboxInput from '@/components/ui/CheckboxInput.vue';
+import { describe, it, expect } from 'vitest';
 
 const checkboxInputSelector = '[data-testid=checkboxInput]';
-
-vi.stubGlobal('UiCheckboxInput', () => UiCheckboxInput);
+const rememberMeInputSelector = '[data-testid=rememberMeInput]';
 
 describe('RememberMeInput', () => {
   describe('props', () => {
@@ -34,5 +33,33 @@ describe('RememberMeInput', () => {
       expect(updateValueEvent).toHaveLength(1);
       expect(updateValueEvent![0]).toEqual([true]);
     });
+  });
+  it('snapshot - should match the snapshot', () => {
+    const wrapper = shallowMount(RememberMeInput, {
+      props: {
+        value: true,
+      },
+    });
+    expect(wrapper.get(rememberMeInputSelector)).toMatchInlineSnapshot(`
+      DOMWrapper {
+        "isDisabled": [Function],
+        "wrapperElement": <div
+          class="grow flex items-center justify-end gap-2"
+          data-testid="rememberMeInput"
+        >
+          <label
+            class="text-xs"
+            for="rememberMe"
+          >
+            Сохранить вход?
+          </label>
+          <uicheckboxinput
+            data-testid="checkboxInput"
+            name="rememberMe"
+            value="true"
+          />
+        </div>,
+      }
+    `);
   });
 });
