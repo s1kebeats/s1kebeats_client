@@ -34,7 +34,7 @@ describe('ProfileOverlay', () => {
       },
     });
 
-    expect(wrapper.get(profileOverlaySelector).isVisible()).toBe(false);
+    expect(wrapper.get(profileOverlaySelector).isVisible()).toBeFalsy();
   });
   it('is visible with uiStore.profileOverlay set to true', async () => {
     const wrapper = shallowMount(ProfileOverlay, {
@@ -73,9 +73,9 @@ describe('ProfileOverlay', () => {
     });
 
     expect(wrapper.find(loginButtonSelector).exists()).toBe(true);
-    expect(wrapper.find(logoutButtonSelector).exists()).toBe(false);
-    expect(wrapper.find(profileLinkSelector).exists()).toBe(false);
-    expect(wrapper.find(likedLinkSelector).exists()).toBe(false);
+    expect(wrapper.find(logoutButtonSelector).exists()).toBeFalsy();
+    expect(wrapper.find(profileLinkSelector).exists()).toBeFalsy();
+    expect(wrapper.find(likedLinkSelector).exists()).toBeFalsy();
   });
   it('should render logout button and links when authorized', async () => {
     const wrapper = shallowMount(ProfileOverlay, {
@@ -96,7 +96,7 @@ describe('ProfileOverlay', () => {
       },
     });
 
-    expect(wrapper.find(loginButtonSelector).exists()).toBe(false);
+    expect(wrapper.find(loginButtonSelector).exists()).toBeFalsy();
     expect(wrapper.find(logoutButtonSelector).exists()).toBe(true);
     expect(wrapper.find(profileLinkSelector).exists()).toBe(true);
     expect(wrapper.find(likedLinkSelector).exists()).toBe(true);

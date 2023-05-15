@@ -36,7 +36,7 @@ describe('ProfileButton', () => {
     );
 
     await wrapper.get(profileButtonSelector).trigger('click');
-    expect(uiStore.profileOverlay).toBe(false);
+    expect(uiStore.profileOverlay).toBeFalsy();
     expect(wrapper.get(profileButtonIconSelector).classes()).not.toContain(
       'rotate-180'
     );
@@ -60,7 +60,7 @@ describe('ProfileButton', () => {
 
     await wrapper.get(profileButtonSelector).trigger('focusout');
     vi.runAllTimers();
-    expect(uiStore.profileOverlay).toBe(false);
+    expect(uiStore.profileOverlay).toBeFalsy();
     // ???
     expect(wrapper.get(profileButtonIconSelector).classes()).not.toContain(
       'rotate-180'

@@ -13,7 +13,7 @@ describe('UI Store', () => {
     });
     test('profileOverlay - should be false', () => {
       const store = useStore();
-      expect(store.profileOverlay).toBe(false);
+      expect(store.profileOverlay).toBeFalsy();
     });
   });
   describe('actions', () => {
@@ -22,7 +22,7 @@ describe('UI Store', () => {
       store.toggleProfileOverlay();
       expect(store.profileOverlay).toBe(true);
       store.toggleProfileOverlay();
-      expect(store.profileOverlay).toBe(false);
+      expect(store.profileOverlay).toBeFalsy();
     });
     test('setProfileOverlay - set true', () => {
       const store = useStore();
@@ -32,7 +32,7 @@ describe('UI Store', () => {
     test('setProfileOverlay - set false', () => {
       const store = useStore();
       store.setProfileOverlay(false);
-      expect(store.profileOverlay).toBe(false);
+      expect(store.profileOverlay).toBeFalsy();
     });
     test('setLoading - set true', () => {
       const store = useStore();
@@ -42,7 +42,7 @@ describe('UI Store', () => {
     test('setLoading - set false', () => {
       const store = useStore();
       store.setLoading(false);
-      expect(store.loading).toBe(false);
+      expect(store.loading).toBeFalsy();
     });
   });
 });

@@ -62,7 +62,7 @@ describe('FormRequestErrorOutput', async () => {
       expect(wrapper.get(errorTitleSelector).text()).toBe(
         'Неверные данные для входа'
       );
-      expect(wrapper.find(errorDescriptionSelector).exists()).toBe(false);
+      expect(wrapper.find(errorDescriptionSelector).exists()).toBeFalsy();
     });
     it('status - should render confirm email error output without description, when set to 403', () => {
       const wrapper = shallowMount(AppFormRequestErrorOutput, {
@@ -75,7 +75,7 @@ describe('FormRequestErrorOutput', async () => {
       expect(wrapper.get(errorTitleSelector).text()).toBe(
         'Подтвердите электронную почту'
       );
-      expect(wrapper.find(errorDescriptionSelector).exists()).toBe(false);
+      expect(wrapper.find(errorDescriptionSelector).exists()).toBeFalsy();
     });
   });
   describe('User Interactions', () => {

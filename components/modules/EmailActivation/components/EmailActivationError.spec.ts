@@ -26,7 +26,7 @@ describe('EmailActivationError', () => {
       },
     });
 
-    expect(wrapper.find(emailActivationErrorSelector).exists()).toBe(false);
+    expect(wrapper.find(emailActivationErrorSelector).exists()).toBeFalsy();
   });
   it('is visible when emailActivationStore.error.state is true', async () => {
     const wrapper = shallowMount(EmailActivationError, {

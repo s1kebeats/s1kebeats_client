@@ -31,7 +31,7 @@ describe('ProfileImage', () => {
         ],
       },
     });
-    expect(wrapper.find(profileIconSelector).exists()).toBe(false);
+    expect(wrapper.find(profileIconSelector).exists()).toBeFalsy();
     expect(wrapper.find(profileImageSelector).exists()).toBe(true);
     expect(wrapper.get(profileImageSelector).attributes('src')).toBe(
       testUser.image
@@ -55,7 +55,7 @@ describe('ProfileImage', () => {
         ],
       },
     });
-    expect(wrapper.find(profileImageSelector).exists()).toBe(false);
+    expect(wrapper.find(profileImageSelector).exists()).toBeFalsy();
     expect(wrapper.find(profileIconSelector).exists()).toBe(true);
     expect(wrapper.get(profileIconSelector).text()).toBe(
       testUser.username[0].toUpperCase()

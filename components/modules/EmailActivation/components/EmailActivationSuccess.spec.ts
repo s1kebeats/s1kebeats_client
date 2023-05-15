@@ -44,6 +44,6 @@ describe('EmailActivationSuccess', () => {
       },
     });
 
-    expect(wrapper.find(emailActivationSuccessSelector).exists()).toBe(false);
+    expect(wrapper.find(emailActivationSuccessSelector).exists()).toBeFalsy();
   });
 });

@@ -28,7 +28,7 @@ describe('MediaForm', () => {
       },
     });
 
-    expect(wrapper.find(stemsInputSelector).exists()).toBe(false);
+    expect(wrapper.find(stemsInputSelector).exists()).toBeFalsy();
   });
   it('should render stems input when uploadVersion is set to extended', () => {
     const wrapper = shallowMount(MediaForm, {

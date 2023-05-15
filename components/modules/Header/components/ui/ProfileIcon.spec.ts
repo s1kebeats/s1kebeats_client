@@ -33,7 +33,7 @@ describe('ProfileIcon', () => {
     });
 
     expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
-    expect(wrapper.find(profileImageSelector).exists()).toBe(false);
+    expect(wrapper.find(profileImageSelector).exists()).toBeFalsy();
   });
   it('should render profile image when authorized', async () => {
     const wrapper = shallowMount(ProfileIcon, {
@@ -51,7 +51,7 @@ describe('ProfileIcon', () => {
       },
     });
 
-    expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(false);
+    expect(wrapper.find(unauthorizedIconSelector).exists()).toBeFalsy();
     expect(wrapper.find(profileImageSelector).exists()).toBe(true);
   });
 });

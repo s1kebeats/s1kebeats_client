@@ -74,7 +74,7 @@ describe('Auth Store', () => {
     test('setAuthorized - set false', () => {
       const store = useAuthStore();
       store.setAuthorized(false);
-      expect(store.authorized).toBe(false);
+      expect(store.authorized).toBeFalsy();
     });
     test('login - success', async () => {
       const store = useAuthStore();
@@ -94,7 +94,7 @@ describe('Auth Store', () => {
       expect(login).toHaveBeenCalled();
       expect(login).toHaveBeenCalledWith('username', 'password', true);
       expect(store.user).toBeNull();
-      expect(store.authorized).toBe(false);
+      expect(store.authorized).toBeFalsy();
     });
     test('logout - success', async () => {
       const store = useAuthStore();
@@ -102,7 +102,7 @@ describe('Auth Store', () => {
       await store.logout();
       expect(logout).toHaveBeenCalled();
       expect(store.user).toBe(null);
-      expect(store.authorized).toBe(false);
+      expect(store.authorized).toBeFalsy();
     });
     test('checkAuth - success', async () => {
       const store = useAuthStore();
@@ -120,7 +120,7 @@ describe('Auth Store', () => {
       await store.checkAuth();
       expect(refresh).toHaveBeenCalled();
       expect(store.user).toStrictEqual(null);
-      expect(store.authorized).toBe(false);
+      expect(store.authorized).toBeFalsy();
     });
   });
 });

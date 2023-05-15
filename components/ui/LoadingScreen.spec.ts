@@ -13,7 +13,7 @@ describe('LoadingScreen', () => {
         },
       });
 
-      expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(false);
+      expect(wrapper.get(loadingScreenSelector).isVisible()).toBeFalsy();
     });
     it('loading - should be visible when set to true', () => {
       const wrapper = shallowMount(LoadingScreen, {

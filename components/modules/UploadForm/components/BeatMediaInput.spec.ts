@@ -105,7 +105,7 @@ describe('BeatMediaInput', () => {
       },
     });
 
-    expect(wrapper.find(requiredSelector).exists()).toBe(false);
+    expect(wrapper.find(requiredSelector).exists()).toBeFalsy();
   });
   // TODO: file upload testing (don't know how to do that rn)
 });
