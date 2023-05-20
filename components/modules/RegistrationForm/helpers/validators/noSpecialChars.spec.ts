@@ -1,7 +1,7 @@
 import noSpecialChars from './noSpecialChars';
 import { describe, expect, it } from 'vitest';
 
-describe('withCapitalLetter', () => {
+describe('noSpecialChars', () => {
   it('string with special chars should return false', () => {
     expect(noSpecialChars('text!')).toBeFalsy();
   });

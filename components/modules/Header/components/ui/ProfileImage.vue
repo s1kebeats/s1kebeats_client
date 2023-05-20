@@ -6,12 +6,12 @@
     width="32px"
     height="32px"
     alt="Profile Image"
-    data-testid="profile-image"
+    data-testid="profileImage"
   />
   <div
     v-else
     class="green-bg rounded-full w-[32px] h-[32px] flex items-center justify-center text-lg text-white"
-    data-testid="authorized-icon"
+    data-testid="authorizedIcon"
   >
     {{ authStore.user!.username.charAt(0).toUpperCase() }}
   </div>

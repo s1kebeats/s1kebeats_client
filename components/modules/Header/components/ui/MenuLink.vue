@@ -1,7 +1,7 @@
 <template>
-  <nuxt-link class="menu-link w-full py-1" :to="to">
-    <span> {{ text }} </span>
-    <Icon :name="icon" size="25px" />
+  <nuxt-link class="menu-link w-full py-1" :to="to" data-testid="menuLink">
+    <span data-testid="menuLinkText"> {{ text }} </span>
+    <Icon data-testid="menuLinkIcon" :name="icon" size="25px" />
   </nuxt-link>
 </template>
 <script setup lang="ts">
