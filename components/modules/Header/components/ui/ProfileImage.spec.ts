@@ -75,7 +75,7 @@ describe('ProfileImage', () => {
           }),
         ],
       },
-    })
+    });
     expect(wrapper.get(profileImageSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
@@ -88,6 +88,6 @@ describe('ProfileImage', () => {
           width="32px"
         />,
       }
-    `)
-  })
+    `);
+  });
 });

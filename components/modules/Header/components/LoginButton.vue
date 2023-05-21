@@ -4,6 +4,7 @@
     class="bg-black text-white"
     text="Вход"
     icon="material-symbols:login-rounded"
+    data-testid="loginButton"
   />
 </template>
 <script setup lang="ts">

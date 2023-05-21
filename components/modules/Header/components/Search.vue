@@ -29,7 +29,7 @@ const toggleFocusedState = (value: boolean) => {
 const searchQuery = ref('');
 
 async function search() {
-  await navigateTo(`/search?q=${searchQuery}`);
+  await navigateTo(`/search?q=${searchQuery.value}`);
 }
 
 async function submitOnEnter(e: KeyboardEvent) {

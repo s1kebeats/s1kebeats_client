@@ -7,6 +7,7 @@
     @update-value="updateValue"
     :required="required"
     :value="localValue || value"
+    data-testid="textInput"
   >
     <slot />
   </UiTextInput>
