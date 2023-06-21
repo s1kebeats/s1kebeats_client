@@ -1,11 +1,11 @@
 <template>
   <div
     data-testid="profileOverlay"
-    class="absolute z-[1] right-0 border-t-[1px] p-5 top-[64px] w-full h-[calc(100dvh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
+    class="absolute z-[1] right-0 px-[3%] py-3 top-[64px] w-full h-[calc(100dvh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
     v-show="uiStore.profileOverlay"
   >
-    <div class="w-full flex flex-col justify-between gap-3">
-      <div class="w-full flex flex-col items-start">
+    <div class="w-full flex flex-col justify-between">
+      <div class="w-full flex flex-col items-start gap-3">
         <HeaderUiMenuLink
           to="/"
           icon="material-symbols:home-outline-rounded"
@@ -35,7 +35,7 @@
           />
         </template>
       </div>
-      <div class="flex gap-2">
+      <div class="flex gap-[3%]">
         <template v-if="authStore.authorized">
           <UploadButton class="grow" />
           <LogoutButton

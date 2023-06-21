@@ -4,9 +4,9 @@
   </section>
 </template>
 <script setup lang="ts">
-import BeatForAuthor from '@/api/models/BeatForAuthor';
+import Beat from '@/api/models/Beat';
 
 const props = defineProps<{
-  data: BeatForAuthor[];
+  data: Beat[];
 }>();
 </script>

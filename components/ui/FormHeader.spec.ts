@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import FormHeader from './FormHeader.vue';
-import { mount, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 
 const formHeaderSelector = '[data-testid=formHeader]';
 

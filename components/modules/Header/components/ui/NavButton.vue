@@ -1,6 +1,6 @@
 <template>
   <button
-    class="rounded-md py-1.5 px-4 font-medium text-sm flex items-center justify-center gap-2"
+    class="rounded-lg py-2 px-4 font-medium text-sm flex items-center justify-center gap-2"
   >
     <Icon :name="icon" size="20px" />
     <span> {{ text }} </span>

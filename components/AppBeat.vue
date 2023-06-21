@@ -1,30 +1,36 @@
 <template>
-  <div class="flex flex-col gap-2 border-[1px] rounded-lg">
+  <div class="flex flex-col gap-3 border-[1px] rounded-lg">
     <AppApiImage
-      :src="data.image ? data.image : ''"
+      v-if="data.image"
+      :src="data.image"
       class="w-full aspect-square rounded-t-lg"
     />
-    <div class="flex flex-col px-3 pb-3">
-      <div class="flex justify-between items-center gap-1">
-        <span class="font-semibold text-lg truncate">
+    <div
+      v-else
+      class="bg-black w-full aspect-square rounded-t-lg flex items-center justify-center text-lg text-white"
+    >
+      ?
+    </div>
+    <div class="flex flex-col px-3 pb-3 gap-1">
+      <div class="flex justify-between items-center gap-3">
+        <span class="font-semibold text-sm truncate">
           {{ data.name }}
         </span>
-        <span class="bg-[#7945fc] text-white truncate text-sm rounded-md px-1"
+        <span class="text-[#7945fc] min-w-[50px] truncate text-sm font-semibold"
           >{{ data.wavePrice }}р.</span
         >
       </div>
-      <div v-if="data.user" class="text-sm font-semibold">
-        {{ data.user.username }}
-      </div>
       <div
-        v-if="data.tags.length"
-        class="mt-2 max-w-full flex flex-wrap gap-1 text-xs tags-container max-h-[36px] overflow-hidden"
+        class="max-w-full flex flex-wrap gap-2 text-xs container max-h-[16px] overflow-hidden"
       >
+        <div v-if="data.user" class="font-semibold">
+          {{ data.user.username }}
+        </div>
         <nuxt-link
+          v-if="data.tags.length"
           v-for="tag in data.tags"
           :to="`/search?tags=${tag.name}`"
           :key="tag.id"
-          class="bg-black text-white rounded-md px-1"
         >
           #{{ tag.name }}
         </nuxt-link>
@@ -41,7 +47,7 @@ const props = defineProps<{
 }>();
 </script>
 <style lang="scss" scoped>
-.tags-container::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   display: none;
 }
 </style>

@@ -25,7 +25,7 @@
           Редактировать
         </nuxt-link>
       </div>
-      <div class="flex flex-col gap-1 pb-3 pt-[7.5%] px-[5%]">
+      <div class="flex flex-col gap-3 pb-3 pt-[7.5%] px-[5%]">
         <div class="flex items-center justify-between">
           <div class="font-semibold text-xl max-w-[calc(95%-76px)] truncate">
             {{ author.displayedName ? author.displayedName : author.username }}
