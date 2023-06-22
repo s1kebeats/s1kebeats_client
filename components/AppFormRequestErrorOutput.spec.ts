@@ -132,7 +132,7 @@ describe('FormRequestErrorOutput', async () => {
             
           </div>
           <button
-            class="absolute top-3 right-3 w-[5%]"
+            class="absolute top-3 right-3 w-[7.5%]"
             data-testid="closeButton"
             data-v-c0dd21dc=""
           >

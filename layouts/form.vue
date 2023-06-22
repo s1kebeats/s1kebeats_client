@@ -1,6 +1,5 @@
 <template>
-  <div id="form" class="flex flex-col min-h-[100dvh]">
-    <!-- <UiFormLayoutPoster /> -->
+  <div id="form" class="flex flex-col min-h-[100dvh]" data-testid="formLayout">
     <main
       class="grow bg-white flex flex-col items-center justify-center gap-7 px-[7.5%] pb-5"
     >

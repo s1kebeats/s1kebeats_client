@@ -1,4 +1,4 @@
 <template>
-  <TheLandingPoster />
+  <!-- <TheLandingPoster /> -->
   <!-- <BaseBeatList /> -->
 </template>

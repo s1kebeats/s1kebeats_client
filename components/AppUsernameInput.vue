@@ -1,5 +1,5 @@
 <template>
-  <UiTextInput
+  <AppTextInput
     title="Имя пользователя"
     :name="name"
     type="text"

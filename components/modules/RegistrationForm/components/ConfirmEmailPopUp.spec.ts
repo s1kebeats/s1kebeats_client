@@ -33,7 +33,7 @@ describe('ConfirmEmailPopUp', () => {
       DOMWrapper {
         "isDisabled": [Function],
         "wrapperElement": <div
-          class="absolute z-[9999] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold select-none"
+          class="absolute z-[1] w-full h-full backdrop-blur-sm rounded-lg flex flex-col items-center justify-center gap-2 font-semibold select-none"
           data-testid="confirmEmailPopUp"
           data-v-38d665d7=""
         >
@@ -53,7 +53,6 @@ describe('ConfirmEmailPopUp', () => {
             >
               Подтвердите электронную почту
             </p>
-            <!-- &lt;UiButton class="w-full h-[36px]" @click.prevent="loginRedirect"&gt;Вход&lt;/UiButton&gt; -->
           </div>
         </div>,
       }

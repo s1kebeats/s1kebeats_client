@@ -78,7 +78,7 @@ describe('AppConfidentionalInput', () => {
     expect(wrapper.get(textInputSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <uitextinput
+        "wrapperElement": <AppTextInput
           data-testid="textInput"
           name="testName"
           placeholder="placeholder"
@@ -96,7 +96,7 @@ describe('AppConfidentionalInput', () => {
               size="16px"
             />
           </button>
-        </uitextinput>,
+        </AppTextInput>,
       }
     `);
   });

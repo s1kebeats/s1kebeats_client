@@ -43,7 +43,7 @@ describe('AppUsernameInput', () => {
     expect(wrapper.get(textInputSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <uitextinput
+        "wrapperElement": <AppTextInput
           data-testid="textInput"
           name="testName"
           placeholder="placeholder"

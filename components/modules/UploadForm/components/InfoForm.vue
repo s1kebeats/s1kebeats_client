@@ -14,7 +14,7 @@
 
       <div class="grid gap-3 grid-cols-2">
         <ImagePreview class="row-span-2" />
-        <UiTextInput
+        <AppTextInput
           :class="v$.name.$error ? '!border-red-500' : ''"
           @update-value="(value: string) => setBeatInfo('name', value)"
           type="text"
@@ -64,7 +64,7 @@
         />
         <div class="flex flex-col gap-3 col-span-2">
           <span class="text-lg font-semibold">Теги</span>
-          <UiTextInput
+          <AppTextInput
             type="text"
             name="tags"
             placeholder="Введите тег"
@@ -77,7 +77,7 @@
                 size="20px"
               />
             </button>
-          </UiTextInput>
+          </AppTextInput>
           <div
             v-if="infoFormState.data.tags.length"
             class="flex flex-wrap gap-1"

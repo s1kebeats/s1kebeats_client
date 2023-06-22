@@ -1,5 +1,5 @@
 <template>
-  <UiTextInput
+  <AppTextInput
     :type="passwordVisible ? 'text' : 'password'"
     @update-value="updateValue"
     :title="title"
@@ -20,7 +20,7 @@
         "
       />
     </button>
-  </UiTextInput>
+  </AppTextInput>
 </template>
 <script setup lang="ts">
 const props = defineProps<{

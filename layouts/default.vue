@@ -1,5 +1,9 @@
 <template>
-  <div id="default" class="flex flex-col min-h-[100dvh]">
+  <div
+    id="default"
+    class="flex flex-col min-h-[100dvh]"
+    data-testid="defaultLayout"
+  >
     <Header />
     <main class="grow w-full flex flex-col items-center gap-3">
       <slot />

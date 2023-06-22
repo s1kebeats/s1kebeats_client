@@ -1,5 +1,5 @@
 <template>
-  <UiTextInput
+  <AppTextInput
     :title="title"
     :name="name"
     :placeholder="placeholder"
@@ -10,7 +10,7 @@
     data-testid="textInput"
   >
     <slot />
-  </UiTextInput>
+  </AppTextInput>
 </template>
 <script setup lang="ts">
 interface Props {
