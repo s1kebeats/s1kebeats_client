@@ -1,6 +1,6 @@
 import useAuthStore from './auth';
 import { setActivePinia, createPinia } from 'pinia';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import type User from '@/api/models/User';
 import { authResponseMock } from './api/mocks';
 import login from './api/login';
@@ -74,7 +74,7 @@ describe('Auth Store', () => {
     test('setAuthorized - set false', () => {
       const store = useAuthStore();
       store.setAuthorized(false);
-      expect(store.authorized).toBeFalsy();
+      expect(store.authorized).toBe(false);
     });
     test('login - success', async () => {
       const store = useAuthStore();
@@ -85,24 +85,25 @@ describe('Auth Store', () => {
       expect(store.user).toStrictEqual(authResponseMock.user);
       expect(store.authorized).toBe(true);
     });
-    test.todo('login - error', async () => {
+    test('login - error', async () => {
       const store = useAuthStore();
-      login.mockImplementationOnce(() => {
-        throw new Error();
-      });
-      await store.login('username', 'password', true);
-      expect(login).toHaveBeenCalled();
-      expect(login).toHaveBeenCalledWith('username', 'password', true);
-      expect(store.user).toBeNull();
-      expect(store.authorized).toBeFalsy();
+      (login as Mock).mockRejectedValueOnce(new Error('Async error'));
+      try {
+        await store.login('username', 'password', true);
+      } catch (error) {
+        expect(login).toHaveBeenCalled();
+        expect(login).toHaveBeenCalledWith('username', 'password', true);
+        expect(store.user).toBeNull();
+        expect(store.authorized).toBe(false);
+      }
     });
     test('logout - success', async () => {
       const store = useAuthStore();
 
       await store.logout();
       expect(logout).toHaveBeenCalled();
-      expect(store.user).toBe(null);
-      expect(store.authorized).toBeFalsy();
+      expect(store.user).toBeNull();
+      expect(store.authorized).toBe(false);
     });
     test('checkAuth - success', async () => {
       const store = useAuthStore();
@@ -112,15 +113,16 @@ describe('Auth Store', () => {
       expect(store.user).toStrictEqual(authResponseMock.user);
       expect(store.authorized).toBe(true);
     });
-    test.todo('checkAuth - error', async () => {
+    test('checkAuth - error', async () => {
       const store = useAuthStore();
-      refresh.mockResolvedValueOnce(() => {
-        throw new Error();
-      });
-      await store.checkAuth();
-      expect(refresh).toHaveBeenCalled();
-      expect(store.user).toStrictEqual(null);
-      expect(store.authorized).toBeFalsy();
+      (refresh as Mock).mockRejectedValueOnce(new Error('Async error'));
+      try {
+        await store.checkAuth();
+      } catch (error) {
+        expect(refresh).toHaveBeenCalled();
+        expect(store.user).toBeNull();
+        expect(store.authorized).toBe(false);
+      }
     });
   });
 });

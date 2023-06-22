@@ -12,7 +12,7 @@
       ?
     </div>
     <div class="font-semibold text-sm truncate">
-        {{ data.username }}
+      {{ data.username }}
     </div>
   </div>
 </template>

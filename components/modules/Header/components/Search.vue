@@ -25,8 +25,8 @@ const inputFocused = ref(false);
 const toggleFocusedState = (value: boolean) => {
   inputFocused.value = value;
 };
-
-const searchQuery = ref('');
+const route = useRoute();
+const searchQuery = ref(route.query.q);
 
 async function search() {
   await navigateTo(`/search?q=${searchQuery.value}`);
