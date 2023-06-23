@@ -2,6 +2,7 @@
   <form
     @submit.prevent="submitRegistrationForm"
     class="relative flex flex-col w-full"
+    data-testid="registrationForm"
   >
     <AppFormRequestErrorOutput
       :open="registrationFormState.error"

@@ -1,8 +1,9 @@
 import AppConfidentionalInput from './AppConfidentionalInput.vue';
 import { describe, expect, it } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 
 const textInputSelector = '[data-testid=textInput]';
+const visibilityIconSelector = '[data-testid=visibilityIcon]';
 
 const defaultMountOptions = {
   props: {
@@ -71,6 +72,35 @@ describe('AppConfidentionalInput', () => {
           'password'
         );
       });
+      it('click - should toggle visibility icon', async () => {
+        const wrapper = shallowMount(AppConfidentionalInput);
+
+        expect(wrapper.get(visibilityIconSelector).attributes('name')).toBe(
+          'material-symbols:visibility-off-outline-rounded'
+        );
+
+        await wrapper.find('button').trigger('click');
+        expect(wrapper.get(visibilityIconSelector).attributes('name')).toBe(
+          'material-symbols:visibility-outline-rounded'
+        );
+
+        await wrapper.find('button').trigger('click');
+        expect(wrapper.get(visibilityIconSelector).attributes('name')).toBe(
+          'material-symbols:visibility-off-outline-rounded'
+        );
+      });
+      // TODO: find a way to use nuxt autoimported components
+      it.todo('input - should emit value', async () => {
+        const testValue = 'test';
+        const wrapper = mount(AppConfidentionalInput, defaultMountOptions);
+
+        await wrapper.get(textInputSelector).setValue(testValue);
+
+        expect(wrapper.emitted()).toHaveProperty('updateValue');
+        const updateValueEvent = wrapper.emitted('updateValue');
+        expect(updateValueEvent).toHaveLength(2);
+        expect(updateValueEvent![1]).toEqual([testValue]);
+      });
     });
   });
   it('snapshot - should match the snapshot', () => {
@@ -78,7 +108,7 @@ describe('AppConfidentionalInput', () => {
     expect(wrapper.get(textInputSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <AppTextInput
+        "wrapperElement": <apptextinput
           data-testid="textInput"
           name="testName"
           placeholder="placeholder"
@@ -92,11 +122,12 @@ describe('AppConfidentionalInput', () => {
           >
             <icon
               class="m-auto"
+              data-testid="visibilityIcon"
               name="material-symbols:visibility-off-outline-rounded"
               size="16px"
             />
           </button>
-        </AppTextInput>,
+        </apptextinput>,
       }
     `);
   });

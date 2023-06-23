@@ -7,11 +7,12 @@
     placeholder="Введите электронную почту"
     :required="required"
     :value="value"
+    data-testid="textInput"
   />
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  required: boolean;
+  required?: boolean;
   value: string;
 }>();
 

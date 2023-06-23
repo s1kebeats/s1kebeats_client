@@ -11,6 +11,7 @@
   >
     <button @click.prevent="togglePasswordVisibility" class="flex w-4">
       <Icon
+        data-testid="visibilityIcon"
         size="16px"
         class="m-auto"
         :name="

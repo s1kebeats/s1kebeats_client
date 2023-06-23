@@ -16,7 +16,7 @@ describe('LoadingButton', () => {
       });
 
       expect(wrapper.find(loadingSpinnerSelector).exists()).toBe(true);
-      expect(wrapper.find(loadingButtonSpanSelector).exists()).toBeFalsy();
+      expect(wrapper.find(loadingButtonSpanSelector).exists()).toBe(false);
     });
     it('pending - should render span without loadingSpinner when set to false', () => {
       const wrapper = shallowMount(LoadingButton, {
@@ -25,7 +25,7 @@ describe('LoadingButton', () => {
         },
       });
 
-      expect(wrapper.find(loadingSpinnerSelector).exists()).toBeFalsy();
+      expect(wrapper.find(loadingSpinnerSelector).exists()).toBe(false);
       expect(wrapper.find(loadingButtonSpanSelector).exists()).toBe(true);
     });
   });

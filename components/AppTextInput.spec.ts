@@ -64,9 +64,9 @@ describe('TextInput', () => {
         defaultMountOptions.props.placeholder
       );
     });
+    // TODO: find a way to use nuxt autoimported components
     it.todo('value - should render with set value', () => {
       const wrapper = shallowMount(TextInput, defaultMountOptions);
-      // TODO: find a way to use nuxt autoimported components
       expect(wrapper.get(textInputSelector).attributes('value')).toBe(
         defaultMountOptions.props.value
       );
