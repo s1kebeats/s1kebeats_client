@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import useAuthStore from '@/stores/auth';
-import HeaderUiNavButton from './ui/NavButton.vue';
+import HeaderUiNavButton from './NavButton.vue';
 const authStore = useAuthStore();
 
 async function logout() {

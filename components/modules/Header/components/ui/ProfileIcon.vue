@@ -1,9 +1,9 @@
 <template>
-  <UiProfileImage v-if="authStore.authorized" />
+  <UiProfileImage v-if="authStore.authorized" data-testid="profileImage" />
   <div
     v-else
     class="bg-black rounded-full w-[32px] h-[32px] flex items-center justify-center text-lg text-white"
-    data-testid="unauthorized-icon"
+    data-testid="unauthorizedIcon"
   >
     ?
   </div>

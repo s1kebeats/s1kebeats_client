@@ -21,6 +21,7 @@ import useUiStore from '@/stores/ui';
 const uiStore = useUiStore();
 
 function closeProfileOverlay() {
+  console.log('out');
   setTimeout(() => uiStore.setProfileOverlay(false), 200);
 }
 </script>

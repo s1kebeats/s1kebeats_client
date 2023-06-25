@@ -4,8 +4,8 @@ import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import type User from '@/api/models/User';
 
-const unauthorizedIconSelector = '[data-testid=unauthorized-icon]';
-const profileImageSelector = '[data-testid=profile-image]';
+const unauthorizedIconSelector = '[data-testid=unauthorizedIcon]';
+const profileImageSelector = '[data-testid=profileImage]';
 
 const testUser: User = {
   email: 'test@example.com',
@@ -16,7 +16,7 @@ const testUser: User = {
 };
 
 describe('ProfileIcon', () => {
-  it('should render unauthorized icon when not authorized', async () => {
+  it('should render unauthorized icon without profile image when not authorized', async () => {
     const wrapper = shallowMount(ProfileIcon, {
       global: {
         plugins: [
@@ -35,7 +35,7 @@ describe('ProfileIcon', () => {
     expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
     expect(wrapper.find(profileImageSelector).exists()).toBeFalsy();
   });
-  it('should render profile image when authorized', async () => {
+  it('should render profile image without unauthorized icon when authorized', async () => {
     const wrapper = shallowMount(ProfileIcon, {
       global: {
         plugins: [

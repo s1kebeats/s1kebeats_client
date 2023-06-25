@@ -8,7 +8,7 @@
   />
 </template>
 <script setup lang="ts">
-import HeaderUiNavButton from './ui/NavButton.vue';
+import HeaderUiNavButton from './NavButton.vue';
 
 async function redirect() {
   await navigateTo('/login');

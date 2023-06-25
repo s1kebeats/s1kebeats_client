@@ -1,7 +1,7 @@
 <template>
   <div
     data-testid="profileOverlay"
-    class="absolute z-[1] right-0 px-[3%] py-3 top-[64px] w-full h-[calc(100dvh-64px)] bg-[rgba(255,255,255,1)] text-black flex"
+    class="absolute z-[1] right-0 px-[3%] py-3 top-[64px] w-full h-[calc(100dvh-64px)] bg-white text-black flex"
     v-show="uiStore.profileOverlay"
   >
     <div class="w-full flex flex-col justify-between">
@@ -38,12 +38,9 @@
       <div class="flex gap-[3%]">
         <template v-if="authStore.authorized">
           <UploadButton class="grow" />
-          <LogoutButton
-            v-if="authStore.authorized"
-            data-testid="logoutButton"
-          />
+          <LogoutButton data-testid="logoutButton" />
         </template>
-        <template v-if="!authStore.authorized">
+        <template v-else>
           <LoginButton />
           <RegisterButton class="grow" />
         </template>
@@ -52,10 +49,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import LogoutButton from './LogoutButton.vue';
-import LoginButton from './LoginButton.vue';
-import RegisterButton from './RegisterButton.vue';
-import UploadButton from './UploadButton.vue';
+import LogoutButton from './ui/LogoutButton.vue';
+import LoginButton from './ui/LoginButton.vue';
+import RegisterButton from './ui/RegisterButton.vue';
+import UploadButton from './ui/UploadButton.vue';
 import HeaderUiMenuLink from './ui/MenuLink.vue';
 import useUiStore from '@/stores/ui';
 import useAuthStore from '@/stores/auth';
