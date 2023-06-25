@@ -28,6 +28,7 @@
         :value="registrationFormState.data.username"
       />
       <EmailInput
+        name="registrationEmail"
         :required="true"
         autocomplete="off"
         :class="v$.email.$error ? '!border-red-500' : ''"

@@ -1,23 +1,25 @@
 import EmailInput from './EmailInput.vue';
 import { mount, shallowMount } from '@vue/test-utils';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 const defaultMountOptions = {
   props: {
     value: 'email@email.com',
     required: true,
+    name: 'testName',
   },
 };
 const textInputSelector = '[data-testid=textInput]';
 
 describe('EmailInput', () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
   describe('props', () => {
+    it('name - should render with set name', () => {
+      const wrapper = shallowMount(EmailInput, defaultMountOptions);
+
+      expect(wrapper.get(textInputSelector).attributes('name')).toBe(
+        defaultMountOptions.props.name
+      );
+    });
     it('required - should render with set required attribute', () => {
       const wrapper = shallowMount(EmailInput, defaultMountOptions);
 
@@ -54,7 +56,7 @@ describe('EmailInput', () => {
         "isDisabled": [Function],
         "wrapperElement": <appdebouncedtextinput
           data-testid="textInput"
-          name="email"
+          name="testName"
           placeholder="Введите электронную почту"
           required="true"
           title="Электронная почта"

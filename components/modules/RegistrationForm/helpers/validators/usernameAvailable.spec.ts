@@ -4,9 +4,9 @@ import fetchUsernameAvailability from '../../api/fetchUsernameAvailability';
 
 vi.mock('../../api/fetchUsernameAvailability', () => {
   return {
-    default: () => {
+    default: vi.fn(() => {
       return true;
-    },
+    }),
   };
 });
 

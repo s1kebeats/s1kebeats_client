@@ -2,6 +2,7 @@
   <form
     @submit.prevent="submitLoginForm"
     class="relative flex flex-col w-full gap-3"
+    data-testid="loginForm"
   >
     <AppFormRequestErrorOutput
       :open="loginFormState.error.state"

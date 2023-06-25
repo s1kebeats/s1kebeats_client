@@ -1,5 +1,13 @@
 import fetchUsernameAvailability from './fetchUsernameAvailability';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import {
+  Mock,
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  test,
+  vi,
+} from 'vitest';
 import axios from 'axios';
 import { runtimeConfigMock } from '@/stores/api/mocks';
 
@@ -9,9 +17,15 @@ vi.mock('axios');
 
 describe('fetchUsernameAvailability', () => {
   beforeEach(() => {
-    axios.get.mockReset();
+    (axios.get as Mock).mockResolvedValue({
+      data: {
+        available: false,
+      },
+    });
   });
-
+  afterEach(() => {
+    (axios.get as Mock).mockReset();
+  });
   test('should make post request to api with valid params', async () => {
     await fetchUsernameAvailability('username');
     expect(axios.get).toHaveBeenCalled();
@@ -20,12 +34,6 @@ describe('fetchUsernameAvailability', () => {
     );
   });
   test('should return valid username availabity', async () => {
-    const responseMock = {
-      data: {
-        available: false,
-      },
-    };
-    axios.get.mockResolvedValue(responseMock);
     const availabity = await fetchUsernameAvailability('username');
     expect(availabity).toBeFalsy();
   });

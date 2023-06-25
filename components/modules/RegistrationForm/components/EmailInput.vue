@@ -2,7 +2,7 @@
   <AppDebouncedTextInput
     @update-value="updateValue"
     type="email"
-    name="email"
+    :name="name"
     title="Электронная почта"
     placeholder="Введите электронную почту"
     :required="required"
@@ -14,6 +14,7 @@
 const props = defineProps<{
   required?: boolean;
   value: string;
+  name: string;
 }>();
 
 const emit = defineEmits<{

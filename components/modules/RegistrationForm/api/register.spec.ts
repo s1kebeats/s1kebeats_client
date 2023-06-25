@@ -1,5 +1,5 @@
 import register from './register';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { runtimeConfigMock } from '@/stores/api/mocks';
 
@@ -9,7 +9,7 @@ vi.mock('axios');
 
 describe('register', () => {
   beforeEach(() => {
-    axios.post.mockReset();
+    (axios.post as Mock).mockReset();
   });
 
   test('should make post request to api with valid params', async () => {
@@ -28,7 +28,7 @@ describe('register', () => {
     const responseMock = {
       data: 'success',
     };
-    axios.post.mockResolvedValue(responseMock);
+    (axios.post as Mock).mockResolvedValue(responseMock);
     const response = await register('username', 'email', 'password');
     expect(response).toStrictEqual(responseMock);
   });
