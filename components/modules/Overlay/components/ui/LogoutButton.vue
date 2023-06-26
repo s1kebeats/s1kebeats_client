@@ -1,5 +1,5 @@
 <template>
-  <HeaderUiNavButton
+  <NavButton
     @click="logout"
     class="bg-red-500 text-white"
     text="Выход"
@@ -8,7 +8,7 @@
   />
 </template>
 <script setup lang="ts">
-import HeaderUiNavButton from './NavButton.vue';
+import NavButton from './NavButton.vue';
 import useAuthStore from '@/stores/auth';
 import useUiStore from '@/stores/ui';
 

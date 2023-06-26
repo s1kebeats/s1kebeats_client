@@ -12,19 +12,21 @@
       text="Биты"
     />
 
-    <template v-if="authStore.authorized">
-      <UiNavLink
-        :to="`/${authStore.user!.username}`"
-        icon="gg:profile"
-        text="Профиль"
-      />
-      <!-- TODO: liked tracks functionality -->
-      <!-- <UiNavLink
+    <!-- <template v-if="authStore.authorized"> -->
+    <UiNavLink
+      v-if="authStore.authorized"
+      :to="`/${authStore.user!.username}`"
+      icon="gg:profile"
+      text="Профиль"
+      data-testid="profileLink"
+    />
+    <!-- TODO: liked tracks functionality -->
+    <!-- <UiNavLink
             to="/liked"
             icon="icon-park-outline:like"
             text="Понравившееся"
-          /> -->
-    </template>
+          />
+    </template> -->
   </nav>
 </template>
 <script setup lang="ts">

@@ -1,12 +1,12 @@
 <template>
-  <div class="flex gap-[3%]">
+  <div class="flex gap-[3%]" data-testid="actionPanel">
     <template v-if="authStore.authorized">
-      <UploadButton class="grow" />
+      <UploadButton data-testid="uploadButton" class="grow" />
       <LogoutButton data-testid="logoutButton" />
     </template>
     <template v-else>
-      <LoginButton />
-      <RegisterButton class="grow" />
+      <LoginButton data-testid="loginButton" />
+      <RegisterButton data-testid="registerButton" class="grow" />
     </template>
   </div>
 </template>

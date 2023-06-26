@@ -12,7 +12,7 @@
 </template>
 <script setup lang="ts">
 import ActionPanel from './components/ActionPanel.vue';
-import UiNav from './components/ui/Nav.client.vue';
+import UiNav from './components/ui/Nav.vue';
 import useUiStore from '@/stores/ui';
 const uiStore = useUiStore();
 </script>

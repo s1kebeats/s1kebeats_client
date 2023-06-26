@@ -18,15 +18,15 @@ describe('LoginButton', () => {
   it('snapshot - should match the snapshot', () => {
     const wrapper = shallowMount(LoginButton);
     expect(wrapper.get(loginButtonSelector)).toMatchInlineSnapshot(`
-          DOMWrapper {
-            "isDisabled": [Function],
-            "wrapperElement": <header-ui-nav-button-stub
-              class="bg-black text-white"
-              data-testid="loginButton"
-              icon="material-symbols:login-rounded"
-              text="Вход"
-            />,
-          }
-        `);
+      DOMWrapper {
+        "isDisabled": [Function],
+        "wrapperElement": <nav-button-stub
+          class="bg-black text-white"
+          data-testid="loginButton"
+          icon="material-symbols:login-rounded"
+          text="Вход"
+        />,
+      }
+    `);
   });
 });

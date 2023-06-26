@@ -24,6 +24,7 @@
           :required="true"
           :value="infoFormState.data.name ?? ''"
         />
+        <!-- null check on all number inputs for hiding zero value -->
         <UiNumberInput
           @update-value="(value: number | null) => setBeatInfo('bpm', value)"
           placeholder="Введите Bpm"
@@ -40,6 +41,7 @@
           title="Описание"
           :blocked="true"
           class="col-span-2"
+          :value="infoFormState.data.description ?? ''"
         />
         <UiNumberInput
           :class="v$.wavePrice.$error ? '!border-red-500' : ''"
