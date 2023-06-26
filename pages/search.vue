@@ -12,25 +12,29 @@ import Author from '@/api/models/Author';
 import SearchPanel from '@/components/modules/SearchPanel/SearchPanel.vue';
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
-// const { data: authorsData } = await useFetch<{
-//   authors: Author[];
-//   viewed: number;
-// }>(`${runtimeConfig.public.API_URL}/author?q=${route.query.q}`);
-const { data: beatsData, refresh: refreshBeatsData } = await useFetch<{
+const query = ref(route.query.q);
+const { data: beatsData } = await useFetch<{
   beats: Beat[];
   viewed: number;
 }>(`${runtimeConfig.public.API_URL}/beat`, {
   query: {
-    q: route.query.q,
+    q: query,
   },
   key: 'beats',
+});
+const { data: authorsData } = await useFetch<{
+  authors: Author[];
+  viewed: number;
+}>(`${runtimeConfig.public.API_URL}/author`, {
+  query: {
+    q: query,
+  },
+  key: 'authors',
 });
 watch(
   () => route.query,
   async () => {
-    refreshNuxtData('beats');
-    await refreshBeatsData();
-    console.log(route.query.q);
+    query.value = route.query.q;
   }
 );
 </script>

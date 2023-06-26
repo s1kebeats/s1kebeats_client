@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "format": "prettier --write .",
+    "format": "npx pretty-quick",
     "lint": "eslint --fix .",
     "test": "vitest"
   },

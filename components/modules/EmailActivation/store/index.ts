@@ -10,7 +10,7 @@ const useEmailActivationStore = defineStore('emailActivation', {
     };
   } => {
     return {
-      loading: false,
+      loading: true,
       error: {
         state: false,
         status: null,
@@ -19,7 +19,6 @@ const useEmailActivationStore = defineStore('emailActivation', {
   },
   actions: {
     async activate(activation: string) {
-      this.loading = true;
       try {
         await activate(activation);
       } catch (error: any) {

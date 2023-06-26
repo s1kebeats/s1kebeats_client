@@ -2,8 +2,9 @@ import EmailActivation from './EmailActivation.vue';
 import { describe, expect, it, vi } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
+import activate from './api/activate';
 
-vi.mock('./api/refresh', () => {
+vi.mock('./api/activate', () => {
   return {
     default: () => {
       return {
@@ -15,7 +16,7 @@ vi.mock('./api/refresh', () => {
 
 describe('EmailActivation', () => {
   it('calls activate api with valid activation string', () => {
-    mount(EmailActivation, {
+    shallowMount(EmailActivation, {
       global: {
         plugins: [createTestingPinia()],
         mocks: {
@@ -27,8 +28,7 @@ describe('EmailActivation', () => {
         },
       },
     });
-    const refresh = vi.fn();
 
-    expect(refresh).toHaveBeenCalledWith('testActivation');
+    expect(activate).toHaveBeenCalledWith('testActivation');
   });
 });
