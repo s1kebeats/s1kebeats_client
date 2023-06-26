@@ -15,7 +15,7 @@ describe('ProfileButton', () => {
     vi.restoreAllMocks();
   });
   describe('User Interactions', () => {
-    it('click - should toggle uiStore.profileOverlay', async () => {
+    it('click - should toggle uiStore.overlay', async () => {
       const wrapper = shallowMount(ProfileButton, {
         global: {
           plugins: [
@@ -29,11 +29,11 @@ describe('ProfileButton', () => {
 
       await wrapper.get(profileButtonSelector).trigger('click');
       vi.runAllTimers();
-      expect(uiStore.profileOverlay).toBe(true);
+      expect(uiStore.overlay).toBe(true);
 
       await wrapper.get(profileButtonSelector).trigger('click');
       vi.runAllTimers();
-      expect(uiStore.profileOverlay).toBe(false);
+      expect(uiStore.overlay).toBe(false);
     });
     it('click - should rotate the icon', async () => {
       const wrapper = shallowMount(ProfileButton, {
@@ -57,7 +57,7 @@ describe('ProfileButton', () => {
         'rotate-180'
       );
     });
-    it('focusout - should set uiStore.profileOverlay to false', async () => {
+    it('focusout - should set uiStore.overlay to false', async () => {
       const wrapper = shallowMount(ProfileButton, {
         global: {
           plugins: [
@@ -65,7 +65,7 @@ describe('ProfileButton', () => {
               stubActions: false,
               initialState: {
                 ui: {
-                  profileOverlay: true,
+                  overlay: true,
                 },
               },
             }),
@@ -76,7 +76,7 @@ describe('ProfileButton', () => {
 
       await wrapper.get(profileButtonSelector).trigger('focusout');
       vi.runAllTimers();
-      expect(uiStore.profileOverlay).toBe(false);
+      expect(uiStore.overlay).toBe(false);
     });
     it('focusout - should rotate the icon', async () => {
       const wrapper = shallowMount(ProfileButton, {
@@ -86,7 +86,7 @@ describe('ProfileButton', () => {
               stubActions: false,
               initialState: {
                 ui: {
-                  profileOverlay: true,
+                  overlay: true,
                 },
               },
             }),

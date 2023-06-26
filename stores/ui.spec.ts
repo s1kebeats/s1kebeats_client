@@ -11,28 +11,28 @@ describe('UI Store', () => {
       const store = useStore();
       expect(store.loading).toBe(true);
     });
-    test('profileOverlay - should be false', () => {
+    test('overlay - should be false', () => {
       const store = useStore();
-      expect(store.profileOverlay).toBe(false);
+      expect(store.overlay).toBe(false);
     });
   });
   describe('actions', () => {
-    test('toggleProfileOverlay', () => {
+    test('toggleOverlay', () => {
       const store = useStore();
-      store.toggleProfileOverlay();
-      expect(store.profileOverlay).toBe(true);
-      store.toggleProfileOverlay();
-      expect(store.profileOverlay).toBe(false);
+      store.toggleOverlay();
+      expect(store.overlay).toBe(true);
+      store.toggleOverlay();
+      expect(store.overlay).toBe(false);
     });
-    test('setProfileOverlay - set true', () => {
+    test('setOverlay - set true', () => {
       const store = useStore();
-      store.setProfileOverlay(true);
-      expect(store.profileOverlay).toBe(true);
+      store.setOverlay(true);
+      expect(store.overlay).toBe(true);
     });
-    test('setProfileOverlay - set false', () => {
+    test('setOverlay - set false', () => {
       const store = useStore();
-      store.setProfileOverlay(false);
-      expect(store.profileOverlay).toBe(false);
+      store.setOverlay(false);
+      expect(store.overlay).toBe(false);
     });
     test('setLoading - set true', () => {
       const store = useStore();

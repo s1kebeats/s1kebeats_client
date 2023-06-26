@@ -6,32 +6,5 @@
 </template>
 <script setup lang="ts">
 import useUiStore from './stores/ui';
-import useAuthStore from './stores/auth';
 const uiStore = useUiStore();
-const authStore = useAuthStore();
-
-const route = useRoute();
-
-const guestOnly = ['/login', '/register'];
-const authOnly = ['/settings', '/upload'];
-
-onMounted(async () => {
-  if (localStorage.getItem('accessToken')) {
-    try {
-      await authStore.checkAuth();
-
-      if (guestOnly.includes(route.path)) {
-        await navigateTo('/');
-      }
-    } catch (error: any) {
-      if (authOnly.includes(route.path)) {
-        await navigateTo('/login');
-      }
-    } finally {
-      uiStore.setLoading(false);
-    }
-  } else {
-    uiStore.setLoading(false);
-  }
-});
 </script>

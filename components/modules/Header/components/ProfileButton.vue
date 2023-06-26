@@ -1,16 +1,18 @@
 <template>
   <button
-    @click="uiStore.toggleProfileOverlay"
+    @click="uiStore.toggleOverlay"
     class="flex items-center gap-1"
-    @focusout="closeProfileOverlay"
+    @focusout="closeoverlay"
     data-testid="profileButton"
   >
-    <ProfileIcon />
+    <ClientOnly>
+      <ProfileIcon />
+    </ClientOnly>
     <Icon
       name="ic:baseline-keyboard-arrow-down"
       size="20px"
       class="transition-all"
-      :class="uiStore.profileOverlay ? 'rotate-180' : ''"
+      :class="uiStore.overlay ? 'rotate-180' : ''"
       data-testid="profileButtonIcon"
     />
   </button>
@@ -20,8 +22,7 @@ import ProfileIcon from './ui/ProfileIcon.vue';
 import useUiStore from '@/stores/ui';
 const uiStore = useUiStore();
 
-function closeProfileOverlay() {
-  console.log('out');
-  setTimeout(() => uiStore.setProfileOverlay(false), 200);
+function closeoverlay() {
+  setTimeout(() => uiStore.setOverlay(false), 200);
 }
 </script>

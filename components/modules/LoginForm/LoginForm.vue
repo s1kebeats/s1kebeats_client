@@ -40,8 +40,10 @@ import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import RememberMeInput from './components/RememberMeInput.vue';
 import useAuthStore from '@/stores/auth';
+import useUiStore from '@/stores/ui';
 
 const authStore = useAuthStore();
+const uiStore = useUiStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;
@@ -101,7 +103,7 @@ async function submitLoginForm() {
         loginFormState.data.password,
         loginFormState.data.rememberMe
       );
-
+      uiStore.setLoading(true);
       emit('success');
     } catch (error: any) {
       loginFormState.error.state = true;

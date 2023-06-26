@@ -3,17 +3,17 @@ import { defineStore } from 'pinia';
 const useUiStore = defineStore('ui', {
   state: (): {
     loading: boolean;
-    profileOverlay: boolean;
+    overlay: boolean;
   } => {
     return {
       loading: true,
-      profileOverlay: false,
+      overlay: false,
     };
   },
   actions: {
-    toggleProfileOverlay(): void {
-      this.profileOverlay = !this.profileOverlay;
-      if (this.profileOverlay) {
+    toggleOverlay(): void {
+      this.overlay = !this.overlay;
+      if (this.overlay) {
         document
           .querySelector('body')!
           .classList.add('overflow-hidden', 'h-[100dvh]');
@@ -23,8 +23,8 @@ const useUiStore = defineStore('ui', {
           .classList.remove('overflow-hidden', 'h-[100dvh]');
       }
     },
-    setProfileOverlay(value: boolean): void {
-      this.profileOverlay = value;
+    setOverlay(value: boolean): void {
+      this.overlay = value;
       if (value) {
         document
           .querySelector('body')!

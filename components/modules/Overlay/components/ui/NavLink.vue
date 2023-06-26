@@ -2,10 +2,10 @@
   <nuxt-link
     class="bg-white menu-link w-full py-3 border-[1px] rounded-lg px-4 font-semibold text-sm"
     :to="to"
-    data-testid="menuLink"
+    data-testid="navLink"
   >
-    <span data-testid="menuLinkText"> {{ text }} </span>
-    <Icon data-testid="menuLinkIcon" :name="icon" size="25px" />
+    <span data-testid="navLinkText"> {{ text }} </span>
+    <Icon data-testid="navLinkIcon" :name="icon" size="25px" />
   </nuxt-link>
 </template>
 <script setup lang="ts">

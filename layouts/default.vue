@@ -5,14 +5,14 @@
     data-testid="defaultLayout"
   >
     <Header />
-    <ProfileOverlay />
+    <Overlay />
     <main class="grow w-full flex flex-col items-center gap-3">
       <slot />
     </main>
   </div>
 </template>
 <script setup lang="ts">
-import ProfileOverlay from '@/components/modules/Header/components/ProfileOverlay.vue';
+import Overlay from '@/components/modules/Overlay/Overlay.vue';
 import Header from '@/components/modules/Header/Header.vue';
 </script>
 <style lang="scss" scoped>

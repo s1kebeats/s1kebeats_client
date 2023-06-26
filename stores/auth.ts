@@ -33,7 +33,7 @@ const useAuthStore = defineStore('auth', {
       } catch (error) {
         this.setUser(null);
         this.setAuthorized(false);
-        throw error;
+        // throw error;
       }
     },
     async logout(): Promise<void> {

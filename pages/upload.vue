@@ -4,4 +4,8 @@
 </template>
 <script setup lang="ts">
 import BeatUploadForm from '@/components/modules/UploadForm/UploadForm.vue';
+
+definePageMeta({
+  middleware: 'auth',
+});
 </script>

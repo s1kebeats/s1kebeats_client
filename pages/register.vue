@@ -8,5 +8,6 @@ import RegistrationForm from '@/components/modules/RegistrationForm/Registration
 
 definePageMeta({
   layout: 'form',
+  middleware: 'guest',
 });
 </script>
