@@ -1,6 +1,10 @@
 <template>
-  <UiLoadingSpinner v-if="emailActivationStore.loading" />
+  <UiLoadingSpinner
+    v-if="emailActivationStore.loading"
+    data-testid="loadingSpinner"
+  />
   <div
+    data-testid="emailActivationInfo"
     class="grow flex flex-col items-center justify-center gap-5 font-medium"
     v-else
   >

@@ -7,3 +7,4 @@ pnpm-lock.yaml
 README.md
 tailwind.config.js
 tsconfig.json
+auto-imports.d.ts
