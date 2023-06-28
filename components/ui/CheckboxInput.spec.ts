@@ -41,7 +41,7 @@ describe('CheckboxInput', async () => {
       const attributes = wrapper.attributes();
 
       expect(attributes['aria-checked']).toBe('false');
-      expect(wrapper.get(checkboxIndicatorSelector).isVisible()).toBeFalsy();
+      expect(wrapper.get(checkboxIndicatorSelector).isVisible()).toBe(false);
     });
   });
   describe('User Interactions', () => {

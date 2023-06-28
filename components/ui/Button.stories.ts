@@ -17,7 +17,6 @@ export const Primary: Story = {
     },
     template: `
       <Button> Button </Button>
-      <div class="bg-red-500">fsdf</div>  
     `,
   }),
   args: {},
