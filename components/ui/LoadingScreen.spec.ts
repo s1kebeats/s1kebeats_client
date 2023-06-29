@@ -1,25 +1,44 @@
 import { shallowMount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import LoadingScreen from './LoadingScreen.vue';
+import { createTestingPinia } from '@pinia/testing';
 
 const loadingScreenSelector = '[data-testid=loadingScreen]';
 
 describe('LoadingScreen', () => {
-  describe('props', () => {
+  describe('ui store', () => {
+    // ! not working properly
     it('loading - should be invisible when set to false', () => {
       const wrapper = shallowMount(LoadingScreen, {
-        props: {
-          loading: false,
-        },
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                ui: {
+                  loading: false
+                }
+              }
+            })
+          ]
+        }
       });
 
-      expect(wrapper.get(loadingScreenSelector).isVisible()).toBeFalsy();
+      expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(false);
     });
+    // ! not working properly
     it('loading - should be visible when set to true', () => {
       const wrapper = shallowMount(LoadingScreen, {
-        props: {
-          loading: true,
-        },
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                ui: {
+                  loading: true
+                }
+              }
+            })
+          ]
+        }
       });
 
       expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(true);
@@ -38,7 +57,6 @@ describe('LoadingScreen', () => {
           class="absolute z-[2] flex w-full h-full bg-white"
           data-testid="loadingScreen"
           data-v-2d6f5cd9=""
-          style="display: none;"
         >
           <uilogo
             class="w-[15%] max-w-[300px] min-w-[175px] m-auto"

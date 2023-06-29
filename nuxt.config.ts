@@ -1,3 +1,4 @@
+import tsconfigPaths from 'vite-tsconfig-paths';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -15,4 +16,7 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@pinia/nuxt', 'nuxt-icon'],
+  vite: {
+    plugins: [tsconfigPaths()],
+  }
 });

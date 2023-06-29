@@ -1,7 +1,16 @@
-/* TODO: update import to your tailwind styles file */
+import  { type Preview, setup }  from '@storybook/vue3';
+import { createPinia } from 'pinia';
+import { type App } from 'vue';
+
 import './tailwind.css';
-/** @type { import('@storybook/vue3').Preview } */
-const preview = {
+
+const pinia = createPinia();
+
+setup((app: App) => {
+  app.use(pinia);
+});
+
+const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {

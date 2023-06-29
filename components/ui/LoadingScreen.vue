@@ -1,7 +1,7 @@
 <template>
   <transition name="loading">
     <div
-      v-show="loading"
+      v-show="uiStore.loading"
       class="absolute z-[2] flex w-full h-full bg-white"
       data-testid="loadingScreen"
     >
@@ -10,9 +10,8 @@
   </transition>
 </template>
 <script setup lang="ts">
-const props = defineProps<{
-  loading: boolean;
-}>();
+import useUiStore from '@/stores/ui';
+const uiStore = useUiStore();
 </script>
 <style lang="scss" scoped>
 .loading-leave-active {

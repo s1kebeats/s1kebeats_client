@@ -1,6 +1,11 @@
 <template>
-  <div class="border-[1px] rounded-md flex items-center gap-2">
-    <button class="rounded-l-md h-full px-2 py-1 text-sm">Треки</button>
-    <button class="rounded-r-md h-full px-2 py-1 text-sm">Авторы</button>
+  <div class="flex items-center text-sm text-gray-400">
+    <button @click="searchPanelStore.setType('tracks')" :class="searchPanelStore.type === 'tracks' ? 'font-semibold !text-black' : ''" class="px-2 border-r-[1px]">Треки</button>
+    <button @click="searchPanelStore.setType('authors')" :class="searchPanelStore.type === 'authors' ? 'font-semibold !text-black' : ''" class="px-2 ">Авторы</button>
   </div>
 </template>
+<script setup lang="ts">
+import useSearchPanelStore from '../store';
+
+const searchPanelStore = useSearchPanelStore();
+</script>
