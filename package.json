@@ -1,6 +1,5 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -42,6 +41,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
+    "@s1kebeats/s1kebeats-ui": "file:../s1kebeats_ui",
     "@vuelidate/core": "^2.0.2",
     "@vuelidate/validators": "^2.0.2",
     "nuxt-icon": "^0.4.1",
