@@ -1,14 +1,15 @@
 <template>
-  <NavButton
-    @click="redirect"
-    class="bg-black text-white"
-    text="Опубликовать"
+  <Button
+    size="sm"
+    class="grow"
     icon="material-symbols:upload-rounded"
     data-testid="uploadButton"
-  />
+    @click="redirect"
+    >Опубликовать</Button
+  >
 </template>
 <script setup lang="ts">
-import NavButton from './NavButton.vue';
+import { Button } from '@s1kebeats/s1kebeats-ui';
 
 async function redirect() {
   await navigateTo('/upload');

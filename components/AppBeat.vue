@@ -7,23 +7,23 @@
     />
     <div
       v-else
-      class="bg-black w-full aspect-square rounded-t-lg flex items-center justify-center text-lg text-white"
+      class="bg-black w-full aspect-square rounded-t-lg flex items-center justify-center desktop-text-lg text-white"
     >
       ?
     </div>
     <div class="flex flex-col px-3 pb-3 gap-1">
       <div class="flex justify-between items-center gap-3">
-        <span class="font-semibold text-sm truncate">
+        <span class="link desktop-text-sm truncate">
           {{ data.name }}
         </span>
-        <span class="text-[#7945fc] min-w-[50px] truncate text-sm font-semibold"
+        <span class="text-primary min-w-[50px] truncate desktop-text-sm link"
           >{{ data.wavePrice }}р.</span
         >
       </div>
       <div
-        class="max-w-full flex flex-wrap gap-2 text-xs container max-h-[16px] overflow-hidden"
+        class="max-w-full flex flex-wrap gap-2 desktop-text-xs container max-h-[16px] overflow-hidden"
       >
-        <div v-if="data.user" class="font-semibold">
+        <div v-if="data.user" class="link">
           {{ data.user.username }}
         </div>
         <nuxt-link

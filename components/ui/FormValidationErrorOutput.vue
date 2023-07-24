@@ -1,7 +1,7 @@
 <template>
   <span
     v-if="v.$errors.length"
-    class="text-xs text-red-500"
+    class="desktop-text-xs text-danger truncate"
     data-testid="formValidationErrorOutput"
     >{{ v.$errors[0].$message }}</span
   >

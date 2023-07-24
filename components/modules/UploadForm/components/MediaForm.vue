@@ -83,7 +83,7 @@
       <transition>
         <div
           v-if="fill"
-          class="text-red-500 font-medium text-xs"
+          class="text-danger font-medium desktop-text-xs"
           data-testid="fillMessage"
         >
           * Выберите медиа

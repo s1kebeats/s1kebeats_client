@@ -1,14 +1,15 @@
 <template>
-  <NavButton
-    @click="logout"
-    class="bg-red-500 text-white"
-    text="Выход"
-    icon="streamline:entertainment-control-button-power-1-power-button-on-off"
+  <Button
+    size="sm"
+    type="secondary"
+    icon="material-symbols:logout-rounded"
     data-testid="logoutButton"
-  />
+    @click="logout"
+    >Выход</Button
+  >
 </template>
 <script setup lang="ts">
-import NavButton from './NavButton.vue';
+import { Button } from '@s1kebeats/s1kebeats-ui';
 import useAuthStore from '@/stores/auth';
 import useUiStore from '@/stores/ui';
 

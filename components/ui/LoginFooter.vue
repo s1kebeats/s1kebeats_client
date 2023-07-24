@@ -1,17 +1,20 @@
 <template>
-  <footer class="text-sm flex items-center gap-2" data-testid="loginFooter">
+  <footer
+    class="w-full desktop-text-xs flex items-center justify-center gap-2 overflow-hidden"
+    data-testid="loginFooter"
+  >
     <!-- TODO: Rest password functionality -->
     <!-- <nuxt-link
       to="/login"
-      class="text-black font-semibold transition-all"
+      class="text-black link transition-all"
       >Забыли пароль?</nuxt-link
     >| -->
-    <span class="text-black font-semibold transition-all"
+    <span class="text-black link transition-all truncate"
       >Новый пользователь?</span
     >
     <nuxt-link
       to="/register"
-      class="text-[#7945fc] font-semibold transition-all hover:brightness-[75%]"
+      class="text-primary link transition-all hover:text-primary-default_strong truncate"
       >Регистрация</nuxt-link
     >
   </footer>

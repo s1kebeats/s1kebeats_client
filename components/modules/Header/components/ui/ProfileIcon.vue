@@ -1,15 +1,20 @@
 <template>
-  <UiProfileImage v-if="authStore.authorized" data-testid="profileImage" />
+  <PresentationalAvatar
+    :image="authStore.user!.image"
+    :username="authStore.user!.username"
+    v-if="authStore.authorized"
+    data-testid="profileImage"
+  />
   <div
     v-else
-    class="bg-black rounded-full w-[32px] h-[32px] flex items-center justify-center text-lg text-white"
+    class="bg-black rounded-full w-[32px] h-[32px] flex items-center justify-center desktop-text-lg text-white"
     data-testid="unauthorizedIcon"
   >
     ?
   </div>
 </template>
 <script setup lang="ts">
-import UiProfileImage from './ProfileImage.vue';
+import { PresentationalAvatar } from '@s1kebeats/s1kebeats-ui';
 import useAuthStore from '@/stores/auth';
 
 const authStore = useAuthStore();

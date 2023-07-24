@@ -65,7 +65,7 @@
           :value="infoFormState.data.stemsPrice ?? null"
         />
         <div class="flex flex-col gap-3 col-span-2">
-          <span class="text-lg font-semibold">Теги</span>
+          <span class="desktop-text-lg link">Теги</span>
           <AppTextInput
             type="text"
             name="tags"

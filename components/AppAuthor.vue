@@ -11,7 +11,7 @@
     >
       ?
     </div>
-    <div class="font-semibold text-sm truncate">
+    <div class="link desktop-text-sm truncate">
       {{ data.username }}
     </div>
   </div>

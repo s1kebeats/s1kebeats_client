@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    class="bg-white menu-link w-full py-3 border-[1px] rounded-lg px-4 font-semibold text-sm"
+    class="bg-white menu-link w-full py-3 border-[1px] rounded-lg px-4 link desktop-text-sm"
     :to="to"
     data-testid="navLink"
   >

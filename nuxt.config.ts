@@ -2,7 +2,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // devtools: { enabled: true },
-  css: ['~/assets/css/main.css', '~/assets/css/fonts.css'],
+  css: [
+    '~/assets/css/main.css',
+    '~/assets/css/fonts.css',
+    '~/node_modules/@s1kebeats/s1kebeats-ui/dist/style.css',
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -18,5 +22,5 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', 'nuxt-icon'],
   vite: {
     plugins: [tsconfigPaths()],
-  }
+  },
 });

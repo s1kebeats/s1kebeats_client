@@ -12,59 +12,76 @@
         }
       "
     />
-    <ConfirmEmailPopUp :open="registrationFormState.success" />
     <div
       class="flex flex-col gap-3 mb-3"
-      :class="!v$.$errors.length ? 'pb-7' : ''"
+      :class="!v$.$errors.length ? 'pb-8' : ''"
     >
-      <AppDebouncedTextInput
-        title="Имя пользователя"
-        placeholder="Введите имя пользователя"
-        :required="true"
-        autocomplete="off"
+      <UsernameInput
+        :debounce="true"
         name="registrationUsername"
-        :class="v$.username.$error ? '!border-red-500' : ''"
+        size="sm"
+        :state="
+          v$.username.$error
+            ? 'error'
+            : registrationFormState.data.username
+            ? 'success'
+            : null
+        "
         @update-value="($event: string) => { registrationFormState.data.username = $event }"
-        :value="registrationFormState.data.username"
       />
       <EmailInput
+        size="sm"
         name="registrationEmail"
-        :required="true"
-        autocomplete="off"
-        :class="v$.email.$error ? '!border-red-500' : ''"
+        :state="
+          v$.email.$error
+            ? 'error'
+            : registrationFormState.data.email
+            ? 'success'
+            : null
+        "
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
-        :value="registrationFormState.data.email"
       />
-      <AppConfidentionalInput
-        :required="true"
-        autocomplete="off"
-        title="Пароль"
+      <ConfidentialInput
+        size="sm"
         name="registrationPassword"
-        placeholder="Введите пароль"
-        :class="v$.password.$error ? '!border-red-500' : ''"
+        label="Введите пароль"
         @update-value="($event: string) => { registrationFormState.data.password = $event }"
-        :value="registrationFormState.data.password"
+        :state="
+          v$.password.$error
+            ? 'error'
+            : registrationFormState.data.password
+            ? 'success'
+            : null
+        "
       />
-      <AppConfidentionalInput
-        autocomplete="off"
-        title="Подтверждение пароля"
+      <ConfidentialInput
+        size="sm"
         name="registrationPasswordConfirm"
-        placeholder="Введите пароль ещё раз"
-        :class="v$.passwordConfirm.$error ? '!border-red-500' : ''"
+        label="Введите пароль ещё раз"
         @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
-        :value="registrationFormState.data.passwordConfirm"
-        :required="true"
+        :state="
+          v$.passwordConfirm.$error
+            ? 'error'
+            : registrationFormState.data.passwordConfirm
+            ? 'success'
+            : null
+        "
       />
       <UiFormValidationErrorOutput :v="v$" />
     </div>
-    <UiLoadingButton :pending="registrationFormState.pending">
+    <Button size="sm" :loading="registrationFormState.pending">
       Зарегистрироваться
-    </UiLoadingButton>
+    </Button>
   </form>
 </template>
 <script setup lang="ts">
-import ConfirmEmailPopUp from './components/ConfirmEmailPopUp.vue';
-import EmailInput from './components/EmailInput.vue';
+import {
+  TextInput,
+  UsernameInput,
+  EmailInput,
+  ConfidentialInput,
+  Button,
+} from '@s1kebeats/s1kebeats-ui';
 import { useVuelidate } from '@vuelidate/core';
 import {
   email,

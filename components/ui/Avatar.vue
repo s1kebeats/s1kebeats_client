@@ -1,8 +1,11 @@
 <template>
-  <div v-if="authStore.authorized" class="rounded-full bg-primary w-[48px] h-[48px]">
+  <div
+    v-if="authStore.authorized"
+    class="rounded-full bg-primary w-[48px] h-[48px]"
+  >
     <span
       v-if="!authStore.user!.image"
-      class="link desktop-text-xs text-grayscale-bg"
+      class="link desktop-desktop-text-xs text-grayscale-bg"
     >
       {{ authStore.user!.username.slice(0, 2) }}
     </span>

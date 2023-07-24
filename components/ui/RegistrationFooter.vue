@@ -1,9 +1,9 @@
 <template>
-  <footer class="text-sm" data-testid="registrationFooter">
+  <footer class="desktop-text-xs" data-testid="registrationFooter">
     Уже есть аккаунт?
     <nuxt-link
       to="/login"
-      class="text-[#7945fc] font-semibold transition-all hover:brightness-[75%]"
+      class="text-primary link transition-all hover:text-primary-default_strong"
       >Войдите</nuxt-link
     >
   </footer>

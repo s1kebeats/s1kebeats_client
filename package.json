@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "conc \"pnpm run format\" \"nuxt dev\"",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

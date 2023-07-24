@@ -4,10 +4,10 @@
     class="bg-image select-none border-b flex items-center justify-center w-full h-[30vh]"
   >
     <div
-      class="relative flex flex-col items-end justify-center text-black font-semibold font-[Poppins]"
+      class="relative flex flex-col items-end justify-center text-black link font-[Poppins]"
     >
       <h1 class="text-5xl">s1kebeats</h1>
-      <h2 class="absolute top-[2.75rem] text-xl">2023</h2>
+      <h2 class="absolute top-[2.75rem] desktop-text-xl">2023</h2>
     </div>
   </section>
 </template>

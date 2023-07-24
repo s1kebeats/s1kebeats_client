@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-center font-semibold flex flex-col items-center justify-center gap-1"
+    class="text-center link flex flex-col items-center justify-center gap-1"
     data-testid="emailActivationSuccess"
     v-if="!emailActivationStore.error.state"
   >
@@ -8,7 +8,7 @@
     Электронная почта подтверждена
     <nuxt-link
       to="/login"
-      class="text-[#7945fc] text-sm transition-all hover:brightness-[75%]"
+      class="text-primary desktop-text-sm transition-all hover:brightness-[75%]"
       >Вход</nuxt-link
     >
   </div>

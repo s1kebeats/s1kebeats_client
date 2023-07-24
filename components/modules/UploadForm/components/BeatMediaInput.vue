@@ -16,7 +16,7 @@
       >
         <span
           v-if="required"
-          class="absolute right-5 top-3 text-sm font-medium"
+          class="absolute right-5 top-3 desktop-text-sm font-medium"
           data-testid="required"
           >*</span
         >
@@ -28,10 +28,10 @@
           class="min-w-[50px]"
         />
         <div class="grow flex flex-col text-center gap-1">
-          <span class="font-semibold text-sm" data-testid="title">
+          <span class="link desktop-text-sm" data-testid="title">
             {{ error.state ? error.message : title }}</span
           >
-          <span class="text-xs" data-testid="description">
+          <span class="desktop-text-xs" data-testid="description">
             <template v-if="error.state && error.description">
               {{ error.description }}
             </template>
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div
-        class="w-full bg-green-200 text-white text-center py-1.5 px-3 text-xs truncate"
+        class="w-full bg-green-200 text-white text-center py-1.5 px-3 desktop-text-xs truncate"
       >
         {{ selected ? selected : 'Файл не выбран' }}
       </div>

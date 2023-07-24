@@ -19,7 +19,7 @@
         <nuxt-link
           v-if="authStore.user?.username === route.params.username"
           to="/settings"
-          class="bg-black text-white rounded-md py-2 px-2 text-xs transition-all flex items-center gap-2"
+          class="bg-black text-white rounded-md py-2 px-2 desktop-text-xs transition-all flex items-center gap-2"
         >
           <Icon name="material-symbols:edit" size="16px" />
           Редактировать
@@ -27,7 +27,7 @@
       </div>
       <div class="flex flex-col gap-3 pb-3 pt-[7.5%] px-[5%]">
         <div class="flex items-center justify-between">
-          <div class="font-semibold text-xl max-w-[calc(95%-76px)] truncate">
+          <div class="link desktop-text-xl max-w-[calc(95%-76px)] truncate">
             {{ author.displayedName ? author.displayedName : author.username }}
           </div>
           <div class="flex gap-1 items-center">
@@ -44,7 +44,7 @@
             />
           </div>
         </div>
-        <div v-if="author.about" class="multiline text-left text-xs">
+        <div v-if="author.about" class="multiline text-left desktop-text-xs">
           {{ author.about }}
         </div>
       </div>

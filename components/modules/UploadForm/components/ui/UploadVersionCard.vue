@@ -5,8 +5,8 @@
   >
     <Icon :name="icon" size="40%" />
     <div class="flex flex-col items-center">
-      <span class="font-semibold"> {{ title }}</span>
-      <span class="text-xs"> {{ description }}</span>
+      <span class="link"> {{ title }}</span>
+      <span class="desktop-text-xs"> {{ description }}</span>
     </div>
   </button>
 </template>

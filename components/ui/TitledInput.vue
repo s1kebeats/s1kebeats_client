@@ -8,7 +8,7 @@
       v-if="title"
       :for="name"
       data-testid="titledInputLabel"
-      class="text-sm font-semibold"
+      class="desktop-text-sm link"
     >
       {{ title }}
       <span v-if="required" data-testid="titledInputRequiredIcon">*</span>

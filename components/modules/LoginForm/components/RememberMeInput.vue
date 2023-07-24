@@ -3,7 +3,7 @@
     class="grow flex items-center justify-end gap-2"
     data-testid="rememberMeInput"
   >
-    <label for="rememberMe" class="text-xs">Сохранить вход?</label>
+    <label for="rememberMe" class="desktop-text-xs">Сохранить вход?</label>
     <UiCheckboxInput
       name="rememberMe"
       @update-value="updateValue"

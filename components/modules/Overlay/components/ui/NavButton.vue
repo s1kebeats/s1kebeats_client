@@ -1,7 +1,7 @@
 <template>
   <button
     data-testid="navButton"
-    class="rounded-lg py-2 px-4 font-medium text-sm flex items-center justify-center gap-2"
+    class="rounded-lg py-2 px-4 font-medium desktop-text-sm flex items-center justify-center gap-2"
   >
     <Icon data-testid="navButtonIcon" :name="icon" size="20px" />
     <span data-testid="navButtonText"> {{ text }} </span>

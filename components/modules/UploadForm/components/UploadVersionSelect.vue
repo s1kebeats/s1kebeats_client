@@ -33,7 +33,7 @@
     <div class="w-full flex items-center">
       <div
         v-if="fill"
-        class="text-red-500 font-medium text-sm"
+        class="text-danger font-medium desktop-text-sm"
         data-testid="fillMessage"
       >
         * Выберите вид публикации
