@@ -1,86 +1,79 @@
 <template>
-  <form
-    @submit.prevent="submitRegistrationForm"
-    class="relative flex flex-col w-full"
-    data-testid="registrationForm"
+  <PageForm
+    title="Регистрация"
+    :pending="registrationFormState.pending"
+    button-text="Зарегистрироваться"
+    footer-hint="Уже есть аккаунт?"
+    footer-link-title="Вход"
+    footer-to="/login"
+    :error-state="registrationFormState.error"
+    :error-status="null"
+    @submit-form="submitRegistrationForm"
+    @close-error="closeErrorPopUp"
   >
-    <AppFormRequestErrorOutput
-      :open="registrationFormState.error"
-      @close="
-        () => {
-          registrationFormState.error = false;
-        }
+    <UsernameInput
+      :debounce="true"
+      name="registrationUsername"
+      size="sm"
+      :state="
+        v$.username.$error
+          ? 'error'
+          : registrationFormState.data.username
+          ? 'success'
+          : null
+      "
+      @update-value="($event: string) => { registrationFormState.data.username = $event }"
+    />
+    <EmailInput
+      size="sm"
+      name="registrationEmail"
+      :state="
+        v$.email.$error
+          ? 'error'
+          : registrationFormState.data.email
+          ? 'success'
+          : null
+      "
+      :debounce="true"
+      @update-value="($event: string) => { registrationFormState.data.email = $event }"
+    />
+    <ConfidentialInput
+      size="sm"
+      name="registrationPassword"
+      label="Введите пароль"
+      @update-value="($event: string) => { registrationFormState.data.password = $event }"
+      :state="
+        v$.password.$error
+          ? 'error'
+          : registrationFormState.data.password
+          ? 'success'
+          : null
       "
     />
-    <div
-      class="flex flex-col gap-3 mb-3"
-      :class="!v$.$errors.length ? 'pb-8' : ''"
-    >
-      <UsernameInput
-        :debounce="true"
-        name="registrationUsername"
-        size="sm"
-        :state="
-          v$.username.$error
-            ? 'error'
-            : registrationFormState.data.username
-            ? 'success'
-            : null
-        "
-        @update-value="($event: string) => { registrationFormState.data.username = $event }"
-      />
-      <EmailInput
-        size="sm"
-        name="registrationEmail"
-        :state="
-          v$.email.$error
-            ? 'error'
-            : registrationFormState.data.email
-            ? 'success'
-            : null
-        "
-        :debounce="true"
-        @update-value="($event: string) => { registrationFormState.data.email = $event }"
-      />
-      <ConfidentialInput
-        size="sm"
-        name="registrationPassword"
-        label="Введите пароль"
-        @update-value="($event: string) => { registrationFormState.data.password = $event }"
-        :state="
-          v$.password.$error
-            ? 'error'
-            : registrationFormState.data.password
-            ? 'success'
-            : null
-        "
-      />
-      <ConfidentialInput
-        size="sm"
-        name="registrationPasswordConfirm"
-        label="Введите пароль ещё раз"
-        @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
-        :state="
-          v$.passwordConfirm.$error
-            ? 'error'
-            : registrationFormState.data.passwordConfirm
-            ? 'success'
-            : null
-        "
-      />
+    <ConfidentialInput
+      size="sm"
+      name="registrationPasswordConfirm"
+      label="Введите пароль ещё раз"
+      @update-value="($event: string) => { registrationFormState.data.passwordConfirm = $event }"
+      :state="
+        v$.passwordConfirm.$error
+          ? 'error'
+          : registrationFormState.data.passwordConfirm
+          ? 'success'
+          : null
+      "
+    />
+    <div class="h-[17px] flex items-center">
       <UiFormValidationErrorOutput :v="v$" />
     </div>
-    <Button size="sm" :loading="registrationFormState.pending">
-      Зарегистрироваться
-    </Button>
-  </form>
+  </PageForm>
 </template>
 <script setup lang="ts">
+import PageForm from '@/components/modules/PageForm/PageForm.vue';
 import {
   UsernameInput,
   EmailInput,
   ConfidentialInput,
-  Button,
 } from '@s1kebeats/s1kebeats-ui';
 import { useVuelidate } from '@vuelidate/core';
 import {
@@ -190,5 +183,9 @@ async function submitRegistrationForm() {
       registrationFormState.pending = false;
     }
   }
+}
+
+function closeErrorPopUp() {
+  registrationFormState.error = false;
 }
 </script>

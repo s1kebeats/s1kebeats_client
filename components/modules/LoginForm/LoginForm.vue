@@ -1,51 +1,47 @@
 <template>
-  <form
-    @submit.prevent="submitLoginForm"
-    class="relative flex flex-col w-full gap-3"
-    data-testid="loginForm"
+  <PageForm
+    title="Вход"
+    :pending="loginFormState.pending"
+    button-text="Войти"
+    footer-hint="Новый пользователь?"
+    footer-link-title="Регистрация"
+    footer-to="/register"
+    :error-state="loginFormState.error.state"
+    :error-status="loginFormState.error.status"
+    @submit-form="submitLoginForm"
+    @close-error="closeErrorPopUp"
   >
-    <AppFormRequestErrorOutput
-      :open="loginFormState.error.state"
-      :status="loginFormState.error.code"
-      @close="closeErrorPopUp"
+    <UsernameInput
+      size="sm"
+      :state="v$.username.$error ? 'error' : null"
+      name="loginUsername"
+      @update-value="($event: string) => { loginFormState.data.username = $event }"
     />
-    <template v-if="loginFormState.error.code === 403">
-      <div></div>
-    </template>
-    <template v-else>
-      <UsernameInput
+    <ConfidentialInput
+      size="sm"
+      name="loginPassword"
+      label="Введите пароль"
+      @update-value="($event: string) => { loginFormState.data.password = $event }"
+      :state="v$.password.$error ? 'error' : null"
+    />
+    <div class="w-full flex items-center justify-between">
+      <UiFormValidationErrorOutput :v="v$" />
+      <CheckboxInput
+        class="grow justify-end"
+        :checked="true"
         size="sm"
-        :state="v$.username.$error ? 'error' : null"
-        name="loginUsername"
-        @update-value="($event: string) => { loginFormState.data.username = $event }"
+        name="loginRememberMe"
+        label="Сохранить вход?"
+        @update-value="($event: boolean) => { loginFormState.data.rememberMe = $event }"
       />
-      <ConfidentialInput
-        size="sm"
-        name="loginPassword"
-        label="Введите пароль"
-        @update-value="($event: string) => { loginFormState.data.password = $event }"
-        :state="v$.password.$error ? 'error' : null"
-      />
-      <div class="w-full flex items-center justify-between">
-        <UiFormValidationErrorOutput :v="v$" />
-        <CheckboxInput
-          class="grow justify-end"
-          :checked="true"
-          size="sm"
-          name="loginRememberMe"
-          label="Сохранить вход?"
-          @update-value="($event: boolean) => { loginFormState.data.rememberMe = $event }"
-        />
-      </div>
-      <Button size="sm" :loading="loginFormState.pending"> Войти </Button>
-    </template>
-  </form>
+    </div>
+  </PageForm>
 </template>
 <script setup lang="ts">
+import PageForm from '@/components/modules/PageForm/PageForm.vue';
 import {
   UsernameInput,
   ConfidentialInput,
-  Button,
   CheckboxInput,
 } from '@s1kebeats/s1kebeats-ui';
 import { helpers, required } from '@vuelidate/validators';
@@ -68,7 +64,7 @@ const loginFormState = reactive<{
   };
   error: {
     state: boolean;
-    code: number | null;
+    status: number | null;
   };
   pending: boolean;
 }>({
@@ -79,7 +75,7 @@ const loginFormState = reactive<{
   },
   error: {
     state: false,
-    code: null,
+    status: null,
   },
   pending: false,
 });
@@ -99,7 +95,7 @@ const v$ = useVuelidate(loginRules, loginFormState.data, {
 function closeErrorPopUp() {
   loginFormState.error.state = false;
   setTimeout(() => {
-    loginFormState.error.code = null;
+    loginFormState.error.status = null;
   }, 200);
 }
 
@@ -119,7 +115,7 @@ async function submitLoginForm() {
     } catch (error: any) {
       loginFormState.error.state = true;
       if (error.response.status) {
-        loginFormState.error.code = error.response.status;
+        loginFormState.error.status = error.response.status;
       }
     } finally {
       loginFormState.pending = false;

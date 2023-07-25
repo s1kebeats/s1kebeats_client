@@ -1,7 +1,5 @@
 <template>
-  <UiFormHeader title="Регистрация" />
   <RegistrationForm @success="onRegistrationSuccess" />
-  <UiFormFooter to="/register" hint="Уже есть аккаунт?" link-title="Вход" />
 </template>
 <script setup lang="ts">
 import RegistrationForm from '@/components/modules/RegistrationForm/RegistrationForm.vue';

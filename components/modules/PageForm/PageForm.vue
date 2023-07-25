@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col items-center justify-center gap-7">
+  <div class="w-full flex flex-col items-center justify-center gap-7">
     <h1 class="link desktop-display-xs" data-testid="formTitle">{{ title }}</h1>
     <form
-      @submit.prevent="emit('submit')"
+      @submit.prevent="emit('submitForm')"
       class="relative flex flex-col w-full gap-3"
     >
       <RequestErrorOutput
@@ -29,10 +29,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import RequestErrorOutput from './components/RequestErrorOutput.vue'
+import RequestErrorOutput from './components/RequestErrorOutput.vue';
+import { Button } from '@s1kebeats/s1kebeats-ui';
 
 const props = defineProps<{
-  submitCallback: Function;
   title: string;
   pending: boolean;
   buttonText: string;
@@ -40,11 +40,11 @@ const props = defineProps<{
   footerLinkTitle?: string;
   footerTo?: string;
   errorState: boolean;
-  errorStatus: number;
+  errorStatus: number | null;
 }>();
 
 const emit = defineEmits<{
-  (e: 'submit'): void;
+  (e: 'submitForm'): void;
   (e: 'closeError'): void;
 }>();
 </script>

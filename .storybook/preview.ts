@@ -6,9 +6,9 @@ import './tailwind.css';
 
 const pinia = createPinia();
 
-setup((app: App) => {
-  app.use(pinia);
-});
+// setup((app: App) => {
+//   app.use(pinia);
+// });
 
 const preview: Preview = {
   parameters: {
