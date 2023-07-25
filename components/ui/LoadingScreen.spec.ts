@@ -15,12 +15,12 @@ describe('LoadingScreen', () => {
             createTestingPinia({
               initialState: {
                 ui: {
-                  loading: false
-                }
-              }
-            })
-          ]
-        }
+                  loading: false,
+                },
+              },
+            }),
+          ],
+        },
       });
 
       expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(false);
@@ -33,12 +33,12 @@ describe('LoadingScreen', () => {
             createTestingPinia({
               initialState: {
                 ui: {
-                  loading: true
-                }
-              }
-            })
-          ]
-        }
+                  loading: true,
+                },
+              },
+            }),
+          ],
+        },
       });
 
       expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(true);

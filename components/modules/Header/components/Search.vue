@@ -1,8 +1,16 @@
 <template>
-  <TextInput icon="material-symbols:search" :callback="search" class="absolute left-0 right-0 mx-auto w-[45%] max-w-[600px]" name="header-search" label="Поиск" size="sm" @update-value="updateSearchQuery" />
+  <TextInput
+    icon="material-symbols:search"
+    :callback="search"
+    class="absolute left-0 right-0 mx-auto w-[45%] max-w-[600px]"
+    name="header-search"
+    label="Поиск"
+    size="sm"
+    @update-value="updateSearchQuery"
+  />
 </template>
 <script setup lang="ts">
-import { TextInput } from '@s1kebeats/s1kebeats-ui'
+import { TextInput } from '@s1kebeats/s1kebeats-ui';
 
 const route = useRoute();
 const searchQuery = ref(route.query.q);

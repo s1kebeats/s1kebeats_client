@@ -1,5 +1,9 @@
 <template>
-  <button class="rounded-md px-1 border-[1px]" @click="searchPanelStore.togglePanel" :class="searchPanelStore.panel ? 'border-[#7945fc]' : ''">
+  <button
+    class="rounded-md px-1 border-[1px]"
+    @click="searchPanelStore.togglePanel"
+    :class="searchPanelStore.panel ? 'border-[#7945fc]' : ''"
+  >
     <Icon
       name="material-symbols:filter-list-rounded"
       size="20px"

@@ -13512,7 +13512,7 @@ packages:
   file:../s1kebeats_ui:
     resolution: {directory: ../s1kebeats_ui, type: directory}
     name: '@s1kebeats/s1kebeats-ui'
-    version: 3.3.0
+    version: 3.4.0
     dependencies:
       email-validator: 2.0.4
       vue: 3.3.4

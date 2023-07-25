@@ -7,7 +7,7 @@ module.exports = {
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
     './app.vue',
-    './node_modules/@s1kebeats/s1kebeats-ui/dist/*.js'
+    './node_modules/@s1kebeats/s1kebeats-ui/dist/*.js',
   ],
   theme: {
     extend: {
@@ -64,4 +64,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

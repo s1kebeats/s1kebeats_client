@@ -1,5 +1,6 @@
 <template>
   <PresentationalAvatar
+    size="sm"
     :image="authStore.user!.image"
     :username="authStore.user!.username"
     v-if="authStore.authorized"
@@ -7,7 +8,7 @@
   />
   <div
     v-else
-    class="bg-black rounded-full w-[32px] h-[32px] flex items-center justify-center desktop-text-lg text-white"
+    class="bg-black rounded-full w-[40px] h-[40px] flex items-center justify-center desktop-text-xs text-white"
     data-testid="unauthorizedIcon"
   >
     ?

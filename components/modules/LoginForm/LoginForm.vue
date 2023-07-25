@@ -9,36 +9,47 @@
       :status="loginFormState.error.code"
       @close="closeErrorPopUp"
     />
-    <AppUsernameInput
-      :class="v$.username.$error ? '!border-red-500' : ''"
-      name="loginUsername"
-      @update-value="($event: string) => { loginFormState.data.username = $event }"
-      :required="true"
-      :value="loginFormState.data.username"
-    />
-    <AppConfidentionalInput
-      title="Пароль"
-      name="loginPassword"
-      placeholder="Введите пароль"
-      :class="v$.password.$error ? '!border-red-500' : ''"
-      @update-value="($event: string) => { loginFormState.data.password = $event }"
-      :required="true"
-      :value="loginFormState.data.password"
-    />
-    <div class="flex items-center h-5">
-      <UiFormValidationErrorOutput :v="v$" />
-      <RememberMeInput
-        @update-value="($event: boolean) => { loginFormState.data.rememberMe = $event }"
-        :value="loginFormState.data.rememberMe"
+    <template v-if="loginFormState.error.code === 403">
+      <div></div>
+    </template>
+    <template v-else>
+      <UsernameInput
+        size="sm"
+        :state="v$.username.$error ? 'error' : null"
+        name="loginUsername"
+        @update-value="($event: string) => { loginFormState.data.username = $event }"
       />
-    </div>
-    <UiLoadingButton :pending="loginFormState.pending"> Войти </UiLoadingButton>
+      <ConfidentialInput
+        size="sm"
+        name="loginPassword"
+        label="Введите пароль"
+        @update-value="($event: string) => { loginFormState.data.password = $event }"
+        :state="v$.password.$error ? 'error' : null"
+      />
+      <div class="w-full flex items-center justify-between">
+        <UiFormValidationErrorOutput :v="v$" />
+        <CheckboxInput
+          class="grow justify-end"
+          :checked="true"
+          size="sm"
+          name="loginRememberMe"
+          label="Сохранить вход?"
+          @update-value="($event: boolean) => { loginFormState.data.rememberMe = $event }"
+        />
+      </div>
+      <Button size="sm" :loading="loginFormState.pending"> Войти </Button>
+    </template>
   </form>
 </template>
 <script setup lang="ts">
+import {
+  UsernameInput,
+  ConfidentialInput,
+  Button,
+  CheckboxInput,
+} from '@s1kebeats/s1kebeats-ui';
 import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import RememberMeInput from './components/RememberMeInput.vue';
 import useAuthStore from '@/stores/auth';
 import useUiStore from '@/stores/ui';
 

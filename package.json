@@ -10,6 +10,7 @@
     "build-storybook": "storybook build",
     "lint": "eslint --fix .",
     "format": "npx pretty-quick",
+    "format-all": "prettier --write .",
     "test": "vitest"
   },
   "devDependencies": {

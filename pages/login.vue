@@ -1,7 +1,11 @@
 <template>
   <UiFormHeader title="Вход" />
   <LoginForm @success="onLoginSuccess" />
-  <UiLoginFooter />
+  <UiFormFooter
+    to="/register"
+    hint="Новый пользователь?"
+    link-title="Регистрация"
+  />
 </template>
 <script setup lang="ts">
 import LoginForm from '@/components/modules/LoginForm/LoginForm.vue';

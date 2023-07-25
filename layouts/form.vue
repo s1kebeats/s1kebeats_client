@@ -3,8 +3,8 @@
     <main
       class="grow bg-white flex flex-col items-center justify-center gap-7 px-[7.5%] pb-5"
     >
-      <nuxt-link to="/">
-        <UiLogo class="mx-auto w-[35%]" />
+      <nuxt-link to="/" class="w-[45%]">
+        <UiLogo class="mx-auto" />
       </nuxt-link>
       <slot />
     </main>

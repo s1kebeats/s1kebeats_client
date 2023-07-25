@@ -39,6 +39,7 @@
             ? 'success'
             : null
         "
+        :debounce="true"
         @update-value="($event: string) => { registrationFormState.data.email = $event }"
       />
       <ConfidentialInput
@@ -76,7 +77,6 @@
 </template>
 <script setup lang="ts">
 import {
-  TextInput,
   UsernameInput,
   EmailInput,
   ConfidentialInput,
@@ -95,6 +95,13 @@ import withDigit from './helpers/validators/withDigit';
 import withCapitalLetter from './helpers/validators/withCapitalLetter';
 import register from './api/register';
 import noSpecialChars from './helpers/validators/noSpecialChars';
+import useUiStore from '@/stores/ui';
+
+const uiStore = useUiStore();
+
+const emit = defineEmits<{
+  (e: 'success'): void;
+}>();
 
 const registrationFormState = reactive<{
   data: {
@@ -105,7 +112,6 @@ const registrationFormState = reactive<{
   };
   error: boolean;
   pending: boolean;
-  success: boolean;
 }>({
   data: {
     username: '',
@@ -115,7 +121,6 @@ const registrationFormState = reactive<{
   },
   error: false,
   pending: false,
-  success: false,
 });
 
 const registrationRules = computed(() => {
@@ -177,8 +182,8 @@ async function submitRegistrationForm() {
         registrationFormState.data.email,
         registrationFormState.data.password
       );
-
-      registrationFormState.success = true;
+      uiStore.setLoading(true);
+      emit('success');
     } catch (error: any) {
       registrationFormState.error = true;
     } finally {
