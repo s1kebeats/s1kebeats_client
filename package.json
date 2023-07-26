@@ -1,16 +1,19 @@
 {
-  "name": "nuxt-app",
+  "name": "s1kebeats-client",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "conc \"pnpm run format\" \"nuxt dev\"",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "storybook": "pnpm dlx tailwindcss -o .storybook/tailwind.css && storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build": "nuxt build",
+    "build:main-scss": "sass ./assets/css/main.scss ./assets/css/main.css",
+    "build:tailwind": "pnpm run build:main-scss && pnpm dlx tailwindcss -i ./assets/css/main.css -o .storybook/tailwind.css",
+    "build:storybook": "storybook build",
+    "dev": "conc \"pnpm run format\" \"nuxt dev\"",
+    "dev:tailwind": "pnpm run build:tailwind -- --watch",
+    "dev:storybook": "conc \"pnpm run format:mod\" \"storybook dev -p 6006\" \"pnpm run dev:tailwind\"",
+    "format:mod": "npx pretty-quick",
+    "format:all": "prettier --write .",
     "lint": "eslint --fix .",
-    "format": "npx pretty-quick",
-    "format-all": "prettier --write .",
     "test": "vitest"
   },
   "devDependencies": {

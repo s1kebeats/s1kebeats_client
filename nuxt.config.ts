@@ -3,7 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineNuxtConfig({
   // devtools: { enabled: true },
   css: [
-    '~/assets/css/main.css',
+    '~/assets/css/main.scss',
     '~/assets/css/fonts.css',
     '~/node_modules/@s1kebeats/s1kebeats-ui/dist/style.css',
   ],

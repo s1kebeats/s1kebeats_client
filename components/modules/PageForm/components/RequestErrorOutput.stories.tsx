@@ -9,7 +9,11 @@ export default meta;
 
 export const Presentation = () => (
   <div class="flex flex-col gap-5 items-start">
-    <RequestErrorOutput open={true} />
-    <RequestErrorOutput open={true} status={401} />
+    <div class="relative w-[200px] aspect-square">
+      <RequestErrorOutput open={true} />
+    </div>
+    <div class="relative w-[200px] aspect-square">
+      <RequestErrorOutput open={true} status={401} />
+    </div>
   </div>
 );

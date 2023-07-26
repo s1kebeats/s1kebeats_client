@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import { type App } from 'vue';
 
 import './tailwind.css';
+import '../assets/css/fonts.css';
 
 const pinia = createPinia();
 
