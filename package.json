@@ -8,7 +8,7 @@
     "build:main-scss": "sass ./assets/css/main.scss ./assets/css/main.css",
     "build:tailwind": "pnpm run build:main-scss && pnpm dlx tailwindcss -i ./assets/css/main.css -o .storybook/tailwind.css",
     "build:storybook": "storybook build",
-    "dev": "conc \"pnpm run format\" \"nuxt dev\"",
+    "dev": "conc \"pnpm run format:mod\" \"nuxt dev\"",
     "dev:tailwind": "pnpm run build:tailwind -- --watch",
     "dev:storybook": "conc \"pnpm run format:mod\" \"storybook dev -p 6006\" \"pnpm run dev:tailwind\"",
     "format:mod": "npx pretty-quick",

@@ -1,14 +1,16 @@
 <template>
-  <span
-    v-if="v.$errors.length"
-    class="desktop-text-xs text-danger truncate"
-    data-testid="formValidationErrorOutput"
-    >{{ v.$errors[0].$message }}</span
-  >
+  <div class="h-[17px] flex items-center">
+    <span
+      v-if="errors.length"
+      class="desktop-text-xs text-danger truncate"
+      data-testid="formValidationErrorOutput"
+      >{{ errors[0].$message }}</span
+    >
+  </div>
 </template>
 <script setup lang="ts">
-import { Validation } from '@vuelidate/core';
+import { ErrorObject } from '@vuelidate/core';
 const props = defineProps<{
-  v: Validation;
+  errors: ErrorObject[];
 }>();
 </script>

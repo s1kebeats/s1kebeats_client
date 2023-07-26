@@ -63,9 +63,7 @@
           : null
       "
     />
-    <div class="h-[17px] flex items-center">
-      <UiFormValidationErrorOutput :v="v$" />
-    </div>
+    <UiFormValidationErrorOutput :errors="v$.$errors" />
   </PageForm>
 </template>
 <script setup lang="ts">

@@ -25,7 +25,7 @@
       :state="v$.password.$error ? 'error' : null"
     />
     <div class="w-full flex items-center justify-between">
-      <UiFormValidationErrorOutput :v="v$" />
+      <UiFormValidationErrorOutput :errors="v$.$errors" />
       <CheckboxInput
         class="grow justify-end"
         :checked="true"
