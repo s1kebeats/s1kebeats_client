@@ -20,7 +20,7 @@ export const Presentation = () => (
     footer-hint="Новый пользователь?"
     footer-link-title="Регистрация"
     footer-to="/register"
-    error-state={true}
+    error-state={false}
     error-status={null}
   >
     <UsernameInput size="sm" name="loginUsername" />

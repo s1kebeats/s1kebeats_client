@@ -4,23 +4,30 @@
     <form
       @submit.prevent="emit('submitForm')"
       class="relative flex flex-col w-full gap-3"
+      data-testid="form"
     >
       <RequestErrorOutput
         :open="errorState"
         :status="errorStatus"
         @close="emit('closeError')"
+        data-testid="formRequestErrorOutput"
       />
       <slot />
-      <Button size="sm" :loading="pending"> {{ buttonText }} </Button>
+      <Button size="sm" :loading="pending" data-testid="actionButton">
+        {{ buttonText }}
+      </Button>
       <footer
         class="w-full desktop-text-xs flex items-center justify-center gap-2"
+        v-if="footerHint && footerLinkTitle && footerTo"
+        data-testid="formFooter"
       >
-        <span class="text-black">
+        <span class="text-black" data-testid="footerHint">
           {{ footerHint }}
         </span>
         <nuxt-link
           :to="footerTo"
           class="text-primary link transition-all hover:text-primary-default_strong"
+          data-testid="footerLink"
         >
           {{ footerLinkTitle }}
         </nuxt-link>

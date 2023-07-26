@@ -1,9 +1,9 @@
 <template>
-  <transition name="popup">
+  <transition name="fade">
     <div
       v-show="open"
       class="absolute outline outline-2 z-[1] w-full h-full backdrop-blur-md rounded-lg flex flex-col items-center justify-center gap-2 p-3"
-      data-testid="formRequestErrorOutput"
+      data-testid="requestErrorOutput"
     >
       <Icon
         name="material-symbols:warning-rounded"
@@ -11,19 +11,16 @@
         size="25%"
       />
       <div class="text-center flex flex-col gap-2">
-        <template v-if="status === 401">
-          <p class="desktop-text-md link" data-testid="errorTitle">
-            Неверные данные для входа
-          </p>
-        </template>
-        <template v-else>
-          <p class="desktop-text-md link" data-testid="errorTitle">
-            Произошла непредвиденная ошибка
-          </p>
-          <p class="desktop-text-xs" data-testid="errorDescription">
-            Проверьте ваше интернет соединение
-          </p>
-        </template>
+        <p class="desktop-text-md link" data-testid="errorTitle">
+          {{ status === 401 ? unauthorizedErrorTitle : unexpectedErrorTitle }}
+        </p>
+        <p
+          class="desktop-text-xs"
+          data-testid="errorDescription"
+          v-if="status !== 401"
+        >
+          Проверьте ваше интернет соединение
+        </p>
       </div>
       <button
         @click.prevent="close"
@@ -36,6 +33,8 @@
   </transition>
 </template>
 <script setup lang="ts">
+import { unauthorizedErrorTitle, unexpectedErrorTitle } from './errorTitles';
+
 const props = defineProps<{
   open: boolean;
   status?: number | null;
@@ -49,13 +48,3 @@ const close = () => {
   emit('close');
 };
 </script>
-<style lang="scss" scoped>
-.popup-enter-active,
-.popup-leave-active {
-  transition: opacity 0.2s ease;
-}
-.popup-enter-from,
-.popup-leave-to {
-  opacity: 0;
-}
-</style>
