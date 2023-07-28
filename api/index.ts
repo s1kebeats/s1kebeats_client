@@ -4,7 +4,7 @@ import axios, {
 } from 'axios';
 import refresh from '@/stores/api/refresh';
 
-export const API_URL = 'http://localhost:5000/api';
+export const API_URL = 'http://192.168.1.135:5000/api';
 
 const $api = axios.create({
   withCredentials: true,

@@ -1,13 +1,10 @@
 <template>
   <LoginForm
-    v-show="page === 0"
+    v-if="page === 0"
     @success="onLoginSuccess"
     @activate="switchPage"
   />
-  <ActivationForm
-    v-if="page === 1"
-    @success="onLoginSuccess"
-  />
+  <ActivationForm v-if="page === 1" @success="onLoginSuccess" />
 </template>
 <script setup lang="ts">
 import LoginForm from '@/components/modules/LoginForm/LoginForm.vue';

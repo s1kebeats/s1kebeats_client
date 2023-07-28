@@ -12,12 +12,18 @@
       />
       <div class="text-center flex flex-col gap-2">
         <p class="desktop-text-md link" data-testid="errorTitle">
-          {{ status === 401 ? unauthorizedErrorTitle : unexpectedErrorTitle }}
+          {{
+            status === 401
+              ? unauthorizedErrorTitle
+              : status === 404
+              ? wrongActivationCodeTitle
+              : unexpectedErrorTitle
+          }}
         </p>
         <p
           class="desktop-text-xs"
           data-testid="errorDescription"
-          v-if="status !== 401"
+          v-if="status !== 401 && status !== 404"
         >
           Проверьте ваше интернет соединение
         </p>
@@ -33,7 +39,11 @@
   </transition>
 </template>
 <script setup lang="ts">
-import { unauthorizedErrorTitle, unexpectedErrorTitle } from './errorTitles';
+import {
+  unauthorizedErrorTitle,
+  unexpectedErrorTitle,
+  wrongActivationCodeTitle,
+} from './errorTitles';
 
 const props = defineProps<{
   open: boolean;
