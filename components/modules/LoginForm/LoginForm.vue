@@ -48,9 +48,11 @@ import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import useAuthStore from '@/stores/auth';
 import useUiStore from '@/stores/ui';
+import useTempAuthStore from '@/stores/tempAuth';
 
 const authStore = useAuthStore();
 const uiStore = useUiStore();
+const tempAuthStore = useTempAuthStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;

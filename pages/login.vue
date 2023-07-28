@@ -7,7 +7,6 @@
   <ActivationForm
     v-if="page === 1"
     @success="onLoginSuccess"
-    @activate="switchPage"
   />
 </template>
 <script setup lang="ts">

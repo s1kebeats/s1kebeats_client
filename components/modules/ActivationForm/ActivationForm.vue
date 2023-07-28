@@ -15,7 +15,8 @@
       name="activationCodeInput"
       label="Введите код"
       size="sm"
-      :state="v$.actvationCode.$error ? 'error' : null"
+      :state="v$.activationCode.$error ? 'error' : null"
+      @update-value="($event: string) => { activationFormState.data.activationCode = $event }"
     />
     <UiFormValidationErrorOutput :errors="v$.$errors" />
   </PageForm>
@@ -27,9 +28,11 @@ import { helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import useAuthStore from '@/stores/auth';
 import useUiStore from '@/stores/ui';
+import useTempAuthStore from '@/stores/tempAuth';
 
 const authStore = useAuthStore();
 const uiStore = useUiStore();
+const tempAuthStore = useTempAuthStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;
@@ -57,8 +60,8 @@ const activationFormState = reactive<{
 
 const activationRules = computed(() => {
   return {
-    actvationCode: {
-      required: helpers.withMessage('Введите код подтрверждения', required),
+    activationCode: {
+      required: helpers.withMessage('Введите код подтверждения', required),
     },
   };
 });
@@ -82,6 +85,7 @@ async function submitActivationForm() {
       activationFormState.pending = true;
 
       await authStore.activate(activationFormState.data.activationCode);
+      await authStore.login(...Object.values(tempAuthStore.getData()));
       uiStore.setLoading(true);
       emit('success');
     } catch (error: any) {

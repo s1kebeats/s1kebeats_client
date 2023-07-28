@@ -3,6 +3,7 @@ import refresh from './api/refresh';
 import type User from '@/api/models/User';
 import logout from './api/logout';
 import login from './api/login';
+import activate from './api/activate';
 
 const useAuthStore = defineStore('auth', {
   state: (): {
@@ -56,6 +57,13 @@ const useAuthStore = defineStore('auth', {
         this.setAuthorized(true);
       } catch (error) {
         this.setAuthorized(false);
+        throw error;
+      }
+    },
+    async activate(activationCode: string): Promise<void> {
+      try {
+        await activate(activationCode);
+      } catch (error) {
         throw error;
       }
     },
