@@ -54,6 +54,7 @@ const uiStore = useUiStore();
 
 const emit = defineEmits<{
   (e: 'success'): void;
+  (e: 'activate'): void;
 }>();
 
 const loginFormState = reactive<{
@@ -82,8 +83,10 @@ const loginFormState = reactive<{
 
 const loginRules = computed(() => {
   return {
-    username: { required: helpers.withMessage('Заполните поля', required) },
-    password: { required: helpers.withMessage('Заполните поля', required) },
+    username: {
+      required: helpers.withMessage('Введите имя пользователя', required),
+    },
+    password: { required: helpers.withMessage('Введите пароль', required) },
   };
 });
 
@@ -113,6 +116,11 @@ async function submitLoginForm() {
       uiStore.setLoading(true);
       emit('success');
     } catch (error: any) {
+      if (error.response.status === 403) {
+        emit('activate');
+        tempAuthStore.setData(loginFormState.data);
+        return;
+      }
       loginFormState.error.state = true;
       if (error.response.status) {
         loginFormState.error.status = error.response.status;

@@ -117,7 +117,7 @@ const registrationFormState = reactive<{
 const registrationRules = computed(() => {
   return {
     username: {
-      required: helpers.withMessage('Заполните поля', required),
+      required: helpers.withMessage('Введите имя пользователя', required),
       noSpecialChars: helpers.withMessage(
         'Введите имя пользователя без спец. символов',
         noSpecialChars
@@ -128,11 +128,11 @@ const registrationRules = computed(() => {
       ),
     },
     email: {
-      required: helpers.withMessage('Заполните поля', required),
+      required: helpers.withMessage('Введите электронную почту', required),
       email: helpers.withMessage('Введите настоящую электронную почту', email),
     },
     password: {
-      required: helpers.withMessage('Заполните поля', required),
+      required: helpers.withMessage('Введите пароль', required),
       minLength: helpers.withMessage(
         'Минимальная длина пароля: 8 символов',
         minLength(8)

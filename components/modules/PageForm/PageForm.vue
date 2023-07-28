@@ -1,6 +1,8 @@
 <template>
   <div class="w-full flex flex-col items-center justify-center gap-7">
-    <h1 class="link desktop-display-xs" data-testid="formTitle">{{ title }}</h1>
+    <h1 class="link desktop-display-xs text-center" data-testid="formTitle">
+      {{ title }}
+    </h1>
     <form
       @submit.prevent="emit('submitForm')"
       class="relative flex flex-col w-full gap-3"

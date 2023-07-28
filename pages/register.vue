@@ -1,5 +1,8 @@
 <template>
-  <RegistrationForm @success="onRegistrationSuccess" />
+  <RegistrationForm
+    @success="onRegistrationSuccess"
+    data-testid="registrationForm"
+  />
 </template>
 <script setup lang="ts">
 import RegistrationForm from '@/components/modules/RegistrationForm/RegistrationForm.vue';
