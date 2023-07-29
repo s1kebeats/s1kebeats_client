@@ -20,11 +20,14 @@ describe('RegisterButton', () => {
     expect(wrapper.get(registerButtonSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <nav-button-stub
-          class="bg-[#7945fc] text-white"
+        "wrapperElement": <button-stub
+          class="grow"
           data-testid="registerButton"
           icon="streamline:interface-user-add-actions-add-close-geometric-human-person-plus-single-up-user"
-          text="Регистрация"
+          loading="false"
+          position="left"
+          size="sm"
+          type="secondary"
         />,
       }
     `);

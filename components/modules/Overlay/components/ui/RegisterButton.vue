@@ -1,14 +1,16 @@
 <template>
-  <NavButton
-    @click="redirect"
-    class="bg-[#7945fc] text-white"
-    text="Регистрация"
+  <Button
+    size="sm"
+    class="grow"
+    type="secondary"
     icon="streamline:interface-user-add-actions-add-close-geometric-human-person-plus-single-up-user"
     data-testid="registerButton"
-  />
+    @click="redirect"
+    >Регистрация</Button
+  >
 </template>
 <script setup lang="ts">
-import NavButton from './NavButton.vue';
+import { Button } from '@s1kebeats/s1kebeats-ui';
 
 async function redirect() {
   await navigateTo('/register');

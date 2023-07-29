@@ -17,6 +17,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@nuxt/devtools": "latest",
     "@pinia/testing": "^0.1.2",
     "@storybook/addon-essentials": "7.0.24",

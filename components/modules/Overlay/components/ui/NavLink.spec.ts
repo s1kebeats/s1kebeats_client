@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import NavLink from './NavLink.vue';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 const navLinkSelector = '[data-testid=navLink]';
 const navLinkTextSelector = '[data-testid=navLinkText]';
@@ -14,9 +14,11 @@ const defaultMountOptions = {
   },
 };
 
+vi.stubGlobal('navigateTo', vi.fn());
+
 describe('NavLink', () => {
   describe('props', () => {
-    it('to - should render with set to param on nuxt-link', () => {
+    it('to - should call navigateTo with set param on click', async () => {
       const wrapper = shallowMount(NavLink, defaultMountOptions);
       expect(wrapper.get(navLinkSelector).attributes('to')).toBe(
         defaultMountOptions.props.to
@@ -41,7 +43,7 @@ describe('NavLink', () => {
       DOMWrapper {
         "isDisabled": [Function],
         "wrapperElement": <nuxt-link
-          class="bg-white menu-link w-full py-3 border-[1px] rounded-lg px-4 font-semibold text-sm"
+          class="bg-white menu-link w-full py-3 border-[1px] rounded-lg px-4 link desktop-text-sm"
           data-testid="navLink"
           to="/"
         >

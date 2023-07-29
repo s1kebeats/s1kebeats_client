@@ -22,7 +22,7 @@ describe('Overlay', () => {
         },
       });
 
-      expect(wrapper.get(overlaySelector).isVisible()).toBeFalsy();
+      expect(wrapper.get(overlaySelector).isVisible()).toBe(false);
     });
     it('overlay - should be visible when set to true', async () => {
       const wrapper = shallowMount(Overlay, {

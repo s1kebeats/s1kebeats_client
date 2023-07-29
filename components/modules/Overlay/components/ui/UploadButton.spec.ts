@@ -20,11 +20,14 @@ describe('UploadButton', () => {
     expect(wrapper.get(uploadButtonSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <nav-button-stub
-          class="bg-black text-white"
+        "wrapperElement": <button-stub
+          class="grow"
           data-testid="uploadButton"
           icon="material-symbols:upload-rounded"
-          text="Опубликовать"
+          loading="false"
+          position="left"
+          size="sm"
+          type="primary"
         />,
       }
     `);

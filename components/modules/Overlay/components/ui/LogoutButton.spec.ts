@@ -40,11 +40,13 @@ describe('LogoutButton', () => {
     expect(wrapper.get(logoutButtonSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <nav-button-stub
-          class="bg-red-500 text-white"
+        "wrapperElement": <button-stub
           data-testid="logoutButton"
-          icon="streamline:entertainment-control-button-power-1-power-button-on-off"
-          text="Выход"
+          icon="material-symbols:logout-rounded"
+          loading="false"
+          position="left"
+          size="sm"
+          type="secondary"
         />,
       }
     `);

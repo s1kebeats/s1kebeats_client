@@ -32,7 +32,7 @@ describe('ProfileIcon', () => {
           ],
         },
       });
-  
+
       expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
       expect(wrapper.find(presentationalAvatarSelector).exists()).toBeFalsy();
     });
@@ -51,7 +51,7 @@ describe('ProfileIcon', () => {
           ],
         },
       });
-  
+
       expect(wrapper.find(unauthorizedIconSelector).exists()).toBeFalsy();
       expect(wrapper.find(presentationalAvatarSelector).exists()).toBe(true);
     });
@@ -70,8 +70,10 @@ describe('ProfileIcon', () => {
           ],
         },
       });
-      expect(wrapper.get(presentationalAvatarSelector).attributes('username')).toBe(testUser.username)
-    })
+      expect(
+        wrapper.get(presentationalAvatarSelector).attributes('username')
+      ).toBe(testUser.username);
+    });
     it('authStore.user - should render presentationalAvatar with set image', () => {
       const wrapper = shallowMount(ProfileIcon, {
         global: {
@@ -87,8 +89,9 @@ describe('ProfileIcon', () => {
           ],
         },
       });
-      expect(wrapper.get(presentationalAvatarSelector).attributes('image')).toBe(testUser.image)
-    })
-  })
-
+      expect(
+        wrapper.get(presentationalAvatarSelector).attributes('image')
+      ).toBe(testUser.image);
+    });
+  });
 });

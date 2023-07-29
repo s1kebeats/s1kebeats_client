@@ -20,11 +20,14 @@ describe('LoginButton', () => {
     expect(wrapper.get(loginButtonSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <nav-button-stub
-          class="bg-black text-white"
+        "wrapperElement": <button-stub
+          class="grow"
           data-testid="loginButton"
           icon="material-symbols:login-rounded"
-          text="Вход"
+          loading="false"
+          position="left"
+          size="sm"
+          type="primary"
         />,
       }
     `);
