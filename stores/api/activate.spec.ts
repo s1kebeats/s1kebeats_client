@@ -1,14 +1,31 @@
-import { describe, it, expect, vi } from 'vitest';
 import activate from './activate';
-import $api from '@/api';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import axios from 'axios';
+import { runtimeConfigMock } from './mocks';
 
-const testActivationString = 'activationString';
+vi.stubGlobal('useRuntimeConfig', () => runtimeConfigMock);
 
-vi.mock('@/api');
+vi.mock('axios');
 
 describe('activate', () => {
-  it('should call $api.post with valid param', async () => {
-    await activate(testActivationString);
-    expect($api.post).toHaveBeenCalledWith(`/activate/${testActivationString}`);
+  beforeEach(() => {
+    axios.post.mockReset();
+  });
+
+  test('should make post request to api with valid params', async () => {
+    const testCode = 'testCode';
+    await activate(testCode);
+    expect(axios.post).toHaveBeenCalled();
+    expect(axios.post).toHaveBeenCalledWith(
+      runtimeConfigMock.public.API_URL + '/activate' + '/' + testCode
+    );
+  });
+  test('should return response', async () => {
+    const responseMock = {
+      data: 'success',
+    };
+    axios.post.mockResolvedValue(responseMock);
+    const response = await activate('testCode');
+    expect(response).toStrictEqual(responseMock);
   });
 });

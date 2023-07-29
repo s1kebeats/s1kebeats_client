@@ -1,5 +1,9 @@
-import $api from '@/api';
+import axios from 'axios';
 
-export default async function activate(activation: string): Promise<void> {
-  await $api.post(`/activate/${activation}`);
+export default async function activate(activationCode: string) {
+  const runtimeConfig = useRuntimeConfig();
+  const response = await axios.post(
+    `${runtimeConfig.public.API_URL}/activate/${activationCode}`
+  );
+  return response;
 }
