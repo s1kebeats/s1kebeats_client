@@ -5,7 +5,7 @@ import { createTestingPinia } from '@pinia/testing';
 import type User from '@/api/models/User';
 
 const unauthorizedIconSelector = '[data-testid=unauthorizedIcon]';
-const profileImageSelector = '[data-testid=profileImage]';
+const presentationalAvatarSelector = '[data-testid=presentationalAvatar]';
 
 const testUser: User = {
   email: 'test@example.com',
@@ -16,42 +16,79 @@ const testUser: User = {
 };
 
 describe('ProfileIcon', () => {
-  it('should render unauthorized icon without profile image when not authorized', async () => {
-    const wrapper = shallowMount(ProfileIcon, {
-      global: {
-        plugins: [
-          createTestingPinia({
-            initialState: {
-              auth: {
-                authorized: false,
-                user: null,
+  describe('state', () => {
+    it('authStore.authorized - should render unauthorized icon without presentationalAvatar when set to "false"', async () => {
+      const wrapper = shallowMount(ProfileIcon, {
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                auth: {
+                  authorized: false,
+                  user: null,
+                },
               },
-            },
-          }),
-        ],
-      },
+            }),
+          ],
+        },
+      });
+  
+      expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
+      expect(wrapper.find(presentationalAvatarSelector).exists()).toBeFalsy();
     });
-
-    expect(wrapper.find(unauthorizedIconSelector).exists()).toBe(true);
-    expect(wrapper.find(profileImageSelector).exists()).toBeFalsy();
-  });
-  it('should render profile image without unauthorized icon when authorized', async () => {
-    const wrapper = shallowMount(ProfileIcon, {
-      global: {
-        plugins: [
-          createTestingPinia({
-            initialState: {
-              auth: {
-                authorized: true,
-                user: testUser,
+    it('authStore.authorized - should render presentationalAvatar without unauthorized icon when set to "true"', async () => {
+      const wrapper = shallowMount(ProfileIcon, {
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                auth: {
+                  authorized: true,
+                  user: testUser,
+                },
               },
-            },
-          }),
-        ],
-      },
+            }),
+          ],
+        },
+      });
+  
+      expect(wrapper.find(unauthorizedIconSelector).exists()).toBeFalsy();
+      expect(wrapper.find(presentationalAvatarSelector).exists()).toBe(true);
     });
+    it('authStore.user - should render presentationalAvatar with set username', () => {
+      const wrapper = shallowMount(ProfileIcon, {
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                auth: {
+                  authorized: true,
+                  user: testUser,
+                },
+              },
+            }),
+          ],
+        },
+      });
+      expect(wrapper.get(presentationalAvatarSelector).attributes('username')).toBe(testUser.username)
+    })
+    it('authStore.user - should render presentationalAvatar with set image', () => {
+      const wrapper = shallowMount(ProfileIcon, {
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                auth: {
+                  authorized: true,
+                  user: testUser,
+                },
+              },
+            }),
+          ],
+        },
+      });
+      expect(wrapper.get(presentationalAvatarSelector).attributes('image')).toBe(testUser.image)
+    })
+  })
 
-    expect(wrapper.find(unauthorizedIconSelector).exists()).toBeFalsy();
-    expect(wrapper.find(profileImageSelector).exists()).toBe(true);
-  });
 });

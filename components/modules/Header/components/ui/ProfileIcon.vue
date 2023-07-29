@@ -4,7 +4,7 @@
     :image="authStore.user!.image"
     :username="authStore.user!.username"
     v-if="authStore.authorized"
-    data-testid="profileImage"
+    data-testid="presentationalAvatar"
   />
   <div
     v-else
