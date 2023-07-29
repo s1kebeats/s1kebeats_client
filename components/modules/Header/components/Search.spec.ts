@@ -5,42 +5,41 @@ import Search from './Search.vue';
 const headerSearchSelector = '[data-testid=headerSearch]';
 const headerSearchInputSelector = '[data-testid=headerSearchInput]';
 
-vi.stubGlobal('navigateTo', vi.fn());
+const testQuery = 'test-query';
 
-// TODO: not working because of nuxt auto-imports
-describe.todo('Search', () => {
+vi.stubGlobal('navigateTo', vi.fn());
+vi.stubGlobal(
+  'useRoute',
+  vi.fn(() => {
+    return {
+      query: {
+        q: testQuery,
+      },
+    };
+  })
+);
+
+// !: not working because of nuxt auto-imports
+describe('Search', () => {
+  describe('state', () => {
+    it('route.query.q - should set textInput "preset" attr', async () => {
+      const wrapper = shallowMount(Search);
+      expect(wrapper.get(headerSearchInputSelector).attributes('preset')).toBe(
+        testQuery
+      );
+    });
+  });
   describe('User Interactions', () => {
-    it('focus - should set colored border', async () => {
-      const wrapper = shallowMount(Search);
-      await wrapper.get(headerSearchInputSelector).trigger('focus');
-      expect(wrapper.get(headerSearchSelector).classes()).toContain(
-        'border-[#7945fc]'
-      );
-    });
-    it('blur - should not set colored border', async () => {
-      const wrapper = shallowMount(Search);
-      await wrapper.get(headerSearchInputSelector).trigger('blur');
-      expect(wrapper.get(headerSearchSelector).classes()).not.toContain(
-        'border-[#7945fc]'
-      );
-    });
-    it('enter - should redirect if focused', async () => {
+    it('text input callback call - should call navigateTo with valid path and query', async () => {
       const testQuery = 'searchQuery';
 
       const wrapper = shallowMount(Search);
 
-      await wrapper.get(headerSearchInputSelector).trigger('focus');
       await wrapper.get(headerSearchInputSelector).setValue(testQuery);
-      await wrapper.trigger('keydown.enter');
+      await wrapper.get(headerSearchInputSelector).trigger('keydown.enter');
 
       expect(navigateTo).toHaveBeenCalled();
       expect(navigateTo).toHaveBeenCalledWith(`/search?q=${testQuery}`);
-    });
-    it('enter - should not redirect if not focused', async () => {
-      const wrapper = shallowMount(Search);
-      await wrapper.get(headerSearchInputSelector).trigger('blur');
-      await wrapper.trigger('keydown.enter');
-      expect(navigateTo).not.toHaveBeenCalled();
     });
   });
   it('snapshot - should match the snapshot', () => {

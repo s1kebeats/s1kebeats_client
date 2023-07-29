@@ -16,7 +16,7 @@
       name="registrationUsername"
       size="sm"
       :state="
-        v$.username.$error
+        v$.username.$error && !v$.username.$pending
           ? 'error'
           : registrationFormState.data.username
           ? 'success'

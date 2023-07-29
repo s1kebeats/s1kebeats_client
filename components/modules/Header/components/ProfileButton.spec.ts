@@ -15,89 +15,66 @@ describe('ProfileButton', () => {
     vi.restoreAllMocks();
   });
   describe('User Interactions', () => {
-    it('click - should toggle uiStore.overlay', async () => {
+    it('click - should call uiStore.toggleOverlay', async () => {
       const wrapper = shallowMount(ProfileButton, {
         global: {
-          plugins: [
-            createTestingPinia({
-              stubActions: false,
-            }),
-          ],
+          plugins: [createTestingPinia()],
         },
       });
       const uiStore = useUiStore();
 
       await wrapper.get(profileButtonSelector).trigger('click');
-      vi.runAllTimers();
-      expect(uiStore.overlay).toBe(true);
 
-      await wrapper.get(profileButtonSelector).trigger('click');
-      vi.runAllTimers();
-      expect(uiStore.overlay).toBe(false);
+      expect(uiStore.toggleOverlay).toHaveBeenCalled();
     });
-    it('click - should rotate the icon', async () => {
+    it('focusout - should call uiStore.setOverlay with "false"', async () => {
+      const wrapper = shallowMount(ProfileButton, {
+        global: {
+          plugins: [createTestingPinia()],
+        },
+      });
+      const uiStore = useUiStore();
+
+      await wrapper.get(profileButtonSelector).trigger('focusout');
+      vi.runAllTimers();
+      expect(uiStore.setOverlay).toHaveBeenCalled();
+      expect(uiStore.setOverlay).toHaveBeenCalledWith(false);
+    });
+  });
+  describe('state', () => {
+    it('uiStore.overlay - should render icon without "rotate-180" class when set to "false"', () => {
       const wrapper = shallowMount(ProfileButton, {
         global: {
           plugins: [
             createTestingPinia({
-              stubActions: false,
+              initialState: {
+                ui: {
+                  overlay: false,
+                },
+              },
             }),
           ],
         },
       });
-      await wrapper.get(profileButtonSelector).trigger('click');
-      vi.runAllTimers();
+      expect(wrapper.get(profileButtonIconSelector).classes()).not.toContain(
+        'rotate-180'
+      );
+    });
+    it('uiStore.overlay - should render icon with "rotate-180" class when set to "true"', () => {
+      const wrapper = shallowMount(ProfileButton, {
+        global: {
+          plugins: [
+            createTestingPinia({
+              initialState: {
+                ui: {
+                  overlay: true,
+                },
+              },
+            }),
+          ],
+        },
+      });
       expect(wrapper.get(profileButtonIconSelector).classes()).toContain(
-        'rotate-180'
-      );
-
-      await wrapper.get(profileButtonSelector).trigger('click');
-      vi.runAllTimers();
-      expect(wrapper.get(profileButtonIconSelector).classes()).not.toContain(
-        'rotate-180'
-      );
-    });
-    it('focusout - should set uiStore.overlay to false', async () => {
-      const wrapper = shallowMount(ProfileButton, {
-        global: {
-          plugins: [
-            createTestingPinia({
-              stubActions: false,
-              initialState: {
-                ui: {
-                  overlay: true,
-                },
-              },
-            }),
-          ],
-        },
-      });
-      const uiStore = useUiStore();
-
-      await wrapper.get(profileButtonSelector).trigger('focusout');
-      vi.runAllTimers();
-      expect(uiStore.overlay).toBe(false);
-    });
-    it('focusout - should rotate the icon', async () => {
-      const wrapper = shallowMount(ProfileButton, {
-        global: {
-          plugins: [
-            createTestingPinia({
-              stubActions: false,
-              initialState: {
-                ui: {
-                  overlay: true,
-                },
-              },
-            }),
-          ],
-        },
-      });
-
-      await wrapper.get(profileButtonSelector).trigger('focusout');
-      // ?: works fine in browser ^-^
-      vi.runAllTimers();
-      expect(wrapper.get(profileButtonIconSelector).classes()).not.toContain(
         'rotate-180'
       );
     });
@@ -111,9 +88,11 @@ describe('ProfileButton', () => {
           class="flex items-center gap-1"
           data-testid="profileButton"
         >
-          <profile-icon-stub />
+          <clientonly>
+            <profile-icon-stub />
+          </clientonly>
           <icon
-            class="transition-all"
+            class="transition-all rotate-180"
             data-testid="profileButtonIcon"
             name="ic:baseline-keyboard-arrow-down"
             size="20px"

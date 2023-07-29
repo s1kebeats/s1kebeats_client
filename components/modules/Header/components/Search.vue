@@ -7,6 +7,8 @@
     label="Поиск"
     size="sm"
     @update-value="updateSearchQuery"
+    :preset="(route.query.q as string)"
+    data-testid="headerSearchInput"
   />
 </template>
 <script setup lang="ts">
