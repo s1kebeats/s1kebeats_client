@@ -15,8 +15,7 @@
     "format:mod": "pnpm dlx pretty-quick",
     "format:all": "prettier --write .",
     "lint": "eslint --fix .",
-    "test": "vitest",
-    "prepare": "husky install"
+    "test": "vitest"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
