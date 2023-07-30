@@ -31,11 +31,13 @@
     "@vue/test-utils": "^2.4.1",
     "concurrently": "^8.2.0",
     "eslint": "^8.46.0",
+    "happy-dom": "^10.5.2",
     "nuxt": "^3.6.5",
     "prettier": "^3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "storybook": "7.2.0-rc.0",
+    "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.33.0"
   },
   "dependencies": {

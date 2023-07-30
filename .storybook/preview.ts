@@ -3,9 +3,7 @@ import { type App } from 'vue';
 
 import '../assets/styles/main.css';
 
-setup((app: App) => {
-
-});
+setup((app: App) => {});
 
 const preview: Preview = {
   parameters: {
