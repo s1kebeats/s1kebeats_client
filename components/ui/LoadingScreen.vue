@@ -5,7 +5,7 @@
       class="absolute z-[2] flex w-full h-full bg-white"
       data-testid="loadingScreen"
     >
-      <UiLogo class="w-[15%] max-w-[300px] min-w-[175px] m-auto" />
+      <UiLogo class="w-[clamp(175px,15%,300px)] m-auto" />
     </div>
   </transition>
 </template>

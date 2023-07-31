@@ -16,6 +16,7 @@ export default defineConfig({
       dirs: [
         './components/',
         // Component folders that should be auto-imported
+        // './.nuxt/components.d.ts'
       ],
       dts: true,
       directoryAsNamespace: true,

@@ -9,7 +9,7 @@
           class="translate-y-1/4 w-[35%] desktop-text-lg"
         />
         <Button
-          v-if="authStore.user?.username === route.params.username"
+          v-if="showEdit"
           icon="material-symbols:edit"
           size="sm"
           @click="redirect"
@@ -46,12 +46,10 @@
 <script setup lang="ts">
 import AuthorIndividual from '@/api/models/AuthorIndividual';
 import { Button, PresentationalAvatar } from '@s1kebeats/s1kebeats-ui';
-import useAuthStore from '@/stores/auth';
-import { useRoute } from '#imports';
-const authStore = useAuthStore();
-const route = useRoute();
+
 const props = defineProps<{
   author: AuthorIndividual;
+  showEdit?: boolean;
 }>();
 
 async function redirect() {

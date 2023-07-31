@@ -3,15 +3,13 @@ import { describe, it, expect, vi } from 'vitest';
 import { VueWrapper, shallowMount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import useUiStore from '@/stores/ui';
-import { setup } from '@nuxt/test-utils';
 
 const registrationFormSelector = '[data-testid=registrationForm]';
 
-// vi.stubGlobal('navigateTo', vi.fn());
-// vi.stubGlobal('definePageMeta', vi.fn());
+vi.stubGlobal('navigateTo', vi.fn());
+vi.stubGlobal('definePageMeta', vi.fn());
 
 describe('register', async () => {
-  await setup({});
   describe('User Interactions', () => {
     it('registrationForm submit event - should redirect to "/login" and turn uiLoadingScreen off', async () => {
       const wrapper = shallowMount(register, {

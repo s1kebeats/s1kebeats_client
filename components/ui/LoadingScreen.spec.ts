@@ -25,7 +25,6 @@ describe('LoadingScreen', () => {
 
       expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(false);
     });
-    // ! not working properly
     it('loading - should be visible when set to true', () => {
       const wrapper = shallowMount(LoadingScreen, {
         global: {
@@ -46,8 +45,16 @@ describe('LoadingScreen', () => {
   });
   it('snapshot - should match the snapshot', () => {
     const wrapper = shallowMount(LoadingScreen, {
-      props: {
-        loading: false,
+      global: {
+        plugins: [
+          createTestingPinia({
+            initialState: {
+              ui: {
+                loading: true,
+              },
+            },
+          }),
+        ],
       },
     });
     expect(wrapper.get(loadingScreenSelector)).toMatchInlineSnapshot(`
@@ -58,8 +65,9 @@ describe('LoadingScreen', () => {
           data-testid="loadingScreen"
           data-v-2d6f5cd9=""
         >
-          <uilogo
-            class="w-[15%] max-w-[300px] min-w-[175px] m-auto"
+          <logo-stub
+            class="w-[clamp(175px,15%,300px)] m-auto"
+            color="black"
             data-v-2d6f5cd9=""
           />
         </div>,

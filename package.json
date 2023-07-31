@@ -7,7 +7,7 @@
     "postinstall": "nuxt prepare",
     "build": "nuxt build",
     "build:main-css": "sass ./assets/styles/main.scss ./assets/styles/main.css",
-    "build:tailwind": "pnpm run build:main-css && pnpm dlx tailwindcss -i ./assets/styles/main.css -o ./assets/styles/output.css",
+    "build:tailwind": "pnpm run build:main-css && pnpm exec tailwindcss -i ./assets/styles/main.css -o ./assets/styles/output.css",
     "build:storybook": "storybook build",
     "dev": "conc \"pnpm run format:mod\" \"nuxt dev\"",
     "dev:tailwind": "pnpm run build:tailwind -- --watch",
