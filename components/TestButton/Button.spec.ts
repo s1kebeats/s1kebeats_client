@@ -1,13 +1,26 @@
 import { shallowMount } from '@vue/test-utils';
 import Button from './Button.vue';
 import { describe, it, expect } from 'vitest';
+import { createTestingPinia } from '@pinia/testing';
 
 describe('Button', () => {
   it('snapshot - should match the snapshot', () => {
-    const wrapper = shallowMount(Button);
+    const wrapper = shallowMount(Button, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            initialState: {
+              ui: {
+                loading: true,
+              },
+            },
+          }),
+        ],
+      },
+    });
     expect(wrapper.element).toMatchInlineSnapshot(`
       <button
-        class="relative flex items-center justify-center link transition-all disabled:cursor-not-allowed desktop-text-sm rounded-xl min-h-[52px] px-6 gap-3 text-grayscale-bg bg-primary hover:bg-primary-default_strong focus:outline-8 focus:outline focus:outline-primary-bg_strong disabled:opacity-50 active:bg-grayscale-header"
+        class="relative bg-yellow-500 flex items-center justify-center link transition-all disabled:cursor-not-allowed desktop-text-sm rounded-xl min-h-[52px] px-6 gap-3"
       >
         <div
           class="flex items-center justify-center gap-3"
@@ -15,10 +28,7 @@ describe('Button', () => {
         >
           
           
-          <!--v-if-->
-          <!--v-if-->
         </div>
-        <!--v-if-->
       </button>
     `);
   });

@@ -1,7 +1,8 @@
 <template>
   <button
-    class="relative flex items-center justify-center link transition-all disabled:cursor-not-allowed"
-    :class="[buttonSizingClasses, buttonTypeClasses]"
+    v-show="uiStore.loading"
+    class="relative bg-yellow-500 flex items-center justify-center link transition-all disabled:cursor-not-allowed"
+    :class="[buttonSizingClasses]"
   >
     <div
       data-testid="buttonContentWrapper"
@@ -13,16 +14,16 @@
   </button>
 </template>
 <script setup lang="ts">
-import { computed } from '#imports';
+import useUiStore from '@/stores/test';
+
+const uiStore = useUiStore();
 
 interface Props {
-  size: 'sm' | 'md' | 'lg' | 'xl';
-  type: 'primary' | 'secondary' | 'subtle' | 'ghost';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: 'md',
-  type: 'primary',
 });
 
 const buttonSizingClasses = computed(() => {
@@ -45,19 +46,6 @@ const buttonElementsContainerSizingClasses = computed(() => {
       return 'gap-4';
     default:
       return 'gap-3';
-  }
-});
-
-const buttonTypeClasses = computed(() => {
-  switch (props.type) {
-    case 'secondary':
-      return 'border-2 border-primary text-primary hover:text-primary-default_strong hover:border-primary-default_strong focus:border-white focus:outline-8 focus:outline focus:outline-primary-bg_strong disabled:opacity-50 active:text-grayscale-header active:border-grayscale-header';
-    case 'subtle':
-      return 'border-2 border-grayscale-line text-primary hover:border-grayscale-placeholder hover:text-primary-default_strong focus:border-white focus:outline-8 focus:outline focus:outline-grayscale-input active:border-grayscale-header active:text-grayscale-header disabled:opacity-50';
-    case 'ghost':
-      return 'text-primary hover:text-primary-default_strong focus:outline-8 focus:outline focus:outline-grayscale-input active:text-grayscale-header disabled:opacity-50';
-    default:
-      return 'text-grayscale-bg bg-primary hover:bg-primary-default_strong focus:outline-8 focus:outline focus:outline-primary-bg_strong disabled:opacity-50 active:bg-grayscale-header';
   }
 });
 </script>

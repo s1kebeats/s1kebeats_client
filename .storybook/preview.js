@@ -1,11 +1,15 @@
-import { type Preview, setup } from '@storybook/vue3';
-import { type App } from 'vue';
+import { setup } from '@storybook/vue3';
+import { createPinia } from 'pinia';
 
-import '../assets/styles/main.css';
+import '../assets/styles/output.css';
 
-setup((app: App) => {});
+const pinia = createPinia();
 
-const preview: Preview = {
+setup((app) => {
+  app.use(pinia);
+});
+
+const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
