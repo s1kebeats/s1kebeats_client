@@ -1,4 +1,4 @@
-### Nuxt 3 build featuring Tailwind, Vitest and Storybook with Nuxt auto-imports
+### Nuxt 3 build featuring Typescript, Tailwind, Vitest and Storybook with Nuxt auto-imports
 
 ### Usage:
 ```pnpm i```
