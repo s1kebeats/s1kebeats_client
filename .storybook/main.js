@@ -1,6 +1,3 @@
-import path from 'path';
-import { mergeConfig, loadConfigFromFile } from 'vite';
-
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 export default {
   stories: ['../**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -11,16 +8,13 @@ export default {
   ],
   framework: {
     name: '@storybook/vue3-vite',
-    options: {},
+    options: {
+      builder: {
+        viteConfigPath: './vite.config.ts',
+      },
+    },
   },
   docs: {
     autodocs: 'tag',
-  },
-  async viteFinal(baseConfig) {
-    const { config: userConfig } = await loadConfigFromFile(
-      path.resolve(__dirname, '../vite.config.ts')
-    );
-
-    return mergeConfig(baseConfig, userConfig);
-  },
+  }
 };
