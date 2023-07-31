@@ -12,7 +12,7 @@
     "dev": "conc \"pnpm run format:mod\" \"nuxt dev\"",
     "dev:tailwind": "pnpm run build:tailwind -- --watch",
     "dev:storybook": "conc \"pnpm run format:mod\" \"storybook dev -p 6006\" \"pnpm run dev:tailwind\"",
-    "format:mod": "pnpm dlx lint-staged",
+    "format:mod": "pnpm exec lint-staged",
     "format:all": "prettier --write .",
     "lint": "eslint --fix .",
     "test": "vitest"
