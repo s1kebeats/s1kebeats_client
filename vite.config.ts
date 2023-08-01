@@ -4,6 +4,10 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import vue from '@vitejs/plugin-vue';
 
+import {} from 'nuxt-icon';
+
+// import './.nuxt/components.d.ts'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [

@@ -7,6 +7,7 @@
       @submit.prevent="emit('submitForm')"
       class="relative flex flex-col w-full gap-3"
       data-testid="form"
+      @keydown.enter="emit('submitForm')"
     >
       <RequestErrorOutput
         :open="errorState"

@@ -95,6 +95,12 @@ describe('PageForm', () => {
       expect(wrapper.emitted()).toHaveProperty('submitForm');
       expect(wrapper.emitted('submitForm')).toHaveLength(1);
     });
+    it('keydown.enter - should emit "submitForm" event', async () => {
+      const wrapper = mount(PageForm, defaultMountOptions);
+      await wrapper.get('[data-testid=form]').trigger('keydown.enter');
+      expect(wrapper.emitted()).toHaveProperty('submitForm');
+      expect(wrapper.emitted('submitForm')).toHaveLength(1);
+    });
     it('formRequestErrorOutput "close" event - should emit "closeError" event', async () => {
       const wrapper = mount(PageForm, defaultMountOptions);
       await (
@@ -111,7 +117,7 @@ describe('PageForm', () => {
         class="w-full flex flex-col items-center justify-center gap-7"
       >
         <h1
-          class="link desktop-display-xs"
+          class="link desktop-display-xs text-center"
           data-testid="formTitle"
         >
           testForm

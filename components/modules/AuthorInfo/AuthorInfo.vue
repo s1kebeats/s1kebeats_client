@@ -26,24 +26,38 @@
             <UiInstagramLink
               v-if="author.instagram"
               :username="author.instagram"
-              size="22px"
+              size="23px"
             />
-            <UiVkLink v-if="author.vk" :username="author.vk" size="22px" />
+            <UiVkLink v-if="author.vk" :username="author.vk" size="23px" />
             <UiYoutubeLink
               v-if="author.youtube"
               :username="author.youtube"
-              size="22px"
+              size="23px"
             />
           </div>
         </div>
-        <div v-if="author.about" class="multiline text-left desktop-text-xs">
-          {{ author.about }}
+        <div v-if="author.about" class="cursor-pointer flex items-start" @click="toggleExpandAbout">
+          <div
+            class="text-left desktop-text-xs"
+            :class="expandAbout ? '' : 'multiline'"
+          >
+            {{ author.about }}
+          </div>
+          <button>
+            <Icon
+              icon="ic:baseline-keyboard-arrow-down"
+              class="transition-all text-[23px]"
+              :class="expandAbout ? 'rotate-180' : ''"
+              data-testid="profileButtonIcon"
+            />
+          </button>
         </div>
       </div>
     </div>
   </section>
 </template>
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
 import AuthorIndividual from '@/api/models/AuthorIndividual';
 import { Button, PresentationalAvatar } from '@s1kebeats/s1kebeats-ui';
 
@@ -51,6 +65,12 @@ const props = defineProps<{
   author: AuthorIndividual;
   showEdit?: boolean;
 }>();
+
+const expandAbout = ref(false);
+
+function toggleExpandAbout() {
+  expandAbout.value = !expandAbout.value;
+}
 
 async function redirect() {
   await navigateTo('/settings');
@@ -63,7 +83,7 @@ async function redirect() {
       rgba(0, 0, 0, 0.8),
       rgba(121, 69, 252, 0.65)
     ),
-    url('~/assets/images/bg.jpg');
+    url('@/assets/images/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }

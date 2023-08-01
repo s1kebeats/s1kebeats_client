@@ -1,9 +1,11 @@
 <template>
   <a target="_blank" data-testid="socialLink" :href="url + username">
-    <Icon :name="icon" data-testid="socialLinkIcon" :size="size" />
+    <Icon :icon="icon" data-testid="socialLinkIcon" :class="`text-[${size}]`" />
   </a>
 </template>
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
+
 interface Props {
   username: string;
   size: string;

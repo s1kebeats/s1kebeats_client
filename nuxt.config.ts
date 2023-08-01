@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: [
-    '~/assets/css/main.scss',
-    '~/assets/css/fonts.css',
+    '~/assets/styles/main.scss',
+    '~/assets/styles/fonts.css',
     '~/node_modules/@s1kebeats/s1kebeats-ui/dist/style.css',
   ],
   runtimeConfig: {

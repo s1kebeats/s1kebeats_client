@@ -1,7 +1,7 @@
 import AuthorInfo from './AuthorInfo.vue';
 import AuthorIndividual from 'api/models/AuthorIndividual';
 import { faker } from '@faker-js/faker';
-import type { Meta } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta: Meta<typeof AuthorInfo> = {
   component: AuthorInfo,
@@ -26,14 +26,9 @@ const testAuthor: AuthorIndividual = {
   beats: [],
 };
 
-// export const Primary = {
-//   render: () => ({
-//     components: { AuthorInfo },
-//     template: '<AuthorInfo :author="testAuthor" />',
-//   }),
-// };
+type Story = StoryObj<typeof AuthorInfo>;
 
-export const Primary = {
+export const Primary: Story = {
   render: (args) => ({
     components: { AuthorInfo },
     setup() {
@@ -43,6 +38,20 @@ export const Primary = {
   }),
   args: {
     author: testAuthor,
-    edit: false
-  }
+    showEdit: false,
+  },
+};
+
+export const WithEdit: Story = {
+  render: (args) => ({
+    components: { AuthorInfo },
+    setup() {
+      return { args };
+    },
+    template: '<AuthorInfo v-bind="args" />',
+  }),
+  args: {
+    author: testAuthor,
+    showEdit: true,
+  },
 };
