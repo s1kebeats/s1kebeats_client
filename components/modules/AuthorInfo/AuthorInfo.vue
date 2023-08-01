@@ -13,6 +13,7 @@
           icon="material-symbols:edit"
           size="sm"
           @click="redirect"
+          data-testid="editButton"
         >
           Редактировать
         </Button>
