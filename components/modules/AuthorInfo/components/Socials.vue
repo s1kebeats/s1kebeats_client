@@ -24,7 +24,7 @@
 import AuthorIndividual from '@/api/models/AuthorIndividual';
 import { InstagramLink, VkLink, YoutubeLink } from '@s1kebeats/s1kebeats-ui'
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
     author: AuthorIndividual;
     size?: "sm" | "md" | "lg"
 }>()
