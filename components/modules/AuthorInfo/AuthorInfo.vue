@@ -7,6 +7,7 @@
           :username="author.username"
           :image="author.image"
           class="translate-y-1/4 w-[35%] desktop-text-lg"
+          data-testid="presentationalAvatar"
         />
         <Button
           v-if="showEdit"
@@ -15,29 +16,20 @@
           @click="redirect"
           data-testid="editButton"
         >
-          Редактировать
         </Button>
       </div>
       <div class="flex flex-col gap-3 pb-3 pt-[7.5%] px-[5%]">
         <div class="flex items-center justify-between">
-          <div class="link desktop-text-md max-w-[calc(95%-76px)] truncate">
+          <div class="link desktop-text-md truncate" data-testid="authorName">
             {{ author.displayedName ? author.displayedName : author.username }}
           </div>
-          <div class="flex gap-1 items-center">
-            <UiInstagramLink
-              v-if="author.instagram"
-              :username="author.instagram"
-              size="23px"
-            />
-            <UiVkLink v-if="author.vk" :username="author.vk" size="23px" />
-            <UiYoutubeLink
-              v-if="author.youtube"
-              :username="author.youtube"
-              size="23px"
-            />
-          </div>
+          <Socials :author="author" data-testid="socials" />
         </div>
-        <div v-if="author.about" class="cursor-pointer flex items-start" @click="toggleExpandAbout">
+        <div
+          v-if="author.about"
+          class="cursor-pointer flex items-start"
+          @click="toggleExpandAbout"
+        >
           <div
             class="text-left desktop-text-xs"
             :class="expandAbout ? '' : 'multiline'"
@@ -61,6 +53,7 @@
 import { Icon } from '@iconify/vue';
 import AuthorIndividual from '@/api/models/AuthorIndividual';
 import { Button, PresentationalAvatar } from '@s1kebeats/s1kebeats-ui';
+import Socials from './components/Socials.vue';
 
 const props = defineProps<{
   author: AuthorIndividual;

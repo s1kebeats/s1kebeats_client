@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.4.11
     version: 0.4.11(vue@3.3.4)
   '@s1kebeats/s1kebeats-ui':
-    specifier: ^3.5.0
-    version: 3.5.0
+    specifier: ^3.6.1
+    version: 3.6.1
   pinia:
     specifier: ^2.1.6
     version: 2.1.6(vue@3.3.4)
@@ -3119,8 +3119,8 @@ packages:
       picomatch: 2.3.1
       rollup: 3.27.0
 
-  /@s1kebeats/s1kebeats-ui@3.5.0:
-    resolution: {integrity: sha512-i/sXdzfnOqUZBocdORlZ0jBv8i8duWAin8ZvUfj71lvOkSJX9UEjbOH8roF+GGctsFbzpkZCZnidPzpTEsYiIA==, tarball: https://npm.pkg.github.com/download/@s1kebeats/s1kebeats-ui/3.5.0/38f00aeee2b70bc8d63e4da778cd573d05bebc43}
+  /@s1kebeats/s1kebeats-ui@3.6.1:
+    resolution: {integrity: sha512-e6PxocGDyC46aiE/7vKXUoH76V+pnRAYPPnWj1en11eZy/hulaYc14kpnYEhqmZ8pPz0UgLlDjIqopgBKvkxzQ==, tarball: https://npm.pkg.github.com/download/@s1kebeats/s1kebeats-ui/3.6.1/18248b1e458a8e3ee8597008565034c57f4d39d3}
     dependencies:
       vue: 3.3.4
     dev: false

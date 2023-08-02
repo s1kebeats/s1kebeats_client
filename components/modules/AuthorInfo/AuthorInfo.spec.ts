@@ -1,35 +1,72 @@
-import AuthorInfo from "./AuthorInfo.vue";
-import { describe, it, expect } from "vitest";
-import { ComponentMountingOptions, shallowMount } from "@vue/test-utils";
-import { AuthorIndividualStaticMock } from "@/testing/mocks/AuthorIndividual.mock";
+import AuthorInfo from './AuthorInfo.vue';
+import { describe, it, expect } from 'vitest';
+import { ComponentMountingOptions, shallowMount } from '@vue/test-utils';
+import { AuthorIndividualStaticMock } from '@/testing/mocks/AuthorIndividual.mock';
 
 const editButtonSelector = '[data-testid=editButton]';
+const presentationalAvatarSelector = '[data-testid=presentationalAvatar]';
+const authorNameSelector = '[data-testid=authorName]';
+const socialsSelector = '[data-testid=socials]';
 
 const defaultMountOptions: ComponentMountingOptions<typeof AuthorInfo> = {
-    props: {
-        author: AuthorIndividualStaticMock
-    }
-}
+  props: {
+    author: AuthorIndividualStaticMock,
+  },
+};
 
 describe('AuthorInfo', () => {
-    describe('props', () => {
-        it('showEdit - should not render edit button by default', () => {
-            const wrapper = shallowMount(AuthorInfo, defaultMountOptions)
-            expect(wrapper.find(editButtonSelector).exists()).toBe(false);
-        })
-        it('showEdit - should render edit button when set to "true"', () => {
-            const wrapper = shallowMount(AuthorInfo, {
-                props: {
-                    ...defaultMountOptions.props!,
-                    showEdit: true
-                }
-            })
-            expect(wrapper.find(editButtonSelector).exists()).toBe(true);
-        })
-    })
-    it('snapshot - should match the snapshot', () => {
-        const wrapper = shallowMount(AuthorInfo, defaultMountOptions)
-        expect(wrapper.element).toMatchInlineSnapshot(`
+  describe('props', () => {
+    it('showEdit - should not render edit button by default', () => {
+      const wrapper = shallowMount(AuthorInfo, defaultMountOptions);
+      expect(wrapper.find(editButtonSelector).exists()).toBe(false);
+    });
+    it('showEdit - should render edit button when set to "true"', () => {
+      const wrapper = shallowMount(AuthorInfo, {
+        props: {
+          ...defaultMountOptions.props!,
+          showEdit: true,
+        },
+      });
+      expect(wrapper.find(editButtonSelector).exists()).toBe(true);
+    });
+    it('author - should render presentationalAvatar with set author username', () => {
+      const wrapper = shallowMount(AuthorInfo, defaultMountOptions);
+      expect(
+        wrapper.get(presentationalAvatarSelector).attributes('username')
+      ).toBe(AuthorIndividualStaticMock.username);
+    });
+    it('author - should render with set author displayed name if provided', () => {
+      const wrapper = shallowMount(AuthorInfo, defaultMountOptions);
+      expect(wrapper.get(authorNameSelector).text()).toBe(
+        AuthorIndividualStaticMock.displayedName
+      );
+    });
+    it('author - should render with set author username when displayedName is not provided', () => {
+      const wrapper = shallowMount(AuthorInfo, {
+        props: {
+          ...defaultMountOptions.props!,
+          displayedName: null,
+        },
+      });
+      expect(wrapper.get(authorNameSelector).text()).toBe(
+        AuthorIndividualStaticMock.username
+      );
+    });
+    it('author - should render socials with set author', () => {
+      const wrapper = shallowMount(AuthorInfo, {
+        props: {
+          ...defaultMountOptions.props!,
+          displayedName: null,
+        },
+      });
+      expect(wrapper.get(socialsSelector).attributes('author')).toBe(
+        AuthorIndividualStaticMock
+      );
+    });
+  });
+  it('snapshot - should match the snapshot', () => {
+    const wrapper = shallowMount(AuthorInfo, defaultMountOptions);
+    expect(wrapper.element).toMatchInlineSnapshot(`
           <section
             class="w-full mt-3 px-[3%]"
             data-v-a524e9b4=""
@@ -110,6 +147,6 @@ describe('AuthorInfo', () => {
               </div>
             </div>
           </section>
-        `)
-    })
-})
+        `);
+  });
+});
