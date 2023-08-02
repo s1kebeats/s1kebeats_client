@@ -1,12 +1,12 @@
 <template>
-  <section class="w-full mt-3 px-[3%]">
+  <section class="w-full mt-3 px-4">
     <div class="border-[1px] rounded-lg overflow-hidden">
-      <div class="bg-image px-[5%] flex items-end pb-3 justify-between">
+      <div class="bg-grayscale-input px-4 flex items-end pb-3 justify-between">
         <PresentationalAvatar
           size="custom"
           :username="author.username"
           :image="author.image"
-          class="translate-y-1/4 w-[35%] desktop-text-lg"
+          class="translate-y-1/4 w-[clamp(100px,35%,1000px)] desktop-text-lg"
           data-testid="presentationalAvatar"
         />
         <Button
@@ -18,12 +18,13 @@
         >
         </Button>
       </div>
-      <div class="flex flex-col gap-3 pb-3 pt-[7.5%] px-[5%]">
+      <div class="flex flex-col gap-2 pb-3 pt-6 px-4">
         <div class="flex items-center justify-between">
           <div class="link desktop-text-md truncate" data-testid="authorName">
             {{ author.displayedName ? author.displayedName : author.username }}
           </div>
-          <Socials :author="author" data-testid="socials" />
+          <!-- TODO: design for socials -->
+          <!-- <Socials :author="author" data-testid="socials" /> -->
         </div>
         <div
           v-if="author.about"

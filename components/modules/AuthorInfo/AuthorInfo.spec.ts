@@ -57,7 +57,7 @@ describe('AuthorInfo', () => {
         AuthorIndividualStaticMock.username
       );
     });
-    // TODO: shallowMount stringifies object attributes, don't know how to check them
+    // TODO: shallowMount stringifies object attributes, don't know how to check them + currently removed
     it.todo('author - should render socials with set author', () => {
       const wrapper = shallowMount(AuthorInfo, defaultMountOptions);
       expect(wrapper.get(socialsSelector).attributes('author')).toBe(

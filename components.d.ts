@@ -15,6 +15,7 @@ declare module 'vue' {
     ModulesActivationFormActivationForm: typeof import('./components/modules/ActivationForm/ActivationForm.vue')['default']
     ModulesAuthorInfoAuthorInfo: typeof import('./components/modules/AuthorInfo/AuthorInfo.vue')['default']
     ModulesAuthorInfoComponentsSocials: typeof import('./components/modules/AuthorInfo/components/Socials.vue')['default']
+    ModulesBeatBeat: typeof import('./components/modules/Beat/Beat.vue')['default']
     ModulesHeaderComponentsProfileButton: typeof import('./components/modules/Header/components/ProfileButton.vue')['default']
     ModulesHeaderComponentsSearch: typeof import('./components/modules/Header/components/Search.vue')['default']
     ModulesHeaderComponentsUiProfileIcon: typeof import('./components/modules/Header/components/ui/ProfileIcon.vue')['default']
