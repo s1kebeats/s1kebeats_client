@@ -20,8 +20,8 @@ describe('Socials', () => {
         props: {
           author: {
             ...defaultMountOptions.props!.author,
-          instagram: null,
-          }
+            instagram: null,
+          },
         },
       });
       expect(wrapper.find(instagramSelector).exists()).toBe(false);
@@ -31,8 +31,10 @@ describe('Socials', () => {
       expect(wrapper.find(instagramSelector).exists()).toBe(true);
     });
     it('author - should render instagram link with set username', () => {
-        const wrapper = shallowMount(Socials, defaultMountOptions);
-        expect(wrapper.get(instagramSelector).attributes('username')).toBe(defaultMountOptions.props!.author.instagram);
+      const wrapper = shallowMount(Socials, defaultMountOptions);
+      expect(wrapper.get(instagramSelector).attributes('username')).toBe(
+        defaultMountOptions.props!.author.instagram
+      );
     });
     it('author - should not render vk link if not provided', () => {
       const wrapper = shallowMount(Socials, {
@@ -41,7 +43,7 @@ describe('Socials', () => {
           author: {
             ...defaultMountOptions.props!.author,
             vk: null,
-          }
+          },
         },
       });
       expect(wrapper.find(vkSelector).exists()).toBe(false);
@@ -51,16 +53,18 @@ describe('Socials', () => {
       expect(wrapper.find(vkSelector).exists()).toBe(true);
     });
     it('author - should render vk link with set username', () => {
-        const wrapper = shallowMount(Socials, defaultMountOptions);
-        expect(wrapper.get(vkSelector).attributes('username')).toBe(defaultMountOptions.props!.author.vk);
+      const wrapper = shallowMount(Socials, defaultMountOptions);
+      expect(wrapper.get(vkSelector).attributes('username')).toBe(
+        defaultMountOptions.props!.author.vk
+      );
     });
     it('author - should not render youtube link if not provided', () => {
       const wrapper = shallowMount(Socials, {
         props: {
           author: {
             ...defaultMountOptions.props!.author,
-          youtube: null,
-          }
+            youtube: null,
+          },
         },
       });
       expect(wrapper.find(youtubeSelector).exists()).toBe(false);
@@ -70,8 +74,10 @@ describe('Socials', () => {
       expect(wrapper.find(youtubeSelector).exists()).toBe(true);
     });
     it('author - should render youtube link with set username', () => {
-        const wrapper = shallowMount(Socials, defaultMountOptions);
-        expect(wrapper.get(youtubeSelector).attributes('username')).toBe(defaultMountOptions.props!.author.youtube);
+      const wrapper = shallowMount(Socials, defaultMountOptions);
+      expect(wrapper.get(youtubeSelector).attributes('username')).toBe(
+        defaultMountOptions.props!.author.youtube
+      );
     });
   });
   it('snapshot - should match the snapshot', () => {
@@ -93,6 +99,6 @@ describe('Socials', () => {
           username="@username"
         />
       </div>
-    `)
-  })
+    `);
+  });
 });

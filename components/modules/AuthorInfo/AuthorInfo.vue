@@ -29,10 +29,12 @@
           v-if="author.about"
           class="cursor-pointer flex items-start"
           @click="toggleExpandAbout"
+          data-testid="aboutWrapper"
         >
           <div
             class="text-left desktop-text-xs"
             :class="expandAbout ? '' : 'multiline'"
+            data-testid="about"
           >
             {{ author.about }}
           </div>
@@ -41,7 +43,7 @@
               icon="ic:baseline-keyboard-arrow-down"
               class="transition-all text-[23px]"
               :class="expandAbout ? 'rotate-180' : ''"
-              data-testid="profileButtonIcon"
+              data-testid="editIcon"
             />
           </button>
         </div>

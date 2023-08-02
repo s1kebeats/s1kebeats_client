@@ -22,10 +22,10 @@
 </template>
 <script setup lang="ts">
 import AuthorIndividual from '@/api/models/AuthorIndividual';
-import { InstagramLink, VkLink, YoutubeLink } from '@s1kebeats/s1kebeats-ui'
+import { InstagramLink, VkLink, YoutubeLink } from '@s1kebeats/s1kebeats-ui';
 
 const props = defineProps<{
-    author: AuthorIndividual;
-    size?: "sm" | "md" | "lg"
-}>()
+  author: AuthorIndividual;
+  size?: 'sm' | 'md' | 'lg';
+}>();
 </script>
