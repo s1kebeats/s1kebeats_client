@@ -1,4 +1,4 @@
-import type BeatForAuthor from './BeatForAuthor';
+import type Beat from './Beat';
 
 export default interface AuthorIndividual {
   id: number;
@@ -7,7 +7,7 @@ export default interface AuthorIndividual {
   displayedName: string | null;
   about: string | null;
   image: string | null;
-  beats: BeatForAuthor[];
+  beats: Beat[];
   youtube: string | null;
   instagram: string | null;
   vk: string | null;

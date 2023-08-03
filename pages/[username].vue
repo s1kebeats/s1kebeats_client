@@ -1,13 +1,17 @@
 <template>
-  <AuthorInfo :author="author!" />
-  <section class="w-full px-5 grid grid-cols-2 gap-3 pb-3">
-    <Beat v-for="beat in author!.beats" :data="beat" :key="beat.id" />
-  </section>
+  <AuthorInfo
+    :author="author!"
+    :show-edit="authStore.user?.username === route.params.username"
+  />
+  <AuthorBeats :beats="author!.beats" />
 </template>
 <script setup lang="ts">
 import AuthorIndividual from '@/api/models/AuthorIndividual';
 import AuthorInfo from '@/components/modules/AuthorInfo/AuthorInfo.vue';
-import Beat from '@/components/modules/Beat/Beat.vue';
+import AuthorBeats from '@/components/modules/AuthorBeats/AuthorBeats.vue';
+import useAuthStore from '@/stores/auth';
+
+const authStore = useAuthStore();
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
 const { data: author } = await useFetch<AuthorIndividual>(

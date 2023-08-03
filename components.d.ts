@@ -13,6 +13,7 @@ declare module 'vue' {
     AuthorBeats: typeof import('./components/AuthorBeats.vue')['default']
     AuthorIndividualInfo: typeof import('./components/AuthorIndividualInfo.vue')['default']
     ModulesActivationFormActivationForm: typeof import('./components/modules/ActivationForm/ActivationForm.vue')['default']
+    ModulesAuthorBeatsAuthorBeats: typeof import('./components/modules/AuthorBeats/AuthorBeats.vue')['default']
     ModulesAuthorInfoAuthorInfo: typeof import('./components/modules/AuthorInfo/AuthorInfo.vue')['default']
     ModulesAuthorInfoComponentsSocials: typeof import('./components/modules/AuthorInfo/components/Socials.vue')['default']
     ModulesBeatBeat: typeof import('./components/modules/Beat/Beat.vue')['default']

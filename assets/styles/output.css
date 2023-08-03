@@ -825,32 +825,16 @@ video {
   width: 7.5%;
 }
 
+.w-\[clamp\(100px\2c 35\%\2c 1000px\)\] {
+  width: clamp(100px,35%,1000px);
+}
+
 .w-\[clamp\(175px\2c 15\%\2c 300px\)\] {
   width: clamp(175px,15%,300px);
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-\[clamp\(1000px\2c 35\%\2c 10px\)\] {
-  width: clamp(1000px,35%,10px);
-}
-
-.w-\[clamp\(100px\2c 35\%\2c 10px\)\] {
-  width: clamp(100px,35%,10px);
-}
-
-.w-\[clamp\(100px\2c 35\%\2c 1000px\)\] {
-  width: clamp(100px,35%,1000px);
-}
-
-.w-\[clamp\(120px\2c 35\%\2c 1000px\)\] {
-  width: clamp(120px,35%,1000px);
-}
-
-.w-\[clamp\(10px\2c 35\%\2c 1000px\)\] {
-  width: clamp(10px,35%,1000px);
 }
 
 .min-w-\[142px\] {
@@ -1009,6 +993,10 @@ video {
   overflow: hidden;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1035,9 +1023,18 @@ video {
   border-radius: 0.75rem;
 }
 
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
 .rounded-t-lg {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+}
+
+.rounded-t-md {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
 }
 
 .border {
@@ -1171,26 +1168,6 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-grayscale-header {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 20 43 / var(--tw-bg-opacity));
-}
-
-.bg-grayscale-body {
-  --tw-bg-opacity: 1;
-  background-color: rgb(78 75 102 / var(--tw-bg-opacity));
-}
-
-.bg-grayscale-label {
-  --tw-bg-opacity: 1;
-  background-color: rgb(110 113 145 / var(--tw-bg-opacity));
-}
-
-.bg-grayscale-placehold {
-  --tw-bg-opacity: 1;
-  background-color: rgb(160 163 189 / var(--tw-bg-opacity));
-}
-
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1309,24 +1286,12 @@ video {
   padding-bottom: 75px;
 }
 
-.pt-\[7\.5\%\] {
-  padding-top: 7.5%;
-}
-
-.pt-5 {
-  padding-top: 1.25rem;
-}
-
-.pt-4 {
-  padding-top: 1rem;
-}
-
-.pt-7 {
-  padding-top: 1.75rem;
-}
-
 .pt-6 {
   padding-top: 1.5rem;
+}
+
+.pt-\[7\.5\%\] {
+  padding-top: 7.5%;
 }
 
 .text-left {
@@ -1483,11 +1448,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-grayscale-header_weak {
-  --tw-text-opacity: 1;
-  color: rgb(38 35 56 / var(--tw-text-opacity));
 }
 
 .opacity-0 {
