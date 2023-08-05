@@ -19,6 +19,7 @@ const preview = {
         date: /Date$/,
       },
     },
+    layout: 'fullscreen',
   },
 };
 
