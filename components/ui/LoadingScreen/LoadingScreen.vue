@@ -2,14 +2,15 @@
   <transition name="loading">
     <div
       v-show="uiStore.loading"
-      class="absolute z-[2] flex w-full h-full bg-white"
+      class="absolute z-[9999] w-full h-full bg-white flex"
       data-testid="loadingScreen"
     >
-      <UiLogo class="w-[clamp(175px,15%,300px)] m-auto" />
+      <MainLogo class="w-[clamp(175px,15%,300px)] m-auto" />
     </div>
   </transition>
 </template>
 <script setup lang="ts">
+import MainLogo from '@/components/ui/MainLogo/MainLogo.vue';
 import useUiStore from '@/stores/ui';
 const uiStore = useUiStore();
 </script>

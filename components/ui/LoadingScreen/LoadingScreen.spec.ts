@@ -7,7 +7,6 @@ const loadingScreenSelector = '[data-testid=loadingScreen]';
 
 describe('LoadingScreen', () => {
   describe('ui store', () => {
-    // ! not working properly
     it('loading - should be invisible when set to false', () => {
       const wrapper = shallowMount(LoadingScreen, {
         global: {
@@ -22,8 +21,10 @@ describe('LoadingScreen', () => {
           ],
         },
       });
-
-      expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(false);
+      // ! isVisible() doesn't work properly, using a workaround
+      expect(wrapper.get(loadingScreenSelector).attributes('style')).toBe(
+        'display: none;'
+      );
     });
     it('loading - should be visible when set to true', () => {
       const wrapper = shallowMount(LoadingScreen, {
@@ -39,7 +40,10 @@ describe('LoadingScreen', () => {
           ],
         },
       });
-
+      // ! isVisible() doesn't work properly, using a workaround
+      expect(wrapper.get(loadingScreenSelector).attributes('style')).not.toBe(
+        'display: none;'
+      );
       expect(wrapper.get(loadingScreenSelector).isVisible()).toBe(true);
     });
   });
@@ -61,14 +65,14 @@ describe('LoadingScreen', () => {
       DOMWrapper {
         "isDisabled": [Function],
         "wrapperElement": <div
-          class="absolute z-[2] flex w-full h-full bg-white"
+          class="absolute z-[9999] w-full h-full bg-white flex"
           data-testid="loadingScreen"
-          data-v-2d6f5cd9=""
+          data-v-798013b0=""
         >
-          <logo-stub
+          <main-logo-stub
             class="w-[clamp(175px,15%,300px)] m-auto"
             color="black"
-            data-v-2d6f5cd9=""
+            data-v-798013b0=""
           />
         </div>,
       }
