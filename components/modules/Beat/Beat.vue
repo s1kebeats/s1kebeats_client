@@ -19,9 +19,7 @@
         <span class="desktop-text-xs truncate link">
           {{ beat.user.username }}
         </span>
-        <span class="text-primary desktop-text-xs"
-          >{{ beat.wavePrice }}р.</span
-        >
+        <span class="text-primary desktop-text-xs">{{ beat.wavePrice }}р.</span>
       </div>
       <!-- <div
         class="flex flex-wrap gap-1 desktop-text-xs"
@@ -36,18 +34,15 @@
           #{{ tag.name }}
         </nuxt-link>
       </div> -->
-      <div class="flex desktop-text-xs gap-1 justify-between overflow-x-auto text-white">
-        <div class="bg-primary rounded-md px-1">
-        mp3
+      <div
+        class="flex desktop-text-xs gap-1 justify-between overflow-x-auto text-white"
+      >
+        <div class="bg-primary rounded-md px-1">mp3</div>
+        <div class="bg-primary rounded-md px-1">wav</div>
+        <div v-if="beat.stemsPrice" class="bg-primary rounded-md px-1">
+          stems
+        </div>
       </div>
-      <div class="bg-primary rounded-md px-1">
-        wav
-      </div>
-      <div v-if="beat.stemsPrice" class="bg-primary rounded-md px-1">
-        stems
-      </div>
-      </div>
-
     </div>
   </div>
 </template>

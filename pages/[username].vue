@@ -1,14 +1,12 @@
 <template>
-  <AuthorInfo
+  <AuthorIndividualView
     :author="author!"
-    :show-edit="authStore.user?.username === route.params.username"
+    :show-edit="route.params.username === authStore.user?.username"
   />
-  <AuthorBeats :beats="author!.beats" />
 </template>
 <script setup lang="ts">
+import AuthorIndividualView from '@/views/pages/AuthorIndividual.vue';
 import AuthorIndividual from '@/api/models/AuthorIndividual';
-import AuthorInfo from '@/components/modules/AuthorInfo/AuthorInfo.vue';
-import AuthorBeats from '@/components/modules/AuthorBeats/AuthorBeats.vue';
 import useAuthStore from '@/stores/auth';
 
 const authStore = useAuthStore();
