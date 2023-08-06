@@ -17,29 +17,29 @@ describe('UI Store', () => {
     });
   });
   describe('actions', () => {
-    test('toggleOverlay', () => {
+    test('toggleOverlay - shuould toggle overlay state', () => {
       const store = useStore();
       store.toggleOverlay();
       expect(store.overlay).toBe(true);
       store.toggleOverlay();
       expect(store.overlay).toBe(false);
     });
-    test('setOverlay - set true', () => {
+    test('setOverlay - should set overlay state to true when called with true', () => {
       const store = useStore();
       store.setOverlay(true);
       expect(store.overlay).toBe(true);
     });
-    test('setOverlay - set false', () => {
+    test('setOverlay - should set overlay state to false when called with false', () => {
       const store = useStore();
       store.setOverlay(false);
       expect(store.overlay).toBe(false);
     });
-    test('setLoading - set true', () => {
+    test('setLoading - should set loading state to true when called with true', () => {
       const store = useStore();
       store.setLoading(true);
       expect(store.loading).toBe(true);
     });
-    test('setLoading - set false', () => {
+    test('setLoading - should set loading state to false when called with false', () => {
       const store = useStore();
       store.setLoading(false);
       expect(store.loading).toBe(false);
