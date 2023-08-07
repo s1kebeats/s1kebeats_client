@@ -14,12 +14,20 @@ describe('login', () => {
   });
 
   test('should call axios.post with valid params', async () => {
-    const testData = { username: `username`, password: 'password', refresh: false }
+    const testData = {
+      username: `username`,
+      password: 'password',
+      refresh: false,
+    };
     await login(testData.username, testData.password, testData.refresh);
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
       runtimeConfigMock.public.API_URL + '/login',
-      { username: testData.username, password: testData.password, refresh: testData.refresh },
+      {
+        username: testData.username,
+        password: testData.password,
+        refresh: testData.refresh,
+      },
       { withCredentials: true }
     );
   });
