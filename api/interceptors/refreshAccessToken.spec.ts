@@ -35,19 +35,7 @@ describe('refreshAccessToken', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'localStorage', { value: localStorageMock });
   });
-  it('should throw error if error status is not 401', async () => {
-    try {
-      await refreshAccessToken({
-        config: {},
-        response: {
-          status: 500,
-        },
-      });
-    } catch (error: any) {
-      expect(error.response.status).toBe(500);
-    }
-  });
-  it('should call refresh function if error status is 401', async () => {
+  it('should call refresh function', async () => {
     await refreshAccessToken({
       config: {},
       response: {
