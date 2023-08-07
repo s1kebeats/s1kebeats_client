@@ -20,7 +20,7 @@ describe('setAuthHeader', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
-  it('should define config.headers if was not provided in config', () => {
+  it('should define config.headers if was not present in provided config', () => {
     const config = setAuthHeader({});
     expect(Object.keys(config)).toContain('headers');
   });
