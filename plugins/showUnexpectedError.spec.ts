@@ -1,6 +1,6 @@
-import throwUnexpectedError, {
+import showUnexpectedError, {
   unexpectedErrorMessage,
-} from './throwUnexpectedError';
+} from './showUnexpectedError';
 import { describe, it, expect, vi } from 'vitest';
 
 vi.stubGlobal('showError', vi.fn());
@@ -11,9 +11,9 @@ const testError = {
   },
 };
 
-describe('throwUnexpectedError', () => {
+describe('showUnexpectedError', () => {
   it('should call showError with unexpectedErrorMessage and statusCode set to "500" if it is not present in provided error', () => {
-    throwUnexpectedError({});
+    showUnexpectedError({});
 
     expect(showError).toHaveBeenCalled();
     expect(showError).toHaveBeenCalledWith({
@@ -22,7 +22,7 @@ describe('throwUnexpectedError', () => {
     });
   });
   it('should call showError with unexpectedErrorMessage and statusCode from provided error if it is present', () => {
-    throwUnexpectedError(testError);
+    showUnexpectedError(testError);
 
     expect(showError).toHaveBeenCalled();
     expect(showError).toHaveBeenCalledWith({
