@@ -1,5 +1,5 @@
 import setAuthHeader from './setAuthHeader';
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 
 const testTokenFromLocalStorage = 'testToken';
 const localStorageMock = (function () {
@@ -16,6 +16,9 @@ const localStorageMock = (function () {
 describe('setAuthHeader', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+  });
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
   it('should define config.headers if was not provided in config', () => {
     const config = setAuthHeader({});

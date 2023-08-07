@@ -1,6 +1,6 @@
 import refresh from '@/stores/api/refresh';
 import refreshAccessToken from './refreshAccessToken';
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 import { runtimeConfigMock } from '@/stores/api/mocks';
 import $api from '@/api';
 
@@ -34,6 +34,9 @@ const localStorageMock = (function () {
 describe('refreshAccessToken', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+  });
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
   it('should call refresh function', async () => {
     await refreshAccessToken({
