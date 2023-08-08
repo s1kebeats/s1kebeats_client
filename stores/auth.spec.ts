@@ -15,10 +15,10 @@ import { authResponseMock } from './api/mocks';
 import login from './api/login';
 import logout from './api/logout';
 import refresh from './api/refresh';
-import showUnexpectedError from '@/plugins/showUnexpectedError';
+import showUnexpectedError from '@/composables/showUnexpectedError';
 import activate from './api/activate';
 
-vi.mock('@/plugins/showUnexpectedError');
+vi.mock('@/composables/showUnexpectedError');
 
 const testError = () => new Error('Api error');
 

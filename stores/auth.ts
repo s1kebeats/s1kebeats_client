@@ -4,7 +4,7 @@ import type User from '@/api/models/User';
 import logout from './api/logout';
 import login from './api/login';
 import activate from './api/activate';
-import showUnexpectedError from '@/plugins/showUnexpectedError';
+import showUnexpectedError from '@/composables/showUnexpectedError';
 
 const useAuthStore = defineStore('auth', {
   state: (): {
