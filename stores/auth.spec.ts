@@ -87,18 +87,16 @@ describe('Auth Store', () => {
         const store = useAuthStore();
 
         await store.activate(testCode);
-        expect(activate).toHaveBeenCalled()
-        expect(activate).toHaveBeenCalledWith(testCode)
-      })
+        expect(activate).toHaveBeenCalled();
+        expect(activate).toHaveBeenCalledWith(testCode);
+      });
       describe('activate - error', () => {
         beforeAll(() => {
           (activate as Mock).mockRejectedValue(testError());
         });
         it('should throw error', async () => {
           const store = useAuthStore();
-          expect(() =>
-            store.activate('code')
-          ).rejects.toThrowError();
+          expect(() => store.activate('code')).rejects.toThrowError();
         });
         it('should throw error returned from activate', async () => {
           const store = useAuthStore();
@@ -108,8 +106,8 @@ describe('Auth Store', () => {
             expect(error).toStrictEqual(testError());
           }
         });
-      })
-    })
+      });
+    });
     describe('login', () => {
       it('should call login function with passed params', async () => {
         const testData = {

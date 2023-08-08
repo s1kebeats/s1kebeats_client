@@ -13,9 +13,10 @@
     "dev:tailwind": "pnpm run build:tailwind -- --watch",
     "dev:sb": "conc \"pnpm run format:mod\" \"storybook dev -p 6006\" \"pnpm run dev:tailwind\"",
     "format:mod": "pnpm exec lint-staged",
-    "format:all": "prettier --write .",
+    "format:all": "prettier --write",
     "lint": "eslint --fix .",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
@@ -30,6 +31,8 @@
     "@storybook/vue3": "7.2.0-rc.0",
     "@storybook/vue3-vite": "7.2.0-rc.0",
     "@types/node": "^18.17.1",
+    "@vitest/coverage-v8": "^0.34.1",
+    "@vitest/ui": "^0.34.1",
     "@vue/test-utils": "^2.4.1",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.3",
