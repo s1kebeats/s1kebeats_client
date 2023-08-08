@@ -26,7 +26,9 @@ describe('checkAuth', () => {
       vi.restoreAllMocks();
     });
     it('should return early when process.server is "true"', async () => {
-      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({ server: true });
+      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({
+        server: true,
+      } as NodeJS.Process);
 
       await checkAuth();
       expect(useAuthStore).not.toHaveBeenCalled();
@@ -61,7 +63,9 @@ describe('checkAuth', () => {
       vi.restoreAllMocks();
     });
     it('should call authStore.checkAuth when process.server is "false" and authStore.authorized is null', async () => {
-      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({ server: false });
+      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({
+        server: false,
+      } as NodeJS.Process);
       const authStore = useAuthStore();
       authStore.authorized = null;
 
@@ -69,7 +73,9 @@ describe('checkAuth', () => {
       expect(authStore.checkAuth).toHaveBeenCalled();
     });
     it('should not call authStore.checkAuth when process.server is "false" and authStore.authorized is not null', async () => {
-      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({ server: false });
+      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({
+        server: false,
+      } as NodeJS.Process);
       const authStore = useAuthStore();
       authStore.authorized = false;
 
@@ -77,7 +83,9 @@ describe('checkAuth', () => {
       expect(authStore.checkAuth).not.toHaveBeenCalled();
     });
     it('should call uiStore.setLoading with false when process.server is "false" and authStore.authorized is null', async () => {
-      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({ server: false });
+      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({
+        server: false,
+      } as NodeJS.Process);
       const authStore = useAuthStore();
       const uiStore = useUiStore();
       authStore.authorized = null;
@@ -88,7 +96,9 @@ describe('checkAuth', () => {
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
     it('should not call uiStore.setLoading when process.server is "false" and authStore.authorized is not null', async () => {
-      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({ server: false });
+      vi.spyOn(global, 'process', 'get').mockReturnValueOnce({
+        server: false,
+      } as NodeJS.Process);
       const authStore = useAuthStore();
       const uiStore = useUiStore();
       authStore.authorized = false;
