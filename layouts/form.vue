@@ -8,8 +8,11 @@
       </nuxt-link>
     </section>
     <section
-      class="w-full md:w-[clamp(320px,30%,576px)] flex items-center justify-center"
+      class="w-full md:w-[clamp(320px,30%,576px)] flex flex-col gap-5 items-center justify-center"
     >
+      <nuxt-link class="w-[min(35%,140px)] md:hidden" to="/">
+        <MainLogo />
+      </nuxt-link>
       <slot />
     </section>
   </div>
