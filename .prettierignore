@@ -25,3 +25,8 @@ logs
 pnpm-lock.yaml
 
 coverage
+components.d.ts
+assets/styles/main.css
+assets/styles/main.css.map
+assets/styles/output.css
+assets/styles/output.css.map
