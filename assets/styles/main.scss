@@ -237,3 +237,11 @@ body {
 input:placeholder-shown {
   text-overflow: ellipsis;
 }
+#layout {
+  min-height: 100dvh;
+}
+.bg-image-main {
+  background: url('../images/mesh-gradient.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
