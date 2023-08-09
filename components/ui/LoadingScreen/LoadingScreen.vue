@@ -10,7 +10,7 @@
   </transition>
 </template>
 <script setup lang="ts">
-import MainLogo from '@/components/ui/MainLogo/MainLogo.vue';
+import MainLogo from '@/components/ui/MainLogo';
 import useUiStore from '@/stores/ui';
 const uiStore = useUiStore();
 </script>
