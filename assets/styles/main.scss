@@ -42,3 +42,14 @@ input:placeholder-shown {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.bg-image-mobile {
+  background: linear-gradient(
+      175deg,
+      rgba(255, 255, 255, 0),
+      15%,
+      rgba(255, 255, 255, 1) 30%
+    ),
+    url('../images/mesh-gradient.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

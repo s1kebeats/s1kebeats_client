@@ -8,7 +8,7 @@
       </nuxt-link>
     </section>
     <section
-      class="w-full md:w-[clamp(320px,30%,576px)] flex flex-col gap-5 items-center justify-center"
+      class="bg-image-mobile md:bg-none md:bg-grayscale-bg w-full md:w-[clamp(320px,30%,576px)] flex flex-col gap-5 items-center justify-center"
     >
       <nuxt-link class="w-[min(35%,140px)] md:hidden" to="/">
         <MainLogo />
