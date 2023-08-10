@@ -65,7 +65,7 @@ describe('LoadingScreen', () => {
       DOMWrapper {
         "isDisabled": [Function],
         "wrapperElement": <div
-          class="absolute z-[9999] w-full h-full bg-white flex"
+          class="absolute z-[9999] w-full h-full bg-grayscale-bg flex"
           data-testid="loadingScreen"
           data-v-798013b0=""
         >

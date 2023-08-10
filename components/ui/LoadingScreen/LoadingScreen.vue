@@ -2,7 +2,7 @@
   <transition name="loading">
     <div
       v-show="uiStore.loading"
-      class="absolute z-[9999] w-full h-full bg-white flex"
+      class="absolute z-[9999] w-full h-full bg-grayscale-bg flex"
       data-testid="loadingScreen"
     >
       <MainLogo class="w-[clamp(175px,15%,300px)] m-auto" />
