@@ -11,11 +11,10 @@ vi.mock('@/components/modules/RegistrationForm/api', () => {
 });
 
 describe('usernameAvailable', () => {
-  test('should call fetchUsernameAvailability', async () => {
-    const availability = await usernameAvailable('username');
+  test('should call fetchUsernameAvailability with passed param', async () => {
+    await usernameAvailable('username');
     expect(fetchUsernameAvailability).toHaveBeenCalled();
     expect(fetchUsernameAvailability).toHaveBeenCalledWith('username');
-    expect(availability).toBe(true);
   });
   test('should return fetchUsernameAvailability value', async () => {
     const availability = await usernameAvailable('username');

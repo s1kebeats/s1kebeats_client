@@ -1,2 +1,2 @@
-import noSpecialChars from "./noSpecialChars";
+import noSpecialChars from './noSpecialChars';
 export default noSpecialChars;

@@ -1,2 +1,2 @@
-import usernameAvailable from "./usernameAvailable";
+import usernameAvailable from './usernameAvailable';
 export default usernameAvailable;

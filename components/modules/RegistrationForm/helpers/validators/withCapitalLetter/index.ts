@@ -1,2 +1,2 @@
-import withCapitalLetter from "./withCapitalLetter";
+import withCapitalLetter from './withCapitalLetter';
 export default withCapitalLetter;
