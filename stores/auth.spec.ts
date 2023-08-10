@@ -20,8 +20,8 @@ import activate from './api/activate';
 
 vi.mock('@/composables', () => {
   return {
-    showUnexpectedError: vi.fn()
-  }
+    showUnexpectedError: vi.fn(),
+  };
 });
 
 const testError = () => new Error('Api error');
