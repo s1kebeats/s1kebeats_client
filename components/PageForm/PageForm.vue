@@ -19,7 +19,14 @@
         data-testid="formRequestErrorOutput"
       />
       <slot />
-      <Button size="sm" :loading="pending" data-testid="actionButton">
+      <Button
+        :class="{
+          'focus:!outline-none': errorState,
+        }"
+        size="sm"
+        :loading="pending"
+        data-testid="actionButton"
+      >
         {{ buttonText }}
       </Button>
       <footer

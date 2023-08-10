@@ -114,16 +114,16 @@ describe('PageForm', () => {
     const wrapper = shallowMount(PageForm, defaultMountOptions);
     expect(wrapper.element).toMatchInlineSnapshot(`
       <div
-        class="w-full flex flex-col items-center justify-center gap-7"
+        class="w-[90%] md:w-[80%] flex flex-col gap-5 md:gap-7"
       >
         <h1
-          class="link desktop-display-xs text-center"
+          class="font-semibold text-3xl md:text-4xl text-center text-grayscale-header"
           data-testid="formTitle"
         >
           testForm
         </h1>
         <form
-          class="relative flex flex-col w-full gap-3"
+          class="relative flex flex-col gap-3"
           data-testid="form"
         >
           <request-error-output-stub
@@ -134,6 +134,7 @@ describe('PageForm', () => {
           
           
           <button-stub
+            class=""
             data-testid="actionButton"
             loading="false"
             position="left"
@@ -141,17 +142,17 @@ describe('PageForm', () => {
             type="primary"
           />
           <footer
-            class="w-full desktop-text-xs flex items-center justify-center gap-2"
+            class="text-sm flex items-center justify-center gap-2"
             data-testid="formFooter"
           >
             <span
-              class="text-black"
+              class="text-grayscale-header"
               data-testid="footerHint"
             >
               testHint
             </span>
             <nuxt-link
-              class="text-primary link transition-all hover:text-primary-default_strong"
+              class="text-primary font-semibold transition-all hover:text-primary-default_strong"
               data-testid="footerLink"
               to="/test"
             >

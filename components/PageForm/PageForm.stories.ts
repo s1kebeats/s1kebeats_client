@@ -12,7 +12,7 @@ export const Primary = {
   render: () => ({
     components: { PageForm, ConfidentialInput, UsernameInput },
     template: `
-      <div class="flex items-center justify-center">
+      <div class="flex flex-col gap-10 items-center justify-center">
         <PageForm
           title="Title"
           :pending="false"
@@ -25,6 +25,18 @@ export const Primary = {
         >
           ...
         </PageForm>
+        <PageForm
+        title="Title"
+        :pending="false"
+        button-text="Submit"
+        footer-hint="What's up?"
+        footer-link-title="Get it"
+        footer-to="/layout"
+        :error-state="true"
+        :error-status="null"
+      >
+        ...
+      </PageForm>
       </div>
     `,
   }),
