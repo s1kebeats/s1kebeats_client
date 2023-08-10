@@ -12,15 +12,14 @@ export default defineConfig({
       dirs: ['./composables'],
       vueTemplate: true,
     }),
-    Components({
-      dirs: [
-        './components/',
-        // Component folders that should be auto-imported
-        // './.nuxt/components.d.ts'
-      ],
-      dts: true,
-      directoryAsNamespace: true,
-    }),
+    // Components({
+    //   dirs: [
+    //     './components/',
+    //     // Component folders that should be auto-imported
+    //   ],
+    //   dts: true,
+    //   directoryAsNamespace: true,
+    // }),
     vue(),
   ],
   resolve: {
