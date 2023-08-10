@@ -9,10 +9,10 @@ vi.mock('axios');
 
 describe('register', () => {
   beforeEach(() => {
-    (axios.post as Mock).mockReset();
+    (axios.post as Mock).mockClear();
   });
 
-  test('should make post request to api with valid params', async () => {
+  test('should call axios.post with valid params', async () => {
     const testData = {
       username: 'username',
       email: 'test@example.com',
@@ -25,7 +25,7 @@ describe('register', () => {
       testData
     );
   });
-  test('should return response', async () => {
+  test('should return axios.post response', async () => {
     const responseMock = {
       data: 'success',
     };
