@@ -15,7 +15,7 @@ describe('login', () => {
 
   test('should call axios.post with valid params', async () => {
     const testData = {
-      username: `username`,
+      username: 'username',
       password: 'password',
       refresh: false,
     };
@@ -23,11 +23,7 @@ describe('login', () => {
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
       runtimeConfigMock.public.API_URL + '/login',
-      {
-        username: testData.username,
-        password: testData.password,
-        refresh: testData.refresh,
-      },
+      testData,
       { withCredentials: true }
     );
   });
