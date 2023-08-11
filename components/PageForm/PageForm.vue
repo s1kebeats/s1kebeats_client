@@ -23,6 +23,7 @@
         :class="{
           'focus:!outline-none': errorState,
         }"
+        type="submit"
         size="sm"
         :loading="pending"
         data-testid="actionButton"
