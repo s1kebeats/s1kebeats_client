@@ -139,7 +139,8 @@ describe('PageForm', () => {
             loading="false"
             position="left"
             size="sm"
-            type="primary"
+            type="submit"
+            uitype="primary"
           />
           <footer
             class="text-sm flex items-center justify-center gap-2"
