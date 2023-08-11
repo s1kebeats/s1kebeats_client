@@ -11,7 +11,7 @@
     "build:sb": "storybook build",
     "dev": "conc \"pnpm run format:all .\" \"nuxt dev\"",
     "dev:tailwind": "pnpm run build:tailwind -- --watch",
-    "dev:sb": "conc \"pnpm run format:all .\" \"storybook dev -p 6006\" \"pnpm run dev:tailwind\"",
+    "dev:sb": "conc \"pnpm run format:all .\" \"storybook dev -p 6006 --no-open\" \"pnpm run dev:tailwind\"",
     "format:mod": "pnpm exec lint-staged",
     "format:all": "prettier --write",
     "lint": "eslint --fix .",
