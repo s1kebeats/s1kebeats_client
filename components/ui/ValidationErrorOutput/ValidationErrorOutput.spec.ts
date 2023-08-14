@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import ValidationErrorOutput from './ValidationErrorOutput.vue';
 import { shallowMount } from '@vue/test-utils';
-import { type ErrorObject } from '@vuelidate/core';
 
 const validationErrorOutputSelector = '[data-testid=validationErrorOutput]';
 
@@ -19,11 +18,7 @@ describe('ValidationErrorOutput', async () => {
     it('errors - should render output when populated error list provided', () => {
       const wrapper = shallowMount(ValidationErrorOutput, {
         props: {
-          errors: [
-            {
-              $message: 'error',
-            } as ErrorObject,
-          ],
+          errors: ['error'],
         },
       });
 
@@ -32,14 +27,7 @@ describe('ValidationErrorOutput', async () => {
     it('errors - should render first error message from error list', () => {
       const wrapper = shallowMount(ValidationErrorOutput, {
         props: {
-          errors: [
-            {
-              $message: 'first',
-            } as ErrorObject,
-            {
-              $message: 'second',
-            } as ErrorObject,
-          ],
+          errors: ['first', 'second'],
         },
       });
 
@@ -49,14 +37,7 @@ describe('ValidationErrorOutput', async () => {
   it('snapshot - should match the snapshot', () => {
     const wrapper = shallowMount(ValidationErrorOutput, {
       props: {
-        errors: [
-          {
-            $message: 'first',
-          } as ErrorObject,
-          {
-            $message: 'second',
-          } as ErrorObject,
-        ],
+        errors: ['first', 'second'],
       },
     });
     expect(wrapper.element).toMatchInlineSnapshot(`
