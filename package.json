@@ -16,6 +16,7 @@
     "format:all": "prettier --write",
     "lint": "eslint --fix .",
     "test": "vitest",
+    "test:sb": "test-storybook",
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {
@@ -27,6 +28,8 @@
     "@storybook/addon-interactions": "7.2.0-rc.0",
     "@storybook/addon-links": "7.2.0-rc.0",
     "@storybook/blocks": "7.2.0-rc.0",
+    "@storybook/jest": "^0.1.0",
+    "@storybook/test-runner": "^0.13.0",
     "@storybook/testing-library": "0.2.0",
     "@storybook/vue3": "7.2.0-rc.0",
     "@storybook/vue3-vite": "7.2.0-rc.0",
@@ -34,8 +37,6 @@
     "@vitest/coverage-v8": "^0.34.1",
     "@vitest/ui": "^0.34.1",
     "@vue/test-utils": "^2.4.1",
-    "@vuelidate/core": "^2.0.3",
-    "@vuelidate/validators": "^2.0.3",
     "concurrently": "^8.2.0",
     "eslint": "^8.46.0",
     "happy-dom": "^10.5.2",
@@ -54,7 +55,9 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "@s1kebeats/s1kebeats-ui": "^3.9.1",
+    "@vee-validate/zod": "^4.11.1",
     "pinia": "^2.1.6",
-    "sass": "^1.64.1"
+    "sass": "^1.64.1",
+    "vee-validate": "^4.11.1"
   }
 }
