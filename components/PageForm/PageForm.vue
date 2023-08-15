@@ -23,6 +23,7 @@
         :class="{
           'focus:!outline-none': errorState,
         }"
+        @click.prevent="emit('submitForm')"
         type="submit"
         size="sm"
         :loading="pending"

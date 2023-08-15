@@ -95,6 +95,12 @@ describe('PageForm', () => {
       expect(wrapper.emitted()).toHaveProperty('submitForm');
       expect(wrapper.emitted('submitForm')).toHaveLength(1);
     });
+    it('actionButton click - should emit "submitForm" event', async () => {
+      const wrapper = mount(PageForm, defaultMountOptions);
+      await wrapper.get(actionButtonSelector).trigger('click');
+      expect(wrapper.emitted()).toHaveProperty('submitForm');
+      expect(wrapper.emitted('submitForm')).toHaveLength(1);
+    });
     it('keydown.enter - should emit "submitForm" event', async () => {
       const wrapper = mount(PageForm, defaultMountOptions);
       await wrapper.get('[data-testid=form]').trigger('keydown.enter');
