@@ -17,4 +17,11 @@ export default {
   docs: {
     autodocs: 'tag',
   },
+  // usernameAvailable validator mock
+  viteFinal: async (config) => {
+    config.resolve.alias['./usernameAvailable'] = require.resolve(
+      '../components/modules/RegistrationForm/__mocks__/usernameAvailable.js'
+    );
+    return config;
+  },
 };
