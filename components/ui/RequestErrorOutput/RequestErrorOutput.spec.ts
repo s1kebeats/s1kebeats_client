@@ -158,7 +158,8 @@ describe('RequestErrorOutput', () => {
             loading="false"
             position="left"
             size="xs"
-            type="primary"
+            type="button"
+            uitype="primary"
           />
         </div>
       </transition-stub>
