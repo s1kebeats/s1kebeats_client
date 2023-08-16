@@ -2,6 +2,9 @@ import RegistrationForm from './RegistrationForm.vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import validationMessages from './validationMessages';
+
+import { createMock, getMock } from 'storybook-addon-module-mock';
 
 const meta: Meta<typeof RegistrationForm> = {
   parameters: {
