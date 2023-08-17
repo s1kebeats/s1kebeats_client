@@ -4,6 +4,7 @@ import { userEvent, waitFor, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import validationMessages from './validationMessages';
 import { decorator as usenameAvailableMockDecorator } from './__mocks__/usernameAvailable';
+import { decorator as registerMockDecorator } from './__mocks__/register';
 
 const meta: Meta<typeof RegistrationForm> = {
   parameters: {
@@ -11,6 +12,7 @@ const meta: Meta<typeof RegistrationForm> = {
   },
   decorators: [
     usenameAvailableMockDecorator,
+    registerMockDecorator,
     () => ({
       template:
         '<div class="w-[576px] flex items-center justify-center"><story/></div>',
