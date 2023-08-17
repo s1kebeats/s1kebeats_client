@@ -1,0 +1,15 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 8e32140feff89064dccdb5535bc3e56ab2274b43..da09a1bde2b71f4f39b93b1b8fa75e95345dc058 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -3,6 +3,6 @@ export { setup } from './chunk-SRVBJOBI.mjs';
+ import { global } from '@storybook/global';
+ import { start } from '@storybook/preview-api';
+ 
+-var{window:globalWindow}=global;globalWindow.STORYBOOK_ENV="vue3";var RENDERER="vue3",api=start(renderToCanvas,{decorateStory,render}),storiesOf=(kind,m)=>api.clientApi.storiesOf(kind,m).addParameters({renderer:RENDERER}),configure=(...args)=>api.configure(RENDERER,...args),{forceReRender}=api,{raw}=api.clientApi;typeof module<"u"&&module?.hot?.decline();
++var{window:globalWindow}=global;globalWindow.STORYBOOK_ENV="vue3";var RENDERER="vue3",api=start(renderToCanvas,{decorateStory,render}),storiesOf=(kind,m)=>api.clientApi.storiesOf(kind,m).addParameters({renderer:RENDERER}),configure=(...args)=>api.configure(RENDERER,...args),{forceReRender}=api,{raw}=api.clientApi;typeof module<"u"&&module?.hot?.decline?.();
+ 
+ export { configure, forceReRender, raw, storiesOf };
+diff --git a/src/typings.d.ts b/src/typings.d.ts
+deleted file mode 100644
+index f4beceae1d634ff3bf08c0fc0005f9dc93e19d6b..0000000000000000000000000000000000000000
