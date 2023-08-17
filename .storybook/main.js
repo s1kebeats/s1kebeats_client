@@ -22,6 +22,9 @@ export default {
     config.resolve.alias['./usernameAvailable'] = require.resolve(
       '../components/modules/RegistrationForm/__mocks__/usernameAvailable.js'
     );
+    config.resolve.alias['./register'] = require.resolve(
+      '../components/modules/RegistrationForm/__mocks__/register.js'
+    );
     return config;
   },
 };
