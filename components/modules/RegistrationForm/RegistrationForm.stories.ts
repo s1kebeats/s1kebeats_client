@@ -24,24 +24,112 @@ export default meta;
 
 type Story = StoryObj<typeof RegistrationForm>;
 
-export const Empty: Story = {
+const usernameInputSelector = 'input[name=registrationUsername]';
+const emailInputSelector = 'input[name=registrationEmail]';
+const passwordInputSelector = 'input[name=registrationPassword]';
+const passwordConfirmInputSelector = 'input[name=registrationPasswordConfirm]';
+
+export const FillValidSubmitFail: Story = {
+  name: 'SUBMIT_VALID: Fill the form with valid values and submit it, with failed register API call - should not render ValidationErrorOutput messages, should render with visible FormRequestErrorOutput',
   render: () => ({
     components: { RegistrationForm },
     template: `
       <RegistrationForm />
     `,
   }),
-};
+  parameters: {
+    usernameAvailable: true,
+    registerResponse: new Error(),
+  },
+  play: async function ({ canvasElement, step }) {
+    const user = userEvent.setup();
+    const canvas = within(canvasElement);
 
-const usernameInputSelector = 'input[name=registrationUsername]';
-const emailInputSelector = 'input[name=registrationEmail]';
-const passwordInputSelector = 'input[name=registrationPassword]';
-const passwordConfirmInputSelector = 'input[name=registrationPasswordConfirm]';
+    await step('Fill the form with valid data', async () => {
+      await user.type(
+        canvasElement.querySelector(usernameInputSelector)!,
+        'johndoe'
+      );
+      await user.type(
+        canvasElement.querySelector(emailInputSelector)!,
+        'email@provider.com'
+      );
+      await user.type(
+        canvasElement.querySelector(passwordInputSelector)!,
+        'Password1234'
+      );
+      await user.type(
+        canvasElement.querySelector(passwordConfirmInputSelector)!,
+        'Password1234'
+      );
+    });
+    setTimeout(async () => {
+      await step('Submit the form', async () => {
+        await user.click(canvas.getByTestId('actionButton'));
+      });
+      await waitFor(async () => {
+        expect(
+          canvas.queryByTestId('validationErrorOutput')
+        ).not.toBeInTheDocument();
+        expect(canvas.queryByTestId('formRequestErrorOutput')).toBeVisible();
+      });
+    }, 500);
+  },
+};
+export const FillValidSubmitSuccess: Story = {
+  name: 'SUBMIT_VALID: Fill the form with valid values and submit it, with successful register API call - should not render ValidationErrorOutput messages, should render with invisible FormRequestErrorOutput',
+  render: () => ({
+    components: { RegistrationForm },
+    template: `
+      <RegistrationForm />
+    `,
+  }),
+  parameters: {
+    usernameAvailable: true,
+    registerResponse: {},
+  },
+  play: async ({ canvasElement, step }) => {
+    const user = userEvent.setup();
+    const canvas = within(canvasElement);
+
+    await step('Fill the form with valid data', async () => {
+      await user.type(
+        canvasElement.querySelector(usernameInputSelector)!,
+        'johndoe'
+      );
+      await user.type(
+        canvasElement.querySelector(emailInputSelector)!,
+        'email@provider.com'
+      );
+      await user.type(
+        canvasElement.querySelector(passwordInputSelector)!,
+        'Password1234'
+      );
+      await user.type(
+        canvasElement.querySelector(passwordConfirmInputSelector)!,
+        'Password1234'
+      );
+    });
+    setTimeout(async () => {
+      await step('Submit the form', async () => {
+        await user.click(canvas.getByTestId('actionButton'));
+      });
+      await waitFor(async () => {
+        expect(
+          canvas.queryByTestId('validationErrorOutput')
+        ).not.toBeInTheDocument();
+        expect(
+          canvas.queryByTestId('formRequestErrorOutput')
+        ).not.toBeVisible();
+      });
+    }, 500);
+  },
+};
 
 // usernameInput
 
-// Fill username input with unavailable username - should render validationErrorOutput with username.available validation message
-export const FillUsernameInputUnavailable: Story = {
+export const FillUsernameUnavailable: Story = {
+  name: 'USERNAME_INPUT: Fill username input with valid username, with available API call returning "false" - should render validationErrorOutput with username.available validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -68,8 +156,8 @@ export const FillUsernameInputUnavailable: Story = {
     });
   },
 };
-// Fill username input with special chars - should render validationErrorOutput with username.noSpecialChars validation message
-export const FillUsernameInputSpecialChars: Story = {
+export const FillUsernameWithSpecialChars: Story = {
+  name: 'USERNAME_INPUT: Fill username input with invalid username containing special chars - should render validationErrorOutput with username.available validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -93,8 +181,8 @@ export const FillUsernameInputSpecialChars: Story = {
     });
   },
 };
-// Fill username input and clear - should render validationErrorOutput with username.required validation message
-export const FillUsernameInputClear: Story = {
+export const FillUsernameClear: Story = {
+  name: 'USERNAME_INPUT: Fill username input and clear its value - should render validationErrorOutput with username.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -118,8 +206,8 @@ export const FillUsernameInputClear: Story = {
     });
   },
 };
-// Empty username input form submit - should render validationErrorOutput with username.required validation message
-export const EmptyUsernameInputFormSubmit: Story = {
+export const EmptyUsernameFormSubmit: Story = {
+  name: 'USERNAME_INPUT: Form submit with empty username input value - should render validationErrorOutput with username.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -152,8 +240,8 @@ export const EmptyUsernameInputFormSubmit: Story = {
     });
   },
 };
-// Fill username input with valid - should not render validationErrorOutput
-export const FillUsernameInputValid: Story = {
+export const FillUsernameValid: Story = {
+  name: 'USERNAME_INPUT: Fill username input with valid value - should not render validationErrorOutput',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -182,8 +270,8 @@ export const FillUsernameInputValid: Story = {
 
 // emailInput
 
-// Fill email input with invalid email - should render validationErrorOutput with email.valid validation message
-export const FillEmailInputInvalid: Story = {
+export const FillEmailInvalid: Story = {
+  name: 'EMAIL_INPUT: Fill email input with invalid email - should render validationErrorOutput with email.valid validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -207,8 +295,8 @@ export const FillEmailInputInvalid: Story = {
     });
   },
 };
-// Fill email input and clear - should render validationErrorOutput with email.required validation message
-export const FillEmailInputClear: Story = {
+export const FillEmailClear: Story = {
+  name: 'EMAIL_INPUT: Fill email input and clear its value - should render validationErrorOutput with email.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -232,8 +320,8 @@ export const FillEmailInputClear: Story = {
     });
   },
 };
-// Empty email input form submit - should render validationErrorOutput with email.required validation message
-export const EmptyEmailInputFormSubmit: Story = {
+export const EmptyEmailFormSubmit: Story = {
+  name: 'EMAIL_INPUT: Form submit with empty email input value - should render validationErrorOutput with email.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -269,8 +357,8 @@ export const EmptyEmailInputFormSubmit: Story = {
     });
   },
 };
-// Fill email input with valid email - should not render validationErrorOutput
-export const FillEmailInputValid: Story = {
+export const FillEmailValid: Story = {
+  name: 'EMAIL_INPUT: Fill email input with valid value - should not render validationErrorOutput',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -299,8 +387,8 @@ export const FillEmailInputValid: Story = {
 
 // passwordInput
 
-// Fill password input with password less than 8 chars long - should render validationErrorOutput with password.min validation message
-export const FillPasswordInputShort: Story = {
+export const FillPasswordShort: Story = {
+  name: 'PASSWORD_INPUT: Fill password input with value less than 8 chars long - should render validationErrorOutput with password.min validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -324,8 +412,8 @@ export const FillPasswordInputShort: Story = {
     });
   },
 };
-// Fill password input with 8 char+ password without digit - should render validationErrorOutput with password.withDigit validation message
-export const FillPasswordInputWithoutDigit: Story = {
+export const FillPasswordWithoutDigit: Story = {
+  name: 'PASSWORD_INPUT: Fill password input with value more than 8 chars long without digits - should render validationErrorOutput with password.min validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -349,8 +437,8 @@ export const FillPasswordInputWithoutDigit: Story = {
     });
   },
 };
-// Fill password input with 8 char+ password with digit without capital letter - should render validationErrorOutput with password.withCapitalLetter validation message
-export const FillPasswordInputWithoutCapital: Story = {
+export const FillPasswordWithoutCapital: Story = {
+  name: 'PASSWORD_INPUT: Fill password input with value more than 8 chars long with digit, without capital letters - should render validationErrorOutput with password.withCapitalLetter validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -374,8 +462,8 @@ export const FillPasswordInputWithoutCapital: Story = {
     });
   },
 };
-// Fill password input and clear - should render validationErrorOutput with password.required validation message
-export const FillPasswordInputClear: Story = {
+export const FillPasswordClear: Story = {
+  name: 'PASSWORD_INPUT: Fill password input and clear its value - should render validationErrorOutput with password.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -399,8 +487,8 @@ export const FillPasswordInputClear: Story = {
     });
   },
 };
-// Empty password input form submit - should render validationErrorOutput with password.required validation message
-export const EmptyPasswordInputFormSubmit: Story = {
+export const EmptyPasswordFormSubmit: Story = {
+  name: 'PASSWORD_INPUT: Form submit with empty password input value - should render validationErrorOutput with password.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -436,8 +524,8 @@ export const EmptyPasswordInputFormSubmit: Story = {
     });
   },
 };
-// Fill password input with valid password - should not render validationErrorOutput
-export const FillPasswordInputValid: Story = {
+export const FillPasswordValid: Story = {
+  name: 'PASSWORD_INPUT: Fill password input with valid value - should not render validationErrorOutput',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -466,8 +554,8 @@ export const FillPasswordInputValid: Story = {
 
 // passwordConfirmInput
 
-// Fill passwordConfirm input with unmatched value - should render validationErrorOutput with passwordConfirm.match validation message
-export const FillPasswordConfirmInputUnmatched: Story = {
+export const FillPasswordConfirmUnmatched: Story = {
+  name: 'PASSWORD_CONFIRM: Fill passwordConfirm input with unmatched value - should render validationErrorOutput with passwordConfirm.match validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -495,8 +583,8 @@ export const FillPasswordConfirmInputUnmatched: Story = {
     });
   },
 };
-// Empty passwordConfirm input form submit - should render validationErrorOutput with passwordConfirm.required validation message
-export const EmptyPasswordConfirmInputFormSubmit: Story = {
+export const EmptyPasswordConfirmFormSubmit: Story = {
+  name: 'PASSWORD_CONFIRM: Form submit with empty passwordConfirm input value - should render validationErrorOutput with passwordConfirm.required validation message',
   render: () => ({
     components: { RegistrationForm },
     template: `
@@ -532,8 +620,8 @@ export const EmptyPasswordConfirmInputFormSubmit: Story = {
     });
   },
 };
-// Fill passwordConfirm input with matching value - should not render validationErrorOutput
-export const FillPasswordConfirmInputValid: Story = {
+export const FillPasswordConfirmValid: Story = {
+  name: 'PASSWORD_CONFIRM: Fill passwordConfirm input with valid value - should not render validationErrorOutput',
   render: () => ({
     components: { RegistrationForm },
     template: `
