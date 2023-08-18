@@ -7,6 +7,7 @@ import { register } from './api';
 import useUiStore from 'stores/ui';
 import { createTestingPinia } from '@pinia/testing';
 import { usernameAvailable } from './helpers/validators';
+import userEvent from '@testing-library/user-event'
 
 import flushPromises from 'flush-promises';
 
@@ -42,59 +43,66 @@ describe('RegistrationForm', async () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
-  describe.only('state', () => {
-
-    describe.skip('validation', () => {
-      it('should render usernameInput without "state" attr set by default', async () => {
-        const wrapper = shallowMount(RegistrationForm, {
-          global: {
-            renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
-          },
-        });
-        expect(
-          wrapper.get(usernameInputSelector).attributes()
-        ).not.toHaveProperty('state');
+  describe('state', () => {
+    it('should render PageForm with "errorstate" attr set to "false" by default', () => {
+      const wrapper = shallowMount(RegistrationForm);
+      expect(wrapper.get(pageFormSelector).attributes('errorstate')).toBe(
+        'false'
+      );
+    });
+    it('should render PageForm with "pending" set to "false" by default', () => {
+      const wrapper = shallowMount(RegistrationForm);
+      expect(wrapper.get(pageFormSelector).attributes('pending')).toBe('false');
+    });
+    it('should render ValidationErrorOutput with "errors" attr set to "" by default', () => {
+      const wrapper = shallowMount(RegistrationForm, {
+        global: {
+          renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
+        },
       });
-      it('should render emailInput without "state" attr set by default', async () => {
-        const wrapper = shallowMount(RegistrationForm, {
-          global: {
-            renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
-          },
-        });
-        expect(wrapper.get(emailInputSelector).attributes()).not.toHaveProperty(
-          'state'
-        );
+      expect(
+        wrapper.get(validationErrorOutputComponentSelector).attributes('errors')
+      ).toBe('');
+    });
+    it('should render usernameInput without "state" attr set by default', async () => {
+      const wrapper = shallowMount(RegistrationForm, {
+        global: {
+          renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
+        },
       });
-      it('should render passwordInput without "state" attr set by default', async () => {
-        const wrapper = shallowMount(RegistrationForm, {
-          global: {
-            renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
-          },
-        });
-        expect(
-          wrapper.get(passwordInputSelector).attributes()
-        ).not.toHaveProperty('state');
+      expect(
+        wrapper.get(usernameInputSelector).attributes()
+      ).not.toHaveProperty('state');
+    });
+    it('should render emailInput without "state" attr set by default', async () => {
+      const wrapper = shallowMount(RegistrationForm, {
+        global: {
+          renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
+        },
       });
-      it('should render passwordConfirmInput without "state" attr set by default', async () => {
-        const wrapper = shallowMount(RegistrationForm, {
-          global: {
-            renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
-          },
-        });
-        expect(
-          wrapper.get(passwordConfirmInputSelector).attributes()
-        ).not.toHaveProperty('state');
+      expect(wrapper.get(emailInputSelector).attributes()).not.toHaveProperty(
+        'state'
+      );
+    });
+    it('should render passwordInput without "state" attr set by default', async () => {
+      const wrapper = shallowMount(RegistrationForm, {
+        global: {
+          renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
+        },
       });
-      it('should render validationErrorOutput without "errors" attr by default', () => {
-        const wrapper = shallowMount(RegistrationForm, {
-          global: {
-            renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
-          },
-        });
-        expect(
-          wrapper.get(validationErrorOutputComponentSelector).attributes()
-        ).not.toHaveProperty('errors');
+      expect(
+        wrapper.get(passwordInputSelector).attributes()
+      ).not.toHaveProperty('state');
+    });
+    it('should render passwordConfirmInput without "state" attr set by default', async () => {
+      const wrapper = shallowMount(RegistrationForm, {
+        global: {
+          renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
+        },
       });
+      expect(
+        wrapper.get(passwordConfirmInputSelector).attributes()
+      ).not.toHaveProperty('state');
     });
   });
   describe('User Interactions', () => {
@@ -107,33 +115,41 @@ describe('RegistrationForm', async () => {
         expect(register).not.toHaveBeenCalled();
       });
     });
-    it('filled form submit - should call register function', async () => {
+    it.only('filled form submit - should call register function', async () => {
       (usernameAvailable as Mock).mockImplementationOnce(() => true);
+      const user = userEvent.setup()
       const { container } = render(RegistrationForm);
 
-      await fireEvent.update(
+      user.type(
         container.querySelector('input[name=registrationUsername]')!,
         'username'
       );
-      await fireEvent.update(
+      user.type(
         container.querySelector('input[name=registrationEmail]')!,
         'email@example.com'
       );
-      await fireEvent.update(
+      user.type(
         container.querySelector('input[name=registrationPassword]')!,
         'Password1'
       );
-      await fireEvent.update(
+      user.type(
         container.querySelector('input[name=registrationPasswordConfirm]')!,
         'Password1'
       );
+      
       await flushPromises();
-
-      await fireEvent.click(screen.getByTestId('actionButton'));
-
       await waitFor(async () => {
-        expect(register).toHaveBeenCalled();
-      });
+        expect(screen.getByTestId('validationErrorOutput')).toBeInTheDocument()
+      })
+      user.click(screen.getByTestId('actionButton'));
+      // console.log(screen.getByTestId('validationErrorOutput').textContent)
+      // setTimeout(async () => {
+
+      // }, 500);
+
+      expect(register).toHaveBeenCalled()
+      expect(navigateTo).toHaveBeenCalled()
+      expect(navigateTo).toHaveBeenCalledWith('/')
     });
     it('empty form submit - should not call uiStore.setLoading', async () => {
       const wrapper = mount(RegistrationForm, {

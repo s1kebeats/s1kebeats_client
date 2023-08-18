@@ -1,12 +1,12 @@
 <template>
   <PageForm
     title="Регистрация"
-    :pending="registrationFormState.pending"
+    :pending="isSubmitting"
     button-text="Зарегистрироваться"
     footer-hint="Уже есть аккаунт?"
     footer-link-title="Вход"
     footer-to="/login"
-    :error-state="registrationFormState.error"
+    :error-state="requestError"
     :error-status="null"
     @submit-form="submitRegistrationForm"
     @close-error="closeErrorPopUp"
@@ -16,36 +16,14 @@
       :debounce="true"
       name="registrationUsername"
       size="sm"
-      :state="
-        v$.username.$error && !v$.username.$pending
-          ? 'error'
-          : registrationFormState.data.username
-          ? 'success'
-          : null
-      "
-      @update-value="
-        ($event: string) => {
-          registrationFormState.data.username = $event;
-        }
-      "
+      v-bind="username"
       data-testid="usernameInput"
     />
     <EmailInput
       size="sm"
       name="registrationEmail"
-      :state="
-        v$.email.$error
-          ? 'error'
-          : registrationFormState.data.email
-          ? 'success'
-          : null
-      "
+      v-bind="email"
       :debounce="true"
-      @update-value="
-        ($event: string) => {
-          registrationFormState.data.email = $event;
-        }
-      "
       data-testid="emailInput"
     />
     <ConfidentialInput
@@ -53,18 +31,7 @@
       name="registrationPassword"
       label="Введите пароль"
       :debounce="true"
-      @update-value="
-        ($event: string) => {
-          registrationFormState.data.password = $event;
-        }
-      "
-      :state="
-        v$.password.$error
-          ? 'error'
-          : registrationFormState.data.password
-          ? 'success'
-          : null
-      "
+      v-bind="password"
       data-testid="passwordInput"
     />
     <ConfidentialInput
@@ -72,23 +39,12 @@
       name="registrationPasswordConfirm"
       label="Введите пароль ещё раз"
       :debounce="true"
-      @update-value="
-        ($event: string) => {
-          registrationFormState.data.passwordConfirm = $event;
-        }
-      "
-      :state="
-        v$.passwordConfirm.$error
-          ? 'error'
-          : registrationFormState.data.passwordConfirm
-          ? 'success'
-          : null
-      "
+      v-bind="passwordConfirm"
       data-testid="passwordConfirmInput"
     />
     <ValidationErrorOutput
-      :errors="v$.$errors"
-      data-testid="validationErrorOutput"
+      :errors="Object.values(errors)"
+      data-testid="validationErrorOutputComponent"
     />
   </PageForm>
 </template>
@@ -100,14 +56,7 @@ import {
   EmailInput,
   ConfidentialInput,
 } from '@s1kebeats/s1kebeats-ui';
-import { useVuelidate } from '@vuelidate/core';
-import {
-  email,
-  minLength,
-  required,
-  sameAs,
-  helpers,
-} from '@vuelidate/validators';
+
 import { register } from './api';
 import useUiStore from '@/stores/ui';
 import {
@@ -117,93 +66,126 @@ import {
   withDigit,
 } from './helpers/validators';
 
-const uiStore = useUiStore();
+import { useForm } from 'vee-validate';
+import {
+  ref as yupRef,
+  object,
+  string,
+  type StringSchema,
+  type ValidationError,
+  type TestFunction,
+} from 'yup';
+import { toTypedSchema } from '@vee-validate/yup';
+import validationMessages from './validationMessages';
 
-const registrationFormState = reactive({
-  data: {
-    username: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  },
-  error: false,
-  pending: false,
-});
-
-const registrationRules = computed(() => {
-  return {
-    username: {
-      required: helpers.withMessage('Введите имя пользователя', required),
-      noSpecialChars: helpers.withMessage(
-        'Введите имя пользователя без спец. символов',
-        noSpecialChars
-      ),
-      available: helpers.withMessage(
-        'Имя пользователя занято',
-        helpers.withAsync(usernameAvailable)
-      ),
-    },
-    email: {
-      required: helpers.withMessage('Введите электронную почту', required),
-      email: helpers.withMessage('Введите настоящую электронную почту', email),
-    },
-    password: {
-      required: helpers.withMessage('Введите пароль', required),
-      minLength: helpers.withMessage(
-        'Минимальная длина пароля: 8 символов',
-        minLength(8)
-      ),
-      withDigit: helpers.withMessage(
-        'Пароль должен содержать цифру',
-        withDigit
-      ),
-      withCapitalLetter: helpers.withMessage(
-        'Пароль должен содержать заглавную букву',
-        withCapitalLetter
-      ),
-    },
-    passwordConfirm: {
-      required: helpers.withMessage('Введите пароль еще раз', required),
-      sameAs: helpers.withMessage(
-        'Пароли не совпадают',
-        sameAs(registrationFormState.data.password)
-      ),
-    },
-  };
-});
-
-const v$ = useVuelidate(registrationRules, registrationFormState.data, {
-  // runs validation on input instead of submit
-  $autoDirty: true,
-  // stops validation from being called on init
-  $lazy: true,
-});
-
-async function submitRegistrationForm() {
-  const result = await v$.value.$validate();
-  if (result) {
+function yupSequentialStringSchema(schemas: StringSchema[]) {
+  return string().test(async (value, context) => {
     try {
-      registrationFormState.error = false;
-      registrationFormState.pending = true;
-
-      await register(
-        registrationFormState.data.username,
-        registrationFormState.data.email,
-        registrationFormState.data.password
-      );
-
-      uiStore.setLoading(true);
-      await navigateTo('/login');
-      setTimeout(() => uiStore.setLoading(false), 200);
-    } catch (error: any) {
-      registrationFormState.error = true;
-    } finally {
-      registrationFormState.pending = false;
+      for (const schema of schemas) {
+        await schema.validate(value);
+      }
+    } catch (error: unknown) {
+      const message = (error as ValidationError).message;
+      return context.createError({ message });
     }
-  }
+    return true;
+  });
 }
 
+const schema = toTypedSchema(
+  object({
+    username: yupSequentialStringSchema([
+      string().required(validationMessages.username.required),
+      string().test(
+        'noSpecialChars',
+        validationMessages.username.noSpecialChars,
+        noSpecialChars as TestFunction<string | undefined, any>
+      ),
+      string().test(
+        'available',
+        validationMessages.username.available,
+        usernameAvailable as TestFunction<string | undefined, any>
+      ),
+    ]),
+    email: string()
+      .required(validationMessages.email.required)
+      .email(validationMessages.email.valid),
+    password: string()
+      .required(validationMessages.password.required)
+      .min(8, validationMessages.password.min)
+      .test('withDigit', validationMessages.password.withDigit, withDigit)
+      .test(
+        'withCapitalLetter',
+        validationMessages.password.withCapitalLetter,
+        withCapitalLetter
+      ),
+    passwordConfirm: string()
+      .required(validationMessages.passwordConfirm.required)
+      .oneOf([yupRef('password')], validationMessages.passwordConfirm.match),
+  })
+);
+const {
+  values,
+  defineComponentBinds,
+  errors,
+  meta,
+  handleSubmit,
+  isSubmitting,
+} = useForm({
+  validationSchema: schema,
+});
+const requestError = ref(false);
+const username = defineComponentBinds('username', {
+  model: 'value',
+  mapProps: (state) => ({
+    state:
+      errors.value.username && !meta.value.pending
+        ? 'error'
+        : values.username
+        ? 'success'
+        : null,
+  }),
+});
+const email = defineComponentBinds('email', {
+  model: 'value',
+  mapProps: (state) => ({
+    state: errors.value.email ? 'error' : values.email ? 'success' : null,
+  }),
+});
+const password = defineComponentBinds('password', {
+  model: 'value',
+  mapProps: (state) => ({
+    state: errors.value.password ? 'error' : values.password ? 'success' : null,
+  }),
+});
+const passwordConfirm = defineComponentBinds('passwordConfirm', {
+  model: 'value',
+  mapProps: (state) => ({
+    state: errors.value.passwordConfirm
+      ? 'error'
+      : values.passwordConfirm
+      ? 'success'
+      : null,
+  }),
+});
+const submitRegistrationForm = handleSubmit(async (values) => {
+  try {
+    requestError.value = false;
+
+    await register(values.username!, values.email, values.password);
+
+    uiStore.setLoading(true);
+    await navigateTo('/login');
+    setTimeout(() => uiStore.setLoading(false), 200);
+  } catch (error: any) {
+    console.log(error);
+    requestError.value = true;
+  }
+});
+
+const uiStore = useUiStore();
+
 function closeErrorPopUp() {
-  registrationFormState.error = false;
+  requestError.value = false;
 }
 </script>
