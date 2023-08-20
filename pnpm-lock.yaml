@@ -17,8 +17,8 @@ dependencies:
     specifier: ^0.4.11
     version: 0.4.11(vue@3.3.4)
   '@s1kebeats/s1kebeats-ui':
-    specifier: ^4.0.0
-    version: 4.0.0
+    specifier: ^4.0.1
+    version: 4.0.1
   '@vee-validate/yup':
     specifier: ^4.11.1
     version: 4.11.1(vue@3.3.4)
@@ -3529,8 +3529,8 @@ packages:
       picomatch: 2.3.1
       rollup: 3.27.0
 
-  /@s1kebeats/s1kebeats-ui@4.0.0:
-    resolution: {integrity: sha512-o97wl/+BvLnP7HkdaqKvGt38ABtX7FbCN5C1tZUQsR28Z6493eEvq+uSOWfkpBNN4g772j4fT1TZFiZJ7UmxTw==, tarball: https://npm.pkg.github.com/download/@s1kebeats/s1kebeats-ui/4.0.0/eb31e9b5937f2a7b35504549e912873bc8d7555f}
+  /@s1kebeats/s1kebeats-ui@4.0.1:
+    resolution: {integrity: sha512-GIRhhQFur9YmBw+XWmhad0Y5xLGwBcOFBJIHZ+GsKfSdL9jumYk0m7bv04xro9bwORIFU48jgXS/w2UVGvzPhg==}
     dependencies:
       vue: 3.3.4
     dev: false
