@@ -7,9 +7,10 @@ import { register } from './api';
 import useUiStore from 'stores/ui';
 import { createTestingPinia } from '@pinia/testing';
 import { usernameAvailable } from './helpers/validators';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 
 import flushPromises from 'flush-promises';
+import validationMessages from './validationMessages';
 
 const pageFormSelector = '[data-testid=pageForm]';
 const usernameInputSelector = '[data-testid=usernameInput]';
@@ -115,9 +116,51 @@ describe('RegistrationForm', async () => {
         expect(register).not.toHaveBeenCalled();
       });
     });
-    it.only('filled form submit - should call register function', async () => {
+    it('Should display the validation error message', async () => {
+      const user = userEvent.setup();
+      const { container } = render(RegistrationForm);
+
+      const button = container.querySelector('form');
+
+      user.type(
+        container.querySelector('input[name=registrationUsername]')!,
+        'username'
+      );
+      user.type(
+        container.querySelector('input[name=registrationEmail]')!,
+        'email@example.com'
+      );
+      user.type(
+        container.querySelector('input[name=registrationPassword]')!,
+        'Password1'
+      );
+      // user.type(
+      //   container.querySelector('input[name=registrationPasswordConfirm]')!,
+      //   'Password1'
+      // );
+
+      user.click(screen.getByTestId('actionButton'));
+      await flushPromises();
+      expect(screen.getByTestId('validationErrorOutput')).toBeInTheDocument();
+      expect(screen).toContain('Введите имя пользователя');
+      expect(register).not.toHaveBeenCalled();
+    });
+
+
+    it.only('empty form submit - should render validationErrorOuput with username.required validation message', async () => {
+      const wrapper = mount(RegistrationForm);
+
+      await  wrapper.find('form').trigger('submit');
+      await flushPromises();
+
+      expect(wrapper.find('[data-testid=validationErrorOutput]').exists()).toBe(true);
+      expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(validationMessages.username.required);
+    });
+
+
+    it('filled form submit - should call register function', async () => {
       (usernameAvailable as Mock).mockImplementationOnce(() => true);
-      const user = userEvent.setup()
+      const user = userEvent.setup();
       const { container } = render(RegistrationForm);
 
       user.type(
@@ -136,20 +179,20 @@ describe('RegistrationForm', async () => {
         container.querySelector('input[name=registrationPasswordConfirm]')!,
         'Password1'
       );
-      
+
       await flushPromises();
       await waitFor(async () => {
-        expect(screen.getByTestId('validationErrorOutput')).toBeInTheDocument()
-      })
+        expect(screen.getByTestId('validationErrorOutput')).toBeInTheDocument();
+      });
       user.click(screen.getByTestId('actionButton'));
       // console.log(screen.getByTestId('validationErrorOutput').textContent)
       // setTimeout(async () => {
 
       // }, 500);
 
-      expect(register).toHaveBeenCalled()
-      expect(navigateTo).toHaveBeenCalled()
-      expect(navigateTo).toHaveBeenCalledWith('/')
+      expect(register).toHaveBeenCalled();
+      expect(navigateTo).toHaveBeenCalled();
+      expect(navigateTo).toHaveBeenCalledWith('/');
     });
     it('empty form submit - should not call uiStore.setLoading', async () => {
       const wrapper = mount(RegistrationForm, {
