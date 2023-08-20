@@ -57,6 +57,7 @@
     "@pinia/nuxt": "^0.4.11",
     "@s1kebeats/s1kebeats-ui": "^4.0.1",
     "@vee-validate/yup": "^4.11.1",
+    "email-validator": "^2.0.4",
     "pinia": "^2.1.6",
     "sass": "^1.64.1",
     "vee-validate": "^4.11.1"

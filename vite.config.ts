@@ -4,10 +4,13 @@ import { URL, fileURLToPath } from 'node:url';
 import AutoImport from 'unplugin-auto-import/vite';
 
 export default defineConfig({
-  plugins: [ AutoImport({
-    imports: ['vue', 'vue-router'],
-    vueTemplate: true,
-  }), vue()],
+  plugins: [
+    AutoImport({
+      imports: ['vue', 'vue-router'],
+      vueTemplate: true,
+    }),
+    vue(),
+  ],
   test: {
     globals: true,
     environment: 'happy-dom',
