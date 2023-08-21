@@ -19,11 +19,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
-    setupFiles: './.env',
-  },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./', import.meta.url)),
-    },
+    // ! commented until solution is found
+    // setupFiles: '.env.public',
   },
 });
