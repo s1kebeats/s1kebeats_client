@@ -25,7 +25,7 @@ logs
 pnpm-lock.yaml
 
 coverage
-components.d.ts
+auto-imports.d.ts
 assets/styles/main.css
 assets/styles/main.css.map
 assets/styles/output.css

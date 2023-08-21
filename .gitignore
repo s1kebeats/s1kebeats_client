@@ -20,10 +20,10 @@ logs
 # Local env files
 .env
 .env.*
-!.env.example
+!.env.public
 
 coverage
-components.d.ts
+auto-imports.d.ts
 assets/styles/main.css
 assets/styles/main.css.map
 assets/styles/output.css
