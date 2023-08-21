@@ -1,4 +1,4 @@
-import RegisterResponseBody from "./register";
-import AuthResponseBody from './auth'
+import type RegisterResponseBody from "./RegisterResponseBody";
+import type AuthResponseBody from './AuthResponseBody'
 
 export { RegisterResponseBody, AuthResponseBody }

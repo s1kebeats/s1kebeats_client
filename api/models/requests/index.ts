@@ -1,3 +1,3 @@
-import RegisterRequestBody from "./register";
+import type RegisterRequestBody from "./RegisterRequestBody";
 
 export { RegisterRequestBody }
