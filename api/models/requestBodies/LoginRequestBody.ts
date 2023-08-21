@@ -1,5 +1,5 @@
 export default interface LoginRequestBody {
-    username: string,
-    password: string,
-    refresh: boolean,
+  username: string;
+  password: string;
+  refresh: boolean;
 }

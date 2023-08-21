@@ -1,5 +1,5 @@
 export default interface RegisterRequestBody {
-    username: string,
-    email: string,
-    password: string
+  username: string;
+  email: string;
+  password: string;
 }
