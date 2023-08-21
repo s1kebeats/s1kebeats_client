@@ -16,7 +16,7 @@ describe('$api', () => {
       expect($api.defaults.baseURL).toBe(process.env.API_URL);
     });
   });
-
+  // Axios has an issue with "handlers" typings: https://github.com/axios/axios/pull/5551
   describe('interceptors', () => {
     it('should have setAuthHeader present inside request fulfilled interceptors', () => {
       expect($api.interceptors.request.handlers[0]['fulfilled']).toBe(
