@@ -1,7 +1,7 @@
 import refresh from './refresh';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
-import { AuthResponseBodyMock } from '@/mocks/responseBodies';
+import { AuthResponseMock } from '@/mocks/responses';
 
 vi.mock('axios');
 
@@ -23,8 +23,8 @@ describe('refresh', () => {
     );
   });
   test('should return response', async () => {
-    (axios.post as Mock).mockResolvedValue(AuthResponseBodyMock);
+    (axios.post as Mock).mockResolvedValue(AuthResponseMock);
     const response = await refresh();
-    expect(response).toBe(AuthResponseBodyMock);
+    expect(response).toBe(AuthResponseMock);
   });
 });

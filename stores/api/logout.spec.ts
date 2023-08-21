@@ -1,6 +1,7 @@
 import logout from './logout';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
+import { LogoutResponseMock } from '@/mocks/responses';
 
 vi.mock('axios');
 
@@ -22,11 +23,8 @@ describe('logout', () => {
     );
   });
   test('should return response', async () => {
-    const responseMock = {
-      data: 'success',
-    };
-    (axios.post as Mock).mockResolvedValue(responseMock);
+    (axios.post as Mock).mockResolvedValue(LogoutResponseMock);
     const response = await logout();
-    expect(response).toBe(responseMock);
+    expect(response).toBe(LogoutResponseMock);
   });
 });

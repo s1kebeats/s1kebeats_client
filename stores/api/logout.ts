@@ -1,10 +1,10 @@
 import axios, { type AxiosResponse } from 'axios';
-import { type AuthResponseBody } from '@/api/models/responseBodies';
+import { type LogoutResponseBody } from '@/api/models/responseBodies';
 
 export default async function refresh(): Promise<
-  AxiosResponse<AuthResponseBody>
+  AxiosResponse<LogoutResponseBody>
 > {
-  const response = await axios.post<AuthResponseBody>(
+  const response = await axios.post<LogoutResponseBody>(
     `${process.env.API_URL}/logout`,
     null,
     {

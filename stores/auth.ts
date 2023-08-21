@@ -5,6 +5,7 @@ import logout from './api/logout';
 import login from './api/login';
 import activate from './api/activate';
 import { showUnexpectedError } from '@/composables';
+import { LoginRequestBody } from '@/api/models/requestBodies';
 
 const useAuthStore = defineStore('auth', {
   state: (): {
@@ -49,13 +50,9 @@ const useAuthStore = defineStore('auth', {
         showUnexpectedError(error);
       }
     },
-    async login(
-      username: string,
-      password: string,
-      refresh: boolean
-    ): Promise<void> {
+    async login(credentials: LoginRequestBody): Promise<void> {
       try {
-        const { data } = await login(username, password, refresh);
+        const { data } = await login(credentials);
         this.setUser(data.user);
         this.setAuthorized(true);
       } catch (error) {

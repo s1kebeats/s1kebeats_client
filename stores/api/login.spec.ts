@@ -2,6 +2,7 @@ import login from './login';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { LoginRequestBodyMock } from '@/mocks/requestBodies';
+import { AuthResponseMock } from '@/mocks/responses';
 
 vi.mock('axios');
 
@@ -21,11 +22,8 @@ describe('login', () => {
     );
   });
   test('should return response', async () => {
-    const responseMock = {
-      data: 'success',
-    };
-    (axios.post as Mock).mockResolvedValue(responseMock);
+    (axios.post as Mock).mockResolvedValue(AuthResponseMock);
     const response = await login(LoginRequestBodyMock);
-    expect(response).toBe(responseMock);
+    expect(response).toBe(AuthResponseMock);
   });
 });

@@ -11,12 +11,13 @@ import {
   vi,
 } from 'vitest';
 import type User from '@/api/models/User';
-import { authResponseMock } from './api/mocks';
+import { AuthResponseMock } from '@/mocks/responses';
 import login from './api/login';
 import logout from './api/logout';
 import refresh from './api/refresh';
 import { showUnexpectedError } from '@/composables';
 import activate from './api/activate';
+import { LoginRequestBodyMock } from '@/mocks/requestBodies';
 
 vi.mock('@/composables', () => {
   return {
@@ -36,24 +37,17 @@ const testUser: User = {
 
 vi.mock('./api/logout');
 vi.mock('./api/activate');
-vi.mock('./api/login', () => {
+
+function mockWithAuthResponseMock() {
   return {
     default: vi.fn(() => {
-      return {
-        data: authResponseMock,
-      };
+      return AuthResponseMock;
     }),
   };
-});
-vi.mock('./api/refresh', () => {
-  return {
-    default: vi.fn(() => {
-      return {
-        data: authResponseMock,
-      };
-    }),
-  };
-});
+}
+
+vi.mock('./api/login', mockWithAuthResponseMock);
+vi.mock('./api/refresh', mockWithAuthResponseMock);
 
 describe('Auth Store', () => {
   beforeEach(() => {
@@ -114,44 +108,24 @@ describe('Auth Store', () => {
     });
     describe('login', () => {
       it('should call login function with passed params', async () => {
-        const testData = {
-          username: 'username',
-          password: 'password',
-          rememberMe: true,
-        };
         const store = useAuthStore();
 
-        await store.login(
-          testData.username,
-          testData.password,
-          testData.rememberMe
-        );
+        await store.login(LoginRequestBodyMock);
         expect(login).toHaveBeenCalled();
-        expect(login).toHaveBeenCalledWith(
-          testData.username,
-          testData.password,
-          testData.rememberMe
-        );
+        expect(login).toHaveBeenCalledWith(LoginRequestBodyMock);
       });
       describe('login - success', () => {
-        beforeAll(() => {
-          (login as Mock).mockImplementation(() => {
-            return {
-              data: authResponseMock,
-            };
-          });
-        });
         it('should set store.user to data received from login', async () => {
           const store = useAuthStore();
 
-          await store.login('username', 'password', true);
-          expect(store.user).toStrictEqual(authResponseMock.user);
+          await store.login(LoginRequestBodyMock);
+          expect(store.user).toStrictEqual(AuthResponseMock.data.user);
         });
         it('should set store.authorized to "true"', async () => {
           const store = useAuthStore();
           store.authorized = false;
 
-          await store.login('username', 'password', true);
+          await store.login(LoginRequestBodyMock);
           expect(store.authorized).toBe(true);
         });
       });
@@ -162,13 +136,13 @@ describe('Auth Store', () => {
         it('should throw error', async () => {
           const store = useAuthStore();
           expect(() =>
-            store.login('username', 'password', true)
+            store.login(LoginRequestBodyMock)
           ).rejects.toThrowError();
         });
         it('should throw error returned from login', async () => {
           const store = useAuthStore();
           try {
-            await store.login('username', 'password', true);
+            await store.login(LoginRequestBodyMock);
           } catch (error) {
             expect(error).toStrictEqual(testError());
           }
@@ -177,7 +151,7 @@ describe('Auth Store', () => {
           const store = useAuthStore();
           store.authorized = true;
           try {
-            await store.login('username', 'password', true);
+            await store.login(LoginRequestBodyMock);
           } catch (error) {
             expect(store.authorized).toBe(false);
           }
@@ -227,18 +201,11 @@ describe('Auth Store', () => {
         expect(refresh).toHaveBeenCalled();
       });
       describe('refresh - success', () => {
-        beforeAll(() => {
-          (refresh as Mock).mockImplementation(() => {
-            return {
-              data: authResponseMock,
-            };
-          });
-        });
         it('should set store.user to data received from refresh', async () => {
           const store = useAuthStore();
 
           await store.checkAuth();
-          expect(store.user).toStrictEqual(authResponseMock.user);
+          expect(store.user).toStrictEqual(AuthResponseMock.data.user);
         });
         it('should set store.authorized to "true"', async () => {
           const store = useAuthStore();
