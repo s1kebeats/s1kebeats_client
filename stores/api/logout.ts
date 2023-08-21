@@ -1,10 +1,11 @@
 import axios, { type AxiosResponse } from 'axios';
-import type AuthResponse from '@/api/models/AuthResponse';
+import { type AuthResponseBody } from '@/api/models/responseBodies';
 
-export default async function refresh(): Promise<AxiosResponse<AuthResponse>> {
-  const runtimeConfig = useRuntimeConfig();
-  const response = await axios.post<AuthResponse>(
-    `${runtimeConfig.public.API_URL}/logout`,
+export default async function refresh(): Promise<
+  AxiosResponse<AuthResponseBody>
+> {
+  const response = await axios.post<AuthResponseBody>(
+    `${process.env.API_URL}/logout`,
     null,
     {
       withCredentials: true,
