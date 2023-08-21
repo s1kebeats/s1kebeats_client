@@ -3,6 +3,6 @@ import { type LoginRequestBody } from '@/api/models/requestBodies';
 const LoginRequestBodyMock: LoginRequestBody = {
   username: 'username',
   password: 'Password1234',
-  refresh: true
+  refresh: true,
 };
 export default LoginRequestBodyMock;

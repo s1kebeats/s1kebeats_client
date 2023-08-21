@@ -1,3 +1,3 @@
-import LoginRequestBodyMock from './LoginRequestBodyMock'
+import LoginRequestBodyMock from './LoginRequestBodyMock';
 
-export { LoginRequestBodyMock }
+export { LoginRequestBodyMock };
