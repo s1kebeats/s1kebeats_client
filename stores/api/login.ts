@@ -1,19 +1,11 @@
-import type AuthResponse from '@/api/models/AuthResponse';
+import { type AuthResponseBody } from '@/api/models/responseBodies';
+import { LoginRequestBody } from '@/api/models/requestBodies';
 import axios from 'axios';
 
-export default async function login(
-  username: string,
-  password: string,
-  refresh: boolean
-) {
-  const runtimeConfig = useRuntimeConfig();
-  const response = await axios.post<AuthResponse>(
-    `${runtimeConfig.public.API_URL}/login`,
-    {
-      username,
-      password,
-      refresh,
-    },
+export default async function login(data: LoginRequestBody) {
+  const response = await axios.post<AuthResponseBody>(
+    `${process.env.API_URL}/login`,
+    data,
     {
       withCredentials: true,
     }

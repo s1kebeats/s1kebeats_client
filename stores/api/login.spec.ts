@@ -1,9 +1,7 @@
 import login from './login';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
-import { runtimeConfigMock } from './mocks';
-
-vi.stubGlobal('useRuntimeConfig', () => runtimeConfigMock);
+import { LoginRequestBodyMock } from '@/mocks/requestBodies';
 
 vi.mock('axios');
 
@@ -14,16 +12,11 @@ describe('login', () => {
   });
 
   test('should call axios.post with valid params', async () => {
-    const testData = {
-      username: 'username',
-      password: 'password',
-      refresh: false,
-    };
-    await login(testData.username, testData.password, testData.refresh);
+    await login(LoginRequestBodyMock);
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      runtimeConfigMock.public.API_URL + '/login',
-      testData,
+      process.env.API_URL + '/login',
+      LoginRequestBodyMock,
       { withCredentials: true }
     );
   });
@@ -32,7 +25,7 @@ describe('login', () => {
       data: 'success',
     };
     (axios.post as Mock).mockResolvedValue(responseMock);
-    const response = await login('username', 'password', false);
+    const response = await login(LoginRequestBodyMock);
     expect(response).toBe(responseMock);
   });
 });
