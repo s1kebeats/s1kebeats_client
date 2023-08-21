@@ -1,4 +1,4 @@
-import $api, { API_URL } from '@/api';
+import $api from '@/api';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import setAuthHeader from './interceptors/setAuthHeader';
 import errorHandler from './interceptors/errorHandler';
@@ -12,8 +12,8 @@ describe('$api', () => {
     it('should have withCredentials option set to "true"', () => {
       expect($api.defaults.withCredentials).toBe(true);
     });
-    it('should have baseUrl option set to API_URL', () => {
-      expect($api.defaults.baseURL).toBe(API_URL);
+    it('should have baseUrl option set to .env API_URL', () => {
+      expect($api.defaults.baseURL).toBe(process.env.API_URL);
     });
   });
 
