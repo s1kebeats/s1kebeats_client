@@ -8,5 +8,5 @@ export default async function (error: {
   const request = error.config;
   const { data } = await refresh();
   localStorage.setItem('accessToken', data.accessToken);
-  return await $api.request(request);
+  return $api.request(request);
 }
