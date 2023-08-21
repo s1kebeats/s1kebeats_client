@@ -7,7 +7,7 @@ export const API_URL = 'http://192.168.1.135:5000/api';
 
 const $api = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
+  baseURL: process.env.API_URL,
 });
 
 $api.interceptors.request.use(setAuthHeader);
