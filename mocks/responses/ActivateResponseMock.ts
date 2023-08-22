@@ -1,5 +1,5 @@
 import { ActivateResponseBody } from '@/api/models/responseBodies';
-import ActivateResponseBodyMock from '@/mocks/responseBodies/ActivateResponseBodyMock';
+import { ActivateResponseBodyMock } from '@/mocks/responseBodies';
 
 const ActivateResponseMock: {
   statusCode: number;

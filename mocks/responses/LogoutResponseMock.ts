@@ -1,5 +1,5 @@
 import { LogoutResponseBody } from '@/api/models/responseBodies';
-import LogoutResponseBodyMock from '@/mocks/responseBodies/LogoutResponseBodyMock';
+import { LogoutResponseBodyMock } from '@/mocks/responseBodies';
 
 const LogoutResponseMock: {
   statusCode: number;
