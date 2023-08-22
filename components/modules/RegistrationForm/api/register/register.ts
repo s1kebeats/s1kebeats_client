@@ -1,18 +1,13 @@
+import { RegisterRequestBody } from 'api/models/requestBodies';
+import { RegisterResponseBody } from 'api/models/responseBodies';
 import axios, { type AxiosResponse } from 'axios';
 
 export default async function register(
-  username: string,
-  email: string,
-  password: string
-): Promise<AxiosResponse> {
-  const runtimeConfig = useRuntimeConfig();
-  const response = await axios.post(
-    `${runtimeConfig.public.API_URL}/register`,
-    {
-      username,
-      email,
-      password,
-    }
+  data: RegisterRequestBody
+): Promise<AxiosResponse<RegisterResponseBody>> {
+  const response = await axios.post<RegisterResponseBody>(
+    `${process.env.API_URL}/register`,
+    data
   );
   return response;
 }

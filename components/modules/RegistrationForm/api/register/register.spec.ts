@@ -1,9 +1,8 @@
 import register from './register';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
-import { runtimeConfigMock } from '@/stores/api/mocks';
-
-vi.stubGlobal('useRuntimeConfig', () => runtimeConfigMock);
+import { RegisterRequestBodyMock } from '@/mocks/requestBodies';
+import { RegisterResponseMock } from '@/mocks/responses';
 
 vi.mock('axios');
 
@@ -13,24 +12,16 @@ describe('register', () => {
   });
 
   test('should call axios.post with valid params', async () => {
-    const testData = {
-      username: 'username',
-      email: 'test@example.com',
-      password: 'password',
-    };
-    await register(testData.username, testData.email, testData.password);
+    await register(RegisterRequestBodyMock);
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      runtimeConfigMock.public.API_URL + '/register',
-      testData
+      process.env.API_URL + '/register',
+      RegisterRequestBodyMock
     );
   });
   test('should return axios.post response', async () => {
-    const responseMock = {
-      data: 'success',
-    };
-    (axios.post as Mock).mockResolvedValue(responseMock);
-    const response = await register('username', 'email', 'password');
-    expect(response).toBe(responseMock);
+    (axios.post as Mock).mockResolvedValue(RegisterResponseMock);
+    const response = await register(RegisterRequestBodyMock);
+    expect(response).toBe(RegisterResponseMock);
   });
 });
