@@ -1,16 +1,15 @@
 import RegistrationForm from './RegistrationForm.vue';
-import { Mock, describe, expect, it, vi } from 'vitest';
-import { VueWrapper, mount, shallowMount } from '@vue/test-utils';
-import { render, waitFor, screen, fireEvent } from '@testing-library/vue';
+import { describe, expect, it, vi, beforeAll, beforeEach, Mock } from 'vitest';
+import { mount, shallowMount } from '@vue/test-utils';
 import { setActivePinia, createPinia } from 'pinia';
 import { register } from './api';
 import useUiStore from 'stores/ui';
 import { createTestingPinia } from '@pinia/testing';
-import { usernameAvailable } from './helpers/validators';
-import userEvent from '@testing-library/user-event';
 
 import flushPromises from 'flush-promises';
 import validationMessages from './validationMessages';
+import { RegisterRequestBodyMock } from '@/mocks/requestBodies';
+import { usernameAvailable } from './helpers/validators';
 
 const pageFormSelector = '[data-testid=pageForm]';
 const usernameInputSelector = '[data-testid=usernameInput]';
@@ -20,8 +19,10 @@ const passwordConfirmInputSelector = '[data-testid=passwordConfirmInput]';
 const validationErrorOutputComponentSelector =
   '[data-testid=validationErrorOutputComponent]';
 
-vi.mock('./api', () => {
+vi.mock('./api', async () => {
+  const actual = await vi.importActual<typeof import('./api')>('./api');
   return {
+    ...actual,
     register: vi.fn(),
   };
 });
@@ -34,6 +35,7 @@ vi.mock('./helpers/validators', async () => {
     usernameAvailable: vi.fn(),
   };
 });
+
 vi.stubGlobal('navigateTo', vi.fn());
 
 describe('RegistrationForm', async () => {
@@ -42,6 +44,7 @@ describe('RegistrationForm', async () => {
     vi.useFakeTimers();
   });
   beforeEach(() => {
+    vi.clearAllTimers();
     vi.clearAllMocks();
   });
   describe('state', () => {
@@ -107,204 +110,640 @@ describe('RegistrationForm', async () => {
     });
   });
   describe('User Interactions', () => {
-    it('empty form submit - should not call register function', async () => {
-      const wrapper = mount(RegistrationForm);
-      await wrapper.get('[data-testid=actionButton]').trigger('click');
+    describe('username input', () => {
+      it('unavailable username form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(false);
 
-      await flushPromises();
-      await waitFor(() => {
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue(RegisterRequestBodyMock.password);
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with username.available validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.username.available
+        );
+
+        // should not call register
         expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+      it('username with special chars form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue('username!');
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue(RegisterRequestBodyMock.password);
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with username.noSpecialChars validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.username.noSpecialChars
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+      it('empty username form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue(RegisterRequestBodyMock.password);
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with username.required validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.username.required
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
       });
     });
-    it('Should display the validation error message', async () => {
-      const user = userEvent.setup();
-      const { container } = render(RegistrationForm);
+    describe('email input', () => {
+      it('invalid email form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
 
-      const button = container.querySelector('form');
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
 
-      user.type(
-        container.querySelector('input[name=registrationUsername]')!,
-        'username'
-      );
-      user.type(
-        container.querySelector('input[name=registrationEmail]')!,
-        'email@example.com'
-      );
-      user.type(
-        container.querySelector('input[name=registrationPassword]')!,
-        'Password1'
-      );
-      // user.type(
-      //   container.querySelector('input[name=registrationPasswordConfirm]')!,
-      //   'Password1'
-      // );
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue('invalid@email');
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue(RegisterRequestBodyMock.password);
 
-      user.click(screen.getByTestId('actionButton'));
-      await flushPromises();
-      expect(screen.getByTestId('validationErrorOutput')).toBeInTheDocument();
-      expect(screen).toContain('Введите имя пользователя');
-      expect(register).not.toHaveBeenCalled();
-    });
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
 
+        await wrapper.find('form').trigger('submit');
 
-    it.only('empty form submit - should render validationErrorOuput with username.required validation message', async () => {
-      const wrapper = mount(RegistrationForm);
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
 
-      await  wrapper.find('form').trigger('submit');
-      await flushPromises();
+        // should render validationErrorOutput with email.valid validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.email.valid
+        );
 
-      expect(wrapper.find('[data-testid=validationErrorOutput]').exists()).toBe(true);
-      expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(validationMessages.username.required);
-    });
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
 
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
 
-    it('filled form submit - should call register function', async () => {
-      (usernameAvailable as Mock).mockImplementationOnce(() => true);
-      const user = userEvent.setup();
-      const { container } = render(RegistrationForm);
-
-      user.type(
-        container.querySelector('input[name=registrationUsername]')!,
-        'username'
-      );
-      user.type(
-        container.querySelector('input[name=registrationEmail]')!,
-        'email@example.com'
-      );
-      user.type(
-        container.querySelector('input[name=registrationPassword]')!,
-        'Password1'
-      );
-      user.type(
-        container.querySelector('input[name=registrationPasswordConfirm]')!,
-        'Password1'
-      );
-
-      await flushPromises();
-      await waitFor(async () => {
-        expect(screen.getByTestId('validationErrorOutput')).toBeInTheDocument();
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
       });
-      user.click(screen.getByTestId('actionButton'));
-      // console.log(screen.getByTestId('validationErrorOutput').textContent)
-      // setTimeout(async () => {
+      it('empty email form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
 
-      // }, 500);
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
 
-      expect(register).toHaveBeenCalled();
-      expect(navigateTo).toHaveBeenCalled();
-      expect(navigateTo).toHaveBeenCalledWith('/');
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue(RegisterRequestBodyMock.password);
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with email.required validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.email.required
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
     });
-    it('empty form submit - should not call uiStore.setLoading', async () => {
+    describe('password input', () => {
+      it('less than 8 chars long password form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue('1234567');
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue('1234567');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with password.min validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.password.min
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+      it('password without digit form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue('password');
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue('password');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with password.withDigit validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.password.withDigit
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+      it('password without capital letter form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue('password1');
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue('password1');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with password.withCapitalLetter validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.password.withCapitalLetter
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+      it('empty password form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue(RegisterRequestBodyMock.password);
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with password.required validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.password.required
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+    });
+    describe('passwordConfirm input', () => {
+      it('unmatched passwordConfirm form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+        await wrapper
+          .get('input[name=registrationPasswordConfirm]')
+          .setValue('unmatched');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with passwordConfirm.match validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.passwordConfirm.match
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+      it('empty passwordConfirm form submit', async () => {
+        (usernameAvailable as Mock).mockResolvedValue(true);
+
+        const wrapper = mount(RegistrationForm, {
+          global: {
+            plugins: [createTestingPinia()],
+          },
+        });
+        const uiStore = useUiStore();
+
+        await wrapper
+          .get('input[name=registrationUsername]')
+          .setValue(RegisterRequestBodyMock.username);
+        await wrapper
+          .get('input[name=registrationEmail]')
+          .setValue(RegisterRequestBodyMock.email);
+        await wrapper
+          .get('input[name=registrationPassword]')
+          .setValue(RegisterRequestBodyMock.password);
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        await wrapper.find('form').trigger('submit');
+
+        await flushPromises();
+        vi.runAllTimers();
+        await flushPromises();
+
+        // should render validationErrorOutput with passwordConfirm.required validationMessage
+        expect(
+          wrapper.find('[data-testid=validationErrorOutput]').exists()
+        ).toBe(true);
+        expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+          validationMessages.passwordConfirm.required
+        );
+
+        // should not call register
+        expect(register).not.toHaveBeenCalled();
+
+        // should not call navigateTo
+        expect(navigateTo).not.toHaveBeenCalled();
+
+        // should not call uiStore.setLoading
+        expect(uiStore.setLoading).not.toHaveBeenCalled();
+      });
+    })
+
+    it('empty form submit', async () => {
       const wrapper = mount(RegistrationForm, {
         global: {
           plugins: [createTestingPinia()],
         },
       });
       const uiStore = useUiStore();
-      await wrapper.get('[data-testid=actionButton]').trigger('click');
+      await wrapper.find('form').trigger('submit');
 
+      await flushPromises();
+      vi.runAllTimers();
+      await flushPromises();
+
+      // should render validationErrorOutput with username.required validationMessage
+      expect(wrapper.find('[data-testid=validationErrorOutput]').exists()).toBe(
+        true
+      );
+      expect(wrapper.find('[data-testid=validationErrorOutput]').text()).toBe(
+        validationMessages.username.required
+      );
+
+      // should not call register
+      expect(register).not.toHaveBeenCalled();
+
+      // should not call navigateTo
+      expect(navigateTo).not.toHaveBeenCalled();
+
+      // should not call uiStore.setLoading
       expect(uiStore.setLoading).not.toHaveBeenCalled();
     });
-    it('empty form submit - should not call navigateTo', async () => {
-      const wrapper = mount(RegistrationForm);
-      await wrapper.get('[data-testid=actionButton]').trigger('click');
-
-      expect(navigateTo).not.toHaveBeenCalled();
-    });
-    it('filled form submit - should call register function with typed values', async () => {
-      const wrapper = mount(RegistrationForm);
-      await wrapper.get('[data-testid=actionButton]').trigger('click');
-
-      expect(register).not.toHaveBeenCalled();
-    });
-    it('filled form submit - should call uiStore.setLoading with "true", then with "false" after a timeOut', async () => {
+    it('valid form submit', async () => {
+      (usernameAvailable as Mock).mockResolvedValue(true);
       const wrapper = mount(RegistrationForm, {
         global: {
           plugins: [createTestingPinia()],
         },
       });
       const uiStore = useUiStore();
-      await wrapper.get('[data-testid=actionButton]').trigger('click');
 
-      await wrapper.get(usernameInputSelector).setValue('username');
+      await wrapper
+        .get('input[name=registrationUsername]')
+        .setValue(RegisterRequestBodyMock.username);
+      await wrapper
+        .get('input[name=registrationEmail]')
+        .setValue(RegisterRequestBodyMock.email);
+      await wrapper
+        .get('input[name=registrationPassword]')
+        .setValue(RegisterRequestBodyMock.password);
+      await wrapper
+        .get('input[name=registrationPasswordConfirm]')
+        .setValue(RegisterRequestBodyMock.password);
 
-      expect(uiStore.setLoading).toHaveBeenCalledTimes(1);
-      expect(uiStore.setLoading).toHaveBeenCalledWith(true);
+      await flushPromises();
       vi.runAllTimers();
-      expect(uiStore.setLoading).toHaveBeenCalledTimes(2);
+      await flushPromises();
+
+      await wrapper.find('form').trigger('submit');
+
+      await flushPromises();
+      vi.runAllTimers();
+      await flushPromises();
+
+      // should not render validationErrorOutput
+      expect(wrapper.find('[data-testid=validationErrorOutput]').exists()).toBe(
+        false
+      );
+
+      // should call register with typed data
+      expect(register).toHaveBeenCalled();
+      expect(register).toHaveBeenCalledWith({
+        username: RegisterRequestBodyMock.username,
+        email: RegisterRequestBodyMock.email,
+        password: RegisterRequestBodyMock.password,
+      });
+
+      // should call uiStore.setLoading with "true"
+      expect(uiStore.setLoading).toHaveBeenCalled();
+      expect(uiStore.setLoading).toHaveBeenCalledWith(true);
+
+      // should call navigateTo with '/login'
+      expect(navigateTo).toHaveBeenCalled();
+      expect(navigateTo).toHaveBeenCalledWith('/login');
+
+      // should call uiStore.setLoading with "false" after timeout
+      vi.runAllTimers();
+      expect(uiStore.setLoading).toHaveBeenCalled();
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
-    it('filled form submit - should not call navigateTo', async () => {
-      const wrapper = mount(RegistrationForm);
-      await wrapper.get('[data-testid=actionButton]').trigger('click');
-
-      expect(navigateTo).not.toHaveBeenCalled();
-    });
-  });
-
-  it.skip('snapshot - should match the snapshot', () => {
-    const wrapper = shallowMount(RegistrationForm);
-    expect(wrapper.element).toMatchInlineSnapshot(`
-      DOMWrapper {
-        "isDisabled": [Function],
-        "wrapperElement": <form
-          class="relative flex flex-col w-full"
-          data-testid="registrationForm"
-        >
-          <appformrequesterroroutput
-            open="false"
-          />
-          <confirm-email-pop-up-stub
-            open="false"
-          />
-          <div
-            class="flex flex-col gap-3 mb-3 pb-7"
-          >
-            <appdebouncedtextinput
-              autocomplete="off"
-              class=""
-              name="registrationUsername"
-              placeholder="Введите имя пользователя"
-              required="true"
-              title="Имя пользователя"
-              value=""
-            />
-            <email-input-stub
-              autocomplete="off"
-              class=""
-              name="registrationEmail"
-              required="true"
-              value=""
-            />
-            <appconfidentionalinput
-              autocomplete="off"
-              class=""
-              name="registrationPassword"
-              placeholder="Введите пароль"
-              required="true"
-              title="Пароль"
-              value=""
-            />
-            <appconfidentionalinput
-              autocomplete="off"
-              class=""
-              name="registrationPasswordConfirm"
-              placeholder="Введите пароль ещё раз"
-              required="true"
-              title="Подтверждение пароля"
-              value=""
-            />
-            <uiformvalidationerroroutput
-              v="[object Object]"
-            />
-          </div>
-          <uiloadingbutton
-            pending="false"
-          >
-             Зарегистрироваться 
-          </uiloadingbutton>
-        </form>,
-      }
-    `);
   });
 });
