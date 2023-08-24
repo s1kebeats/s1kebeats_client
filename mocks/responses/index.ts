@@ -3,4 +3,9 @@ import ActivateResponseMock from './ActivateResponseMock';
 import LogoutResponseMock from './LogoutResponseMock';
 import RegisterResponseMock from './RegisterResponseMock';
 
-export { AuthResponseMock, ActivateResponseMock, LogoutResponseMock, RegisterResponseMock };
+export {
+  AuthResponseMock,
+  ActivateResponseMock,
+  LogoutResponseMock,
+  RegisterResponseMock,
+};
