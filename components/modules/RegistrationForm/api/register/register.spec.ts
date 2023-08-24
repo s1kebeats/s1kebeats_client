@@ -3,8 +3,10 @@ import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { RegisterRequestBodyMock } from '@/mocks/requestBodies';
 import { RegisterResponseMock } from '@/mocks/responses';
+import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
 
 describe('register', () => {
   beforeEach(() => {
@@ -15,7 +17,7 @@ describe('register', () => {
     await register(RegisterRequestBodyMock);
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      process.env.API_URL + '/register',
+      RuntimeConfigMock.public.API_URL + '/register',
       RegisterRequestBodyMock
     );
   });
