@@ -4,8 +4,9 @@ import { type AuthResponseBody } from '@/api/models/responseBodies';
 export default async function refresh(): Promise<
   AxiosResponse<AuthResponseBody>
 > {
+  const runtimeConfig = useRuntimeConfig();
   const response = await axios.post<AuthResponseBody>(
-    `${process.env.API_URL}/refresh`,
+    `${runtimeConfig.public.API_URL}/refresh`,
     null,
     {
       withCredentials: true,

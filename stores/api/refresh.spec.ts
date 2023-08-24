@@ -2,8 +2,10 @@ import refresh from './refresh';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { AuthResponseMock } from '@/mocks/responses';
+import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock)
 
 describe('refresh', () => {
   beforeEach(() => {
@@ -15,7 +17,7 @@ describe('refresh', () => {
     await refresh();
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      process.env.API_URL + '/refresh',
+      RuntimeConfigMock.public.API_URL + '/refresh',
       null,
       {
         withCredentials: true,

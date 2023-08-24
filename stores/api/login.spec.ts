@@ -3,8 +3,10 @@ import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { LoginRequestBodyMock } from '@/mocks/requestBodies';
 import { AuthResponseMock } from '@/mocks/responses';
+import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock)
 
 describe('login', () => {
   beforeEach(() => {
@@ -16,7 +18,7 @@ describe('login', () => {
     await login(LoginRequestBodyMock);
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      process.env.API_URL + '/login',
+      RuntimeConfigMock.public.API_URL + '/login',
       LoginRequestBodyMock,
       { withCredentials: true }
     );

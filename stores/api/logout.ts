@@ -4,8 +4,9 @@ import { type LogoutResponseBody } from '@/api/models/responseBodies';
 export default async function refresh(): Promise<
   AxiosResponse<LogoutResponseBody>
 > {
+  const runtimeConfig = useRuntimeConfig();
   const response = await axios.post<LogoutResponseBody>(
-    `${process.env.API_URL}/logout`,
+    `${runtimeConfig.public.API_URL}/logout`,
     null,
     {
       withCredentials: true,

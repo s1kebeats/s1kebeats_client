@@ -2,8 +2,10 @@ import logout from './logout';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { LogoutResponseMock } from '@/mocks/responses';
+import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock)
 
 describe('logout', () => {
   beforeEach(() => {
@@ -15,7 +17,7 @@ describe('logout', () => {
     await logout();
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      process.env.API_URL + '/logout',
+      RuntimeConfigMock.public.API_URL + '/logout',
       null,
       {
         withCredentials: true,

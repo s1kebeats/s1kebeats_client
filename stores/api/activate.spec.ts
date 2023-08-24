@@ -2,8 +2,10 @@ import activate from './activate';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { ActivateResponseMock } from '@/mocks/responses';
+import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock)
 
 describe('activate', () => {
   beforeEach(() => {
@@ -16,7 +18,7 @@ describe('activate', () => {
     await activate(testCode);
     expect(axios.post).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith(
-      process.env.API_URL + '/activate/' + testCode
+      RuntimeConfigMock.public.API_URL + '/activate/' + testCode
     );
   });
   test('should return response', async () => {

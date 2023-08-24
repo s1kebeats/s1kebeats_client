@@ -5,8 +5,9 @@ import axios, { type AxiosResponse } from 'axios';
 export default async function login(
   data: LoginRequestBody
 ): Promise<AxiosResponse<AuthResponseBody>> {
+  const runtimeConfig = useRuntimeConfig();
   const response = await axios.post<AuthResponseBody>(
-    `${process.env.API_URL}/login`,
+    `${runtimeConfig.public.API_URL}/login`,
     data,
     {
       withCredentials: true,
