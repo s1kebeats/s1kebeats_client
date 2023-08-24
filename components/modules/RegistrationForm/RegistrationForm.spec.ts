@@ -655,12 +655,17 @@ describe('RegistrationForm', async () => {
         // should not call uiStore.setLoading
         expect(uiStore.setLoading).not.toHaveBeenCalled();
       });
-    })
+    });
 
     it('empty form submit', async () => {
       const wrapper = mount(RegistrationForm, {
         global: {
           plugins: [createTestingPinia()],
+          stubs: {
+            UsernameInput: true,
+            EmailInput: true,
+            ConfidentialInput: true,
+          },
         },
       });
       const uiStore = useUiStore();
@@ -678,6 +683,18 @@ describe('RegistrationForm', async () => {
         validationMessages.username.required
       );
 
+      // should set "state" attr to "error" on all inputs
+      expect(wrapper.get(usernameInputSelector).attributes('state')).toBe(
+        'error'
+      );
+      expect(wrapper.get(emailInputSelector).attributes('state')).toBe('error');
+      expect(wrapper.get(passwordInputSelector).attributes('state')).toBe(
+        'error'
+      );
+      expect(
+        wrapper.get(passwordConfirmInputSelector).attributes('state')
+      ).toBe('error');
+
       // should not call register
       expect(register).not.toHaveBeenCalled();
 
@@ -687,7 +704,7 @@ describe('RegistrationForm', async () => {
       // should not call uiStore.setLoading
       expect(uiStore.setLoading).not.toHaveBeenCalled();
     });
-    it('valid form submit', async () => {
+    it('valid form submit with register success', async () => {
       (usernameAvailable as Mock).mockResolvedValue(true);
       const wrapper = mount(RegistrationForm, {
         global: {
@@ -732,6 +749,12 @@ describe('RegistrationForm', async () => {
         password: RegisterRequestBodyMock.password,
       });
 
+      // should render requestErrorOutput invisible
+      // ! isVisible() doesn't work properly, using a workaround
+      expect(
+        wrapper.get('[data-testid=requestErrorOutput]').attributes('style')
+      ).toBe('display: none;');
+
       // should call uiStore.setLoading with "true"
       expect(uiStore.setLoading).toHaveBeenCalled();
       expect(uiStore.setLoading).toHaveBeenCalledWith(true);
@@ -744,6 +767,64 @@ describe('RegistrationForm', async () => {
       vi.runAllTimers();
       expect(uiStore.setLoading).toHaveBeenCalled();
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
+    });
+    it('valid form submit with register error', async () => {
+      (usernameAvailable as Mock).mockResolvedValue(true);
+      (register as Mock).mockRejectedValue({});
+      const wrapper = mount(RegistrationForm, {
+        global: {
+          plugins: [createTestingPinia()],
+        },
+      });
+      const uiStore = useUiStore();
+
+      await wrapper
+        .get('input[name=registrationUsername]')
+        .setValue(RegisterRequestBodyMock.username);
+      await wrapper
+        .get('input[name=registrationEmail]')
+        .setValue(RegisterRequestBodyMock.email);
+      await wrapper
+        .get('input[name=registrationPassword]')
+        .setValue(RegisterRequestBodyMock.password);
+      await wrapper
+        .get('input[name=registrationPasswordConfirm]')
+        .setValue(RegisterRequestBodyMock.password);
+
+      await flushPromises();
+      vi.runAllTimers();
+      await flushPromises();
+
+      await wrapper.find('form').trigger('submit');
+
+      await flushPromises();
+      vi.runAllTimers();
+      await flushPromises();
+
+      // should not render validationErrorOutput
+      expect(wrapper.find('[data-testid=validationErrorOutput]').exists()).toBe(
+        false
+      );
+
+      // should call register with typed data
+      expect(register).toHaveBeenCalled();
+      expect(register).toHaveBeenCalledWith({
+        username: RegisterRequestBodyMock.username,
+        email: RegisterRequestBodyMock.email,
+        password: RegisterRequestBodyMock.password,
+      });
+
+      // should render requestErrorOutput visible
+      // ! isVisible() doesn't work properly, using a workaround
+      expect(
+        wrapper.get('[data-testid=requestErrorOutput]').attributes('style')
+      ).not.toBe('display: none;');
+
+      // should not call uiStore.setLoading
+      expect(uiStore.setLoading).not.toHaveBeenCalled();
+
+      // should not call navigateTo
+      expect(navigateTo).not.toHaveBeenCalled();
     });
   });
 });

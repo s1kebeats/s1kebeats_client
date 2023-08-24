@@ -77,6 +77,9 @@ import {
 } from 'yup';
 import { toTypedSchema } from '@vee-validate/yup';
 import validationMessages from './validationMessages';
+import * as EmailValidator from 'email-validator';
+
+const uiStore = useUiStore();
 
 function yupSequentialStringSchema(schemas: StringSchema[]) {
   return string().test(async (value, context) => {
@@ -137,7 +140,7 @@ const {
 const requestError = ref(false);
 const username = defineComponentBinds('username', {
   model: 'value',
-  mapProps: (state) => ({
+  mapProps: () => ({
     state:
       errors.value.username && !meta.value.pending
         ? 'error'
@@ -148,19 +151,19 @@ const username = defineComponentBinds('username', {
 });
 const email = defineComponentBinds('email', {
   model: 'value',
-  mapProps: (state) => ({
+  mapProps: () => ({
     state: errors.value.email ? 'error' : values.email ? 'success' : null,
   }),
 });
 const password = defineComponentBinds('password', {
   model: 'value',
-  mapProps: (state) => ({
+  mapProps: () => ({
     state: errors.value.password ? 'error' : values.password ? 'success' : null,
   }),
 });
 const passwordConfirm = defineComponentBinds('passwordConfirm', {
   model: 'value',
-  mapProps: (state) => ({
+  mapProps: () => ({
     state: errors.value.passwordConfirm
       ? 'error'
       : values.passwordConfirm
@@ -172,18 +175,19 @@ const submitRegistrationForm = handleSubmit(async (values) => {
   try {
     requestError.value = false;
 
-    await register(values.username!, values.email, values.password);
+    await register({
+      username: values.username!,
+      email: values.email,
+      password: values.password,
+    });
 
     uiStore.setLoading(true);
     await navigateTo('/login');
     setTimeout(() => uiStore.setLoading(false), 200);
   } catch (error: any) {
-    console.log(error);
     requestError.value = true;
   }
 });
-
-const uiStore = useUiStore();
 
 function closeErrorPopUp() {
   requestError.value = false;
