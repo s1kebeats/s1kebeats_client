@@ -8,7 +8,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       API_URL: 'http://192.168.1.135:5000/api',
-      MEDIA_URL: 'http://192.168.1.135:5000/api/media/',
+      CLIENT_URL: 'http://192.168.1.135:3000',
+      // MEDIA_URL: `${this.API_URL}/media`,
     },
   },
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
