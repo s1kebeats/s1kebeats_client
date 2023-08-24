@@ -6,7 +6,7 @@ import { AuthResponseMock } from '@/mocks/responses';
 import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
-vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock)
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
 
 describe('login', () => {
   beforeEach(() => {

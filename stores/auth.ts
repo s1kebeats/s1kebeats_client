@@ -1,9 +1,6 @@
 import { defineStore } from 'pinia';
-import refresh from './api/refresh';
 import type User from '@/api/models/User';
-import logout from './api/logout';
-import login from './api/login';
-import activate from './api/activate';
+import { refresh, logout, login, activate } from './api';
 import { showUnexpectedError } from '@/composables';
 import { LoginRequestBody } from '@/api/models/requestBodies';
 

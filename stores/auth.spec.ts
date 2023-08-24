@@ -12,11 +12,8 @@ import {
 } from 'vitest';
 import type User from '@/api/models/User';
 import { AuthResponseMock } from '@/mocks/responses';
-import login from './api/login';
-import logout from './api/logout';
-import refresh from './api/refresh';
 import { showUnexpectedError } from '@/composables';
-import activate from './api/activate';
+import { login, logout, refresh, activate } from './api';
 import { LoginRequestBodyMock } from '@/mocks/requestBodies';
 
 vi.mock('@/composables', () => {
@@ -35,19 +32,14 @@ const testUser: User = {
   displayedName: null,
 };
 
-vi.mock('./api/logout');
-vi.mock('./api/activate');
-
-function mockWithAuthResponseMock() {
+vi.mock('./api', () => {
   return {
-    default: vi.fn(() => {
-      return AuthResponseMock;
-    }),
+    logout: vi.fn(),
+    activate: vi.fn(),
+    login: vi.fn(() => AuthResponseMock),
+    refresh: vi.fn(() => AuthResponseMock),
   };
-}
-
-vi.mock('./api/login', mockWithAuthResponseMock);
-vi.mock('./api/refresh', mockWithAuthResponseMock);
+});
 
 describe('Auth Store', () => {
   beforeEach(() => {
