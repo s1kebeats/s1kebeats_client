@@ -109,7 +109,7 @@ const schema = toTypedSchema(
     ]),
     email: string()
       .required(validationMessages.email.required)
-      .email(validationMessages.email.valid),
+      .test('email', validationMessages.email.valid, EmailValidator.validate),
     password: string()
       .required(validationMessages.password.required)
       .min(8, validationMessages.password.min)
