@@ -76,7 +76,7 @@ import {
   type TestFunction,
 } from 'yup';
 import { toTypedSchema } from '@vee-validate/yup';
-import validationMessages from './validationMessages';
+import validationMessages from '@/components/shared/validationMessages';
 import * as EmailValidator from 'email-validator';
 
 const uiStore = useUiStore();

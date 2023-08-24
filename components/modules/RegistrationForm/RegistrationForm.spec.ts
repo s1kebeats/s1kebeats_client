@@ -7,7 +7,7 @@ import useUiStore from 'stores/ui';
 import { createTestingPinia } from '@pinia/testing';
 
 import flushPromises from 'flush-promises';
-import validationMessages from './validationMessages';
+import validationMessages from '@/components/shared/validationMessages';
 import { RegisterRequestBodyMock } from '@/mocks/requestBodies';
 import { usernameAvailable } from './helpers/validators';
 

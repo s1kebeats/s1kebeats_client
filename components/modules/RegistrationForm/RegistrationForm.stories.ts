@@ -2,7 +2,7 @@ import RegistrationForm from './RegistrationForm.vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { userEvent, waitFor, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import validationMessages from './validationMessages';
+import validationMessages from '@/components/shared/validationMessages';
 import { decorator as usenameAvailableMockDecorator } from './__mocks__/usernameAvailable';
 import { decorator as registerMockDecorator } from './__mocks__/register';
 
