@@ -3,7 +3,7 @@ import { describe, expect, it, vi, beforeAll, beforeEach, Mock } from 'vitest';
 import { mount, shallowMount } from '@vue/test-utils';
 import { setActivePinia, createPinia } from 'pinia';
 import { register } from './api';
-import useUiStore from '@/stores/ui';
+import { useUiStore } from '@/stores';
 import { createTestingPinia } from '@pinia/testing';
 
 import flushPromises from 'flush-promises';

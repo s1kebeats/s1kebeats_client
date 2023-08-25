@@ -58,7 +58,7 @@ import {
 } from '@s1kebeats/s1kebeats-ui';
 
 import { register } from './api';
-import useUiStore from '@/stores/ui';
+import { useUiStore } from '@/stores';
 import {
   noSpecialChars,
   usernameAvailable,
