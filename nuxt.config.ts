@@ -1,3 +1,4 @@
+import { API_URL } from '@/api';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: [
@@ -7,7 +8,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      API_URL: 'http://192.168.1.135:5000/api',
+      API_URL,
       CLIENT_URL: 'http://192.168.1.135:3000',
       // MEDIA_URL: `${this.API_URL}/media`,
     },
