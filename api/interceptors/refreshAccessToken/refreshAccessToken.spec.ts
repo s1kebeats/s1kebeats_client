@@ -24,6 +24,11 @@ vi.mock('@/stores/api', () => {
 vi.mock('@/api');
 
 vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
+vi.mock('@/nuxt.config', () => {
+  return {
+    API_URL: 'api_url',
+  };
+});
 
 describe('refreshAccessToken', () => {
   beforeAll(() => {

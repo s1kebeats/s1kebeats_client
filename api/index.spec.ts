@@ -1,9 +1,15 @@
-import $api, { API_URL } from '@/api';
+import $api from '@/api';
+import { API_URL } from '@/nuxt.config';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { returnResponse, errorHandler, setAuthHeader } from './interceptors';
 import { RuntimeConfigMock } from '@/mocks';
 
 vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
+vi.mock('@/nuxt.config', () => {
+  return {
+    API_URL: 'api_url',
+  };
+});
 
 describe('$api', () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { returnResponse, errorHandler, setAuthHeader } from './interceptors';
-import { API_URL } from 'nuxt.config';
+import { API_URL } from '@/nuxt.config';
 
 const $api = axios.create({
   withCredentials: true,

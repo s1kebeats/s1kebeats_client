@@ -3,6 +3,11 @@ import errorHandler from './errorHandler';
 import refreshAccessToken from '../refreshAccessToken';
 
 vi.mock('../refreshAccessToken');
+vi.mock('@/nuxt.config', () => {
+  return {
+    API_URL: 'api_url',
+  };
+});
 
 describe('errorHandler', () => {
   beforeEach(() => {
