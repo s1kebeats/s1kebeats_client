@@ -173,7 +173,9 @@ describe('ActivationPart', () => {
       // should emit submit event with typed value
       expect(wrapper.emitted()).toHaveProperty('submit');
       expect(wrapper.emitted('submit')).toHaveLength(1);
-      expect(wrapper.emitted('submit')![0][0]).toStrictEqual(testActivationCode);
+      expect(wrapper.emitted('submit')![0][0]).toStrictEqual(
+        testActivationCode
+      );
     });
   });
   it('snapshot - should match the snapshot', () => {
