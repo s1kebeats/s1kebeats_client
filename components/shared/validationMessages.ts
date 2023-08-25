@@ -18,6 +18,9 @@ const validationMessages = {
     required: 'Введите пароль еще раз',
     match: 'Пароли не совпадают',
   },
+  activationCode: {
+    required: 'Введите код активации',
+  },
 };
 
 export default validationMessages;
