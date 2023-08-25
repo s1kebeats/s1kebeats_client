@@ -1,4 +1,4 @@
-import { User } from '@/api/models';
+import { type User } from '@/api/models';
 
 const UserMock: User = {
   email: 'user@example.com',

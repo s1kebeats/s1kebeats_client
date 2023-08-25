@@ -1,5 +1,5 @@
 import { RegisterResponseBodyMock } from '@/mocks/responseBodies';
-import { RegisterResponseBody } from '@/api/models/responseBodies';
+import { type RegisterResponseBody } from '@/api/models/responseBodies';
 
 const RegisterResponseMock: {
   statusCode: number;

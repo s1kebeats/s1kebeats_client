@@ -10,7 +10,7 @@ import {
   test,
   vi,
 } from 'vitest';
-import type User from '@/api/models/User';
+import { type User } from '@/api/models';
 import { AuthResponseMock } from '@/mocks/responses';
 import { showUnexpectedError } from '@/composables';
 import { login, logout, refresh, activate } from './api';

@@ -1,4 +1,4 @@
-import { ActivateResponseBody } from '@/api/models/responseBodies';
+import { type ActivateResponseBody } from '@/api/models/responseBodies';
 import { ActivateResponseBodyMock } from '@/mocks/responseBodies';
 
 const ActivateResponseMock: {

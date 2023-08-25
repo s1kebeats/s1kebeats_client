@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import type User from '@/api/models/User';
+import { type User } from '@/api/models';
 import { refresh, logout, login, activate } from './api';
 import { showUnexpectedError } from '@/composables';
-import { LoginRequestBody } from '@/api/models/requestBodies';
+import { type LoginRequestBody } from '@/api/models/requestBodies';
 
 const useAuthStore = defineStore('auth', {
   state: (): {

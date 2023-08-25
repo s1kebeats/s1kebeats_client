@@ -1,5 +1,5 @@
 import { AuthResponseBodyMock } from '@/mocks/responseBodies';
-import { AuthResponseBody } from '@/api/models/responseBodies';
+import { type AuthResponseBody } from '@/api/models/responseBodies';
 
 const AuthResponseMock: {
   statusCode: number;

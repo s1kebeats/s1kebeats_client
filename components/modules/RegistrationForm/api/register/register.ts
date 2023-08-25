@@ -1,5 +1,5 @@
-import { RegisterRequestBody } from '@/api/models/requestBodies';
-import { RegisterResponseBody } from '@/api/models/responseBodies';
+import { type RegisterRequestBody } from '@/api/models/requestBodies';
+import { type RegisterResponseBody } from '@/api/models/responseBodies';
 import axios, { type AxiosResponse } from 'axios';
 
 export default async function register(

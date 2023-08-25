@@ -1,5 +1,5 @@
 import { type AuthResponseBody } from '@/api/models/responseBodies';
-import { LoginRequestBody } from '@/api/models/requestBodies';
+import { type LoginRequestBody } from '@/api/models/requestBodies';
 import axios, { type AxiosResponse } from 'axios';
 
 export default async function login(
