@@ -827,4 +827,64 @@ describe('RegistrationForm', async () => {
       expect(navigateTo).not.toHaveBeenCalled();
     });
   });
+  it('snapshot - should match the snapshot', () => {
+    const wrapper = shallowMount(RegistrationForm, {
+      global: {
+        renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
+      },
+    })
+    expect(wrapper.element).toMatchInlineSnapshot(`
+      <page-form-stub
+        buttontext="Зарегистрироваться"
+        data-testid="pageForm"
+        errorstate="false"
+        footerhint="Уже есть аккаунт?"
+        footerlinktitle="Вход"
+        footerto="/login"
+        pending="false"
+        title="Регистрация"
+      >
+        <username-input-stub
+          data-testid="usernameInput"
+          debounce="true"
+          disabled="false"
+          icon="true"
+          name="registrationUsername"
+          size="sm"
+        />
+        <email-input-stub
+          data-testid="emailInput"
+          debounce="true"
+          disabled="false"
+          icon="true"
+          name="registrationEmail"
+          size="sm"
+        />
+        <confidential-input-stub
+          autocomplete="off"
+          data-testid="passwordInput"
+          debounce="true"
+          disabled="false"
+          icon="true"
+          label="Введите пароль"
+          name="registrationPassword"
+          size="sm"
+        />
+        <confidential-input-stub
+          autocomplete="off"
+          data-testid="passwordConfirmInput"
+          debounce="true"
+          disabled="false"
+          icon="true"
+          label="Введите пароль ещё раз"
+          name="registrationPasswordConfirm"
+          size="sm"
+        />
+        <validation-error-output-stub
+          data-testid="validationErrorOutputComponent"
+          errors=""
+        />
+      </page-form-stub>
+    `)
+  })
 });
