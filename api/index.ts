@@ -1,11 +1,11 @@
 import axios from 'axios';
-import setAuthHeader from './interceptors/setAuthHeader';
-import errorHandler from './interceptors/errorHandler';
-import returnResponse from './interceptors/returnResponse';
+import { returnResponse, errorHandler, setAuthHeader } from './interceptors';
+
+export const API_URL = 'http://192.168.1.135:5000/api';
 
 const $api = axios.create({
   withCredentials: true,
-  baseURL: process.env.API_URL,
+  baseURL: API_URL,
 });
 
 $api.interceptors.request.use(setAuthHeader);

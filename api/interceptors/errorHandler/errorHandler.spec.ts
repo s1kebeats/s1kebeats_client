@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import errorHandler from './errorHandler';
-import refreshAccessToken from './refreshAccessToken';
+import refreshAccessToken from '../refreshAccessToken';
 
-vi.mock('./refreshAccessToken');
+vi.mock('../refreshAccessToken');
 
 describe('errorHandler', () => {
   beforeEach(() => {

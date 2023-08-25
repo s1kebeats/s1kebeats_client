@@ -1,4 +1,4 @@
-import refresh from '@/stores/api/refresh';
+import { refresh } from '@/stores/api';
 import $api from '@/api';
 
 export default async function (error: {

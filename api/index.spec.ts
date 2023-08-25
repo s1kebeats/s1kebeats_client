@@ -1,8 +1,9 @@
-import $api from '@/api';
+import $api, { API_URL } from '@/api';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import setAuthHeader from './interceptors/setAuthHeader';
-import errorHandler from './interceptors/errorHandler';
-import returnResponse from './interceptors/returnResponse';
+import { returnResponse, errorHandler, setAuthHeader } from './interceptors';
+import { RuntimeConfigMock } from '@/mocks';
+
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
 
 describe('$api', () => {
   beforeEach(() => {
@@ -12,8 +13,8 @@ describe('$api', () => {
     it('should have withCredentials option set to "true"', () => {
       expect($api.defaults.withCredentials).toBe(true);
     });
-    it('should have baseUrl option set to .env API_URL', () => {
-      expect($api.defaults.baseURL).toBe(process.env.API_URL);
+    it('should have baseUrl option set to API_URL', () => {
+      expect($api.defaults.baseURL).toBe(API_URL);
     });
   });
   // Axios has an issue with "handlers" typings: https://github.com/axios/axios/pull/5551

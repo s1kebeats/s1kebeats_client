@@ -1,21 +1,10 @@
+import { LocalStorageMock } from '@/mocks';
 import setAuthHeader from './setAuthHeader';
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 
-const testTokenFromLocalStorage = 'testToken';
-const localStorageMock = (function () {
-  const store = {
-    accessToken: testTokenFromLocalStorage,
-  };
-  return {
-    getItem: vi.fn(function (key: keyof typeof store) {
-      return store[key];
-    }),
-  };
-})();
-
 describe('setAuthHeader', () => {
   beforeAll(() => {
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+    Object.defineProperty(window, 'localStorage', { value: LocalStorageMock });
   });
   beforeEach(() => {
     vi.clearAllMocks();
@@ -33,9 +22,9 @@ describe('setAuthHeader', () => {
     expect(localStorage.getItem).toHaveBeenCalledWith('accessToken');
   });
   it('should set config.headers.Authorization to valid token string', () => {
+    const testToken = 'testToken';
+    localStorage.setItem('accessToken', testToken);
     const config = setAuthHeader({});
-    expect(config.headers!.Authorization).toBe(
-      `Bearer ${testTokenFromLocalStorage}`
-    );
+    expect(config.headers!.Authorization).toBe(`Bearer ${testToken}`);
   });
 });

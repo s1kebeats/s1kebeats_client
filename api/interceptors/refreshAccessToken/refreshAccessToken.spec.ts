@@ -1,7 +1,7 @@
-import refresh from '@/stores/api/refresh';
+import { refresh } from '@/stores/api';
 import refreshAccessToken from './refreshAccessToken';
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
-import { runtimeConfigMock } from '@/stores/api/mocks';
+import { LocalStorageMock, RuntimeConfigMock } from '@/mocks';
 import $api from '@/api';
 
 const testAccessToken = 'testAccessToken';
@@ -18,22 +18,16 @@ const { mockedMethod } = vi.hoisted(() => {
   };
 });
 
-vi.mock('@/stores/api/refresh', () => {
-  return { default: mockedMethod };
+vi.mock('@/stores/api', () => {
+  return { refresh: mockedMethod };
 });
 vi.mock('@/api');
 
-vi.stubGlobal('useRuntimeConfig', () => runtimeConfigMock);
-const localStorageMock = (function () {
-  return {
-    getItem: vi.fn(),
-    setItem: vi.fn(),
-  };
-})();
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
 
 describe('refreshAccessToken', () => {
   beforeAll(() => {
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+    Object.defineProperty(window, 'localStorage', { value: LocalStorageMock });
   });
   beforeEach(() => {
     vi.clearAllMocks();
