@@ -1,7 +1,7 @@
 import guestOnly from './guestOnly';
 import { describe, it, expect, beforeAll, beforeEach, vi } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
-import useAuthStore from '@/stores/auth';
+import { useAuthStore } from '@/stores';
 
 vi.stubGlobal('navigateTo', vi.fn());
 

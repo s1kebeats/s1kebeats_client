@@ -1,4 +1,4 @@
-import useAuthStore from '@/stores/auth';
+import { useAuthStore } from '@/stores';
 export default () => {
   const authStore = useAuthStore();
   if (authStore.authorized) {

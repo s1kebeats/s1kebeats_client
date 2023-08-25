@@ -1,4 +1,4 @@
-import useAuthStore from '@/stores/auth';
+import { useAuthStore, useUiStore } from '@/stores';
 import checkAuth from './checkAuth';
 import {
   describe,
@@ -10,11 +10,9 @@ import {
   Mock,
   beforeEach,
 } from 'vitest';
-import useUiStore from '@/stores/ui';
 import { setActivePinia, createPinia } from 'pinia';
 
-vi.mock('@/stores/auth');
-vi.mock('@/stores/ui');
+vi.mock('@/stores');
 
 describe('checkAuth', () => {
   describe('fully mocked stores', () => {
@@ -41,11 +39,11 @@ describe('checkAuth', () => {
       setActivePinia(createPinia());
 
       const useAuthStoreActual = (
-        await vi.importActual<typeof import('@/stores/auth')>('@/stores/auth')
-      ).default;
+        await vi.importActual<typeof import('@/stores')>('@/stores')
+      ).useAuthStore;
       const useUiStoreActual = (
-        await vi.importActual<typeof import('@/stores/ui')>('@/stores/ui')
-      ).default;
+        await vi.importActual<typeof import('@/stores')>('@/stores')
+      ).useUiStore;
 
       (useAuthStore as unknown as Mock).mockReturnValue({
         ...useAuthStoreActual(),

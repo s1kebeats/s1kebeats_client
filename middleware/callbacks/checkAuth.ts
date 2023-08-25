@@ -1,5 +1,4 @@
-import useAuthStore from '@/stores/auth';
-import useUiStore from '@/stores/ui';
+import { useAuthStore, useUiStore } from '@/stores';
 export default async () => {
   if (process.server) return;
   const authStore = useAuthStore();
