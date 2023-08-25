@@ -1,4 +1,4 @@
-import { API_URL } from '@/api';
+export const API_URL = 'http://192.168.1.135:5000/api';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: [
