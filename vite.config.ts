@@ -19,7 +19,5 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
-    // ! commented until solution is found
-    // setupFiles: '.env.public',
   },
 });
