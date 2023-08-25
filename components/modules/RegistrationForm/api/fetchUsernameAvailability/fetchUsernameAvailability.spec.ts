@@ -9,8 +9,10 @@ import {
   vi,
 } from 'vitest';
 import axios from 'axios';
+import { RuntimeConfigMock } from '@/mocks';
 
 vi.mock('axios');
+vi.stubGlobal('useRuntimeConfig', () => RuntimeConfigMock);
 
 describe('fetchUsernameAvailability', () => {
   beforeEach(() => {
@@ -28,7 +30,7 @@ describe('fetchUsernameAvailability', () => {
     await fetchUsernameAvailability(testUsername);
     expect(axios.get).toHaveBeenCalled();
     expect(axios.get).toHaveBeenCalledWith(
-      `${process.env.API_URL}/checkusername/${testUsername}`
+      `${RuntimeConfigMock.public.API_URL}/checkusername/${testUsername}`
     );
   });
   test('should return username availabity', async () => {
