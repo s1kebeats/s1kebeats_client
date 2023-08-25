@@ -832,7 +832,7 @@ describe('RegistrationForm', async () => {
       global: {
         renderStubDefaultSlot: true, // enables slots content rendering with shallowMount
       },
-    })
+    });
     expect(wrapper.element).toMatchInlineSnapshot(`
       <page-form-stub
         buttontext="Зарегистрироваться"
@@ -885,6 +885,6 @@ describe('RegistrationForm', async () => {
           errors=""
         />
       </page-form-stub>
-    `)
-  })
+    `);
+  });
 });
