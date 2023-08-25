@@ -1,4 +1,4 @@
-import useAuthStore from './auth';
+import useAuthStore from './authStore';
 import { setActivePinia, createPinia } from 'pinia';
 import {
   Mock,

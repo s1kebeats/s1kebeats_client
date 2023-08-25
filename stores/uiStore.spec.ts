@@ -1,4 +1,4 @@
-import useStore from './ui';
+import useStore from './uiStore';
 import { setActivePinia, createPinia } from 'pinia';
 import { beforeEach, describe, expect, test } from 'vitest';
 
@@ -17,7 +17,7 @@ describe('UI Store', () => {
     });
   });
   describe('actions', () => {
-    test('toggleOverlay - shuould toggle overlay state', () => {
+    test('toggleOverlay - should toggle overlay state', () => {
       const store = useStore();
       store.toggleOverlay();
       expect(store.overlay).toBe(true);

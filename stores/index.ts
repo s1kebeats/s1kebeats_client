@@ -1,4 +1,4 @@
-import useAuthStore from './auth';
-import useUiStore from './ui';
+import useAuthStore from './authStore';
+import useUiStore from './uiStore';
 
 export { useAuthStore, useUiStore };
