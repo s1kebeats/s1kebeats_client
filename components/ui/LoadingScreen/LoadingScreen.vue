@@ -11,7 +11,7 @@
 </template>
 <script setup lang="ts">
 import MainLogo from '@/components/ui/MainLogo';
-import useUiStore from '@/stores/ui';
+import { useUiStore } from '@/stores';
 const uiStore = useUiStore();
 </script>
 <style lang="scss" scoped>
