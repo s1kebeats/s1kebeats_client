@@ -78,6 +78,7 @@ import {
 import { toTypedSchema } from '@vee-validate/yup';
 import validationMessages from '@/components/shared/validationMessages';
 import * as EmailValidator from 'email-validator';
+import { execWithTimeout } from '@/composables';
 
 const uiStore = useUiStore();
 
@@ -182,8 +183,8 @@ const submitRegistrationForm = handleSubmit(async (values) => {
     });
 
     uiStore.setLoading(true);
-    await navigateTo('/login');
-    setTimeout(() => uiStore.setLoading(false), 200);
+    await execWithTimeout(navigateTo('/login') as Promise<unknown>, 200);
+  uiStore.setLoading(false);
   } catch (error: any) {
     requestError.value = true;
   }

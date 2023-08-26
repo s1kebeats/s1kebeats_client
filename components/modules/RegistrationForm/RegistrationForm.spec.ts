@@ -763,8 +763,11 @@ describe('RegistrationForm', async () => {
       expect(navigateTo).toHaveBeenCalled();
       expect(navigateTo).toHaveBeenCalledWith('/login');
 
-      // should call uiStore.setLoading with "false" after timeout
+      // should call uiStore.setLoading with "false"
+      await flushPromises()
       vi.runAllTimers();
+      await flushPromises()
+
       expect(uiStore.setLoading).toHaveBeenCalledTimes(2);
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
