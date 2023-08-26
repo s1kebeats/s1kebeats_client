@@ -1,2 +1,3 @@
 import showUnexpectedError from './showUnexpectedError';
-export { showUnexpectedError };
+import execWithTimeout from './execWithTimeout';
+export { showUnexpectedError, execWithTimeout };
