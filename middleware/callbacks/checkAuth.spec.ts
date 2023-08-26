@@ -11,6 +11,7 @@ import {
   beforeEach,
 } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
+import flushPromises from 'flush-promises';
 
 vi.mock('@/stores');
 
@@ -67,7 +68,12 @@ describe('checkAuth', () => {
       const authStore = useAuthStore();
       authStore.authorized = null;
 
-      await checkAuth();
+      checkAuth();
+
+      await flushPromises();
+      vi.runAllTimers();
+      await flushPromises();
+
       expect(authStore.checkAuth).toHaveBeenCalled();
     });
     it('should not call authStore.checkAuth when process.server is "false" and authStore.authorized is not null', async () => {
@@ -77,7 +83,7 @@ describe('checkAuth', () => {
       const authStore = useAuthStore();
       authStore.authorized = false;
 
-      await checkAuth();
+      checkAuth();
       expect(authStore.checkAuth).not.toHaveBeenCalled();
     });
     it('should call uiStore.setLoading with false when process.server is "false" and authStore.authorized is null', async () => {
@@ -88,8 +94,12 @@ describe('checkAuth', () => {
       const uiStore = useUiStore();
       authStore.authorized = null;
 
-      await checkAuth();
+      checkAuth();
+
+      await flushPromises();
       vi.runAllTimers();
+      await flushPromises();
+
       expect(uiStore.setLoading).toHaveBeenCalled();
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
@@ -101,7 +111,7 @@ describe('checkAuth', () => {
       const uiStore = useUiStore();
       authStore.authorized = false;
 
-      await checkAuth();
+      checkAuth();
       expect(uiStore.setLoading).not.toHaveBeenCalled();
     });
   });

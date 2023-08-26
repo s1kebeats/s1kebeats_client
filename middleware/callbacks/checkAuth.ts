@@ -1,10 +1,11 @@
 import { useAuthStore, useUiStore } from '@/stores';
+import { execWithTimeout } from '@/composables';
 export default async () => {
   if (process.server) return;
   const authStore = useAuthStore();
   if (authStore.authorized === null) {
-    await authStore.checkAuth();
     const uiStore = useUiStore();
-    setTimeout(() => uiStore.setLoading(false), 200);
+    await execWithTimeout(authStore.checkAuth(), 200);
+    uiStore.setLoading(false);
   }
 };
