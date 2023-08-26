@@ -765,7 +765,7 @@ describe('RegistrationForm', async () => {
 
       // should call uiStore.setLoading with "false" after timeout
       vi.runAllTimers();
-      expect(uiStore.setLoading).toHaveBeenCalled();
+      expect(uiStore.setLoading).toHaveBeenCalledTimes(2);
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
     it('valid form submit with register error', async () => {
