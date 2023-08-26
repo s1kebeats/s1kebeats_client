@@ -6,10 +6,9 @@ describe('execWithTimeout', () => {
   it('timeout longer that cb - should return after timeout', async () => {
     const start = Date.now();
     await execWithTimeout(
-      () =>
-        new Promise((resolve) => {
-          setTimeout(resolve, 100);
-        }),
+      new Promise((resolve) => {
+        setTimeout(resolve, 100);
+      }),
       400
     );
     const end = Date.now();
@@ -19,10 +18,9 @@ describe('execWithTimeout', () => {
   it('cb longer that timeout - should return after cb', async () => {
     const start = Date.now();
     await execWithTimeout(
-      () =>
-        new Promise((resolve) => {
-          setTimeout(resolve, 400);
-        }),
+      new Promise((resolve) => {
+        setTimeout(resolve, 400);
+      }),
       100
     );
     const end = Date.now();
