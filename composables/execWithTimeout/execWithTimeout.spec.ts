@@ -2,7 +2,7 @@ import execWithTimeout from './execWithTimeout';
 import { describe, it, expect } from 'vitest';
 
 describe('execWithTimeout', () => {
-  // fails sometimes, +- couple ms, dont worry if wasnt edited
+  // +- 50 ms to prevent test failures due to pc timings
   it('timeout longer that cb - should return after timeout', async () => {
     const start = Date.now();
     await execWithTimeout(
@@ -13,7 +13,8 @@ describe('execWithTimeout', () => {
     );
     const end = Date.now();
     const duration = end - start;
-    expect(duration).toBe(400);
+    expect(duration > 350).toBe(true);
+    expect(duration < 450).toBe(true);
   });
   it('cb longer that timeout - should return after cb', async () => {
     const start = Date.now();
@@ -25,6 +26,7 @@ describe('execWithTimeout', () => {
     );
     const end = Date.now();
     const duration = end - start;
-    expect(duration).toBe(400);
+    expect(duration > 350).toBe(true);
+    expect(duration < 450).toBe(true);
   });
 });
