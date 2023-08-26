@@ -184,7 +184,7 @@ const submitRegistrationForm = handleSubmit(async (values) => {
 
     uiStore.setLoading(true);
     await execWithTimeout(navigateTo('/login') as Promise<unknown>, 200);
-  uiStore.setLoading(false);
+    uiStore.setLoading(false);
   } catch (error: any) {
     requestError.value = true;
   }
