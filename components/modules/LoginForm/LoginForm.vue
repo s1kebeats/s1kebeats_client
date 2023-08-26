@@ -23,6 +23,7 @@ import { LoginRequestBody } from '@/api/models/requestBodies';
 import { LoginPart, ActivationPart } from './components';
 
 import { useAuthStore, useUiStore } from '@/stores';
+import { execWithTimeout } from '@/composables';
 
 const authStore = useAuthStore();
 const uiStore = useUiStore();
@@ -90,7 +91,7 @@ function closeErrorPopUp() {
 
 async function onLoginSuccess() {
   uiStore.setLoading(true);
-  await navigateTo('/');
-  setTimeout(() => uiStore.setLoading(false), 200);
+  await execWithTimeout(navigateTo('/') as Promise<unknown>, 200);
+  uiStore.setLoading(false);
 }
 </script>

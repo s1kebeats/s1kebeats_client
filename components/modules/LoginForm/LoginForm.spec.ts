@@ -94,9 +94,10 @@ describe('LoginForm', () => {
       expect(navigateTo).toHaveBeenCalledWith('/');
 
       await flushPromises();
-
-      // should call uiStore.setLoading with false after timeout
       vi.runAllTimers();
+      await flushPromises();
+
+      // should call uiStore.setLoading with false
       expect(uiStore.setLoading).toHaveBeenCalledTimes(2);
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
@@ -271,9 +272,10 @@ describe('LoginForm', () => {
       expect(navigateTo).toHaveBeenCalledWith('/');
 
       await flushPromises();
-
-      // should call uiStore.setLoading with false after timeout
       vi.runAllTimers();
+      await flushPromises();
+
+      // should call uiStore.setLoading with false
       expect(uiStore.setLoading).toHaveBeenCalledTimes(2);
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
     });
