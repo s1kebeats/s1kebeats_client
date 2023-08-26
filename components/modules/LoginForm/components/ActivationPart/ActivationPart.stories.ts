@@ -2,6 +2,15 @@ import ActivationPart from './ActivationPart.vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta: Meta<typeof ActivationPart> = {
+  parameters: {
+    layout: 'centered',
+  },
+  decorators: [
+    () => ({
+      template:
+        '<div class="w-[576px] flex items-center justify-center"><story/></div>',
+    }),
+  ],
   component: ActivationPart,
 };
 

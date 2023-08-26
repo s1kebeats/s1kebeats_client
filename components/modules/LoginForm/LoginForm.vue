@@ -51,13 +51,13 @@ async function onLoginSubmit(data: LoginRequestBody) {
     await authStore.login(data);
     await onLoginSuccess();
   } catch (error: any) {
-    if (error.response.status === 403) {
+    if (error.response?.status === 403) {
       Object.assign(loginFormState.data, data);
       loginFormState.mode = 'activation';
       return;
     }
     loginFormState.error.state = true;
-    if (error.response.status) {
+    if (error.response?.status) {
       loginFormState.error.status = error.response.status;
     }
   } finally {
@@ -73,7 +73,7 @@ async function onActivationSubmit(code: string) {
     await onLoginSuccess();
   } catch (error: any) {
     loginFormState.error.state = true;
-    if (error.response.status) {
+    if (error.response?.status) {
       loginFormState.error.status = error.response.status;
     }
   } finally {
