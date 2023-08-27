@@ -1,2 +1,2 @@
-import checkAuth from './callbacks/checkAuth';
+import { checkAuth } from './callbacks';
 export default defineNuxtRouteMiddleware(checkAuth);

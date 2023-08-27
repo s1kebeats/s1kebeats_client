@@ -1,2 +1,2 @@
-import auth from './callbacks/authorizedOnly';
-export default defineNuxtRouteMiddleware(auth);
+import { authorizedOnly } from './callbacks';
+export default defineNuxtRouteMiddleware(authorizedOnly);
