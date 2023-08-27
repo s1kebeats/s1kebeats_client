@@ -5,12 +5,12 @@
       class="absolute z-[9999] w-full h-full bg-grayscale-bg flex"
       data-testid="loadingScreen"
     >
-      <MainLogo class="w-[clamp(175px,15%,300px)] m-auto" />
+      <AppLogo class="w-[clamp(175px,15%,300px)] m-auto" />
     </div>
   </transition>
 </template>
 <script setup lang="ts">
-import MainLogo from '@/components/ui/MainLogo';
+import AppLogo from '@/components/ui/AppLogo';
 import { useUiStore } from '@/stores';
 const uiStore = useUiStore();
 </script>

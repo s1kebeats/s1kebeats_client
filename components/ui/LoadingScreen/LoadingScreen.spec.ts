@@ -69,7 +69,7 @@ describe('LoadingScreen', () => {
           data-testid="loadingScreen"
           data-v-798013b0=""
         >
-          <main-logo-stub
+          <app-logo-stub
             class="w-[clamp(175px,15%,300px)] m-auto"
             color="black"
             data-v-798013b0=""

@@ -1,6 +1,6 @@
 import LoadingScreen from './LoadingScreen';
-import MainLogo from './MainLogo';
+import AppLogo from './AppLogo';
 import RequestErrorOutput from './RequestErrorOutput';
 import ValidationErrorOutput from './ValidationErrorOutput';
 
-export { LoadingScreen, MainLogo, ValidationErrorOutput, RequestErrorOutput };
+export { LoadingScreen, AppLogo, ValidationErrorOutput, RequestErrorOutput };
