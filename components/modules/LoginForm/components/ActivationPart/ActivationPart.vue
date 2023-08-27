@@ -26,8 +26,8 @@
   </PageForm>
 </template>
 <script setup lang="ts">
-import PageForm from '@/components/PageForm';
-import ValidationErrorOutput from '@/components/ui/ValidationErrorOutput';
+import { PageForm } from '@/components';
+import { ValidationErrorOutput } from '@/components/ui';
 import { TextInput } from '@s1kebeats/s1kebeats-ui';
 
 import { useForm } from 'vee-validate';

@@ -18,5 +18,5 @@
   </div>
 </template>
 <script setup lang="ts">
-import MainLogo from '@/components/ui/MainLogo/MainLogo.vue';
+import { MainLogo } from '@/components/ui';
 </script>

@@ -51,7 +51,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import RequestErrorOutput from '@/components/ui/RequestErrorOutput';
+import { RequestErrorOutput } from '@/components/ui';
 import { Button } from '@s1kebeats/s1kebeats-ui';
 
 const props = defineProps<{
