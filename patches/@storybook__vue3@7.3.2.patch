@@ -1,8 +1,8 @@
 diff --git a/dist/index.mjs b/dist/index.mjs
-index 8e32140feff89064dccdb5535bc3e56ab2274b43..da09a1bde2b71f4f39b93b1b8fa75e95345dc058 100644
+index c00adcb01d13f05749360eaa4d14730445e394a8..2d3b5c3751fc8ac25605de2fce5f2d9a1d1275e3 100644
 --- a/dist/index.mjs
 +++ b/dist/index.mjs
-@@ -3,6 +3,6 @@ export { setup } from './chunk-SRVBJOBI.mjs';
+@@ -3,6 +3,6 @@ export { setup } from './chunk-35B2DQBU.mjs';
  import { global } from '@storybook/global';
  import { start } from '@storybook/preview-api';
  
