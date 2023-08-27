@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import { VueWrapper, mount, shallowMount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
-import validationMessages from 'components/shared/validationMessages';
+import validationMessages from '@/components/shared/validationMessages';
 
 const pageFormSelector = '[data-testid=pageForm]';
 const validationErrorOutputComponentSelector =
