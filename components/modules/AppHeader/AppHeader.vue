@@ -7,7 +7,7 @@
     <!-- <OverlayButton /> -->
   </header>
 </template>
-<script>
+<script setup lang="ts">
 import { AppLogo } from '@/components/ui';
 import { Search } from './components';
 </script>
