@@ -764,9 +764,9 @@ describe('RegistrationForm', async () => {
       expect(navigateTo).toHaveBeenCalledWith('/login');
 
       // should call uiStore.setLoading with "false"
-      await flushPromises()
+      await flushPromises();
       vi.runAllTimers();
-      await flushPromises()
+      await flushPromises();
 
       expect(uiStore.setLoading).toHaveBeenCalledTimes(2);
       expect(uiStore.setLoading).toHaveBeenCalledWith(false);
