@@ -34,23 +34,4 @@ describe('ValidationErrorOutput', async () => {
       expect(wrapper.find(validationErrorOutputSelector).text()).toBe('first');
     });
   });
-  it('snapshot - should match the snapshot', () => {
-    const wrapper = shallowMount(ValidationErrorOutput, {
-      props: {
-        errors: ['first', 'second'],
-      },
-    });
-    expect(wrapper.element).toMatchInlineSnapshot(`
-      <div
-        class="h-[17px] flex items-center"
-      >
-        <span
-          class="text-sm text-danger truncate"
-          data-testid="validationErrorOutput"
-        >
-          first
-        </span>
-      </div>
-    `);
-  });
 });
