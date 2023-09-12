@@ -1,7 +1,7 @@
 <template>
   <button
     @click="uiStore.toggleOverlay"
-    class="flex items-center gap-1"
+    class="flex items-center gap-0.5"
     @focusout="closeOverlay"
     data-testid="overlayButton"
   >
