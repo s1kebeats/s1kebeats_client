@@ -2,13 +2,13 @@
   <TextInput
     icon="material-symbols:search"
     :callback="search"
-    class=""
+    class="grow"
     name="header-search"
     label="Поиск"
     size="sm"
-    @update-value="updateSearchQuery"
+    @update:value="updateSearchQuery"
     :preset="initialQuery"
-    data-testid="headerSearchInput"
+    data-testid="headerSearch"
   />
 </template>
 <script setup lang="ts">
