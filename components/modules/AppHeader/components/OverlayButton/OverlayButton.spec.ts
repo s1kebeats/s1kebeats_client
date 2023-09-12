@@ -86,7 +86,7 @@ describe('OverlayButton', () => {
       DOMWrapper {
         "isDisabled": [Function],
         "wrapperElement": <button
-          class="flex items-center gap-1"
+          class="flex items-center gap-0.5"
           data-testid="overlayButton"
         >
           <clientonly>
