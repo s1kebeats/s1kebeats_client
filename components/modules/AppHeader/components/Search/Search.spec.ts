@@ -9,14 +9,14 @@ const testQuery = 'test-query';
 
 vi.stubGlobal('navigateTo', vi.fn());
 vi.mock('vue-router', () => ({
-    useRoute: () => {
-        return {
-          query: {
-            q: testQuery,
-          },
-        };
-      }
-}))
+  useRoute: () => {
+    return {
+      query: {
+        q: testQuery,
+      },
+    };
+  },
+}));
 
 describe('Search', () => {
   describe('state', () => {

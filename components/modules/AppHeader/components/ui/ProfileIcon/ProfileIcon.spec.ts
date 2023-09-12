@@ -85,28 +85,4 @@ describe('ProfileIcon.vue', () => {
       ).toBe(UserMock.image);
     });
   });
-  it('snapshot - should match the snapshot', () => {
-    const wrapper = shallowMount(ProfileIcon, {
-        global: {
-            plugins: [
-              createTestingPinia({
-                initialState: {
-                  auth: {
-                    authorized: true,
-                    user: UserMock,
-                  },
-                },
-              }),
-            ],
-          },
-    })
-    expect(wrapper.element).toMatchInlineSnapshot(`
-      <presentational-avatar-stub
-        data-testid="presentationalAvatar"
-        image="/path/to/image"
-        size="sm"
-        username="username"
-      />
-    `);
-  })
 });

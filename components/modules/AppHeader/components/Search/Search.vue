@@ -2,7 +2,7 @@
   <TextInput
     icon="material-symbols:search"
     :callback="search"
-    class="grow"
+    class="grow max-w-[400px]"
     name="header-search"
     label="Поиск"
     size="sm"
