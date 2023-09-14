@@ -49,7 +49,7 @@ describe('Search', () => {
         "wrapperElement": <text-input-stub
           autocomplete="off"
           callback="[Function]"
-          class="grow"
+          class="grow max-w-[400px]"
           data-testid="headerSearch"
           debounce="false"
           disabled="false"
