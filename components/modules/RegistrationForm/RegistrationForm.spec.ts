@@ -662,9 +662,9 @@ describe('RegistrationForm', async () => {
         global: {
           plugins: [createTestingPinia()],
           stubs: {
-            UsernameInput: true,
-            EmailInput: true,
-            ConfidentialInput: true,
+            SBUsernameInput: true,
+            SBEmailInput: true,
+            SBConfidentialInput: true,
           },
         },
       });
@@ -847,7 +847,7 @@ describe('RegistrationForm', async () => {
         pending="false"
         title="Регистрация"
       >
-        <username-input-stub
+        <s-b-username-input-stub
           data-testid="usernameInput"
           debounce="true"
           disabled="false"
@@ -855,7 +855,7 @@ describe('RegistrationForm', async () => {
           name="registrationUsername"
           size="sm"
         />
-        <email-input-stub
+        <s-b-email-input-stub
           data-testid="emailInput"
           debounce="true"
           disabled="false"
@@ -863,7 +863,7 @@ describe('RegistrationForm', async () => {
           name="registrationEmail"
           size="sm"
         />
-        <confidential-input-stub
+        <s-b-confidential-input-stub
           autocomplete="off"
           data-testid="passwordInput"
           debounce="true"
@@ -873,7 +873,7 @@ describe('RegistrationForm', async () => {
           name="registrationPassword"
           size="sm"
         />
-        <confidential-input-stub
+        <s-b-confidential-input-stub
           autocomplete="off"
           data-testid="passwordConfirmInput"
           debounce="true"

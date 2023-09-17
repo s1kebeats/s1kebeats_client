@@ -121,7 +121,7 @@ describe('ActivationPart', () => {
         props: defaultMountOptions.props,
         global: {
           stubs: {
-            TextInput: true,
+            SBTextInput: true,
           },
         },
       });
@@ -199,7 +199,7 @@ describe('ActivationPart', () => {
         >
            Проверьте электронную почту, мы отправили вам код. 
         </p>
-        <text-input-stub
+        <s-b-text-input-stub
           autocomplete="off"
           data-testid="activationCodeInput"
           debounce="false"

@@ -180,8 +180,8 @@ describe('LoginPart', () => {
         props: defaultMountOptions.props,
         global: {
           stubs: {
-            UsernameInput: true,
-            ConfidentialInput: true,
+            SBUsernameInput: true,
+            SBConfidentialInput: true,
           },
         },
       });
@@ -266,7 +266,7 @@ describe('LoginPart', () => {
         pending="true"
         title="Вход"
       >
-        <username-input-stub
+        <s-b-username-input-stub
           data-testid="usernameInput"
           debounce="false"
           disabled="false"
@@ -274,7 +274,7 @@ describe('LoginPart', () => {
           name="loginUsername"
           size="sm"
         />
-        <confidential-input-stub
+        <s-b-confidential-input-stub
           autocomplete="off"
           data-testid="passwordInput"
           debounce="false"
@@ -291,7 +291,7 @@ describe('LoginPart', () => {
             data-testid="validationErrorOutputComponent"
             errors=""
           />
-          <checkbox-input-stub
+          <s-b-checkbox-input-stub
             checked="true"
             data-testid="rememberMeInput"
             disabled="false"

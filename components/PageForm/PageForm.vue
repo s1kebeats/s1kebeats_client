@@ -19,7 +19,7 @@
         data-testid="formRequestErrorOutput"
       />
       <slot />
-      <Button
+      <SBBtn
         :class="{
           'focus:!outline-none': errorState,
         }"
@@ -30,7 +30,7 @@
         data-testid="actionButton"
       >
         {{ buttonText }}
-      </Button>
+      </SBBtn>
       <footer
         class="text-sm flex items-center justify-center gap-2"
         v-if="footerHint && footerLinkTitle && footerTo"
@@ -52,7 +52,7 @@
 </template>
 <script setup lang="ts">
 import { RequestErrorOutput } from '@/components/ui';
-import { Button } from '@s1kebeats/s1kebeats-ui';
+import { SBBtn } from '@s1kebeats/s1kebeats-ui';
 
 const props = defineProps<{
   title: string;

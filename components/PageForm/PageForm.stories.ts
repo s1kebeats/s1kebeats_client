@@ -1,6 +1,6 @@
 import PageForm from './PageForm.vue';
 import type { Meta } from '@storybook/vue3';
-import { ConfidentialInput, UsernameInput } from '@s1kebeats/s1kebeats-ui';
+import { SBConfidentialInput, SBUsernameInput } from '@s1kebeats/s1kebeats-ui';
 
 const meta: Meta<typeof PageForm> = {
   component: PageForm,
@@ -10,7 +10,7 @@ export default meta;
 
 export const Primary = {
   render: () => ({
-    components: { PageForm, ConfidentialInput, UsernameInput },
+    components: { PageForm, SBConfidentialInput, SBUsernameInput },
     template: `
       <div class="flex flex-col gap-10 items-center justify-center">
         <PageForm

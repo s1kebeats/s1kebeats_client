@@ -12,7 +12,7 @@
     <p class="text-center text-md">
       Проверьте электронную почту, мы отправили вам код.
     </p>
-    <TextInput
+    <SBTextInput
       name="activationCodeInput"
       label="Введите код"
       size="sm"
@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { PageForm } from '@/components';
 import { ValidationErrorOutput } from '@/components/ui';
-import { TextInput } from '@s1kebeats/s1kebeats-ui';
+import { SBTextInput } from '@s1kebeats/s1kebeats-ui';
 
 import { useForm } from 'vee-validate';
 import { object, string } from 'yup';

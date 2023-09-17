@@ -27,7 +27,7 @@
           Проверьте ваше интернет соединение
         </p>
       </div>
-      <Button
+      <SBBtn
         @click.prevent="close"
         data-testid="closeButton"
         class="absolute top-4 right-4"
@@ -39,7 +39,7 @@
 </template>
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { Button } from '@s1kebeats/s1kebeats-ui';
+import { SBBtn } from '@s1kebeats/s1kebeats-ui';
 import {
   unauthorizedErrorTitle,
   unexpectedErrorTitle,

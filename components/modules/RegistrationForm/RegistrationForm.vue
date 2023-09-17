@@ -12,21 +12,21 @@
     @close-error="closeErrorPopUp"
     data-testid="pageForm"
   >
-    <UsernameInput
+    <SBUsernameInput
       :debounce="true"
       name="registrationUsername"
       size="sm"
       v-bind="username"
       data-testid="usernameInput"
     />
-    <EmailInput
+    <SBEmailInput
       size="sm"
       name="registrationEmail"
       v-bind="email"
       :debounce="true"
       data-testid="emailInput"
     />
-    <ConfidentialInput
+    <SBConfidentialInput
       size="sm"
       name="registrationPassword"
       label="Введите пароль"
@@ -34,7 +34,7 @@
       v-bind="password"
       data-testid="passwordInput"
     />
-    <ConfidentialInput
+    <SBConfidentialInput
       size="sm"
       name="registrationPasswordConfirm"
       label="Введите пароль ещё раз"
@@ -52,9 +52,9 @@
 import { PageForm } from '@/components';
 import { ValidationErrorOutput } from '@/components/ui';
 import {
-  UsernameInput,
-  EmailInput,
-  ConfidentialInput,
+  SBUsernameInput,
+  SBEmailInput,
+  SBConfidentialInput,
 } from '@s1kebeats/s1kebeats-ui';
 
 import { register } from './api';

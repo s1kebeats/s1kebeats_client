@@ -12,13 +12,13 @@
     @close-error="emit('closeError')"
     data-testid="pageForm"
   >
-    <UsernameInput
+    <SBUsernameInput
       name="loginUsername"
       size="sm"
       v-bind="username"
       data-testid="usernameInput"
     />
-    <ConfidentialInput
+    <SBConfidentialInput
       size="sm"
       name="loginPassword"
       label="Введите пароль"
@@ -30,7 +30,7 @@
         :errors="Object.values(errors)"
         data-testid="validationErrorOutputComponent"
       />
-      <CheckboxInput
+      <SBCheckboxInput
         :checked="true"
         size="sm"
         name="loginRememberMe"
@@ -49,9 +49,9 @@
 import { PageForm } from '@/components';
 import { ValidationErrorOutput } from '@/components/ui';
 import {
-  UsernameInput,
-  ConfidentialInput,
-  CheckboxInput,
+  SBUsernameInput,
+  SBConfidentialInput,
+  SBCheckboxInput,
 } from '@s1kebeats/s1kebeats-ui';
 
 import { useForm } from 'vee-validate';
