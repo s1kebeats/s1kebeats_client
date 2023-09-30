@@ -58,7 +58,7 @@
   "dependencies": {
     "@iconify/vue": "^4.1.1",
     "@pinia/nuxt": "^0.4.11",
-    "@s1kebeats/s1kebeats-ui": "^5.0.0",
+    "@s1kebeats/s1kebeats-ui": "^6.0.0",
     "@vee-validate/yup": "^4.11.3",
     "email-validator": "^2.0.4",
     "pinia": "^2.1.6",
