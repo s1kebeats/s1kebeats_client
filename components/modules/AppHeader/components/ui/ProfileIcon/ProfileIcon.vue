@@ -1,5 +1,5 @@
 <template>
-  <PresentationalAvatar
+  <SBPresentationalAvatar
     v-if="authStore.authorized"
     :image="authStore.user!.image"
     :username="authStore.user!.username"
@@ -15,7 +15,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PresentationalAvatar } from '@s1kebeats/s1kebeats-ui';
+import { SBPresentationalAvatar } from '@s1kebeats/s1kebeats-ui';
 import { useAuthStore } from '@/stores';
 
 const authStore = useAuthStore();

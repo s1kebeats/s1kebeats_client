@@ -46,7 +46,7 @@ describe('Search', () => {
     expect(wrapper.get(headerSearchSelector)).toMatchInlineSnapshot(`
       DOMWrapper {
         "isDisabled": [Function],
-        "wrapperElement": <text-input-stub
+        "wrapperElement": <s-b-text-input-stub
           autocomplete="off"
           callback="[Function]"
           class="grow max-w-[400px]"

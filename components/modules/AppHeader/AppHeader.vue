@@ -2,6 +2,7 @@
   <header
     class="px-[5%] md:px-[10%] h-[64px] relative flex items-center justify-between gap-[5%]"
   >
+    <!-- <MobileOverlay /> -->
     <nuxt-link to="/">
       <AppLogo class="w-[55px] sm:w-[65px]" />
     </nuxt-link>

@@ -1,5 +1,5 @@
 <template>
-  <TextInput
+  <SBTextInput
     icon="material-symbols:search"
     :callback="search"
     class="grow max-w-[400px]"
@@ -12,7 +12,7 @@
   />
 </template>
 <script setup lang="ts">
-import { TextInput } from '@s1kebeats/s1kebeats-ui';
+import { SBTextInput } from '@s1kebeats/s1kebeats-ui';
 
 const route = useRoute();
 const initialQuery = route.query.q as string;
